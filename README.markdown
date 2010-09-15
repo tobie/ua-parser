@@ -5,6 +5,8 @@ ua-parser
 
 The crux of the original parser--the data collected by [Steve Souders][4] over the years--has been extracted into a separate [JSON file][5] so as to be reusable _as is_ by implementations in other programming languages.
 
+`ua-parser` is just a small wrapper around this data.
+
 Usage
 -----
 
