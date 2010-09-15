@@ -43,6 +43,6 @@ The data contained in `regexes.json` is Copyright 2009 Google Inc. and available
 [3]: http://code.google.com/p/ua-parser/
 [4]: http://stevesouders.com/
 [5]: http://code.google.com/p/ua-parser/source/browse/trunk/regexes.json
-[6]: ./LICENSE
+[6]: http://github.com/tobie/ua-parser/raw/master/LICENSE
 [7]: http://www.apache.org/licenses/LICENSE-2.0
 
