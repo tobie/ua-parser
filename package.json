@@ -2,8 +2,26 @@
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
   "main": "index.js",
-  "version": "0.1.0",
-  "author": "Tobie Langel <tobie.langel@gmail.com> (http://tobielangel.com)",
+  "version": "0.1.1",
+  "maintainers": [
+    {
+      "name": "Tobie Langel",
+      "email": "tobie.langel@gmail.com",
+      "web": "http://tobielangel.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Tobie Langel",
+      "email": "tobie.langel@gmail.com",
+      "web": "http://tobielangel.com"
+    },
+    {
+      "name": "Lindsey Simon",
+      "email": "lsimon@commoner.com",
+      "web": "http://www.idreamofuni.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/tobie/ua-parser.git"
