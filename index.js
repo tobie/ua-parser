@@ -3,12 +3,12 @@ var path = require('path'),
 
 var file = path.join(__dirname, 'regexes.json');
 var regexes = fs.readFileSync(file, 'utf8');
-regexes = JSON.parse(regexes);
+regexes = JSON.parse(regexes).user_agent_parsers;
 
 var parsers = regexes.map(function(obj) {
-  var regexp = new RegExp(obj.pattern),
+  var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
-      v1Rep = obj.v1_replacement;
+      majorVersionRep = obj.major_version_replacement;
 
   function parser(ua) {
     var m = ua.match(regexp);
@@ -18,7 +18,7 @@ var parsers = regexes.map(function(obj) {
     var familly = famRep ? famRep.replace('$1', m[1]) : m[1];
     
     var obj = new UserAgent(familly);
-    obj.major = parseInt(v1Rep ? v1Rep : m[2]);
+    obj.major = parseInt(majorVersionRep ? majorVersionRep : m[2]);
     obj.minor = m[3] ? parseInt(m[3]) : null;
     obj.patch = m[4] ? parseInt(m[4]) : null;
     
