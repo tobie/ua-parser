@@ -1,4 +1,3 @@
-
 {
   "user_agent_parsers": [
     {
@@ -227,6 +226,41 @@
     {
       "regex": "(MSIE) (\\d+)\\.(\\d+)", 
       "family_replacement": "IE"
+    }
+  ], 
+  "os_parsers": [
+    {
+      "regex": "(Android)"
+    }, 
+    {
+      "regex": "(Windows)"
+    }, 
+    {
+      "regex": "(iPad)"
+    }, 
+    {
+      "regex": "(iPhone OS) ([\\d_]+)", 
+      "os_replacement": "iOS"
+    }, 
+    {
+      "regex": "(Mac OS X)"
+    }, 
+    {
+      "regex": "(FreeBSD)"
+    }, 
+    {
+      "regex": "(iPod)"
+    }, 
+    {
+      "regex": "(iPhone Simulator)"
+    }, 
+    {
+      "regex": "(Linux)"
+    }
+  ], 
+  "product_parsers": [
+    {
+      "regex": "(iPhone)"
     }
   ]
 }
