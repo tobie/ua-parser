@@ -3,9 +3,9 @@ var path = require('path'),
 
 var file = path.join(__dirname, 'regexes.json');
 var regexes = fs.readFileSync(file, 'utf8');
-regexes = JSON.parse(regexes).user_agent_parsers;
+regexes = JSON.parse(regexes);
 
-var parsers = regexes.map(function(obj) {
+var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
       majorVersionRep = obj.major_version_replacement;
@@ -28,13 +28,40 @@ var parsers = regexes.map(function(obj) {
   return parser;
 });
 
+var os_parsers = regexes.os_parsers.map(function(obj) {
+  var regexp = new RegExp(obj.regex),
+      osRep  = obj.os_replacement;
+
+  function parser(ua) {
+    var m = ua.match(regexp);
+
+    if(!m) { return null; }
+
+    var os = (osRep ? osRep : m[1]) + (m.length > 2 ? " " + m[2] : "");
+
+    return os;
+  }
+
+  return parser;
+});
+
 exports.parse = parse;
 function parse(ua) {
-  for (var i=0; i < parsers.length; i++) {
-    var result = parsers[i](ua);
-    if (result) { return result; }
+  var os, i;
+  for (i=0; i < ua_parsers.length; i++) {
+    var result = ua_parsers[i](ua);
+    if (result) { break; }
   }
-  return new UserAgent();
+
+  for (i=0; i < os_parsers.length; i++) {
+    os = os_parsers[i](ua);
+    if (os) { break; }
+  }
+
+  if(!result) { result = new UserAgent(); }
+
+  result.os = os;
+  return result;
 }
 
 function UserAgent(family) {
@@ -59,6 +86,10 @@ UserAgent.prototype.toString = function() {
   var suffix = this.toVersionString();
   if (suffix) { suffix = ' ' + suffix; }
   return this.family + suffix;
+};
+
+UserAgent.prototype.toFullString = function() {
+  return this.toString() + (this.os ? "/" + this.os : "");
 };
 
 if (require.main === module) {

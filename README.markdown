@@ -18,6 +18,9 @@ Usage
     
     console.log(ua.toVersionString());
     // -> "5.0.1"
+
+    console.log(ua.toFullString());
+    // -> "Safari 5.0.1/Mac OS X"
     
     console.log(ua.family);
     // -> "Safari"
@@ -30,6 +33,9 @@ Usage
     
     console.log(ua.patch);
     // -> 1
+
+    console.log(ua.os);
+    // -> Mac OS X
 
 License
 -------
