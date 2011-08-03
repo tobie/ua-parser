@@ -89,6 +89,10 @@
       "family_replacement": "Konqueror"
     }, 
     {
+      "regex": "(conkeror)/(\\d+)\\.(\\d+)\\.(\\d+)", 
+      "family_replacement": "Conkeror"
+    }, 
+    {
       "regex": "(PlayBook).+RIM Tablet OS (\\d+)\\.(\\d+)\\.(\\d+)"
     }, 
     {
@@ -106,7 +110,7 @@
       "regex": "(Kindle)/(\\d+)\\.(\\d+)"
     }, 
     {
-      "regex": "(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Vodafone|NetFront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|Iron|Iris)/(\\d+)\\.(\\d+)\\.(\\d+)"
+      "regex": "(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Vodafone|NetFront|Konqueror|Conkeror|SeaMonkey|ThunderBrowse|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|Iron|Iris)/(\\d+)\\.(\\d+)\\.(\\d+)"
     }, 
     {
       "regex": "(Bolt|Jasmine|IEMobile|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Iron|Space Bison|Stainless|Orca|Dolfin|BOLT)/(\\d+)\\.(\\d+)"
@@ -126,6 +130,9 @@
     }, 
     {
       "regex": "(Firefox)/(\\d+)\\.(\\d+)(pre|[ab]\\d+[a-z]*)?"
+    }, 
+    {
+      "regex": "(Lightning)/(\\d+)\\.(\\d+)(pre|[ab]\\d+[a-z]*)?"
     }, 
     {
       "regex": "(Obigo|OBIGO)[^\\d]*(\\d+)(?:.(\\d+))?", 
