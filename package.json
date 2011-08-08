@@ -2,7 +2,7 @@
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
   "main": "index.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "maintainers": [
     {
       "name": "Tobie Langel",
