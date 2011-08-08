@@ -36,5 +36,8 @@
       "type" : "MIT",
       "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE"
     }
-  ]
+  ],
+  "scripts": {
+    "update": "update.js"
+  }
 }
