@@ -1,7 +1,7 @@
 var fs = require('fs'),
     path = require('path'),
     http = require('http'),
-    yaml = require('../vendor/yaml');
+    yaml = require('yamlparser');
     
 exports.YAML_FILE = path.join(__dirname, '..', 'regexes.yaml');
 exports.JSON_FILE = path.join(__dirname, '..', 'regexes.json');

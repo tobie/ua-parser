@@ -39,5 +39,8 @@
   ],
   "scripts": {
     "update": "update.js"
+  },
+  "devDependencies": {
+    "yamlparser": ">=0.0.2"
   }
 }
