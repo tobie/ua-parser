@@ -40,7 +40,7 @@ Usage
 License
 -------
 
-Your choice of [MIT][6] or [Apache License, Version 2.0][7] for the JS code which is Copyright 2010 Tobie Langel.
+Your choice of [MIT or Apache, Version 2.0 licenses][6] for the JS code which is Copyright 2010 Tobie Langel.
 
 The data contained in `regexes.json` is Copyright 2009 Google Inc. and available under the [Apache License, Version 2.0][7].
 
