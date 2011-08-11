@@ -100,10 +100,6 @@
       "family_replacement": "Konqueror"
     },
     {
-      "regex": "(conkeror)/(\\d+)\\.(\\d+)\\.(\\d+)", 
-      "family_replacement": "Conkeror"
-    }, 
-    {
       "regex": "(PlayBook).+RIM Tablet OS (\\d+)\\.(\\d+)\\.(\\d+)"
     },
     {
