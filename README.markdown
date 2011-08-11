@@ -10,32 +10,34 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 Usage
 -----
 
-    var uaParser = require('ua-parser');
-    var ua = uaParser.parse(navigator.userAgent);
-    
-    console.log(ua.tostring());
-    // -> "Safari 5.0.1"
-    
-    console.log(ua.toVersionString());
-    // -> "5.0.1"
+```javascript
+var uaParser = require('ua-parser');
+var ua = uaParser.parse(navigator.userAgent);
 
-    console.log(ua.toFullString());
-    // -> "Safari 5.0.1/Mac OS X"
-    
-    console.log(ua.family);
-    // -> "Safari"
-    
-    console.log(ua.major);
-    // -> 5
-    
-    console.log(ua.minor);
-    // -> 0
-    
-    console.log(ua.patch);
-    // -> 1
+console.log(ua.tostring());
+// -> "Safari 5.0.1"
 
-    console.log(ua.os);
-    // -> Mac OS X
+console.log(ua.toVersionString());
+// -> "5.0.1"
+
+console.log(ua.toFullString());
+// -> "Safari 5.0.1/Mac OS X"
+
+console.log(ua.family);
+// -> "Safari"
+
+console.log(ua.major);
+// -> 5
+
+console.log(ua.minor);
+// -> 0
+
+console.log(ua.patch);
+// -> 1
+
+console.log(ua.os);
+// -> Mac OS X
+```
 
 License
 -------
