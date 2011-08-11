@@ -2,7 +2,7 @@
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
   "main": "index.js",
-  "version": "0.1.1",
+  "version": "0.2.3",
   "maintainers": [
     {
       "name": "Tobie Langel",
@@ -20,6 +20,11 @@
       "name": "Lindsey Simon",
       "email": "lsimon@commoner.com",
       "web": "http://www.idreamofuni.com"
+    },
+    {
+      "name": "Philip Tellis",
+      "email": "philip@bluesmoon.info",
+      "web": "http://bluesmoon.info"
     }
   ],
   "repository": {
@@ -29,7 +34,17 @@
   "licenses": [
     {
       "type" : "MIT",
-      "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE"
+      "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE",
+    },
+    {
+      "type" : "Apache-2.0",
+      "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE",
     }
-  ]
+  ],
+  "scripts": {
+    "update": "update.js"
+  },
+  "devDependencies": {
+    "yamlparser": ">=0.0.2"
+  }
 }
