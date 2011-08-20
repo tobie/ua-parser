@@ -1,4 +1,5 @@
-// cat uas.txt | awk 'BEGIN { sub(/ *$/, ""); print "exports=[" } { printf("\t\"%s\",\n", $0) } END { print "]" }'  > uas.js
+// Note, this list is neither sorted, nor unique.  It was made this way so that more popular useragents have a higher probability
+// of showing up in the test.  This is a better simulation of the real world.
 exports.uas=[
 	"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16",
 	"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16",
