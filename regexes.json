@@ -114,7 +114,7 @@
       "family_replacement": "Comodo Dragon"
     },
     {
-      "regex": "(YottaaMonitor)"
+      "regex": "(YottaaMonitor|BrowserMob|HttpMonitor)"
     },
     {
       "regex": "(Kindle)/(\\d+)\\.(\\d+)"
