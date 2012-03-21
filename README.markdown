@@ -12,24 +12,35 @@ Usage
 
     var uaParser = require('ua-parser');
     var ua = uaParser.parse(navigator.userAgent);
-    
+
     console.log(ua.tostring());
     // -> "Safari 5.0.1"
-    
+
     console.log(ua.toVersionString());
     // -> "5.0.1"
-    
+
     console.log(ua.family);
     // -> "Safari"
-    
+
     console.log(ua.major);
     // -> 5
-    
+
     console.log(ua.minor);
     // -> 0
-    
+
     console.log(ua.patch);
     // -> 1
+
+
+Usage :: python
+---------------
+
+    from ua-parser.py import user_agent_parser
+
+    # On the server, let's say you have a WebOB request object.
+    user_agent_string = request.META.get('HTTP_USER_AGENT')
+    family, v1, v2, v3 = user_agent_parser.Parse(user_agent_string)
+
 
 License
 -------

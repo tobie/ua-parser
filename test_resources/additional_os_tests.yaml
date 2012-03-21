@@ -1,0 +1,134 @@
+test_cases:
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.1-update1; en-us; Nexus One Build/ERE27) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17,gzip(gfe),gzip(gfe)'
+    os: 'Android'
+    os_v1: '2'
+    os_v2: '1'
+    os_v3: 'update1'
+    os_v4:
+  
+  - user_agent_string: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X Mach-O; en-en; rv:1.9.0.12) Gecko/2009070609 Firefox/3.0.12,gzip(gfe),gzip(gfe)'
+    os: 'Mac OS X'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'Opera/9.80 (iPhone; Opera Mini/5.0.019802/21.572; U; en) Presto/2.5.25 Version/10.54'
+    os: 'iOS'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 NokiaN95/12.0.013; Profile/MIDP-2.0 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413'
+    os: 'Symbian OS'
+    os_v1: '9'
+    os_v2: '2'
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'Opera/9.80 (S60; SymbOS; Opera Mobi/499; U; de) Presto/2.4.18 Version/10.00,gzip(gfe),gzip(gfe)'
+    os: 'Symbian OS'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/010.022; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.6.3 3gpp-gba,gzip(gfe),gzip(gfe)'
+    os: 'Symbian^3'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'BlackBerry9000/4.6.0.167 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/102'
+    os: 'BlackBerry OS'
+    os_v1: '4'
+    os_v2: '6'
+    os_v3: '0'
+    os_v4: '167'
+  
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.8) Gecko/20100723 Linux Mint/9 (Isadora) Firefox/3.6.8'
+    os: 'Linux Mint'
+    os_v1: '9'
+    os_v2:
+    os_v3:
+    os_v4:
+  
+  - user_agent_string: 'Mozilla/5.0 (X11; CrOS i686 13.587.80) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.99 Safari/535.1'
+    os: 'Chrome OS'
+    os_v1: '13'
+    os_v2: '587'
+    os_v3: '80'
+    os_v4:
+  
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008072310 Red Hat/3.0.1-3.el4 Firefox/3.0.1,gzip(gfe),gzip(gfe)'
+    os: 'Red Hat'
+    os_v1: '3'
+    os_v2: '0'
+    os_v3: '1'
+    os_v4:
+        
+  - user_agent_string: 'Mozilla/5.0 ( U; Linux x86_32; en-US; rv:1.0) Gecko/20090723 Puppy/3.6.8-0.1.1 Firefox/3.6.7,gzip(gfe),gzip(gfe)'
+    os: 'Puppy'
+    os_v1: '3'
+    os_v2: '6'
+    os_v3: '8'
+    os_v4:
+       
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.14) Gecko/20110301 PCLinuxOS/1.9.2.14-1pclos2011 (2011) Firefox/3.6.14,gzip(gfe),gzip(gfe),gzip(gfe)'
+    os: 'PCLinuxOS'
+    os_v1: '1'
+    os_v2: '9'
+    os_v3: '2'
+    os_v4: '14'
+ 
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.0.4) Gecko/2008111217 Fedora/3.0.4-1.fc9 Firefox/3.0.4'
+    os: 'Fedora'
+    os_v1: '3'
+    os_v2: '0'
+    os_v3: '4'
+    os_v4:
+    
+  - user_agent_string: 'Mozilla/5.0 (X11; 78; CentOS; US-en) AppleWebKit/527+ (KHTML, like Gecko) Bolt/0.862 Version/3.0 Safari/523.15'
+    os: 'CentOS'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+    
+  - user_agent_string: 'Mozilla/5.0 (BlackBerry; U; BlackBerry 9780; en) AppleWebKit/534.8+ (KHTML, like Gecko) Version/6.0.0.526 Mobile Safari/534.8+,gzip(gfe),gzip(gfe),gzip(gfe)'
+    os: 'BlackBerry OS'
+    os_v1: '6'
+    os_v2: '0'
+    os_v3: '0'
+    os_v4: '526'
+    
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090807 Mandriva Linux/1.9.1.2-1.1mud2009.1 (2009.1) Firefox/3.5.2 FirePHP/0.3,gzip(gfe),gzip(gfe)'
+    os: 'Mandriva'
+    os_v1: '1'
+    os_v2: '9'
+    os_v3: '1'
+    os_v4: '2'
+    
+  - user_agent_string: 'Opera/9.80 (X11; Linux x86_64; U; Slackware; lt) Presto/2.8.131 Version/11.11'
+    os: 'Slackware'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
+    
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; SAMSUNG; SGH-i917)'
+    os: 'Windows Phone OS'
+    os_v1: '7'
+    os_v2: '5'
+    os_v3:
+    os_v4:
+    
+  - user_agent_string: ''
+    os: 'Other'
+    os_v1:
+    os_v2:
+    os_v3:
+    os_v4:
