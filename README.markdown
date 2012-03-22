@@ -1,7 +1,7 @@
 ua-parser
 =========
 
-`ua-parser` is a port to [node.js][1] of [BrowserScope][2]'s [user agent string parser][3].
+`ua-parser` is a port to [node.js][1] and python of [BrowserScope][2]'s [user agent string parser][3].
 
 The crux of the original parser--the data collected by [Steve Souders][4] over the years--has been extracted into a separate [JSON file][5] so as to be reusable _as is_ by implementations in other programming languages.
 
@@ -35,7 +35,9 @@ Usage
 Usage :: python
 ---------------
 
-    from ua-parser.py import user_agent_parser
+    # Python won't do with dashes in module names so you'll need to rename
+    # this directory. i.e. mv ua-parser ua_parser
+    from ua_parser.py import user_agent_parser
 
     # On the server, let's say you have a WebOB request object.
     user_agent_string = request.META.get('HTTP_USER_AGENT')
