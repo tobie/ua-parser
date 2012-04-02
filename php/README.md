@@ -1,12 +1,11 @@
-# ua-parser-php #
+# ua-parser PHP Library #
 
-`ua-parser-php` is a PHP-based pseudo-port of the [ua-parser](http://code.google.com/p/ua-parser/) project. `ua-parser-php`
-utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device. `ua-parser-php`
-was created as a new browser-detection library for the browser- and feature-detection library [Detector](https://github.com/dmolsen/Detector).
+This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project. This library
+utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device. The 
 
 ## Demo ##
 
-You can [test ua-parser-php](http://uaparser.dmolsen.com/) with your browser.
+You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
 
 ## Usage ##
 
