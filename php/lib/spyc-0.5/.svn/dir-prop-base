@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 35
+dist.py
+.hgignore
+.hgsvn
+horde
+.hg
+
+END
