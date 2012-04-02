@@ -84,16 +84,21 @@ Straightforward:
     ?>
 
 If you want to grab a copy of the YAML data from ua-parser each night you can use a cron job and point it at the following bit of code:
+## Getting the User-Agent Data ##
+
+To get the user-agent data for either the initial load of the project or each night as a cron job you can use the following on the command line:
+
+    %: cd /path/to/project/
+    %: php UAParser.php -get
+
+Alternatively, you can create a PHP script that includes the following:
 
     <?php
 
-       require("UAParser.php");
-       $result = UA::get();
-
+			require("/path/to/UAParser.php");
+			UA::get();
+			
     ?>
-
-**NOTE:** This will overwrite quite a few changes I've made to the `user_agents_regex.yaml` file included with the `ua-parser-php` distribution.
-
 
 ## Credits ##
 
