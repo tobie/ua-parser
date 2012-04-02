@@ -332,10 +332,26 @@ class UA {
 	*/
 	public static function get() {
 		if ($data = @file_get_contents("http://ua-parser.googlecode.com/svn/trunk/resources/user_agent_parser.yaml")) {
-			copy(__DIR__."/resources/user_agents_regex.yaml", __DIR__."/resources/user_agents_regex.".date("Ymdhis").".yaml");
+			if (file_exists(__DIR__."/resources/user_agents_regex.yaml")) {
+				print("backing up old YAML file...\n");
+				if (!copy(__DIR__."/resources/user_agents_regex.yaml", __DIR__."/resources/user_agents_regex.".date("Ymdhis").".yaml")) {
+					print("back-up failed...\n");
+					exit;
+				}
+			}
 			$fp = fopen(__DIR__."/resources/user_agents_regex.yaml", "w");
 			fwrite($fp, $data);
 			fclose($fp);
+			print("success...\n");
+		} else {
+			print("failed to get the file...\n");
 		}
 	}
 }
+
+if (defined('STDIN') && isset($argv) && ($argv[1] == '-get')) {
+	print("getting the YAML file...\n");
+	UA::get();
+}
+
+?>
