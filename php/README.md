@@ -83,7 +83,6 @@ Straightforward:
 
     ?>
 
-If you want to grab a copy of the YAML data from ua-parser each night you can use a cron job and point it at the following bit of code:
 ## Getting the User-Agent Data ##
 
 To get the user-agent data for either the initial load of the project or each night as a cron job you can use the following on the command line:
