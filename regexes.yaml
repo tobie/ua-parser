@@ -1,0 +1,457 @@
+user_agent_parsers:
+  #### SPECIAL CASES TOP ####
+
+  # must go before Opera
+  - regex: '^(Opera)/(\d+)\.(\d+) \(Nintendo Wii'
+    family_replacement: 'Wii'
+
+  # must go before Firefox to catch SeaMonkey.
+  - regex: '(SeaMonkey|Fennec|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
+
+  # must go before Firefox
+
+  # must go before Browser/major_version.minor_version - eg: Minefield/3.1a1pre
+  - regex: '(Namoroka|Shiretoko|Minefield)/(\d+)\.(\d+)\.(\d+(?:pre)?)'
+    family_replacement: 'Firefox ($1)'
+
+  - regex: '(Firefox)/(\d+)\.(\d+)([ab]\d+[a-z]*)'
+    family_replacement: 'Firefox Beta'
+
+  - regex: '(Firefox)-(?:\d+\.\d+)?/(\d+)\.(\d+)([ab]\d+[a-z]*)'
+    family_replacement: 'Firefox Beta'
+
+  - regex: '(Namoroka|Shiretoko|Minefield)/(\d+)\.(\d+)([ab]\d+[a-z]*)?'
+    family_replacement: 'Firefox ($1)'
+
+  - regex: '(Firefox).*Tablet browser (\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'MicroB'
+
+  - regex: '(MozillaDeveloperPreview)/(\d+)\.(\d+)([ab]\d+[a-z]*)?'
+
+  # e.g.: Flock/2.0b2
+  - regex: '(Flock)/(\d+)\.(\d+)(b\d+?)'
+
+  # RockMelt
+  - regex: '(RockMelt)/(\d+)\.(\d+)\.(\d+)'
+
+  # e.g.: Fennec/0.9pre
+  - regex: '(Fennec)/(\d+)\.(\d+)(pre)'
+
+  - regex: '(Navigator)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(Navigator)/(\d+)\.(\d+)([ab]\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(Netscape6)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(MyIBrow)/(\d+)\.(\d+)'
+    family_replacement: 'My Internet Browser'
+
+  # Opera will stop at 9.80 and hide the real version in the Version string.
+  # see: http://dev.opera.com/articles/view/opera-ua-string-changes/
+  - regex: '(Opera Tablet).*Version\/(\d+)\.(\d+)(?:\.(\d+))?'
+
+  - regex: '(Opera)/.+Opera Mobi.+Version/(\d+)\.(\d+)'
+    family_replacement: 'Opera Mobile'
+
+  - regex: '(Opera Mini)/(\d+)\.(\d+)'
+
+  - regex: '(Opera)/9.80.*Version\/(\d+)\.(\d+)(?:\.(\d+))?'
+
+  # Palm WebOS looks a lot like Safari.
+  - regex: '(webOS)/(\d+)\.(\d+)'
+    family_replacement: 'Palm webOS'
+
+  # LuaKit has no version info.
+  # http://luakit.org/projects/luakit/
+  - regex: '(luakit)'
+    family_replacement: 'LuaKit'
+
+  # Lightning (for Thunderbird)
+  # http://www.mozilla.org/projects/calendar/lightning/
+  - regex: '(Lightning)/(\d+)\.(\d+)([ab]?\d+[a-z]*)'
+
+  # Swiftfox
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+(?:pre)?) \(Swiftfox\)'
+    family_replacement: 'Swiftfox'
+  - regex: '(Firefox)/(\d+)\.(\d+)([ab]\d+[a-z]*)? \(Swiftfox\)'
+    family_replacement: 'Swiftfox'
+
+  # Rekonq
+  - regex: 'rekonq'
+    family_replacement: 'Rekonq'
+
+  # Conkeror lowercase/uppercase
+  # http://conkeror.org/
+  - regex: '(conkeror|Conkeror)/(\d+)\.(\d+)\.?(\d+)?'
+    family_replacement: 'Conkeror'
+
+  # catches lower case konqueror
+  - regex: '(konqueror)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Konqueror'
+
+  - regex: '(PlayBook).+RIM Tablet OS (\d+)\.(\d+)\.(\d+)'
+
+  - regex: '(WeTab)-Browser'
+
+  - regex: '(wOSBrowser).+TouchPad/(\d+)\.(\d+)'
+    family_replacement: 'webOS TouchPad'
+
+  - regex: '(Comodo_Dragon)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Comodo Dragon'
+
+  # YottaaMonitor bot
+  - regex: '(YottaaMonitor)'
+
+  # must go before NetFront below
+  - regex: '(Kindle)/(\d+)\.(\d+)'
+
+  # must go before Android below.
+  - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Chrome Mobile'
+
+
+  #### END SPECIAL CASES TOP ####
+
+  #### MAIN CASES - this catches > 50% of all browsers ####
+
+  # Browser/major_version.minor_version.beta_version
+  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Vodafone|NetFront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iron|Iris)/(\d+)\.(\d+)\.(\d+)'
+
+  # Browser/major_version.minor_version
+  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Iron|Space Bison|Stainless|Orca|Dolfin|BOLT)/(\d+)\.(\d+)'
+
+  # Browser major_version.minor_version.beta_version (space instead of slash)
+  - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
+  # Browser major_version.minor_version (space instead of slash)
+  - regex: '(iCab|Lunascape|Opera|Android) (\d+)\.(\d+)\.?(\d+)?'
+  
+  # IE Mobile
+  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
+    family_replacement: 'IE Mobile'
+  # desktop mode
+  # http://www.anandtech.com/show/3982/windows-phone-7-review
+  - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
+    family_replacement: 'IE Mobile'
+
+  # AFTER THE EDGE CASES ABOVE!
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
+
+  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
+  #### END MAIN CASES ####
+
+  #### SPECIAL CASES ####
+  - regex: '(Obigo|OBIGO)[^\d]*(\d+)(?:.(\d+))?'
+    family_replacement: 'Obigo'
+
+  - regex: '(MAXTHON|Maxthon) (\d+)\.(\d+)'
+    family_replacement: 'Maxthon'
+
+  - regex: '(Maxthon|MyIE2|Uzbl|Shiira)'
+    v1_replacement: '0'
+
+  - regex: '(PLAYSTATION) (\d+)'
+    family_replacement: 'PlayStation'
+
+  - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
+
+  - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
+
+  - regex: '(POLARIS)/(\d+)\.(\d+)'
+    family_replacement: 'Polaris'
+
+  - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Bon Echo'
+
+  - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
+
+  - regex: '(iPhone) OS (\d+)_(\d+)(?:_(\d+))?'
+
+  - regex: '(iPad).+ OS (\d+)_(\d+)(?:_(\d+))?'
+
+  - regex: '(Avant)'
+    v1_replacement: '1'
+
+  - regex: '(Nokia)[EN]?(\d+)'
+
+  # BlackBerry devices
+  - regex: '(Black[bB]erry).+Version\/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Blackberry'
+
+  - regex: '(Black[bB]erry)\s?(\d+)'
+    family_replacement: 'Blackberry'
+
+  - regex: '(OmniWeb)/v(\d+)\.(\d+)'
+
+  - regex: '(Blazer)/(\d+)\.(\d+)'
+    family_replacement: 'Palm Blazer'
+
+  - regex: '(Pre)/(\d+)\.(\d+)'
+    family_replacement: 'Palm Pre'
+
+  - regex: '(Links) \((\d+)\.(\d+)'
+
+  - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
+
+  #- regex: '\(iPad;.+(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
+  #  family_replacement: 'iPad'
+
+  # Amazon Silk, should go before Safari
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+
+  # Safari
+  - regex: '(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
+    family_replacement: 'Safari'
+  # Safari didn't provide "Version/d.d.d" prior to 3.0
+  - regex: '(Safari)/\d+'
+
+  - regex: '(OLPC)/Update(\d+)\.(\d+)'
+
+  - regex: '(OLPC)/Update()\.(\d+)'
+    v1_replacement: '0'
+
+  - regex: '(SamsungSGHi560)'
+    family_replacement: 'Samsung SGHi560'
+
+  - regex: '^(SonyEricssonK800i)'
+    family_replacement: 'Sony Ericsson K800i'
+
+  - regex: '(Teleca Q7)'
+
+  - regex: '(MSIE) (\d+)\.(\d+)'
+    family_replacement: 'IE'
+
+
+os_parsers:    
+  ##########
+  # Windows
+  # http://en.wikipedia.org/wiki/Windows_NT#Releases
+  # possibility of false positive when different marketing names share same NT kernel
+  # e.g. windows server 2003 and windows xp
+  # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
+  # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
+  ##########
+  - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
+    os_replacement: 'Windows XP'
+    
+  # ie mobile des ktop mode  
+  # spoofs nt 6.1. must come before windows 7  
+  - regex: '(XBLWP7)'
+    os_replacement: 'Windows Phone OS'
+    
+  - regex: '(Windows NT 6\.1)'
+    os_replacement: 'Windows 7'
+    
+  - regex: '(Windows NT 6\.0)'
+    os_replacement: 'Windows Vista'
+    
+  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000)'
+  
+  # is this a spoof or is nt 6.2 out and about in some capacity?
+  - regex: '(Windows NT 6\.2)'
+    os_replacement: 'Windows 8'
+    
+  - regex: '(Windows NT 5\.0)'
+    os_replacement: 'Windows 2000'
+    
+  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
+  
+  - regex: '(Windows ?Mobile)'
+    os_replacement: 'Windows Mobile'
+    
+  - regex: '(WinNT4.0)'
+    os_replacement: 'Windows NT 4.0'
+    
+  - regex: '(Win98)'
+    os_replacement: 'Windows 98'
+    
+  ##########
+  # Android
+  # can actually detect rooted android os. do we care?
+  ##########
+  - regex: '(Android) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+  
+  - regex: '(Android) Donut'
+    os_v1_replacement: '1'
+    os_v2_replacement: '2'
+    
+  - regex: '(Android) Eclair'
+    os_v1_replacement: '2'
+    os_v2_replacement: '1'
+    
+  - regex: '(Android) Froyo'
+    os_v1_replacement: '2'
+    os_v2_replacement: '2'
+    
+  - regex: '(Android) Gingerbread'
+    os_v1_replacement: '2'
+    os_v2_replacement: '3'
+    
+  - regex: '(Android) Honeycomb'
+    os_v1_replacement: '3'
+    
+  ##########
+  # Mac OS
+  # http://en.wikipedia.org/wiki/Mac_OS_X#Versions
+  ##########
+  - regex: '(Mac OS X) (\d+)[_.](\d+)(?:[_.](\d+))?'
+    
+  # builds before tiger don't seem to specify version?
+    
+  # ios devices spoof (mac os x), so including intel/ppc prefixes
+  - regex: '(?:PPC|Intel) (Mac OS X)'
+  
+  ##########
+  # iOS
+  # http://en.wikipedia.org/wiki/IOS_version_history
+  ##########
+  - regex: '(CPU OS|iPhone OS) (\d+)_(\d+)(?:_(\d+))?'  
+    os_replacement: 'iOS'
+    
+  # remaining cases are mostly only opera uas, so catch opera as to not catch iphone spoofs
+  - regex: '(iPhone|iPad|iPod); Opera'
+    os_replacement: 'iOS'
+    
+  # few more stragglers
+  - regex: '(iPhone|iPad|iPod).*Mac OS X'
+    os_replacement: 'iOS'
+    
+  ##########
+  # Chrome OS
+  # if version 0.0.0, probably this stuff: 
+  # http://code.google.com/p/chromium-os/issues/detail?id=11573
+  # http://code.google.com/p/chromium-os/issues/detail?id=13790
+  ##########
+  - regex: '(CrOS) [a-z0-9_]+ (\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'Chrome OS'
+    
+  ##########
+  # Linux distros
+  ##########
+  - regex: '(Debian)-(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Linux Mint)(?:/(\d+))?'
+  - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  
+  ##########
+  # Symbian + Symbian OS
+  # http://en.wikipedia.org/wiki/History_of_Symbian
+  ##########
+  - regex: '(Symbian[Oo][Ss])/(\d+)\.(\d+)'
+    os_replacement: 'Symbian OS'
+  - regex: '(Symbian/3)'
+    os_replacement: 'Symbian^3'
+  - regex: '(Series 60|SymbOS|S60)'
+    os_replacement: 'Symbian OS'
+  
+  ##########
+  # BlackBerry devices
+  ##########
+  - regex: '(Black[Bb]erry)[0-9a-z]+/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'BlackBerry OS'
+  - regex: '(Black[Bb]erry).+Version/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'BlackBerry OS'
+  - regex: '(RIM Tablet OS) (\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'BlackBerry Tablet OS'
+  - regex: '(Play[Bb]ook)'
+    os_replacement: 'BlackBerry Tablet OS'
+  - regex: '(Black[Bb]erry)'
+    os_replacement: 'Blackberry OS'
+
+  ##########
+  # Misc mobile
+  ##########          
+  - regex: '(webOS|hpwOS)/(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'webOS'
+  
+  ##########
+  # Generic patterns
+  # since the majority of os cases are very specific, these go last
+  ##########
+  # first.second.third.fourth bits
+  - regex: '(SUSE|Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+  
+  # first.second.third bits
+  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS|CentOS)/(\d+)\.(\d+)\.(\d+)'
+  
+  # first.second bits
+  - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
+  
+  # just os
+  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Linux|BSD)'
+
+device_parsers:
+  ##########
+  # incomplete!
+  # multiple replacement placeholds i.e. ($1) ($2) help solve problem of single device with multiple representations in ua
+  # e.g. HTC Dream S should parse to the same device as HTC_DreamS
+  ##########
+
+  ##########
+  # incomplete!
+  # HTC
+  # http://en.wikipedia.org/wiki/List_of_HTC_phones
+  # this is quickly getting unwieldy
+  ##########
+  # SPECIFIC CASES
+  - regex: '(HTC_VDA_V)'
+    device_replacement: 'HTC S710'
+  - regex: '(HTC-P4600)'
+    device_replacement: 'HTC Touch Pro'
+  - regex: '(HTCX06HT)'
+    device_replacement: 'HTC Desire'
+  - regex: '(HTC-A6366)'
+    device_replacement: 'HTC Aria'
+  - regex: 'HTC; (7 Mozart|T8697)'
+    device_replacement: 'HTC 7 Mozart'
+  - regex: '(HTC-ST7377)'
+    device_replacement: 'HTC Touch Pro2'
+  - regex: 'HTC; 7 Trophy'
+    device_replacement: 'HTC 7 Trophy'
+  - regex: 'HTC; HD7'
+    device_replacement: 'HTC HD7'
+ 
+  # example: Mozilla/5.0 (Linux; U; Android 2.3.2; fr-fr; HTC HD2 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+  - regex: 'HTC ([A-Z][a-z0-9]+) Build'
+    device_replacement: 'HTC ($1)'
+  # example: Mozilla/5.0 (Linux; U; Android 2.1; es-es; HTC Legend 1.23.161.1 Build/ERD79) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17,gzip
+  - regex: 'HTC ([A-Z][a-z0-9 ]+) \d+\.\d+\.\d+\.\d+'
+    device_replacement: 'HTC ($1) ($2)'
+  # example: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; HTC_Touch_Diamond2_T5353; Windows Phone 6.5.3.5)
+  - regex: 'HTC_Touch_([A-Za-z0-9]+)'
+    device_replacement: 'HTC Touch ($1)'
+  # should come after HTC_Touch
+  - regex: 'HTC_([A-Za-z0-9]+)'
+    device: 'HTC ($1)'
+  - regex: '(HTC)'
+
+  ##########
+  # NOKIA 
+  # nokia NokiaN8-00 comes before iphone. sometimes spoofs iphone
+  ##########
+  - regex: 'Nokia(?!Browser)([A-Za-z0-9\-])+'
+    device_replacement: 'Nokia ($1)'
+  - regex: 'Nokia ([A-Za-z0-9\-]+)'
+    device_replacement: 'Nokia ($1)'
+
+  ##########
+  # incomplete!
+  # PALM 
+  ##########
+  # some palm devices must come before iphone. sometimes spoofs iphone in ua
+  - regex: '(Pre)/(\d+)\.(\d+)'
+    device_replacement: 'Palm Pre'
+  - regex: '(Pixi)/(\d+)\.(\d+)'
+    device_replacement: 'Palm Pixi'
+
+  ##########
+  # complete but probably catches spoofs
+  # iSTUFF 
+  ##########
+  # ipad and ipod must be parsed before iphone
+  # cannot determine specific device type from ua string. (3g, 3gs, 4, etc)
+  - regex: '(iPad);'
+  - regex: '(iPod);'
+  - regex: '(iPhone);'
