@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/109/trunk/examples
+END
+yaml-load.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/109/trunk/examples/yaml-load.php
+END
+yaml-dump.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/84/trunk/examples/yaml-dump.php
+END

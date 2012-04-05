@@ -1,0 +1,72 @@
+THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
+SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
+ME ORGANIZE WHEN I MADE A SET OF FIXES
+
+UAP-v1.2.2
+ - The following were changes to user_agents_regex.yaml:
+ ---- ADD: support for UC Browser
+
+UAP-v1.2.1
+ - The following were changes to user_agents_regex.yaml:
+ ---- ADD: support for android 4 user agents that have a dash in them
+
+UAP-v1.2.0
+ - FIX: should be compatible with PHP 5.2
+ - FIX: addressed STRICT mode errors
+ - FIX: addressed NOTICE for a missing variable
+ - FIX: if isTablet is set to true then isMobile is set to false (mobile to me means phone)
+ - THX: Thanks to Mike Bond of WVU Libraries for pointing out the 5.2 incompatibility
+
+UAP-v1.1.0
+ - FIX: a number of fixes from bryan shelton
+ - The following were changes to user_agents_regex.yaml:
+ ---- ADD: support for Chrome Mobile
+
+UAP-v1.0.0
+ - just because i don't expect to update this anytime soon and ppl report it's working
+
+UAP-v0.3.1
+ - FIX: swapped nil for null in parse()
+ - FIX: smarter/saner defaults
+ - FIX: now using isset() for family_replacement
+ - THX: thanks to bryan shelton for these fixes 
+
+UAP-v0.3.0
+ - ADD: can now supply a specific UA to be checked
+ - ADD: if the UA contains 'tablet' isTablet is marked true
+ - ADD: for certain mobile OSs they report a desktop browser. marking them mobile now.
+ - FIX: tablet listing should now be better
+ - FIX: the list of mobile browsers was updated
+ - FIX: made sure that certain checks won't fail as "false" if a version number was a 0
+ - FIX: for the device check, if it returns spider as a result it no longer marks it as mobile
+ - FIX: added more mobile browsers to that specific check
+ - The following were changes to user_agents_regex.yaml:
+ ---- ADD: symphony, minimo, teleca, semc, up.browser, bunjaloo, jasmine, & brew browsers supported
+ ---- ADD: windows mobile 6.5 os support
+ ---- ADD: amoi, asus, bird, dell, docomo, huawei, i-mate, kyocera, lenovo, lg, microsoft kind,
+       motorola, philips, samsung, softbank, & sony ericsson device checks
+ ---- FIX: mobile firefox, opera mobile & mini, obigo, polaris, nokiabrowser, ie mobile,
+       android, & mobile safari browser checks
+ ---- FIX: iOS support
+ ---- FIX: htc, android, palm/hp, kindle, ios, generic feature phones & spider device checks
+
+UAP-v0.2.0
+ - ADD: added isMobile support
+ - ADD: added isTablet support
+ - ADD: added isComputer support
+ - ADD: added isSpider support
+
+UAP-v0.1.0
+ - The following were changes to user_agents_regex.yaml:
+ ---- expanded support for Symbia & Nokia Devices, 
+ ---- cleaned up some slashies, 
+ ---- added Mobile Safari as the family replacement for iOS devices, 
+ ---- better support for longer HTC device names
+ ---- added feature phones to the device check
+ ---- added generic smartphones to the device check
+ ---- added AvantGo to the ua check
+ ---- tweaked a lot of the nokia checks
+ ---- added kindle support to the device section
+ ---- added a generic catch for android devices.
+ ---- added support for blackberry devices
+ ---- changed the blackberry family to 'blackberry webkit' when it's a webkit browser

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/108/trunk/tests
+END
+ParseTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/102/trunk/tests/ParseTest.php
+END
+quotes.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/43/trunk/tests/quotes.yaml
+END
+indent_1.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/107/trunk/tests/indent_1.yaml
+END
+IndentTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/107/trunk/tests/IndentTest.php
+END
+DumpTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/108/trunk/tests/DumpTest.php
+END
+failing1.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/44/trunk/tests/failing1.yaml
+END
+RoundTripTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/104/trunk/tests/RoundTripTest.php
+END
