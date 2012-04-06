@@ -47,8 +47,6 @@ Usage :: python
 License
 -------
 
-Your choice of [MIT][6] or [Apache License, Version 2.0][6] for the JS code which is Copyright 2010 Tobie Langel.
-
 The data contained in `regexes.yaml` is Copyright 2009 Google Inc. and available under the [Apache License, Version 2.0][6].
 
 The original python code is Copyright 2008 Google Inc. and is available under the [Apache License, Version 2.0][7].
