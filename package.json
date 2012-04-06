@@ -1,7 +1,7 @@
 { 
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
-  "main": "index.js",
+  "main": "./js/index",
   "version": "0.2.3",
   "maintainers": [
     {
@@ -25,6 +25,11 @@
       "name": "Philip Tellis",
       "email": "philip@bluesmoon.info",
       "web": "http://bluesmoon.info"
+    },
+    {
+      "name": "Dave Olsen",
+      "email": "dmolsen@gmail.com",
+      "web": "http://dmolsen.com"
     }
   ],
   "repository": {
@@ -41,10 +46,7 @@
       "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE"
     }
   ],
-  "scripts": {
-    "update": "update.js"
-  },
-  "devDependencies": {
+  "dependencies": {
     "yamlparser": ">=0.0.2"
   }
 }

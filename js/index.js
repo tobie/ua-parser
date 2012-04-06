@@ -1,9 +1,10 @@
 var path = require('path'), 
-    fs = require('fs');
+    fs = require('fs'),
+    yaml = require('yamlparser');
 
-var file = path.join(__dirname, 'regexes.json');
+var file = path.join(__dirname, '..', 'regexes.yaml');
 var regexes = fs.readFileSync(file, 'utf8');
-regexes = JSON.parse(regexes);
+regexes = yaml.eval(regexes);
 
 var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
