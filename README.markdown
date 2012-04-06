@@ -3,7 +3,7 @@ ua-parser
 
 `ua-parser` is a port to [node.js][1] and python of [BrowserScope][2]'s [user agent string parser][3].
 
-The crux of the original parser--the data collected by [Steve Souders][4] over the years--has been extracted into a separate [JSON file][5] so as to be reusable _as is_ by implementations in other programming languages.
+The crux of the original parser--the data collected by [Steve Souders][4] over the years--has been extracted into a separate [YAML file][5] so as to be reusable _as is_ by implementations in other programming languages.
 
 `ua-parser` is just a small wrapper around this data.
 
@@ -47,15 +47,23 @@ Usage :: python
 License
 -------
 
-Your choice of [MIT][6] or [Apache License, Version 2.0][7] for the JS code which is Copyright 2010 Tobie Langel.
+Your choice of [MIT][6] or [Apache License, Version 2.0][6] for the JS code which is Copyright 2010 Tobie Langel.
 
-The data contained in `regexes.json` is Copyright 2009 Google Inc. and available under the [Apache License, Version 2.0][7].
+The data contained in `regexes.yaml` is Copyright 2009 Google Inc. and available under the [Apache License, Version 2.0][6].
+
+The original python code is Copyright 2008 Google Inc. and is available under the [Apache License, Version 2.0][7].
+
+The JS port is Copyright 2010 Tobie Langel and is available under [your choice of MIT or Apache Version 2.0 license][8].
+
+The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [MIT license][9].
 
 [1]: http://node.js
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
 [4]: http://stevesouders.com/
-[5]: http://code.google.com/p/ua-parser/source/browse/trunk/regexes.json
-[6]: http://github.com/tobie/ua-parser/raw/master/LICENSE
-[7]: http://www.apache.org/licenses/LICENSE-2.0
+[5]: https://raw.github.com/tobie/ua-parser/master/regexes.yaml
+[6]: http://www.apache.org/licenses/LICENSE-2.0
+[7]: https://raw.github.com/tobie/ua-parser/master/py/LICENSE
+[8]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
+[9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
 

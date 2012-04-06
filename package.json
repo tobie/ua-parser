@@ -39,11 +39,11 @@
   "licenses": [
     {
       "type" : "MIT",
-      "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE"
+      "url" : "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
     },
     {
       "type" : "Apache-2.0",
-      "url" : "http://github.com/tobie/ua-parser/raw/master/LICENSE"
+      "url" : "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
     }
   ],
   "dependencies": {
