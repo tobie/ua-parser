@@ -14,12 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""User Agent Parser Unit Tests.
-Run:
-# python -m test.test_user_agent_parser
-or like:
-# python -m test.test_user_agent_parser ParseTest.testBrowserscopeStrings
-"""
+"""User Agent Parser Unit Tests."""
 
 __author__ = 'slamm@google.com (Stephen Lamm)'
 
