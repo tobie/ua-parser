@@ -44,6 +44,12 @@ Usage :: python
     family, v1, v2, v3 = user_agent_parser.Parse(user_agent_string)
 
 
+Usage :: php
+------------
+
+    Refer to the README in the `php` directory.   
+
+
 License
 -------
 
