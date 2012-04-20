@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php v1.2.1
+ * ua-parser-php v1.3.0
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -43,7 +43,19 @@ class UA {
 		
 		self::$ua      = $ua ? $ua : $_SERVER["HTTP_USER_AGENT"];
 		self::$accept  = $_SERVER["HTTP_ACCEPT"];
-		self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/user_agents_regex.yaml");
+		if (file_exists(__DIR__."/resources/regexes.yaml")) {
+			self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
+		} else {
+			print "<h1>Error</h1>
+				   <p>Please download the regexes.yaml file before using UAParser.php.</p>
+				   <p>You can type the following at the command line to download the latest version:</p>
+				   <blockquote>
+					<code>%: cd /path/to/UAParser</code><br />
+				   	<code>%: php UAParser.php -get</code>
+				   </blockquote>";
+			exit;
+		}
+	
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
@@ -60,7 +72,7 @@ class UA {
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;	
 				$result->uaOriginal     = self::$ua;
-			} else if ($result->device == "Spider") {
+			} else if (isset($result) && isset($result->device) && ($result->device == "Spider")) {
 				$result->isMobile       = false;
 				$result->isSpider       = true;
 				$result->uaOriginal     = self::$ua;
@@ -112,7 +124,11 @@ class UA {
 			$obj = (object) $defaults;
 
 			// build the version numbers for the browser
-			$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
+				$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			} else {
+				$obj->major = '';
+			}
 			if (isset($matches[3]) || isset($regex['v2_replacement'])) {
 				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
 			}
@@ -331,15 +347,15 @@ class UA {
 	* Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
 	*/
 	public static function get() {
-		if ($data = @file_get_contents("http://ua-parser.googlecode.com/svn/trunk/resources/user_agent_parser.yaml")) {
-			if (file_exists(__DIR__."/resources/user_agents_regex.yaml")) {
+		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/2397fc156b4389d6909ea58b7157bd88d957cbbf/regexes.yaml")) {
+			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 				print("backing up old YAML file...\n");
-				if (!copy(__DIR__."/resources/user_agents_regex.yaml", __DIR__."/resources/user_agents_regex.".date("Ymdhis").".yaml")) {
+				if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
 					print("back-up failed...\n");
 					exit;
 				}
 			}
-			$fp = fopen(__DIR__."/resources/user_agents_regex.yaml", "w");
+			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
 			fwrite($fp, $data);
 			fclose($fp);
 			print("success...\n");
