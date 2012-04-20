@@ -43,7 +43,19 @@ class UA {
 		
 		self::$ua      = $ua ? $ua : $_SERVER["HTTP_USER_AGENT"];
 		self::$accept  = $_SERVER["HTTP_ACCEPT"];
-		self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/user_agents_regex.yaml");
+		if (file_exists(__DIR__."/resources/regexes.yaml")) {
+			self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
+		} else {
+			print "<h1>Error</h1>
+				   <p>Please download the regexes.yaml file before using UAParser.php.</p>
+				   <p>You can type the following at the command line to download the latest version:</p>
+				   <blockquote>
+					<code>%: cd /path/to/UAParser</code><br />
+				   	<code>%: php UAParser.php -get</code>
+				   </blockquote>";
+			exit;
+		}
+	
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
