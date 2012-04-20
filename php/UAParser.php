@@ -72,7 +72,7 @@ class UA {
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;	
 				$result->uaOriginal     = self::$ua;
-			} else if ($result->device == "Spider") {
+			} else if (isset($result) && isset($result->device) && ($result->device == "Spider")) {
 				$result->isMobile       = false;
 				$result->isSpider       = true;
 				$result->uaOriginal     = self::$ua;
@@ -124,7 +124,11 @@ class UA {
 			$obj = (object) $defaults;
 
 			// build the version numbers for the browser
-			$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
+				$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			} else {
+				$obj->major = '';
+			}
 			if (isset($matches[3]) || isset($regex['v2_replacement'])) {
 				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
 			}
