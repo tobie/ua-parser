@@ -345,13 +345,14 @@ class UA {
 	public static function get() {
 		if ($data = @file_get_contents("http://ua-parser.googlecode.com/svn/trunk/resources/user_agent_parser.yaml")) {
 			if (file_exists(__DIR__."/resources/user_agents_regex.yaml")) {
+			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 				print("backing up old YAML file...\n");
-				if (!copy(__DIR__."/resources/user_agents_regex.yaml", __DIR__."/resources/user_agents_regex.".date("Ymdhis").".yaml")) {
+				if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
 					print("back-up failed...\n");
 					exit;
 				}
 			}
-			$fp = fopen(__DIR__."/resources/user_agents_regex.yaml", "w");
+			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
 			fwrite($fp, $data);
 			fclose($fp);
 			print("success...\n");
