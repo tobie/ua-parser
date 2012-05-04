@@ -382,4 +382,4 @@ for parser in yaml['device_parsers']:
   if 'device_replacement' in parser:
     device_replacement = parser['device_replacement']
 
-DEVICE_PARSERS.append(DeviceParser(regex, device_replacement))
+  DEVICE_PARSERS.append(DeviceParser(regex, device_replacement))
