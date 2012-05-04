@@ -16,9 +16,9 @@
 
 """User Agent Parser Unit Tests.
 Run:
-# python -m test.test_user_agent_parser
+# python -m test_user_agent_parser_test  (runs all the tests, takes awhile)
 or like:
-# python -m test.test_user_agent_parser ParseTest.testBrowserscopeStrings
+# python -m user_agent_parser_test ParseTest.testBrowserscopeStrings
 """
 
 __author__ = 'slamm@google.com (Stephen Lamm)'
