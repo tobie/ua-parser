@@ -114,6 +114,10 @@ user_agent_parsers:
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Mobile'
 
+  # Chrome Frame must come before MSIE.
+  - regex: '(chromeframe)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Chrome Frame'
+
   # UC Browser
   - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
 
