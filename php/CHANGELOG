@@ -2,6 +2,10 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-v1.3.1
+ - FIX: now doing some sanity cleaning on the user agent strings
+ - FIX: added a smarter default if the user agent isn't recognized at all
+
 UAP-v1.3.0
  - FIX: now points to Tobie's ua-parser project for the latest greatest YAML file
  - FIX: YAML file is now standardized as regexes.yaml instead of user_agents_regex.yaml
