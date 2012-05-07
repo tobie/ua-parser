@@ -79,7 +79,7 @@ class UA {
 			}
 		}
 		
-		// still false?! see if it's a really dumb feature phone
+		// still false?! see if it's a really dumb feature phone, if not just mark it as unknown
 		if (!$result) {
 			if ((strpos(self::$accept,'text/vnd.wap.wml') > 0) || (strpos(self::$accept,'application/vnd.wap.xhtml+xml') > 0) || isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
 				$result = new stdClass();
@@ -87,6 +87,14 @@ class UA {
 				$result->deviceFull     = "Generic Feature Phone";
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;
+				$result->uaOriginal     = self::$ua;
+			} else {
+				$result = new stdClass();
+				$result->device         = "Unknown";
+				$result->deviceFull     = "Unknown";
+				$result->isMobile       = false;
+				$result->isMobileDevice = false;
+				$result->isComputer     = true;
 				$result->uaOriginal     = self::$ua;
 			}
 		}
