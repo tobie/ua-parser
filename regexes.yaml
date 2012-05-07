@@ -504,6 +504,7 @@ device_parsers:
   - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-z]{2}\-[A-z]{2}\; (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+\-update1\; [A-z]{2}\-[A-z]{2}\; (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+\; [A-z]{2}\-[A-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
 
   ##########
   # NOKIA
