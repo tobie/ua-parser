@@ -169,7 +169,7 @@ class UA {
 			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
 			                        "Nokia","Blackberry","Palm","Silk","Android","Maemo","Obigo","Netfront","AvantGo","Teleca","SEMC-Browser",
 			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
-									"UC Browser");
+									"UC Browser","Tizen Browser");
 			foreach($mobileBrowsers as $mobileBrowser) {
 				if (stristr($obj->browser, $mobileBrowser)) {
 					$obj->isMobile = true;
