@@ -2,6 +2,13 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-v1.3.2
+ - FIX: addressed false "tablet" classification for opera mobile & mini on android
+ - The following were changes to regexes.yaml:
+ ---- ADD: support for Tizen Browser (aka SLP Browser) from Samsung
+ ---- FIX: support for a new look Polaris 8.0 user agent string
+ ---- FIX: modified where the Epiphany Browser check happens
+
 UAP-v1.3.1
  - FIX: now doing some sanity cleaning on the user agent strings
  - FIX: added a smarter default if the user agent isn't recognized at all
