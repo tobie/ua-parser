@@ -200,7 +200,9 @@ class UA {
 			}
 			
 			// if OS is Android check to see if this is a tablet. won't work on UA strings less than Android 3.0
-			if ((isset($obj->os) && $obj->os == 'Android') && !strstr(self::$ua, 'Mobile')) {
+			// based on: http://googlewebmastercentral.blogspot.com/2011/03/mo-better-to-also-detect-mobile-user.html
+			// opera doesn't follow this convention though...
+			if ((isset($obj->os) && $obj->os == 'Android') && !strstr(self::$ua, 'Mobile') && !strstr(self::$ua, 'Opera')) {
 				$obj->isTablet = true;
 				$obj->isMobile = false;
 			}
