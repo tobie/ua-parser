@@ -6,9 +6,9 @@
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
- * ua-parser-php is a PHP-based pseudo-port of the ua-parser project. Learn more about the ua-parser project at:
+ * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
  * 
- * http://code.google.com/p/ua-parser/
+ * https://github.com/tobie/ua-parser
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
  * spyc-0.5, for loading the YAML, is licensed under the MIT license.
