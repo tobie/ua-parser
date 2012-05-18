@@ -359,7 +359,7 @@ class UA {
 	* Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
 	*/
 	public static function get() {
-		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/2397fc156b4389d6909ea58b7157bd88d957cbbf/regexes.yaml")) {
+		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 				if (!self::$nobackup) { 
 					if (!self::$silent) { print("backing up old YAML file...\n"); }
