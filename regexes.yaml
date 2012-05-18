@@ -207,6 +207,7 @@ user_agent_parsers:
 
   - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
 
+  # Polaris/d.d is above
   - regex: '(POLARIS)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
   - regex: '(Embider)/(\d+)\.(\d+)'
