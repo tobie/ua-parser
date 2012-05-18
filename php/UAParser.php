@@ -32,7 +32,9 @@ class UA {
 	private static $accept;
 	private static $regexes;
 	
-	private static $debug = false;
+	private static $debug    = false; // log requests
+	public static $silent    = false; // no output when running UA::get()
+	public static $nobackup  = false; // don't create a back-up when running UA::get()
 	
 	/**
 	* Sets up some standard variables as well as starts the user agent parsing process
@@ -359,24 +361,28 @@ class UA {
 	public static function get() {
 		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/2397fc156b4389d6909ea58b7157bd88d957cbbf/regexes.yaml")) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
-				print("backing up old YAML file...\n");
-				if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
-					print("back-up failed...\n");
-					exit;
+				if (!self::$nobackup) { 
+					if (!self::$silent) { print("backing up old YAML file...\n"); }
+					if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
+						if (!self::$silent) { print("back-up failed...\n"); }
+						exit;
+					}
 				}
 			}
 			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
 			fwrite($fp, $data);
 			fclose($fp);
-			print("success...\n");
+			if (!self::$silent) { print("success...\n"); }
 		} else {
-			print("failed to get the file...\n");
+			if (!self::$silent) { print("failed to get the file...\n"); }
 		}
 	}
 }
 
 if (defined('STDIN') && isset($argv) && ($argv[1] == '-get')) {
-	print("getting the YAML file...\n");
+	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
+	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
+	if (!UA::$silent) { print("getting the YAML file...\n"); }
 	UA::get();
 }
 
