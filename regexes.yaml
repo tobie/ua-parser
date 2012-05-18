@@ -12,6 +12,8 @@ user_agent_parsers:
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
 
   # Firefox
+  - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)'
+    family_replacement: 'Pale Moon (Firefox Variant)'
   - regex: '(Fennec)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
     family_replacement: 'Firefox Mobile'
   - regex: '(Fennec)/(\d+)\.(\d+)(pre)'
