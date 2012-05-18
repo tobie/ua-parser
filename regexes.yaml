@@ -137,6 +137,10 @@ user_agent_parsers:
     
   # Epiphany browser (identifies as Chromium)
   - regex: '(Epiphany)/(\d+)\.(\d+).(\d+)'
+  
+  # Sogou Explorer 2.X
+  - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
+    family_replacement: 'Sogou Explorer'
 
   #### END SPECIAL CASES TOP ####
 
