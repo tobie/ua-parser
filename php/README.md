@@ -112,6 +112,30 @@ Alternatively, you can create a PHP script that includes the following:
     ?>
 
 The `silent` and `nobackup` variables can also be modified directly in the `UAParser.php` script on lines #36 and #37 respectively.
+
+## Using ua-parser For a Redirect Script ##
+
+It's very simple to use ua-parser as a redirect script. To do so do the following:
+
+    <?php
+
+    	// require the ua-parser-php library
+    	require_once("/path/to/UAParser.php");
+
+    	// parse the requesting user agent
+    	$result = UA::parse();
+
+    	// redirect phones, to redirect tablets use isMobileDevice
+    	if ($result->isMobile) {
+    		header("location:http://dmolsen.com");
+    	}
+	
+	    // run through the rest of your code for the page for desktop devices & spiders
+	
+    ?>
+
+You can use any of the properties above to perform the redirect but the boolean options are probably easiest.
+
 ## Credits ##
 
 Thanks to the [ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon. Thanks to Bryan Shelton for some fixes.
