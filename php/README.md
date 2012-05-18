@@ -90,6 +90,18 @@ To get the user-agent data for either the initial load of the project or each ni
     %: cd /path/to/project/
     %: php UAParser.php -get
 
+If you use the cron job method it's highly encouraged that you run `UAParser.php -get` in silent mode. To do so do the following:
+
+    %: php UAParser.php -get -silent
+
+You can also turn off back-ups by doing the following:
+
+    %: php UAParser.php -get -nobackup
+
+And you can run in silent mode and turn off back-ups by doing the following:
+
+    %: php UAParser.php -get -silent -nobackup
+
 Alternatively, you can create a PHP script that includes the following:
 
     <?php
@@ -99,6 +111,7 @@ Alternatively, you can create a PHP script that includes the following:
 			
     ?>
 
+The `silent` and `nobackup` variables can also be modified directly in the `UAParser.php` script on lines #36 and #37 respectively.
 ## Credits ##
 
 Thanks to the [ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon. Thanks to Bryan Shelton for some fixes.
