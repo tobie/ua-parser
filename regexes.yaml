@@ -309,6 +309,33 @@ user_agent_parsers:
     family_replacement: 'IE'
 
 os_parsers:
+
+  ##########
+  # Android
+  # can actually detect rooted android os. do we care?
+  ##########
+  - regex: '(Android) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+  - regex: '(Android)\-(\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+
+  - regex: '(Android) Donut'
+    os_v1_replacement: '1'
+    os_v2_replacement: '2'
+
+  - regex: '(Android) Eclair'
+    os_v1_replacement: '2'
+    os_v2_replacement: '1'
+
+  - regex: '(Android) Froyo'
+    os_v1_replacement: '2'
+    os_v2_replacement: '2'
+
+  - regex: '(Android) Gingerbread'
+    os_v1_replacement: '2'
+    os_v2_replacement: '3'
+
+  - regex: '(Android) Honeycomb'
+    os_v1_replacement: '3'
+      
   ##########
   # Windows
   # http://en.wikipedia.org/wiki/Windows_NT#Releases
@@ -359,31 +386,7 @@ os_parsers:
   ##########
   - regex: '(Tizen)/(\d+)\.(\d+)'
 
-  ##########
-  # Android
-  # can actually detect rooted android os. do we care?
-  ##########
-  - regex: '(Android) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
-  - regex: '(Android)\-(\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
 
-  - regex: '(Android) Donut'
-    os_v1_replacement: '1'
-    os_v2_replacement: '2'
-
-  - regex: '(Android) Eclair'
-    os_v1_replacement: '2'
-    os_v2_replacement: '1'
-
-  - regex: '(Android) Froyo'
-    os_v1_replacement: '2'
-    os_v2_replacement: '2'
-
-  - regex: '(Android) Gingerbread'
-    os_v1_replacement: '2'
-    os_v2_replacement: '3'
-
-  - regex: '(Android) Honeycomb'
-    os_v1_replacement: '3'
 
   ##########
   # Mac OS
