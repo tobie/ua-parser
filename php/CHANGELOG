@@ -2,6 +2,19 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-1.4.0
+ - ADD: silent mode for the UA::get() method
+ - ADD: nobackup mode for the UA::get() method
+ - ADD: example of how to do a redirect with ua-parser-php
+ - The following were changes to regexes.yaml:
+ ---- ADD: support for Google Earth browser
+ ---- ADD: another regex for Firefox Mobile
+ ---- ADD: support for Firefox Alpha builds
+ ---- ADD: support for Sogou Explorer
+ ---- ADD: support for the Raven for Mac browser
+ ---- ADD: support for WebKit Nightly builds (though slightly pointless)
+ ---- FIX: better pattern matching for the Pale Moon browser
+
 UAP-v1.3.2
  - FIX: addressed false "tablet" classification for opera mobile & mini on android
  - The following were changes to regexes.yaml:
