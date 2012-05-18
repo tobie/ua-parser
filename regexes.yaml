@@ -285,6 +285,10 @@ user_agent_parsers:
   # Amazon Silk, should go before Safari
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
 
+  # WebKit Nightly
+  - regex: '(AppleWebKit)/(\d+)\.(\d+)\+ .* Version/\d+\.\d+.\d+ Safari/'
+    family_replacement: 'WebKit Nightly'
+  
   # Safari
   - regex: '(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
     family_replacement: 'Safari'
