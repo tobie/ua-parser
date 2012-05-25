@@ -1,14 +1,14 @@
 <?php
 
 /*!
- * ua-parser-php v1.2.1
+ * ua-parser-php v1.4.0
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
- * ua-parser-php is a PHP-based pseudo-port of the ua-parser project. Learn more about the ua-parser project at:
+ * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
  * 
- * http://code.google.com/p/ua-parser/
+ * https://github.com/tobie/ua-parser
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
  * spyc-0.5, for loading the YAML, is licensed under the MIT license.
@@ -32,7 +32,9 @@ class UA {
 	private static $accept;
 	private static $regexes;
 	
-	private static $debug = false;
+	private static $debug    = false; // log requests
+	public static $silent    = false; // no output when running UA::get()
+	public static $nobackup  = false; // don't create a back-up when running UA::get()
 	
 	/**
 	* Sets up some standard variables as well as starts the user agent parsing process
@@ -41,9 +43,21 @@ class UA {
 	*/
 	public static function parse($ua = NULL) {
 		
-		self::$ua      = $ua ? $ua : $_SERVER["HTTP_USER_AGENT"];
-		self::$accept  = $_SERVER["HTTP_ACCEPT"];
-		self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/user_agents_regex.yaml");
+		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
+		self::$accept  = strip_tags($_SERVER["HTTP_ACCEPT"]);
+		if (file_exists(__DIR__."/resources/regexes.yaml")) {
+			self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
+		} else {
+			print "<h1>Error</h1>
+				   <p>Please download the regexes.yaml file before using UAParser.php.</p>
+				   <p>You can type the following at the command line to download the latest version:</p>
+				   <blockquote>
+					<code>%: cd /path/to/UAParser</code><br />
+				   	<code>%: php UAParser.php -get</code>
+				   </blockquote>";
+			exit;
+		}
+	
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
@@ -60,14 +74,14 @@ class UA {
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;	
 				$result->uaOriginal     = self::$ua;
-			} else if ($result->device == "Spider") {
+			} else if (isset($result) && isset($result->device) && ($result->device == "Spider")) {
 				$result->isMobile       = false;
 				$result->isSpider       = true;
 				$result->uaOriginal     = self::$ua;
 			}
 		}
 		
-		// still false?! see if it's a really dumb feature phone
+		// still false?! see if it's a really dumb feature phone, if not just mark it as unknown
 		if (!$result) {
 			if ((strpos(self::$accept,'text/vnd.wap.wml') > 0) || (strpos(self::$accept,'application/vnd.wap.xhtml+xml') > 0) || isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
 				$result = new stdClass();
@@ -75,6 +89,14 @@ class UA {
 				$result->deviceFull     = "Generic Feature Phone";
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;
+				$result->uaOriginal     = self::$ua;
+			} else {
+				$result = new stdClass();
+				$result->device         = "Unknown";
+				$result->deviceFull     = "Unknown";
+				$result->isMobile       = false;
+				$result->isMobileDevice = false;
+				$result->isComputer     = true;
 				$result->uaOriginal     = self::$ua;
 			}
 		}
@@ -112,7 +134,11 @@ class UA {
 			$obj = (object) $defaults;
 
 			// build the version numbers for the browser
-			$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
+				$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+			} else {
+				$obj->major = '';
+			}
 			if (isset($matches[3]) || isset($regex['v2_replacement'])) {
 				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
 			}
@@ -145,7 +171,7 @@ class UA {
 			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
 			                        "Nokia","Blackberry","Palm","Silk","Android","Maemo","Obigo","Netfront","AvantGo","Teleca","SEMC-Browser",
 			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
-									"UC Browser");
+									"UC Browser","Tizen Browser");
 			foreach($mobileBrowsers as $mobileBrowser) {
 				if (stristr($obj->browser, $mobileBrowser)) {
 					$obj->isMobile = true;
@@ -176,7 +202,9 @@ class UA {
 			}
 			
 			// if OS is Android check to see if this is a tablet. won't work on UA strings less than Android 3.0
-			if ((isset($obj->os) && $obj->os == 'Android') && !strstr(self::$ua, 'Mobile')) {
+			// based on: http://googlewebmastercentral.blogspot.com/2011/03/mo-better-to-also-detect-mobile-user.html
+			// opera doesn't follow this convention though...
+			if ((isset($obj->os) && $obj->os == 'Android') && !strstr(self::$ua, 'Mobile') && !strstr(self::$ua, 'Opera')) {
 				$obj->isTablet = true;
 				$obj->isMobile = false;
 			}
@@ -331,26 +359,30 @@ class UA {
 	* Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
 	*/
 	public static function get() {
-		if ($data = @file_get_contents("http://ua-parser.googlecode.com/svn/trunk/resources/user_agent_parser.yaml")) {
-			if (file_exists(__DIR__."/resources/user_agents_regex.yaml")) {
-				print("backing up old YAML file...\n");
-				if (!copy(__DIR__."/resources/user_agents_regex.yaml", __DIR__."/resources/user_agents_regex.".date("Ymdhis").".yaml")) {
-					print("back-up failed...\n");
-					exit;
+		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
+			if (file_exists(__DIR__."/resources/regexes.yaml")) {
+				if (!self::$nobackup) { 
+					if (!self::$silent) { print("backing up old YAML file...\n"); }
+					if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
+						if (!self::$silent) { print("back-up failed...\n"); }
+						exit;
+					}
 				}
 			}
-			$fp = fopen(__DIR__."/resources/user_agents_regex.yaml", "w");
+			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
 			fwrite($fp, $data);
 			fclose($fp);
-			print("success...\n");
+			if (!self::$silent) { print("success...\n"); }
 		} else {
-			print("failed to get the file...\n");
+			if (!self::$silent) { print("failed to get the file...\n"); }
 		}
 	}
 }
 
 if (defined('STDIN') && isset($argv) && ($argv[1] == '-get')) {
-	print("getting the YAML file...\n");
+	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
+	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
+	if (!UA::$silent) { print("getting the YAML file...\n"); }
 	UA::get();
 }
 

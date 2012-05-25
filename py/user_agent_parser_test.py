@@ -218,6 +218,29 @@ class ParseTest(unittest.TestCase):
                     result['is_spider']))
 
 
+    def runDeviceTestsFromYAML(self, file_name):
+        yamlFile = open(os.path.join(TEST_RESOURCES_DIR, file_name))
+        yamlContents = yaml.load(yamlFile)
+        yamlFile.close()
+
+        for test_case in yamlContents['test_cases']:
+            # Inputs to Parse()
+            user_agent_string = test_case['user_agent_string']
+            kwds = {}
+            if 'js_ua' in test_case:
+                kwds = eval(test_case['js_ua'])
+
+            # The expected results
+            expected = {'device': test_case['device']}
+
+            result = {}
+            result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
+            self.assertEqual(result, expected,
+                u"UA: {0}\n expected<{1}> != actual<{2}>".format(
+                    user_agent_string,
+                    expected['device'], result['device']))
+
+
 class GetFiltersTest(unittest.TestCase):
     def testGetFiltersNoMatchesGiveEmptyDict(self):
         user_agent_string = 'foo'
