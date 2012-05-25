@@ -36,7 +36,7 @@ foreach my $line (<$fh>) {
 
     print "    - user_agent_string: $ua
       family: $family
-      v1: " . ($v1 eq '' ? "'0'" : "'$v1'") . "
-      v2: " . ($v2 eq '' ? '' : "'$v2'") . "
-      v3: " . ($v3 eq '' ? '' : "'$v3'") . "\n";
+      major: " . ($v1 eq '' ? "'0'" : "'$v1'") . "
+      minor: " . ($v2 eq '' ? '' : "'$v2'") . "
+      patch: " . ($v3 eq '' ? '' : "'$v3'") . "\n";
 }
