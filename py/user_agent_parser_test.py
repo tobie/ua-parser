@@ -27,6 +27,7 @@ or like:
 __author__ = 'slamm@google.com (Stephen Lamm)'
 
 import os
+import re
 import sys
 import unittest
 import yaml
@@ -70,30 +71,29 @@ class ParseTest(unittest.TestCase):
 
     def testParseAll(self):
         user_agent_string = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)'
-        expected = {'os': 'Mac OS X',
-                    'os_v1': '10',
-                    'os_v2': '4',
-                    'os_v3': None,
-                    'os_v4': None,
-                    'family': 'Firefox',
-                    'v1': '3',
-                    'v2': '5',
-                    'v3': '5'}
-        result = user_agent_parser.ParseAll(user_agent_string)
-        self.assertEqual(result, expected,
-            u"UA: {0}\n expected<{1}> != actual<{2}>".format(user_agent_string, expected, result))
+        expected = {
+          'device': {
+            'is_spider': False,
+            'is_mobile': False,
+            'family': None
+          },
+          'os': {
+            'family': 'Mac OS X',
+            'major': '10',
+            'minor': '4',
+            'patch': None,
+            'patch_minor': None
+          },
+          'user_agent': {
+            'family': 'Firefox',
+            'major': '3',
+            'minor': '5',
+            'patch': '5'
+          },
+          'string': user_agent_string
+        }
 
-        user_agent_string = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; GTB6; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; OfficeLiveConnector.1.4; OfficeLivePatch.1.3; Media Center PC 6.0),gzip(gfe),gzip(gfe)'
-        expected = {'os': 'Windows 7',
-                    'os_v1': None,
-                    'os_v2': None,
-                    'os_v3': None,
-                    'os_v4': None,
-                    'family': 'IE',
-                    'v1': '8',
-                    'v2': '0',
-                    'v3': None}
-        result = user_agent_parser.ParseAll(user_agent_string)
+        result = user_agent_parser.Parse(user_agent_string)
         self.assertEqual(result, expected,
             u"UA: {0}\n expected<{1}> != actual<{2}>".format(user_agent_string, expected, result))
 
@@ -114,15 +114,15 @@ class ParseTest(unittest.TestCase):
             if 'js_ua' in test_case:
                 kwds = eval(test_case['js_ua'])
 
-            (family, v1, v2, v3) = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
+            (family, major, minor, patch) = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
 
             # Escape any double-quotes in the UA string
             user_agent_string = re.sub(r'"', '\\"', user_agent_string)
             print >> outfile, '    - user_agent_string: "' + unicode(user_agent_string) + '"' + "\n" +\
                               '      family: "' + family + "\"\n" +\
-                              "      v1: " + ('' if (v1 is None) else "'" + v1 + "'") + "\n" +\
-                              "      v2: " + ('' if (v2 is None) else "'" + v2 + "'") + "\n" +\
-                              "      v3: " + ('' if (v3 is None) else "'" + v3 + "'")
+                              "      major: " + ('' if (major is None) else "'" + major + "'") + "\n" +\
+                              "      minor: " + ('' if (minor is None) else "'" + minor + "'") + "\n" +\
+                              "      patch: " + ('' if (patch is None) else "'" + patch + "'")
         outfile.close()
 
     # Run a set of test cases from a YAML file
@@ -140,17 +140,17 @@ class ParseTest(unittest.TestCase):
 
             # The expected results
             expected = {'family': test_case['family'],
-                        'v1': test_case['v1'],
-                        'v2': test_case['v2'],
-                        'v3': test_case['v3']}
+                        'major': test_case['major'],
+                        'minor': test_case['minor'],
+                        'patch': test_case['patch']}
 
             result = {}
             result = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
             self.assertEqual(result, expected,
                     u"UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>".format(\
                             user_agent_string,
-                            expected['family'], expected['v1'], expected['v2'], expected['v3'],
-                            result['family'], result['v1'], result['v2'], result['v3']))
+                            expected['family'], expected['major'], expected['minor'], expected['patch'],
+                            result['family'], result['major'], result['minor'], result['patch']))
 
     def runOSTestsFromYAML(self, file_name):
         yamlFile = open(os.path.join(TEST_RESOURCES_DIR, file_name))
@@ -165,19 +165,28 @@ class ParseTest(unittest.TestCase):
                 kwds = eval(test_case['js_ua'])
 
             # The expected results
-            expected = {'os': test_case['os'],
-                        'os_v1': test_case['os_v1'],
-                        'os_v2': test_case['os_v2'],
-                        'os_v3': test_case['os_v3'],
-                        'os_v4': test_case['os_v4']}
+            expected = {
+              'family': test_case['family'],
+              'major': test_case['major'],
+              'minor': test_case['minor'],
+              'patch': test_case['patch'],
+              'patch_minor': test_case['patch_minor']
+            }
 
-            result = {}
             result = user_agent_parser.ParseOS(user_agent_string, **kwds)
             self.assertEqual(result, expected,
                     u"UA: {0}\n expected<{1} {2} {3} {4} {5}> != actual<{6} {7} {8} {9} {10}>".format(\
                             user_agent_string,
-                            expected['os'], expected['os_v1'], expected['os_v2'], expected['os_v3'], expected['os_v4'],
-                            result['os'], result['os_v1'], result['os_v2'], result['os_v3'], result['os_v4']))
+                            expected['family'],
+                            expected['major'],
+                            expected['minor'],
+                            expected['patch'],
+                            expected['patch_minor'],
+                            result['family'],
+                            result['major'],
+                            result['minor'],
+                            result['patch'],
+                            result['patch_minor']))
 
     def runDeviceTestsFromYAML(self, file_name):
         yamlFile = open(os.path.join(TEST_RESOURCES_DIR, file_name))
@@ -192,14 +201,22 @@ class ParseTest(unittest.TestCase):
                 kwds = eval(test_case['js_ua'])
 
             # The expected results
-            expected = {'device': test_case['device']}
+            expected = {
+              'family': test_case['family'],
+              'is_mobile': test_case['is_mobile'],
+              'is_spider': test_case['is_spider']
+            }
 
-            result = {}
             result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
             self.assertEqual(result, expected,
-                u"UA: {0}\n expected<{1}> != actual<{2}>".format(
+                u"UA: {0}\n expected<{1} {2} {3}> != actual<{4} {5} {6}>".format(
                     user_agent_string,
-                    expected['device'], result['device']))
+                    expected['family'],
+                    expected['is_mobile'],
+                    expected['is_spider'],
+                    result['family'],
+                    result['is_mobile'],
+                    result['is_spider']))
 
 
 class GetFiltersTest(unittest.TestCase):
