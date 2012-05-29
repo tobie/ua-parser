@@ -429,5 +429,5 @@ for parser in yaml['device_parsers']:
 
 
 MOBILE_USER_AGENT_FAMILIES = yaml['mobile_user_agent_families']
-MOBILE_OS_FAMILIES = yaml['mobile_user_agent_families']
+MOBILE_OS_FAMILIES = yaml['mobile_os_families']
 
