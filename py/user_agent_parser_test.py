@@ -27,6 +27,7 @@ or like:
 __author__ = 'slamm@google.com (Stephen Lamm)'
 
 import os
+import re
 import sys
 import unittest
 import yaml
@@ -216,29 +217,6 @@ class ParseTest(unittest.TestCase):
                     result['family'],
                     result['is_mobile'],
                     result['is_spider']))
-
-
-    def runDeviceTestsFromYAML(self, file_name):
-        yamlFile = open(os.path.join(TEST_RESOURCES_DIR, file_name))
-        yamlContents = yaml.load(yamlFile)
-        yamlFile.close()
-
-        for test_case in yamlContents['test_cases']:
-            # Inputs to Parse()
-            user_agent_string = test_case['user_agent_string']
-            kwds = {}
-            if 'js_ua' in test_case:
-                kwds = eval(test_case['js_ua'])
-
-            # The expected results
-            expected = {'device': test_case['device']}
-
-            result = {}
-            result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
-            self.assertEqual(result, expected,
-                u"UA: {0}\n expected<{1}> != actual<{2}>".format(
-                    user_agent_string,
-                    expected['device'], result['device']))
 
 
 class GetFiltersTest(unittest.TestCase):

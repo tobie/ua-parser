@@ -242,7 +242,7 @@ def ParseDevice(user_agent_string, ua_family=None, os_family=None):
     if device:
       break
 
-  family = device or 'Other'
+  os_family = device or 'Other'
 
   if ua_family is None:
     ua_family = ParseUserAgent(user_agent_string)['family']
@@ -325,7 +325,10 @@ def ParseWithJSOverrides(user_agent_string,
   if (js_user_agent_string and js_user_agent_string.find('Chrome/') > -1 and
       user_agent_string.find('chromeframe') > -1):
     family = 'Chrome Frame (%s %s)' % (family, v1)
-    cf_family, v1, v2, v3 = Parse(js_user_agent_string)
+    ua_dict = ParseUserAgent(js_user_agent_string)
+    v1 = ua_dict['major']
+    v2 = ua_dict['minor']
+    v3 = ua_dict['patch']
 
   return family or 'Other', v1, v2, v3
 
@@ -394,40 +397,43 @@ yaml = yaml.load(yamlFile)
 yamlFile.close()
 
 USER_AGENT_PARSERS = []
-for parser in yaml['user_agent_parsers']:
-  regex = parser['regex']
+for _ua_parser in yaml['user_agent_parsers']:
+  _regex = _ua_parser['regex']
 
-  family_replacement = None
-  if 'family_replacement' in parser:
-    family_replacement = parser['family_replacement']
+  _family_replacement = None
+  if 'family_replacement' in _ua_parser:
+    _family_replacement = _ua_parser['family_replacement']
 
-  v1_replacement = None
-  if 'v1_replacement' in parser:
-    v1_replacement = parser['v1_replacement']
+  _v1_replacement = None
+  if 'v1_replacement' in _ua_parser:
+    _v1_replacement = _ua_parser['v1_replacement']
 
-  USER_AGENT_PARSERS.append(UserAgentParser(regex, family_replacement, v1_replacement))
+  USER_AGENT_PARSERS.append(UserAgentParser(_regex,
+                                            _family_replacement,
+                                            _v1_replacement))
 
 OS_PARSERS = []
-for parser in yaml['os_parsers']:
-  regex = parser['regex']
+for _os_parser in yaml['os_parsers']:
+  _regex = _os_parser['regex']
 
-  os_replacement = None
-  if 'os_replacement' in parser:
-    os_replacement = parser['os_replacement']
+  _os_replacement = None
+  if 'os_replacement' in _os_parser:
+      _os_replacement = _os_parser['os_replacement']
 
-  OS_PARSERS.append(OSParser(regex, os_replacement))
+  OS_PARSERS.append(OSParser(_regex, _os_replacement))
+
 
 DEVICE_PARSERS = []
-for parser in yaml['device_parsers']:
-  regex = parser['regex']
+for _device_parser in yaml['device_parsers']:
+  _regex = _device_parser['regex']
 
-  device_replacement = None
-  if 'device_replacement' in parser:
-    device_replacement = parser['device_replacement']
+  _device_replacement = None
+  if 'device_replacement' in _device_parser:
+      _device_replacement = _device_parser['device_replacement']
 
-  DEVICE_PARSERS.append(DeviceParser(regex, device_replacement))
+  DEVICE_PARSERS.append(DeviceParser(_regex, _device_replacement))
 
 
 MOBILE_USER_AGENT_FAMILIES = yaml['mobile_user_agent_families']
-MOBILE_OS_FAMILIES = yaml['mobile_os_families']
+MOBILE_OS_FAMILIES = yaml['mobile_user_agent_families']
 
