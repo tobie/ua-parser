@@ -1,6 +1,3 @@
-### THIS FILE WAS COPIED ON JAN 26 2012.
-### ORIGINAL IS AT: http://code.google.com/p/ua-parser/source/browse/trunk/resources/user_agent_parser.yaml
-### Please review the CHANGELOG to see how this file differs from the original
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
@@ -12,7 +9,7 @@ user_agent_parsers:
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
 
   # Firefox
-  - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)'
+  - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)\.?(\d+)?'
     family_replacement: 'Pale Moon (Firefox Variant)'
   - regex: '(Fennec)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
     family_replacement: 'Firefox Mobile'
@@ -130,14 +127,14 @@ user_agent_parsers:
 
   # UC Browser
   - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
-  
+
   # Tizen Browser (second case included in browser/major.minor regex)
   - regex: '(SLP Browser)/(\d+)\.(\d+)'
     family_replacement: 'Tizen Browser'
-    
+
   # Epiphany browser (identifies as Chromium)
   - regex: '(Epiphany)/(\d+)\.(\d+).(\d+)'
-  
+
   # Sogou Explorer 2.X
   - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
     family_replacement: 'Sogou Explorer'
@@ -288,7 +285,7 @@ user_agent_parsers:
   # WebKit Nightly
   - regex: '(AppleWebKit)/(\d+)\.(\d+)\+ .* Version/\d+\.\d+.\d+ Safari/'
     family_replacement: 'WebKit Nightly'
-  
+
   # Safari
   - regex: '(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
     family_replacement: 'Safari'
@@ -335,7 +332,7 @@ os_parsers:
 
   - regex: '(Android) Honeycomb'
     os_v1_replacement: '3'
-      
+
   ##########
   # Windows
   # http://en.wikipedia.org/wiki/Windows_NT#Releases
@@ -379,7 +376,7 @@ os_parsers:
 
   - regex: '(Win98)'
     os_replacement: 'Windows 98'
-    
+
   ##########
   # Tizen OS from Samsung
   # spoofs Android so pushing it above
@@ -770,3 +767,44 @@ device_parsers:
   ##########
   - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks)'
     device_replacement: 'Spider'
+
+
+mobile_user_agent_families:
+  - 'Firefox Mobile'
+  - 'Opera Mobile'
+  - 'Opera Mini'
+  - 'Mobile Safari'
+  - 'webOS'
+  - 'IE Mobile'
+  - 'Playstation Portable'
+  - 'Nokia'
+  - 'Blackberry'
+  - 'Palm'
+  - 'Silk'
+  - 'Android'
+  - 'Maemo'
+  - 'Obigo'
+  - 'Netfront'
+  - 'AvantGo'
+  - 'Teleca'
+  - 'SEMC-Browser'
+  - 'Bolt'
+  - 'Iris'
+  - 'UP.Browser'
+  - 'Symphony'
+  - 'Minimo'
+  - 'Bunjaloo'
+  - 'Jasmine'
+  - 'Dolfin'
+  - 'Polaris'
+  - 'BREW'
+  - 'Chrome Mobile'
+  - 'UC Browser'
+  - 'Tizen Browser'
+
+# Some select mobile OSs report a desktop browser.
+# make sure we note they're mobile
+mobile_os_families:
+  - 'Windows Phone 6.5'
+  - 'Windows CE'
+  - 'Symbian OS'

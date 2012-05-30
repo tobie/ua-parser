@@ -70,6 +70,7 @@ class UserAgentParser(object):
           v3 = match.group(4)
     return family, v1, v2, v3
 
+
 class OSParser(object):
   def __init__(self, pattern, os_replacement=None ):
     """Initialize UserAgentParser.
@@ -110,6 +111,7 @@ class OSParser(object):
 
     return os, os_v1, os_v2, os_v3, os_v4
 
+
 class DeviceParser(object):
   def __init__(self, pattern, device_replacement=None):
     """Initialize UserAgentParser.
@@ -145,32 +147,30 @@ class DeviceParser(object):
     return device
 
 
-def ParseAll(user_agent_string, **jsParseBits):
+def Parse(user_agent_string, **jsParseBits):
   """ Parse all the things
-      Args:
-          user_agent_string: the full user agent string
-          jsParseBits: javascript override bits
-      Returns:
-          flat dictionary containing all parsed bits
+  Args:
+    user_agent_string: the full user agent string
+    jsParseBits: javascript override bits
+  Returns:
+    A dictionary containing all parsed bits
   """
   jsParseBits = jsParseBits or {}
+  return {
+    'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
+    'os': ParseOS(user_agent_string, **jsParseBits),
+    'device': ParseDevice(user_agent_string, **jsParseBits),
+    'string': user_agent_string
+  }
 
-  resultUA = ParseUserAgent(user_agent_string, **jsParseBits)
-  resultOS = ParseOS(user_agent_string, **jsParseBits)
-
-  resultAll = {}
-  for result in (resultUA, resultOS):
-    resultAll.update(result)
-
-  return resultAll
 
 def ParseUserAgent(user_agent_string, **jsParseBits):
   """ Parses the user-agent string for user agent (browser) info.
-      Args:
-        user_agent_string: The full user-agent string.
-        jsParseBits: javascript override bits
-      Returns:
-        flat dictionary containing parsed bits
+  Args:
+    user_agent_string: The full user-agent string.
+    jsParseBits: javascript override bits.
+  Returns:
+    A dictionary containing parsed bits.
   """
   if 'js_user_agent_family' in jsParseBits and jsParseBits['js_user_agent_family'] != '':
     family = jsParseBits['js_user_agent_family']
@@ -194,37 +194,76 @@ def ParseUserAgent(user_agent_string, **jsParseBits):
       jsOverride = {}
       jsOverride = ParseUserAgent(js_user_agent_string)
       family = 'Chrome Frame (%s %s)' % (family, v1)
-      v1 = jsOverride['v1']
-      v2 = jsOverride['v2']
-      v3 = jsOverride['v3']
+      v1 = jsOverride['major']
+      v2 = jsOverride['minor']
+      v3 = jsOverride['patch']
 
   family = family or 'Other'
-  return {'family': family, 'v1': v1,  'v2': v2, 'v3': v3}
+  return {
+      'family': family,
+      'major': v1,
+      'minor': v2,
+      'patch': v3
+  }
+
 
 def ParseOS(user_agent_string, **jsParseBits):
   """ Parses the user-agent string for operating system info
-      Args:
-        user_agent_string: The full user-agent string.
-        jsParseBits: javascript override bits
-      Returns:
-        flat dictionary containing parsed bits
+  Args:
+    user_agent_string: The full user-agent string.
+    jsParseBits: javascript override bits.
+  Returns:
+    A dictionary containing parsed bits.
   """
   for osParser in OS_PARSERS:
     os, os_v1, os_v2, os_v3, os_v4 = osParser.Parse(user_agent_string)
     if os:
       break
   os = os or 'Other'
-  return { 'os': os, 'os_v1': os_v1, 'os_v2': os_v2, 'os_v3': os_v3, 'os_v4': os_v4 }
+  return {
+      'family': os,
+      'major': os_v1,
+      'minor': os_v2,
+      'patch': os_v3,
+      'patch_minor': os_v4
+  }
 
-def ParseDevice(user_agent_string, **jsParseBits):
-  """ incomplete! """
+
+def ParseDevice(user_agent_string, ua_family=None, os_family=None):
+  """ Parses the user-agent string for device info.
+  Args:
+      user_agent_string: The full user-agent string.
+      ua_family: The parsed user agent family name.
+  Returns:
+      A dictionary containing parsed bits.
+  """
   for deviceParser in DEVICE_PARSERS:
     device = deviceParser.Parse(user_agent_string)
     if device:
       break
 
-  device = device or 'Other'
-  return {'device': device}
+  os_family = device or 'Other'
+
+  if ua_family is None:
+    ua_family = ParseUserAgent(user_agent_string)['family']
+
+  if os_family is None:
+    os_family = ParseOS(user_agent_string)['family']
+
+  # Bits to match some of dmolsen's device booleans.
+  if ua_family in MOBILE_USER_AGENT_FAMILIES:
+    is_mobile = True
+  elif os_family in MOBILE_OS_FAMILIES:
+    is_mobile = True
+  else:
+    is_mobile = False
+
+  return {
+    'family': device,
+    'is_mobile': is_mobile,
+    'is_spider': device == 'Spider'
+  }
+
 
 def PrettyUserAgent(family, v1=None, v2=None, v3=None):
   """Pretty user agent string."""
@@ -238,6 +277,7 @@ def PrettyUserAgent(family, v1=None, v2=None, v3=None):
   elif v1:
     return '%s %s' % (family, v1)
   return family
+
 
 def PrettyOS(os, os_v1=None, os_v2=None, os_v3=None, os_v4=None):
   """Pretty os string."""
@@ -254,11 +294,13 @@ def PrettyOS(os, os_v1=None, os_v2=None, os_v3=None, os_v4=None):
     return '%s %s' % (os, os_v1)
   return os
 
-def Parse(user_agent_string, js_user_agent_string=None,
-          js_user_agent_family=None,
-          js_user_agent_v1=None,
-          js_user_agent_v2=None,
-          js_user_agent_v3=None):
+
+def ParseWithJSOverrides(user_agent_string,
+                         js_user_agent_string=None,
+                         js_user_agent_family=None,
+                         js_user_agent_v1=None,
+                         js_user_agent_v2=None,
+                         js_user_agent_v3=None):
   """ backwards compatible. use one of the other Parse methods instead! """
 
   # Override via JS properties.
@@ -283,9 +325,13 @@ def Parse(user_agent_string, js_user_agent_string=None,
   if (js_user_agent_string and js_user_agent_string.find('Chrome/') > -1 and
       user_agent_string.find('chromeframe') > -1):
     family = 'Chrome Frame (%s %s)' % (family, v1)
-    cf_family, v1, v2, v3 = Parse(js_user_agent_string)
+    ua_dict = ParseUserAgent(js_user_agent_string)
+    v1 = ua_dict['major']
+    v2 = ua_dict['minor']
+    v3 = ua_dict['patch']
 
   return family or 'Other', v1, v2, v3
+
 
 def Pretty(family, v1=None, v2=None, v3=None):
   """ backwards compatible. use PrettyUserAgent instead! """
@@ -351,35 +397,43 @@ yaml = yaml.load(yamlFile)
 yamlFile.close()
 
 USER_AGENT_PARSERS = []
-for parser in yaml['user_agent_parsers']:
-  regex = parser['regex']
+for _ua_parser in yaml['user_agent_parsers']:
+  _regex = _ua_parser['regex']
 
-  family_replacement = None
-  if 'family_replacement' in parser:
-    family_replacement = parser['family_replacement']
+  _family_replacement = None
+  if 'family_replacement' in _ua_parser:
+    _family_replacement = _ua_parser['family_replacement']
 
-  v1_replacement = None
-  if 'v1_replacement' in parser:
-    v1_replacement = parser['v1_replacement']
+  _v1_replacement = None
+  if 'v1_replacement' in _ua_parser:
+    _v1_replacement = _ua_parser['v1_replacement']
 
-  USER_AGENT_PARSERS.append(UserAgentParser(regex, family_replacement, v1_replacement))
+  USER_AGENT_PARSERS.append(UserAgentParser(_regex,
+                                            _family_replacement,
+                                            _v1_replacement))
 
 OS_PARSERS = []
-for parser in yaml['os_parsers']:
-  regex = parser['regex']
+for _os_parser in yaml['os_parsers']:
+  _regex = _os_parser['regex']
 
-  os_replacement = None
-  if 'os_replacement' in parser:
-    os_replacement = parser['os_replacement']
+  _os_replacement = None
+  if 'os_replacement' in _os_parser:
+      _os_replacement = _os_parser['os_replacement']
 
-  OS_PARSERS.append(OSParser(regex, os_replacement))
+  OS_PARSERS.append(OSParser(_regex, _os_replacement))
+
 
 DEVICE_PARSERS = []
-for parser in yaml['device_parsers']:
-  regex = parser['regex']
+for _device_parser in yaml['device_parsers']:
+  _regex = _device_parser['regex']
 
-  device_replacement = None
-  if 'device_replacement' in parser:
-    device_replacement = parser['device_replacement']
+  _device_replacement = None
+  if 'device_replacement' in _device_parser:
+      _device_replacement = _device_parser['device_replacement']
 
-  DEVICE_PARSERS.append(DeviceParser(regex, device_replacement))
+  DEVICE_PARSERS.append(DeviceParser(_regex, _device_replacement))
+
+
+MOBILE_USER_AGENT_FAMILIES = yaml['mobile_user_agent_families']
+MOBILE_OS_FAMILIES = yaml['mobile_user_agent_families']
+

@@ -1,14 +1,15 @@
 ua-parser
 =========
 
-`ua-parser` is a port to [node.js][1] and python of [BrowserScope][2]'s [user agent string parser][3].
+`ua-parser` is a multi-language port of [BrowserScope][2]'s [user agent string parser][3].
 
 The crux of the original parser--the data collected by [Steve Souders][4] over the years--has been extracted into a separate [YAML file][5] so as to be reusable _as is_ by implementations in other programming languages.
 
 `ua-parser` is just a small wrapper around this data.
 
-Usage
------
+
+Usage :: [node.js][1]
+---------------------
 
     var uaParser = require('ua-parser');
     var ua = uaParser.parse(navigator.userAgent);
@@ -35,13 +36,40 @@ Usage
 Usage :: python
 ---------------
 
-    # Python won't do with dashes in module names so you'll need to rename
-    # this directory. i.e. mv ua-parser ua_parser
+    # Python won't do with dashes in module names so you'll need to rename,
+    # copy, or symlink this directory and also add an __init__.py file,
+    # like so:
+    #
+    # ln -s ua-parser ua_parser
+    # touch ua_parser/__init__.py
+    #
+    # Now you're good to go.
+
     from ua_parser.py import user_agent_parser
 
-    # On the server, let's say you have a WebOB request object.
+    # On the server, you could use a WebOB request object.
     user_agent_string = request.META.get('HTTP_USER_AGENT')
-    family, v1, v2, v3 = user_agent_parser.Parse(user_agent_string)
+
+    # For demonstration purposes, though an iPhone ...
+    user_agent_string = 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3'
+
+    # Get back a big dictionary of all the goodies.
+    result_dict = user_agent_parser.Parse(user_agent_string)
+
+    print result_dict['user_agent']
+    # {'major': '5', 'minor': '1', 'family': 'Mobile Safari', 'patch': None}
+
+    print result_dict['os']
+    # {'major': '5', 'patch_minor': None, 'minor': '1', 'family': 'iOS', 'patch': None}
+
+    print result_dict['device']
+    # {'is_spider': False, 'is_mobile': True, 'family': 'iPhone'}
+
+
+Usage :: php
+------------
+
+    Please refer to the README in the php directory.
 
 
 Usage :: php
