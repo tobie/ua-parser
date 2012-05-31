@@ -379,11 +379,13 @@ class UA {
 	}
 }
 
-if (defined('STDIN') && isset($argv) && ($argv[1] == '-get')) {
+if (defined('STDIN') && isset($argv) && isset($argv[1]) && ($argv[1] == '-get')) {
 	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
 	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
 	if (!UA::$silent) { print("getting the YAML file...\n"); }
 	UA::get();
+} else if (defined('STDIN')) {
+	print("You must use the -get flag to use UAParser.php from the command line.\n");
 }
 
 ?>
