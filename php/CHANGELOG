@@ -2,6 +2,9 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-1.4.1
+ - FIX: notice when using UAParser from the command line
+
 UAP-1.4.0
  - ADD: silent mode for the UA::get() method
  - ADD: nobackup mode for the UA::get() method
