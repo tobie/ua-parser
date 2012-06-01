@@ -1,7 +1,7 @@
 # ua-parser PHP Library #
 
 This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project. This library
-utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device. The 
+utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device.
 
 ## Demo ##
 
@@ -53,7 +53,7 @@ Straightforward:
        print $result->device;
        // -> "Palm Pixi"
 
-       print $result->deviceVersion
+       print $result->deviceVersion;
        // -> "1.0"
 
        print $result->deviceMajor;
