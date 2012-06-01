@@ -1,5 +1,17 @@
 test_cases:
 
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
+    family: 'WebKit Nightly'
+    major: '534'
+    minor:
+    patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
+    family: 'WebKit Nightly'
+    major: '537'
+    minor: '1'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Linux x86_64) AppleWebKit/534.26+ WebKitGTK+/1.4.1 luakit/f3a2dbe'
     family: 'LuaKit'
     major:
