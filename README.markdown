@@ -36,16 +36,13 @@ Usage :: [node.js][1]
 Usage :: python
 ---------------
 
-    # Python won't do with dashes in module names so you'll need to rename,
-    # copy, or symlink this directory and also add an __init__.py file,
-    # like so:
+    # Install this into python site_packages like so:
     #
-    # ln -s ua-parser ua_parser
-    # touch ua_parser/__init__.py
+    # python setup.py install
     #
     # Now you're good to go.
 
-    from ua_parser.py import user_agent_parser
+    from ua_parser import user_agent_parser
 
     # On the server, you could use a WebOB request object.
     user_agent_string = request.META.get('HTTP_USER_AGENT')
