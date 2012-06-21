@@ -1,5 +1,11 @@
 test_cases:
 
+  - user_agent_string: 'Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)'
+    family: 'PingdomBot'
+    major: '1'
+    minor: '4'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'
     major: '534'
