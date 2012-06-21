@@ -35,7 +35,7 @@ import yaml
 import user_agent_parser
 
 TEST_RESOURCES_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                  '../test_resources')
+                                  '../../test_resources')
 
 
 class ParseTest(unittest.TestCase):
