@@ -392,7 +392,7 @@ def GetFilters(user_agent_string, js_user_agent_string=None,
 
 
 # Build the list of user agent parsers from YAML
-yamlFile = open(os.path.join(ROOT_DIR, '../regexes.yaml'))
+yamlFile = open(os.path.join(ROOT_DIR, '../../regexes.yaml'))
 yaml = yaml.load(yamlFile)
 yamlFile.close()
 
