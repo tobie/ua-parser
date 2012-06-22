@@ -1,5 +1,11 @@
 test_cases:
 
+  - user_agent_string: 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
+    family: 'FacebookBot'
+    major: '1'
+    minor: '1'
+    patch:
+
   - user_agent_string: 'Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)'
     family: 'PingdomBot'
     major: '1'
