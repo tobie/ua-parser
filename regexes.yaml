@@ -143,6 +143,10 @@ user_agent_parsers:
   - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
     family_replacement: 'PingdomBot'
 
+  # Facebook
+  - regex: '(facebookexternalhit)/(\d+)\.(\d+)'
+    family_replacement: 'FacebookBot'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
