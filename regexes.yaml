@@ -119,7 +119,7 @@ user_agent_parsers:
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Mobile'
   - regex: '(CriOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'Chrome Mobile'
+    family_replacement: 'Chrome Mobile iOS'
   - regex: '(Chrome)/(\d+)\.(\d+)\.(\d+)\.(\d+) Mobile'
     family_replacement: 'Chrome Mobile'
 
