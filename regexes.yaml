@@ -149,6 +149,10 @@ user_agent_parsers:
   - regex: '(facebookexternalhit)/(\d+)\.(\d+)'
     family_replacement: 'FacebookBot'
 
+  # Twitterbot
+  - regex: '(Twitterbot)/(\d+)\.(\d+)'
+    family_replacement: 'TwitterBot'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
