@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ua_parser</groupId>
+  <artifactId>ua-parser</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>ua-parser</name>
+  <url>https://github.com/tobie/ua-parser/</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <resources>
+      <resource>
+        <targetPath>ua_parser</targetPath>
+        <directory>${basedir}/..</directory>
+        <includes>
+          <include>regexes.yaml</include>
+        </includes>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <targetPath>ua_parser</targetPath>
+        <directory>${basedir}/../test_resources</directory>
+        <includes>
+          <include>*.yaml</include>
+        </includes>
+      </testResource>
+    </testResources>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.10</version>
+    </dependency>
+  </dependencies>
+</project>
