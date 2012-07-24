@@ -1,15 +1,38 @@
+/**
+ * Copyright 2012 Twitter, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ua_parser;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.*;
-
 import org.yaml.snakeyaml.Yaml;
 
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
+/**
+ * Tests parsing results match the expected results in the test_resources yamls
+ *
+ * @author Steve Jiang (@sjiang) <gh at iamsteve com>
+ */
 public class ParserTest {
   final String TEST_RESOURCE_PATH = "/ua_parser/";
   Yaml yaml = new Yaml();
@@ -51,14 +74,26 @@ public class ParserTest {
     testUserAgentFromYaml("pgts_browser_list.yaml");
   }
 
-
   @Test
   public void testParseAll() {
-    String agentString = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)";
+    String agentString1 = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)";
+    String agentString2 = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
 
-    assertEquals(parser.parseUserAgent(agentString), new UserAgent("Firefox", "3", "5", "5"));
-    assertEquals(parser.parseOS(agentString), new OS("Mac OS X", "10", "4", null, null));
-    assertEquals(parser.parseDevice(agentString), new Device(null, false, false));
+    Client expected1 = new Client(new UserAgent("Firefox", "3", "5", "5"),
+                                  new OS("Mac OS X", "10", "4", null, null),
+                                  new Device(null, false, false));
+    Client expected2 = new Client(new UserAgent("Mobile Safari", "5", "1", null),
+                                  new OS("iOS", "5", "1", "1", null),
+                                  new Device("iPhone", true, false));
+
+    assertThat(parser.parse(agentString1), is(expected1));
+    assertThat(parser.parse(agentString2), is(expected2));
+  }
+
+  @Test (expected=IllegalArgumentException.class)
+  public void testInvalidConfigThrows() {
+    InputStream invalid = new ByteArrayInputStream("user_agent_parsers:\n  - family_replacement: 'a'".getBytes());
+    parser = new Parser(invalid);
   }
 
   void testUserAgentFromYaml(String filename) {
@@ -69,7 +104,7 @@ public class ParserTest {
       // Skip tests with js_ua as those overrides are not yet supported in java
       if (testCase.containsKey("js_ua")) continue;
 
-      assertEquals(UserAgent.fromMap(testCase), parser.parseUserAgent(testCase.get("user_agent_string")));
+      assertThat(parser.parseUserAgent(testCase.get("user_agent_string")), is(UserAgent.fromMap(testCase)));
     }
   }
 
@@ -81,7 +116,7 @@ public class ParserTest {
       // Skip tests with js_ua as those overrides are not yet supported in java
       if (testCase.containsKey("js_ua")) continue;
 
-      assertEquals(OS.fromMap(testCase), parser.parseOS(testCase.get("user_agent_string")));
+      assertThat(parser.parseOS(testCase.get("user_agent_string")), is(OS.fromMap(testCase)));
     }
   }
 
@@ -90,7 +125,7 @@ public class ParserTest {
 
     List<Map> testCases = (List<Map>) ((Map)yaml.load(yamlStream)).get("test_cases");
     for(Map<String, Object> testCase : testCases) {
-      assertEquals(Device.fromMap(testCase), parser.parseDevice((String)testCase.get("user_agent_string")));
+      assertThat(parser.parseDevice((String)testCase.get("user_agent_string")), is(Device.fromMap(testCase)));
     }
   }
 }

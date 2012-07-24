@@ -6,6 +6,7 @@ The implementation uses the shared regex patterns and overrides from regexes.yam
 
 Usage:
 --------
+```lang java
     import ua_parser.Parser;
     import ua_parser.UserAgent;
     import ua_parser.Device;
@@ -13,23 +14,22 @@ Usage:
 
     ...
 
-      Parser uaParser = new Parser();
       String uaString = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
 
-      UserAgent u = uaParser.parseUserAgent(uaString);
-      System.out.println(u.family); // => "Mobile Safari"
-      System.out.println(u.major);  // => "5"
-      System.out.println(u.minor);  // => "1"
+      Parser uaParser = new Parser();
+      Client c = uaParser.parse(uaString);
 
-      OS o = uaParser.parseOS(uaString);
-      System.out.println(o.family); // => "iOS"
-      System.out.println(o.major);  // => "5"
-      System.out.println(o.minor);  // => "1"
+      System.out.println(c.userAgent.family); // => "Mobile Safari"
+      System.out.println(c.userAgent.major);  // => "5"
+      System.out.println(c.userAgent.minor);  // => "1"
 
-      Device d = uaParser.parseDevice(uaString);
-      System.out.println(d.family);   // => "iPhone"
-      System.out.println(d.isMobile); // => true
-      System.out.println(d.isSpider); // => false
+      System.out.println(c.os.family);        // => "iOS"
+      System.out.println(c.os.major);         // => "5"
+      System.out.println(c.os.minor);         // => "1"
+
+      System.out.println(c.device.family);    // => "iPhone"
+      System.out.println(c.device.isMobile);  // => true
+      System.out.println(c.device.isSpider);  // => false
 
 
 Build:

@@ -1,3 +1,19 @@
+/**
+ * Copyright 2012 Twitter, Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ua_parser;
 
 import java.util.ArrayList;
@@ -26,17 +42,22 @@ public class DeviceParser {
   }
 
   public Device parse(String agentString) {
+    return parse(agentString, uaParser.parse(agentString).family);
+  }
+
+  public Device parse(String agentString, String userAgentFamily) {
     String device = null;
     for (DevicePattern p : patterns) {
       if ((device = p.match(agentString)) != null) {
         break;
       }
     }
+
     String osFamily = device == null ? "Other" : device;
-    String uaFamily = uaParser.parse(agentString).family;
+    userAgentFamily = userAgentFamily == null ? "Other" : userAgentFamily;
 
     return new Device(device,
-                      mobileUAFamilies.contains(uaFamily) || mobileOSFamilies.contains(osFamily),
+                      mobileUAFamilies.contains(userAgentFamily) || mobileOSFamilies.contains(osFamily),
                       (device != null && device.equals("Spider")));
   }
 

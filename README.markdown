@@ -80,6 +80,8 @@ The JS port is Copyright 2010 Tobie Langel and is available under [your choice o
 
 The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [MIT license][9].
 
+The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
+
 [1]: http://node.js
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
