@@ -8,9 +8,7 @@ Usage:
 --------
 ```java
 import ua_parser.Parser;
-import ua_parser.UserAgent;
-import ua_parser.Device;
-import ua_parser.OS;
+import ua_parser.Client;
 
 ...
 
