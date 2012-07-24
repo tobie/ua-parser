@@ -6,7 +6,7 @@ The implementation uses the shared regex patterns and overrides from regexes.yam
 
 Usage:
 --------
-```lang java
+```java
     import ua_parser.Parser;
     import ua_parser.UserAgent;
     import ua_parser.Device;
