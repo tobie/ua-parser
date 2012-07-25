@@ -4,6 +4,11 @@ ua_parser Java Library
 This is the Java implementation of [ua-parser](https://github.com/tobie/ua-parser).  
 The implementation uses the shared regex patterns and overrides from regexes.yaml.
 
+Build:
+------
+
+    mvn package
+
 Usage:
 --------
 ```java
@@ -29,11 +34,6 @@ import ua_parser.Client;
   System.out.println(c.device.isMobile);  // => true
   System.out.println(c.device.isSpider);  // => false
 ```
-
-Build:
-------
-
-    mvn package
 
 Author:
 -------
