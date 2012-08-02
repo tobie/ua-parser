@@ -88,7 +88,7 @@ public class UserAgentParser {
 
       if (familyReplacement != null) {
         if (familyReplacement.contains("$1") && groupCount >= 1 && matcher.group(1) != null) {
-          family = familyReplacement.replaceFirst("\\$1", matcher.group(1));
+          family = familyReplacement.replaceFirst("\\$1", Matcher.quoteReplacement(matcher.group(1)));
         } else {
           family = familyReplacement;
         }
