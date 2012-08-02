@@ -531,23 +531,23 @@ device_parsers:
     device_replacement: 'HTC $1'
   - regex: 'HTC ([A-Za-z0-9]+)'
     device_replacement: 'HTC $1'
-  - regex: '(ADR[A-z0-9]+)'
+  - regex: '(ADR[A-Za-z0-9]+)'
     device_replacement: 'HTC $1'
   - regex: '(HTC)'
 
   #########
   # Ericsson - must come before nokia since they also use symbian
   #########
-  - regex: 'SonyEricsson([A-z0-9]+)/'
+  - regex: 'SonyEricsson([A-Za-z0-9]+)/'
     device_replacement: 'Ericsson $1'
 
   #########
   # Android General Device Matching (far from perfect)
   #########
-  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-z]{2}\-[A-z]{2}\; WOWMobile (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-z]{2}\-[A-z]{2}\; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\-update1\; [A-z]{2}\-[A-z]{2}\; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-z]{2}\-[A-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-Za-z]{2}\-[A-Za-z]{2}\; WOWMobile (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\-update1\; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
 
   ##########
@@ -587,11 +587,11 @@ device_parsers:
     device_replacement: 'Palm Pixi'
   - regex: '(Touchpad)/(\d+)\.(\d+)'
     device_replacement: 'HP Touchpad'
-  - regex: 'HPiPAQ([A-z0-9]+)/(\d+).(\d+)'
+  - regex: 'HPiPAQ([A-Za-z0-9]+)/(\d+).(\d+)'
     device_replacement: 'HP iPAQ $1'
-  - regex: 'Palm([A-z0-9]+)'
+  - regex: 'Palm([A-Za-z0-9]+)'
     device_replacement: 'Palm $1'
-  - regex: 'Treo([A-z0-9]+)'
+  - regex: 'Treo([A-Za-z0-9]+)'
     device_replacement: 'Palm Treo $1'
   - regex: 'webOS.*(P160UNA)/(\d+).(\d+)'
     device_replacement: 'HP Veer'
@@ -620,101 +620,101 @@ device_parsers:
   ##########
   # Acer
   ##########
-  - regex: 'acer_([A-z0-9]+)_'
+  - regex: 'acer_([A-Za-z0-9]+)_'
     device_replacement: 'Acer $1'
-  - regex: 'acer_([A-z0-9]+)_'
+  - regex: 'acer_([A-Za-z0-9]+)_'
     device_replacement: 'Acer $1'
 
   ##########
   # Amoi
   ##########
-  - regex: 'Amoi\-([A-z0-9]+)'
+  - regex: 'Amoi\-([A-Za-z0-9]+)'
     device_replacement: 'Amoi $1'
-  - regex: 'AMOI\-([A-z0-9]+)'
+  - regex: 'AMOI\-([A-Za-z0-9]+)'
     device_replacement: 'Amoi $1'
 
   ##########
   # Amoi
   ##########
-  - regex: 'Asus\-([A-z0-9]+)'
+  - regex: 'Asus\-([A-Za-z0-9]+)'
     device_replacement: 'Asus $1'
-  - regex: 'ASUS\-([A-z0-9]+)'
+  - regex: 'ASUS\-([A-Za-z0-9]+)'
     device_replacement: 'Asus $1'
 
   ##########
   # Bird
   ##########
-  - regex: 'BIRD\-([A-z0-9]+)'
+  - regex: 'BIRD\-([A-Za-z0-9]+)'
     device_replacement: 'Bird $1'
-  - regex: 'BIRD\.([A-z0-9]+)'
+  - regex: 'BIRD\.([A-Za-z0-9]+)'
     device_replacement: 'Bird $1'
-  - regex: 'BIRD ([A-z0-9]+)'
+  - regex: 'BIRD ([A-Za-z0-9]+)'
     device_replacement: 'Bird $1'
 
   ##########
   # Dell
   ##########
-  - regex: 'Dell ([A-z0-9]+)'
+  - regex: 'Dell ([A-Za-z0-9]+)'
     device_replacement: 'Dell $1'
 
   ##########
   # DoCoMo
   ##########
-  - regex: 'DoCoMo/2\.0 ([A-z0-9]+)'
+  - regex: 'DoCoMo/2\.0 ([A-Za-z0-9]+)'
     device_replacement: 'DoCoMo $1'
-  - regex: '([A-z0-9]+)\_W\;FOMA'
+  - regex: '([A-Za-z0-9]+)\_W\;FOMA'
     device_replacement: 'DoCoMo $1'
-  - regex: '([A-z0-9]+)\;FOMA'
+  - regex: '([A-Za-z0-9]+)\;FOMA'
     device_replacement: 'DoCoMo $1'
 
   ##########
   # Huawei Vodafone
   ##########
-  - regex: 'vodafone([A-z0-9]+)'
+  - regex: 'vodafone([A-Za-z0-9]+)'
     device_replacement: 'Huawei Vodafone $1'
 
   ##########
   # i-mate
   ##########
-  - regex: 'i\-mate ([A-z0-9]+)'
+  - regex: 'i\-mate ([A-Za-z0-9]+)'
     device_replacement: 'i-mate $1'
 
   ##########
   # kyocera
   ##########
-  - regex: 'Kyocera\-([A-z0-9]+)'
+  - regex: 'Kyocera\-([A-Za-z0-9]+)'
     device_replacement: 'Kyocera $1'
-  - regex: 'KWC\-([A-z0-9]+)'
+  - regex: 'KWC\-([A-Za-z0-9]+)'
     device_replacement: 'Kyocera $1'
 
   ##########
   # lenovo
   ##########
-  - regex: 'Lenovo\-([A-z0-9]+)'
+  - regex: 'Lenovo\-([A-Za-z0-9]+)'
     device_replacement: 'Lenovo $1'
-  - regex: 'Lenovo\_([A-z0-9]+)'
+  - regex: 'Lenovo\_([A-Za-z0-9]+)'
     device_replacement: 'Lenovo $1'
 
   ##########
   # lg
   ##########
-  - regex: 'LG/([A-z0-9]+)'
+  - regex: 'LG/([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LG-LG([A-z0-9]+)'
+  - regex: 'LG-LG([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LGE-LG([A-z0-9]+)'
+  - regex: 'LGE-LG([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LGE VX([A-z0-9]+)'
+  - regex: 'LGE VX([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LG ([A-z0-9]+)'
+  - regex: 'LG ([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LGE LG\-AX([A-z0-9]+)'
+  - regex: 'LGE LG\-AX([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LG\-([A-z0-9]+)'
+  - regex: 'LG\-([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LGE\-([A-z0-9]+)'
+  - regex: 'LGE\-([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
-  - regex: 'LG([A-z0-9]+)'
+  - regex: 'LG([A-Za-z0-9]+)'
     device_replacement: 'LG $1'
 
   ##########
@@ -728,34 +728,34 @@ device_parsers:
   ##########
   # motorola
   ##########
-  - regex: '(Motorola)\-([A-z0-9]+)'
-  - regex: 'MOTO\-([A-z0-9]+)'
+  - regex: '(Motorola)\-([A-Za-z0-9]+)'
+  - regex: 'MOTO\-([A-Za-z0-9]+)'
     device_replacement: 'Motorola $1'
-  - regex: 'MOT\-([A-z0-9]+)'
+  - regex: 'MOT\-([A-Za-z0-9]+)'
     device_replacement: 'Motorola $1'
 
   ##########
   # philips
   ##########
-  - regex: 'Philips([A-z0-9]+)'
+  - regex: 'Philips([A-Za-z0-9]+)'
     device_replacement: 'Philips $1'
-  - regex: 'Philips ([A-z0-9]+)'
+  - regex: 'Philips ([A-Za-z0-9]+)'
     device_replacement: 'Philips $1'
 
   ##########
   # Samsung
   ##########
-  - regex: 'SAMSUNG-([A-z0-9\-]+)'
+  - regex: 'SAMSUNG-([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
-  - regex: 'SAMSUNG\; ([A-z0-9\-]+)'
+  - regex: 'SAMSUNG\; ([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
 
   ##########
   # Softbank
   ##########
-  - regex: 'Softbank/1\.0/([A-z0-9]+)'
+  - regex: 'Softbank/1\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
-  - regex: 'Softbank/2\.0/([A-z0-9]+)'
+  - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
 
   ##########
