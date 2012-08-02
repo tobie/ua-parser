@@ -90,10 +90,28 @@ public class ParserTest {
     assertThat(parser.parse(agentString2), is(expected2));
   }
 
+  @Test
+  public void testReplacementQuoting() throws Exception {
+    String testConfig = "user_agent_parsers:\n"
+                      + "  - regex: 'ABC([\\\\0-9]+)'\n"
+                      + "    family_replacement: 'ABC ($1)'\n"
+                      + "os_parsers:\n"
+                      + "  - regex: 'CatOS OH-HAI=/\\^\\.\\^\\\\='\n"
+                      + "    os_replacement: 'CatOS 9000'\n"
+                      + "device_parsers:\n"
+                      + "  - regex: 'CashPhone-([\\$0-9]+)\\.(\\d+)\\.(\\d+)'\n"
+                      + "    device_replacement: 'CashPhone $1'\n";
+
+    Parser testParser = parserFromStringConfig(testConfig);
+    Client result = testParser.parse("ABC12\\34 (CashPhone-$9.0.1 CatOS OH-HAI=/^.^\\=)");
+    assertThat(result.userAgent.family, is("ABC (12\\34)"));
+    assertThat(result.os.family, is("CatOS 9000"));
+    assertThat(result.device.family, is("CashPhone $9"));
+  }
+
   @Test (expected=IllegalArgumentException.class)
-  public void testInvalidConfigThrows() {
-    InputStream invalid = new ByteArrayInputStream("user_agent_parsers:\n  - family_replacement: 'a'".getBytes());
-    parser = new Parser(invalid);
+  public void testInvalidConfigThrows() throws Exception {
+    parserFromStringConfig("user_agent_parsers:\n  - family_replacement: 'a'");
   }
 
   void testUserAgentFromYaml(String filename) {
@@ -127,5 +145,10 @@ public class ParserTest {
     for(Map<String, Object> testCase : testCases) {
       assertThat(parser.parseDevice((String)testCase.get("user_agent_string")), is(Device.fromMap(testCase)));
     }
+  }
+
+  Parser parserFromStringConfig(String configYamlAsString) throws Exception {
+    InputStream yamlInput = new ByteArrayInputStream(configYamlAsString.getBytes("UTF8"));
+    return new Parser(yamlInput);
   }
 }
