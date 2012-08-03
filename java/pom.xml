@@ -4,7 +4,7 @@
   <groupId>ua_parser</groupId>
   <artifactId>ua-parser</artifactId>
   <packaging>jar</packaging>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <name>ua-parser</name>
   <url>https://github.com/tobie/ua-parser/</url>
   <properties>
