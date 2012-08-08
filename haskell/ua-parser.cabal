@@ -12,7 +12,6 @@ Cabal-version:       >=1.6
 
 data-files:
   ./*.yaml
-  test/test_resources/*.yaml
 
 Library
   hs-source-dirs: src

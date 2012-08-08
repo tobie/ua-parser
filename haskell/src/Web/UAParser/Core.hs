@@ -56,9 +56,10 @@ test =
 
 
 -------------------------------------------------------------------------------
+-- | Parse a given User-Agent string
 parseUA
     :: UAConfig
-    -- ^ Loaded parser data
+    -- ^ Loaded parser configuration data
     -> ByteString
     -- ^ User-Agent string to be parsed
     -> Maybe UAResult
@@ -80,6 +81,7 @@ parseUA UAConfig{..} bs = foldr mplus Nothing $ map go uaParsers
 
 
 -------------------------------------------------------------------------------
+-- | Results datatype for the parsed User-Agent
 data UAResult = UAResult {
       uarFamily :: Text
     , uarV1 :: Maybe Text
@@ -89,7 +91,7 @@ data UAResult = UAResult {
 
 
 -------------------------------------------------------------------------------
--- | Construct a browser versionstring from 'UAResult'
+-- | Construct a browser version-string from 'UAResult'
 uarVersion :: UAResult -> Text
 uarVersion UAResult{..} =
     T.intercalate "." . catMaybes . takeWhile isJust $ [uarV1, uarV2, uarV3]
@@ -107,6 +109,7 @@ instance Default UAResult where
 
 
 -------------------------------------------------------------------------------
+-- | Parse OS from given User-Agent string
 parseOS
     :: UAConfig
     -- ^ Loaded parser data
@@ -161,6 +164,7 @@ loadConfig fp = either error id  `fmap` decodeFile' fp
 
 
 -------------------------------------------------------------------------------
+decodeFile' :: FromJSON a => FilePath -> IO (Either String a)
 decodeFile' fp = decodeEither `fmap` B.readFile fp
 
 
@@ -197,6 +201,7 @@ data DevParser = DevParser {
 
 
 -------------------------------------------------------------------------------
+parseRegex :: Object -> Parser Regex
 parseRegex v = flip compile [] `liftM` (v .: "regex")
 
 
