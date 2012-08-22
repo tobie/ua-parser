@@ -9,7 +9,7 @@ regexes = yaml.eval(regexes);
 var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
-      majorVersionRep = obj.major_version_replacement;
+      majorVersionRep = obj.v1_replacement;
 
   function parser(ua) {
     var m = ua.match(regexp);
