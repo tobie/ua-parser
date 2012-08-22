@@ -535,6 +535,10 @@ device_parsers:
     device_replacement: 'HTC $1'
   - regex: '(HTC)'
 
+  # Samsung
+  - regex: '(SamsungSGHi560)'
+    device_replacement: 'Samsung SGHi560'
+
   #########
   # Ericsson - must come before nokia since they also use symbian
   #########
