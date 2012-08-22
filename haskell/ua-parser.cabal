@@ -1,0 +1,36 @@
+Name:                ua-parser
+Version:             0.2
+Synopsis:            Port of ua-parser in Haskell
+License:             BSD3
+License-file:        LICENSE
+Author:              Ozgun Ataman
+Maintainer:          ozgun.ataman@soostone.com
+Category:            Web
+Build-type:          Simple
+Cabal-version:       >=1.6
+
+
+data-files:
+  ./*.yaml
+
+Library
+  hs-source-dirs: src
+  Exposed-modules:
+    Web.UAParser
+    Web.UAParser.Core
+  other-modules:
+    Paths_ua_parser
+
+
+  Build-depends:       
+      base
+    , bytestring
+    , text
+    , pcre-light
+    , yaml >= 0.7
+    , aeson
+    , filepath
+    , data-default
+    , syb
+
+  ghc-options: -O2 -Wall  
