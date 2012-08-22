@@ -319,6 +319,8 @@ user_agent_parsers:
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+
 os_parsers:
 
   ##########
