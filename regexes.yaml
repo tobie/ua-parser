@@ -105,8 +105,8 @@ user_agent_parsers:
   - regex: '(Comodo_Dragon)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Comodo Dragon'
 
-  # YottaaMonitor bot
-  - regex: '(YottaaMonitor)'
+  # Bots
+  - regex: '(YottaaMonitor|BrowserMob|HttpMonitor|YandexBot|Slurp|BingPreview|PagePeeker|ThumbShotsBot|WebThumb|URL2PNG|ZooShot|GomezA|Catchpoint bot|Willow Internet Crawler|Google SketchUp|Read%20Later)'
 
   # must go before NetFront below
   - regex: '(Kindle)/(\d+)\.(\d+)'
