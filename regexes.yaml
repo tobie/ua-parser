@@ -105,8 +105,8 @@ user_agent_parsers:
   - regex: '(Comodo_Dragon)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Comodo Dragon'
 
-  # YottaaMonitor bot
-  - regex: '(YottaaMonitor)'
+  # Bots
+  - regex: '(YottaaMonitor|BrowserMob|HttpMonitor|YandexBot|Slurp|BingPreview|PagePeeker|ThumbShotsBot|WebThumb|URL2PNG|ZooShot|GomezA|Catchpoint bot|Willow Internet Crawler|Google SketchUp|Read%20Later)'
 
   # must go before NetFront below
   - regex: '(Kindle)/(\d+)\.(\d+)'
@@ -158,10 +158,10 @@ user_agent_parsers:
   #### MAIN CASES - this catches > 50% of all browsers ####
 
   # Browser/major_version.minor_version.beta_version
-  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iron|Iris|UP\.Browser|Bunjaloo|Google Earth|Raven for Mac)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjaloo|Google Earth|Raven for Mac)/(\d+)\.(\d+)\.(\d+)'
 
   # Browser/major_version.minor_version
-  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Iron|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris)/(\d+)\.(\d+)'
+  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser)/(\d+)\.(\d+)'
 
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
@@ -231,19 +231,17 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
   - regex: '(iPod).*Version/(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
-  - regex: '(iPod)'
-    family_replacement: 'Mobile Safari'
   - regex: '(iPhone).*Version/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
   - regex: '(iPhone).*Version/(\d+)\.(\d+)'
-    family_replacement: 'Mobile Safari'
-  - regex: '(iPhone)'
     family_replacement: 'Mobile Safari'
   - regex: '(iPad).*Version/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
   - regex: '(iPad).*Version/(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
-  - regex: '(iPad)'
+  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)(?:_\d+)?_(\d+).*Mobile'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPod|iPhone|iPad)'
     family_replacement: 'Mobile Safari'
 
   - regex: '(AvantGo) (\d+).(\d+)'
@@ -318,6 +316,8 @@ user_agent_parsers:
 
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
+
+  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
 
 os_parsers:
 
@@ -491,6 +491,7 @@ os_parsers:
 
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
+  - regex: '(PlayStation Vita) (\d+)\.(\d+)'
 
   # just os
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
@@ -534,6 +535,10 @@ device_parsers:
   - regex: '(ADR[A-Za-z0-9]+)'
     device_replacement: 'HTC $1'
   - regex: '(HTC)'
+
+  # Samsung
+  - regex: '(SamsungSGHi560)'
+    device_replacement: 'Samsung SGHi560'
 
   #########
   # Ericsson - must come before nokia since they also use symbian
