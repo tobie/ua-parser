@@ -38,7 +38,7 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
 
     if(!m) { return null; }
 
-    var os = (osRep ? osRep : m[1]) + (m.length > 2 ? " " + m[2] : "");
+    var os = (osRep ? osRep : m[1]) + (m.length > 2 ? " " + m[2] : "") + (m.length > 3 ? "." + m[3] : "");
 
     return os;
   }
