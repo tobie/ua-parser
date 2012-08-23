@@ -525,7 +525,7 @@ device_parsers:
   - regex: 'Sprint APA(9292)'
     device_replacement: 'HTC $1 (Sprint)'
   - regex: 'HTC ([A-Za-z0-9]+ [A-Z])'
-    device_replacement: HTC $1
+    device_replacement: 'HTC $1'
   - regex: 'HTC-([A-Za-z0-9]+)'
     device_replacement: 'HTC $1'
   - regex: 'HTC_([A-Za-z0-9]+)'
