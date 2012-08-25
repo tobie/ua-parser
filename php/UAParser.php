@@ -44,7 +44,7 @@ class UA {
 	public static function parse($ua = NULL) {
 		
 		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
-		self::$accept  = strip_tags($_SERVER["HTTP_ACCEPT"]);
+		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (file_exists(__DIR__."/resources/regexes.yaml")) {
 			self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
 		} else {
