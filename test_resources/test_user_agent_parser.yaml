@@ -1,5 +1,17 @@
 test_cases:
 
+  - user_agent_string: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.8+ (KHTML, like Gecko) Version/6.0 Safari/536.25'
+    family: 'WebKit Nightly'
+    major: '537'
+    minor: '8'
+    patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
+    family: 'WebKit Nightly'
+    major: '534'
+    minor: 
+    patch:
+    
   - user_agent_string: 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
     family: 'FacebookBot'
     major: '1'
