@@ -295,7 +295,7 @@ user_agent_parsers:
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
 
   # WebKit Nightly
-  - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Version/\d+\.\d+.\d+ Safari/'
+  - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Safari'
     family_replacement: 'WebKit Nightly'
 
   # Safari
