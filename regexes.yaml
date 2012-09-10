@@ -14,7 +14,7 @@ user_agent_parsers:
   - regex: '(Fennec)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
     family_replacement: 'Firefox Mobile'
   - regex: '(Fennec)/(\d+)\.(\d+)(pre)'
-    family_replacment: 'Firefox Mobile'
+    family_replacement: 'Firefox Mobile'
   - regex: '(Fennec)/(\d+)\.(\d+)'
     family_replacement: 'Firefox Mobile'
   - regex: 'Mobile.*(Firefox)/(\d+)\.(\d+)'
