@@ -98,6 +98,39 @@ Usage :: php
     Please refer to the README in the php directory. 
 
 
+Usage :: D
+-------------
+```d
+import UaParser;
+
+import std.stdio;
+
+void main() {
+    auto agent = UaParser.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3");
+    std.stdio.writeln(agent.browser.family); // Mobile Safari
+    std.stdio.writeln(agent.browser.major);  // 5
+    std.stdio.writeln(agent.browser.minor);  // 1
+    std.stdio.writeln(agent.browser.patch);  // 0
+    std.stdio.writeln(agent.browser.toString); // Mobile Safari 5.1.0
+    std.stdio.writeln(agent.browser.toVersionString); // 5.1.0
+
+    std.stdio.writeln(agent.os.family); // iOS
+    std.stdio.writeln(agent.os.major);  // 5
+    std.stdio.writeln(agent.os.minor);  // 1
+    std.stdio.writeln(agent.os.patch);  // 1
+    std.stdio.writeln(agent.os.toString); // iOS 5.1.1
+    std.stdio.writeln(agent.os.toVersionString); // 5.1.1
+
+    std.stdio.writeln(agent.toFullString); // Mobile Safari 5.1.0/iOS 5.1.1
+
+    std.stdio.writeln(agent.device.family); // iPhone
+    
+    std.stdio.writeln(agent.isMobile); // true
+    std.stdio.writeln(agent.isSpider); // false
+}
+```
+
+
 License
 -------
 
@@ -111,6 +144,8 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
+The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
+
 [1]: http://node.js
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
@@ -120,4 +155,5 @@ The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apa
 [7]: https://raw.github.com/tobie/ua-parser/master/py/LICENSE
 [8]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
 [9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
+[10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 
