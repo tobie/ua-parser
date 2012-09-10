@@ -119,7 +119,7 @@ void main() {
     std.stdio.writeln(agent.os.minor);  // 1
     std.stdio.writeln(agent.os.patch);  // 1
     std.stdio.writeln(agent.os.toString); // iOS 5.1.1
-    std.stdio.writeln(agent.os.toVersionString);  5.1.1
+    std.stdio.writeln(agent.os.toVersionString); // 5.1.1
 
     std.stdio.writeln(agent.toFullString); // Mobile Safari 5.1.0/iOS 5.1.1
 
