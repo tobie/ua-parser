@@ -21,7 +21,7 @@ Usage
 
 Please refer to the example.d file. To run the example, execute the following command in terminal:
 
-`rdmd --force example.d'
+`rdmd --force example.d`
 
 [1]: http://www.browserscope.org
 [2]: http://code.google.com/p/ua-parser/
