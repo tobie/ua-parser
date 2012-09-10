@@ -2,6 +2,10 @@ module UaParser;
 
 import yaml;
 
+private int parseInt(string input) {
+    return std.conv.parse!int(input);
+}
+
 private class DeviceStore {
     private string rep;
     private string rexp;
@@ -216,19 +220,19 @@ UserAgent parse(string ua) {
                 browser.family = "";
             }
             try {
-                browser.major = std.conv.to!int(b.getMajorVersionRep ? b.getMajorVersionRep 
-                                                                     : m.captures[2]);
+                browser.major = parseInt(b.getMajorVersionRep ? b.getMajorVersionRep 
+                                                              : m.captures[2]);
             } catch(Throwable e) {
                 browser.major = 0;
             }
             try {
-                browser.minor = std.conv.to!int(b.getMinorVersionRep ? b.getMinorVersionRep
-                                                                     : m.captures[3]);
+                browser.minor = parseInt(b.getMinorVersionRep ? b.getMinorVersionRep
+                                                              : m.captures[3]);
             } catch(Throwable e) {
                 browser.minor = 0;
             }
             try {
-                browser.patch = std.conv.to!int(m.captures[4]);
+                browser.patch = parseInt(m.captures[4]);
             } catch(Throwable e) {
                 browser.patch = 0;
             }
@@ -251,19 +255,19 @@ UserAgent parse(string ua) {
                 os.family = "";
             }
             try {
-                os.major = std.conv.to!int(o.getMajorVersionRep ? o.getMajorVersionRep
-                                                                : m.captures[2]);
+                os.major = parseInt(o.getMajorVersionRep ? o.getMajorVersionRep
+                                                         : m.captures[2]);
             } catch(Throwable e) {
                 os.major = 0;
             }
             try {
-                os.minor = std.conv.to!int(o.getMinorVersionRep ? o.getMinorVersionRep
-                                                                : m.captures[3]);
+                os.minor = parseInt(o.getMinorVersionRep ? o.getMinorVersionRep
+                                                         : m.captures[3]);
             } catch(Throwable e) {
                 os.minor = 0;
             }
             try {
-                os.patch = std.conv.to!int(m.captures[4]);
+                os.patch = parseInt(m.captures[4]);
             } catch(Throwable e) {
                 os.patch = 0;
             }
