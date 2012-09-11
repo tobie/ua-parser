@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php v1.4.1
+ * ua-parser-php v1.4.3
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -144,6 +144,7 @@ class UA {
 			}
 			if (isset($matches[4])) {
 				$obj->build = $matches[4];
+				$obj->patch = $matches[4];
 			}
 			if (isset($matches[5])) {
 				$obj->revision = $matches[5];
@@ -151,6 +152,7 @@ class UA {
 			
 			// pull out the browser family. replace the version number if necessary
 			$obj->browser = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
+			$obj->family  = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
 			
 			// set-up a clean version number
 			$obj->version = isset($obj->major) ? $obj->major : "";
@@ -261,6 +263,7 @@ class UA {
 				$osObj->osMinor   = isset($osRegex['os_v2_replacement']) ? $osRegex['os_v2_replacement'] : $matches[3];
 				if (isset($matches[4])) {
 					$osObj->osBuild = $matches[4];
+					$osObj->osPatch = $matches[4];
 				}
 				if (isset($matches[5])) {
 					$osObj->osRevision = $matches[5];

@@ -11,77 +11,43 @@ You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
 
 Straightforward:
 
-    <?php
+```php
+require("UAParser.php");
+$ua = UA::parse();
 
-       require("UAParser.php");
-       $result = UA::parse();
+print $ua->family;         // Chrome (can also use $ua->browser)
+print $ua->major;          // 16
+print $ua->minor;          // 0
+print $ua->patch;          // 912 (can also use $ua->build)
+print $ua->browserFull;    // Chrome 16.0.912
+print $ua->version;        // 16.0.912
 
-       print $result->full;
-       // -> Chrome 16.0.912/Mac OS X 10.6.8
+print $ua->os;             // Mac OS X
+print $ua->osMajor;        // 10
+print $ua->osMinor;        // 6
+print $ua->osPatch;        // 8 (can also use $ua->osBuild)
+print $ua->osFull;         // Mac OS X 10.6.8
+print $ua->osVersion;      // 10.6.8
 
-       print $result->browserFull;
-       // -> "Chrome 16.0.912"
-		
-       print $result->browser;
-       // -> "Chrome"
-		
-       print $result->version;
-       // -> "16.0.912"
-		
-       print $result->major;
-       // -> 16 (minor, build, & revision also available)
-		
-       print $result->osFull;
-       // -> "Mac OS X 10.6.8"
-		
-       print $result->os;
-       // -> "Mac OS X"
-		
-       print $result->osVersion;
-       // -> "10.6.8"
-		
-       print $result->osMajor;
-       // -> 10 (osMinor, osBuild, & osRevision also available)
+print $ua->full;           // Chrome 16.0.912/Mac OS X 10.6.8
 
-       /* 
-        * in select cases the device information will also be captured
-        */
+// in select cases the device information will also be captured
 
-       print $result->deviceFull;
-       // -> "Palm Pixi 1.0"
-       
-       print $result->device;
-       // -> "Palm Pixi"
+print $ua->device;         // Palm Pixi
+print $ua->deviceMajor;    // 1
+print $ua->deviceMinor;    // 0
+print $ua->deviceFull;     // Palm Pixi 1.0
+print $ua->deviceVersion;  // 1.0
 
-       print $result->deviceVersion;
-       // -> "1.0"
+// some other generic boolean options
 
-       print $result->deviceMajor;
-       // -> 1 (deviceMinor also available)
-
-       /*
-        * Some other generic boolean options
-        */
-
-       print $result->isMobile;
-       // -> (would return true if the browser met the criteria of a mobile browser based on the user agent information)
-
-       print $result->isMobileDevice;
-       // -> (would return true if the device met the criteria of a mobile device based on the user agent information)
-
-       print $result->isTablet;
-       // -> (would return true if the device was a tablet according to the user agent information)
-
-       print $result->isSpider;
-       // -> (would return true if the device was a spider according to the user agent information)
-
-       print $result->isComputer;
-       // -> (would return true if the device was a computer according to the user agent information)
-
-       print $result->isUIWebview;
-       // -> (would return true if the user agent was from a uiwebview in ios)
-
-    ?>
+print $ua->isMobile;       // true or false
+print $ua->isMobileDevice; // true or false
+print $ua->isTablet;       // true or false
+print $ua->isSpider;       // true or false
+print $ua->isComputer;     // true or false
+print $ua->isUIWebview;    // true or false, iOS-only
+```
 
 ## Getting the User-Agent Data ##
 
