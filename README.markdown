@@ -95,8 +95,42 @@ import ua_parser.Client;
 Usage :: php
 ------------
 
-    Please refer to the README in the php directory. 
+```php
+require("UAParser.php");
+$ua = UA::parse();
 
+print $ua->family;        // Chrome (can also use $ua->browser)
+print $ua->major;         // 16
+print $ua->minor;         // 0
+print $ua->patch;         // 912 (can also use $ua->build)
+print $ua->browserFull;   // Chrome 16.0.912
+print $ua->version;       // 16.0.912
+
+print $ua->os;            // Mac OS X
+print $ua->osMajor;       // 10
+print $ua->osMinor;       // 6
+print $ua->osPatch;       // 8 (can also use $ua->osBuild)
+print $ua->osFull;        // Mac OS X 10.6.8
+print $ua->osVersion;     // 10.6.8
+
+print $ua->full;          // Chrome 16.0.912/Mac OS X 10.6.8
+
+// in select cases the device information will also be captured
+
+print $ua->device;        // Palm Pixi
+print $ua->deviceMajor;   // 1
+print $ua->deviceMinor;   // 0
+print $ua->deviceFull;    // Palm Pixi 1.0
+print $ua->deviceVersion; // 1.0
+
+// some other generic boolean options
+
+print $ua->isMobile;      // true or false
+print $ua->isSpider;      // true or false
+print $ua->isComputer;    // true or false
+
+More information is available in the README in the PHP directory
+```
 
 Usage :: D
 -------------
