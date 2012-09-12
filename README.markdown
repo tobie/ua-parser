@@ -12,25 +12,34 @@ Usage :: [node.js][1]
 ---------------------
 ```js
 var uaParser = require('ua-parser');
-var ua = uaParser.parse(navigator.userAgent);
+var ua = uaParser.parse("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3");
 
 console.log(ua.tostring());
-// -> "Safari 5.0.1"
+// -> "Mobile Safari 5.1"
 
 console.log(ua.toVersionString());
 // -> "5.0.1"
 
 console.log(ua.family);
-// -> "Safari"
+// -> "Mobile Safari"
 
 console.log(ua.major);
 // -> 5
 
 console.log(ua.minor);
-// -> 0
+// -> 1
 
 console.log(ua.patch);
-// -> 1
+// -> 0
+
+console.log(ua.os);
+// -> { family: 'iOS', major: 5, minor: 1, patch: 1 }
+
+console.log(ua.isMobile);
+// -> true
+
+console.log(ua.isSpider);
+// -> false
 ```
 
 
