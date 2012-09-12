@@ -18,7 +18,8 @@ var mobile_os_families = regexes.mobile_os_families.map(function(str) {
 var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
-      majorVersionRep = obj.v1_replacement;
+      majorVersionRep = obj.v1_replacement,
+      minorVersionRep = obj.v2_replacement;
 
   function parser(ua) {
     var m = ua.match(regexp);
@@ -29,8 +30,8 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
     
     var obj = new UserAgent(family);
     obj.major = ~~parseInt(majorVersionRep ? majorVersionRep : m[2]);
-    obj.minor = m[3] ? ~~parseInt(m[3]) : 0;
-    obj.patch = m[4] ? ~~parseInt(m[4]) : 0;
+    obj.minor = ~~parseInt(minorVersionRep ? minorVersionRep : m[3]);
+    obj.patch = ~~parseInt(m[4]);
 
     if(mobile_agents.hasOwnProperty(family)) {
       obj.isMobile = true;
@@ -47,14 +48,21 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
 
 var os_parsers = regexes.os_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
-      osRep  = obj.os_replacement;
+      osRep  = obj.os_replacement,
+      minorVersionRep = obj.os_v1_replacement,
+      majorVersionRep = obj.os_v2_replacement;
 
   function parser(ua) {
     var m = ua.match(regexp);
 
     if(!m) { return null; }
 
-    var os = (osRep ? osRep : m[1]) + (m.length > 2 ? " " + m[2] : "") + (m.length > 3 ? "." + m[3] : "");
+    var os = {
+      family: osRep ? osRep.replace('$1', m[1]) : m[1],
+      major : ~~parseInt(majorVersionRep ? majorVersionRep : m[2]),
+      minor : ~~parseInt(minorVersionRep ? minorVersionRep : m[3]),
+      patch : ~~parseInt(m[4])
+    };
 
     return os;
   }
@@ -99,21 +107,17 @@ function parse(ua) {
 
   if(!result) { result = new UserAgent(); }
 
-  result.os     = os || "Other";
+  if(os) {
+    result.os.family = os.family;
+    result.os.major  = os.major;
+    result.os.minor  = os.minor;
+    result.os.patch  = os.patch;
+  }
   result.device = device || "Other";
   return result;
 }
 
-function UserAgent(family) {
-  this.family = family || 'Other';
-  this.minor = 0;
-  this.major = 0;
-  this.patch = 0;
-  this.isMobile = false;
-  this.isSpider = false;
-}
-
-UserAgent.prototype.toVersionString = function() {
+function toVersionString() {
   var output = '';
   if (this.major) {
     output += this.major;
@@ -124,17 +128,43 @@ UserAgent.prototype.toVersionString = function() {
       }
     }
   }
-  return output;
-};
+  return output;  
+}
 
-UserAgent.prototype.toString = function() {
+function toString() {
   var suffix = this.toVersionString();
   if (suffix) { suffix = ' ' + suffix; }
   return this.family + suffix;
-};
+}
+
+function OS() {
+  this.family = "Other";
+  this.major  = 0;
+  this.minor  = 0;
+  this.patch  = 0;
+}
+
+OS.prototype.toVersionString = toVersionString;
+
+OS.prototype.toString = toString;
+
+function UserAgent(family) {
+  this.os = new OS();
+
+  this.family = family || 'Other';
+  this.major = 0;
+  this.minor = 0;
+  this.patch = 0;
+  this.isMobile = false;
+  this.isSpider = false;
+}
+
+UserAgent.prototype.toVersionString = toVersionString;
+
+UserAgent.prototype.toString = toString;
 
 UserAgent.prototype.toFullString = function() {
-  return this.toString() + (this.os ? "/" + this.os : "");
+  return this.toString() + (this.os.toString() ? "/" + this.os.toString() : "");
 };
 
 if (require.main === module) {
