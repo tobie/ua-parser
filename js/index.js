@@ -6,6 +6,15 @@ var file = path.join(__dirname, '..', 'regexes.yaml');
 var regexes = fs.readFileSync(file, 'utf8');
 regexes = yaml.eval(regexes);
 
+var mobile_agents = {};
+var mobile_user_agent_families = regexes.mobile_user_agent_families.map(function(str) {
+  mobile_agents[str] = true;
+});
+
+var mobile_os_families = regexes.mobile_os_families.map(function(str) {
+  mobile_agents[str] = true;
+});
+
 var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
@@ -19,9 +28,16 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
     var family = famRep ? famRep.replace('$1', m[1]) : m[1];
     
     var obj = new UserAgent(family);
-    obj.major = parseInt(majorVersionRep ? majorVersionRep : m[2]);
-    obj.minor = m[3] ? parseInt(m[3]) : null;
-    obj.patch = m[4] ? parseInt(m[4]) : null;
+    obj.major = ~~parseInt(majorVersionRep ? majorVersionRep : m[2]);
+    obj.minor = m[3] ? ~~parseInt(m[3]) : 0;
+    obj.patch = m[4] ? ~~parseInt(m[4]) : 0;
+
+    if(mobile_agents.hasOwnProperty(family)) {
+      obj.isMobile = true;
+    }
+    if(family == "Spider") {
+      obj.isSpider = true;
+    }
     
     return obj;
   }
@@ -46,9 +62,26 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
   return parser;
 });
 
+var device_parsers = regexes.device_parsers.map(function(obj) {
+  var regexp    = new RegExp(obj.regex),
+      deviceRep = obj.device_replacement;
+
+  function parser(ua) {
+    var m = ua.match(regexp);
+
+    if(!m) { return null; }
+
+    var device = deviceRep ? deviceRep.replace('$1', m[1]) : m[1];
+
+    return device;
+  }
+
+  return parser;
+});
+
 exports.parse = parse;
 function parse(ua) {
-  var os, i;
+  var os, device, i;
   for (i=0; i < ua_parsers.length; i++) {
     var result = ua_parsers[i](ua);
     if (result) { break; }
@@ -59,23 +92,34 @@ function parse(ua) {
     if (os) { break; }
   }
 
+  for (i=0; i < device_parsers.length; i++) {
+    device = device_parsers[i](ua);
+    if (device) { break; }
+  }
+
   if(!result) { result = new UserAgent(); }
 
-  result.os = os;
+  result.os     = os || "Other";
+  result.device = device || "Other";
   return result;
 }
 
 function UserAgent(family) {
   this.family = family || 'Other';
+  this.minor = 0;
+  this.major = 0;
+  this.patch = 0;
+  this.isMobile = false;
+  this.isSpider = false;
 }
 
 UserAgent.prototype.toVersionString = function() {
   var output = '';
-  if (this.major != null) {
+  if (this.major) {
     output += this.major;
-    if (this.minor != null) {
+    if (this.minor) {
       output += '.' + this.minor;
-      if (this.patch != null) {
+      if (this.patch) {
         output += '.' + this.patch;
       }
     }
