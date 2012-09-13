@@ -1,8 +1,8 @@
-{ 
+{
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
   "main": "./js/index",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "maintainers": [
     {
       "name": "Tobie Langel",
@@ -38,12 +38,12 @@
   },
   "licenses": [
     {
-      "type" : "MIT",
-      "url" : "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
+      "type": "MIT",
+      "url": "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
     },
     {
-      "type" : "Apache-2.0",
-      "url" : "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
+      "type": "Apache-2.0",
+      "url": "https://raw.github.com/tobie/ua-parser/master/js/LICENSE"
     }
   ],
   "dependencies": {
