@@ -49,9 +49,9 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
      * ~~(1/0) // 0
      */
 
-    obj.major = ~~(majorVersionRep ? majorVersionRep : m[2]);
-    obj.minor = ~~(minorVersionRep ? minorVersionRep : m[3]);
-    obj.patch = ~~(m[4]);
+    obj.major = ~~parseInt(majorVersionRep ? majorVersionRep : m[2]);
+    obj.minor = ~~parseInt(minorVersionRep ? minorVersionRep : m[3]);
+    obj.patch = ~~parseInt(m[4]);
 
     if(mobile_agents.hasOwnProperty(family)) {
       obj.isMobile = true;
@@ -79,9 +79,9 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
 
     var os = {
       family: osRep ? osRep.replace('$1', m[1]) : m[1],
-      major : ~~(majorVersionRep ? majorVersionRep : m[2]),
-      minor : ~~(minorVersionRep ? minorVersionRep : m[3]),
-      patch : ~~(m[4])
+      major : ~~parseInt(majorVersionRep ? majorVersionRep : m[2]),
+      minor : ~~parseInt(minorVersionRep ? minorVersionRep : m[3]),
+      patch : ~~parseInt(m[4])
     };
 
     return os;
