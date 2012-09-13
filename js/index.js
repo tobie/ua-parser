@@ -29,6 +29,26 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
     var family = famRep ? famRep.replace('$1', m[1]) : m[1];
     
     var obj = new UserAgent(family);
+
+    /**
+     * Making use of the Double Bitwise Not trick. Reference:
+     *  http://www.slideshare.net/madrobby/extreme-javascript-performance
+     *  http://james.padolsey.com/javascript/double-bitwise-not/
+     *
+     * All non-zero equivalents will be truthy and will be floored if float:
+     *  ~~true; // 1
+     *  ~~4.9;  // 4
+     *  ~~(-2.9); // -2
+     * null, undefined and false will be falsey:
+     * ~~null // 0
+     * ~~undefined // 0
+     * ~~false // 0
+     * For NaN and Infinity, internal ToInt32 converts it to 0.
+     * ~~NaN // 0
+     * ~~Infinity // 0
+     * ~~(1/0) // 0
+     */
+
     obj.major = ~~parseInt(majorVersionRep ? majorVersionRep : m[2]);
     obj.minor = ~~parseInt(minorVersionRep ? minorVersionRep : m[3]);
     obj.patch = ~~parseInt(m[4]);
@@ -89,21 +109,25 @@ var device_parsers = regexes.device_parsers.map(function(obj) {
 
 exports.parse = parse;
 function parse(ua) {
-  var os, device, i;
-  for (i=0; i < ua_parsers.length; i++) {
-    var result = ua_parsers[i](ua);
-    if (result) { break; }
-  }
+  var result, os, device, i;
 
-  for (i=0; i < os_parsers.length; i++) {
-    os = os_parsers[i](ua);
-    if (os) { break; }
-  }
+  ua_parsers.some(function(u) {
+    if(!!(u(ua))) {
+      return result = u(ua);
+    }
+  });
 
-  for (i=0; i < device_parsers.length; i++) {
-    device = device_parsers[i](ua);
-    if (device) { break; }
-  }
+  os_parsers.some(function(o) {
+    if(!!(o(ua))) {
+      return os = o(ua);
+    }
+  });
+
+  device_parsers.some(function(d) {
+    if(!!(d(ua))) {
+      return device = d(ua);
+    }
+  });
 
   if(!result) { result = new UserAgent(); }
 
