@@ -602,6 +602,12 @@ device_parsers:
     device_replacement: 'HP Veer'
 
   ##########
+  # PlayStation
+  ##########
+  - regex: '(PlayStation Portable)'
+  - regex: '(PlayStation Vita)'
+  
+  ##########
   # incomplete!
   # Kindle
   ##########
