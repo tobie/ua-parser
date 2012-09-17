@@ -317,7 +317,9 @@ user_agent_parsers:
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
-  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+  # source: http://www.nintendo.com/3ds/internetbrowser/specs/
+  - regex: '(Nintendo 3DS)'
+    family_replacement: 'Netfront Browser'
 
 os_parsers:
 
@@ -478,6 +480,14 @@ os_parsers:
   ##########
   - regex: '(webOS|hpwOS)/(\d+)\.(\d+)(?:\.(\d+))?'
     os_replacement: 'webOS'
+  
+  ##########
+  # Nintendo
+  # source: http://www.nintendo.com/3ds/internetbrowser/specs/
+  # source: http://dsibrew.org/wiki/Nintendo_DSi_Browser
+  ##########  
+  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+  - regex: '(Nintendo DSi); Opera/(\d+)'
 
   ##########
   # Generic patterns
@@ -600,7 +610,13 @@ device_parsers:
     device_replacement: 'Palm Treo $1'
   - regex: 'webOS.*(P160UNA)/(\d+).(\d+)'
     device_replacement: 'HP Veer'
-
+  
+  ##########
+  # Nintendo
+  ##########
+  - regex: '(Nintendo 3DS)'
+  - regex: '(Nintendo DSi)'
+  
   ##########
   # incomplete!
   # Kindle
