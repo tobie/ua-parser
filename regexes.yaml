@@ -143,7 +143,7 @@ user_agent_parsers:
     
   # Baidu Browser
   - regex: '(FlyFlow)/(\d+)\.(\d+)'
-    family_replacement: 'Baidu Browser'
+    family_replacement: 'Baidu Explorer'
 
   # Pingdom
   - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
