@@ -140,6 +140,10 @@ user_agent_parsers:
   # Sogou Explorer 2.X
   - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
     family_replacement: 'Sogou Explorer'
+    
+  # Baidu Browser
+  - regex: '(FlyFlow)/(\d+)\.(\d+)'
+    family_replacement: 'Baidu Browser'
 
   # Pingdom
   - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
