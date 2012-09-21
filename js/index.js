@@ -12,6 +12,8 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
       majorVersionRep = obj.v1_replacement;
 
   function parser(ua) {
+    if (!ua) { return null; }
+      
     var m = ua.match(regexp);
     
     if (!m) { return null; }
