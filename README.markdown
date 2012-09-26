@@ -97,7 +97,8 @@ Usage :: php
 
 ```php
 require("UAParser.php");
-$ua = UA::parse();
+$parser = new UA;
+$ua = $parser->parse();
 
 print $ua->family;        // Chrome (can also use $ua->browser)
 print $ua->major;         // 16
