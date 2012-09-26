@@ -35,17 +35,12 @@ class UA {
 	private $debug    = false; // log requests
 	public $silent    = false; // no output when running UA::get()
 	public $nobackup  = false; // don't create a back-up when running UA::get()
-	
-	/**
-	* Sets up some standard variables as well as starts the user agent parsing process
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
-	public function parse($ua = NULL) {
-		
-		$this->ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
-		$this->accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 
+	/**
+	 * Start up the parser by importing the yaml to regexes
+	 */
+	public function __construct()
+	{
 		if (file_exists(__DIR__."/resources/regexes.yaml")) {
 			$this->regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
 		} else {
@@ -58,6 +53,19 @@ class UA {
 				   </blockquote>";
 			exit;
 		}
+	}
+
+	/**
+	 * Sets up some standard variables as well as starts the user agent parsing process
+	 * If you don't set $ua it will get the useragent of the user running the script.
+	 *
+	 * @param string $ua The useragent to parse
+	 * @return object  the result of the user agent parsing
+	 */
+	public function parse($ua = NULL) {
+		
+		$this->ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
+		$this->accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		
 		// run the regexes to match things up
 		$uaRegexes = $this->regexes['user_agent_parsers'];
@@ -113,9 +121,9 @@ class UA {
 	* Attemps to see if the user agent matches the regex for this test. If so it populates an obj
 	* with properties based on the user agent. Will also try to fetch OS & device properties
 	*
-	* @param  {Array}        the regex to be tested as well as any extra variables that need to be swapped
+	* @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
 	*
-	* @return {Object}       the result of the user agent parsing
+	* @return object The result of the user agent parsing
 	*/
 	private function uaParser($regex) {
 		
@@ -240,7 +248,7 @@ class UA {
 	/**
 	* If the user agent is matched in uaParser() it also tries to check the OS and get properties
 	*
-	* @return {Object}       the result of the os parsing
+	* @return object The result of the os parsing
 	*/
 	private function osParser() {
 		
@@ -288,7 +296,7 @@ class UA {
 	/**
 	* If the user agent is matched in uaParser() it also tries to check the device and get its properties
 	*
-	* @return {Object}       the result of the device parsing
+	* @return object The result of the device parsing
 	*/
 	private function deviceParser() {
 		
