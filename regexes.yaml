@@ -113,7 +113,7 @@ user_agent_parsers:
 
   - regex: '(Symphony) (\d+).(\d+)'
 
-  - regex: 'Minimo'
+  - regex: '(Minimo)'
 
   # Chrome Mobile
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
