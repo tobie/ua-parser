@@ -12,25 +12,23 @@ Usage :: [node.js][1]
 ---------------------
 ```js
 var uaParser = require('ua-parser');
-var ua = uaParser.parse(navigator.userAgent);
-
-console.log(ua.tostring());
-// -> "Safari 5.0.1"
+var ua = uaParser.parse('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4');
 
 console.log(ua.toVersionString());
-// -> "5.0.1"
+// -> '22.0.1229'
 
-console.log(ua.family);
-// -> "Safari"
+console.log(ua.tostring());
+// -> 'Chrome 22.0.1229'
 
-console.log(ua.major);
-// -> 5
+console.log(ua.toFullString());
+// -> 'Chrome 22.0.1229/Mac OS X 10.8'
 
-console.log(ua.minor);
-// -> 0
-
-console.log(ua.patch);
-// -> 1
+console.dir(ua);
+{ family: 'Chrome',
+  major: 22,
+  minor: 0,
+  patch: 1229,
+  os: 'Mac OS X 10.8' }
 ```
 
 
