@@ -2,6 +2,11 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-1.4.4
+ - FIX: made sure that the regex file is only loaded once if running the library multiple times. performance boost.
+ - FIX: added support for identifying various game devices as mobile devices
+ - THX: thanks to @rjd22 for pointing out the perf issue
+
 UAP-1.4.3
  - FIX: added support for patch & family attributes to sort of match the other libraries
 
