@@ -45,17 +45,20 @@ class UA {
 		
 		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
-		if (file_exists(__DIR__."/resources/regexes.yaml")) {
-			self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
-		} else {
-			print "<h1>Error</h1>
-				   <p>Please download the regexes.yaml file before using UAParser.php.</p>
-				   <p>You can type the following at the command line to download the latest version:</p>
-				   <blockquote>
-					<code>%: cd /path/to/UAParser</code><br />
-				   	<code>%: php UAParser.php -get</code>
-				   </blockquote>";
-			exit;
+		if (empty(self::$regexes)) {
+			if (file_exists(__DIR__."/resources/regexes.yaml")) {
+				self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
+				print "loading yaml...<br />";
+			} else {
+				print "<h1>Error</h1>
+					   <p>Please download the regexes.yaml file before using UAParser.php.</p>
+					   <p>You can type the following at the command line to download the latest version:</p>
+					   <blockquote>
+						<code>%: cd /path/to/UAParser</code><br />
+					   	<code>%: php UAParser.php -get</code>
+					   </blockquote>";
+				exit;
+			}
 		}
 	
 		
