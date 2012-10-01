@@ -325,7 +325,8 @@ class UA {
 				// this isn't really needed because if it matches a mobile browser it'll automatically mark it as a mobile device
 				$deviceObj->isMobileDevice = false;
 				$mobileDevices  = array("iPhone","iPod","iPad","HTC","Kindle","Lumia","Amoi","Asus","Bird","Dell","DoCoMo","Huawei","i-mate","Kyocera",
-				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone");
+				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone",
+										"Nintendo DSi","Nintendo 3DS","PlayStation Vita");
 				foreach($mobileDevices as $mobileDevice) {
 					if (stristr($deviceObj->device, $mobileDevice)) {
 						$deviceObj->isMobileDevice = true;
