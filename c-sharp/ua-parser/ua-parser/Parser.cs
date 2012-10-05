@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
@@ -35,8 +37,10 @@ namespace ua_parser
         private DeviceParser deviceParser;
 
         public Parser()
-            : this(new FileStream(Parser.REGEX_YAML_PATH, FileMode.Open))
         {
+            Stream stream = Assembly.GetAssembly(typeof(Parser)).GetManifestResourceStream("ua_parser.regexes.yaml");
+
+            Initialize(stream);
         }
 
         public Parser(Stream regexYaml)
