@@ -774,6 +774,12 @@ device_parsers:
     device_replacement: 'Softbank $1'
 
   ##########
+  # Sony
+  ##########
+  - regex: '(PlayStation3 PPC)'
+    device_replacement: 'Playstation 3'
+
+  ##########
   # Generic Smart Phone
   ##########
   - regex: '(hiptop|avantgo|plucker|xiino|blazer|elaine|up.browser|up.link|mmp|smartphone|midp|wap|vodafone|o2|pocket|mobile|pda)'
