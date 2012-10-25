@@ -157,6 +157,9 @@ user_agent_parsers:
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
 
+  # PyAMF
+  - regex: '(PyAMF)/(\d+)\.(\d+)\.(\d+)'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####

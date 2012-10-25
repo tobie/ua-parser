@@ -358,3 +358,8 @@ test_cases:
     minor: '0'
     patch: '660'
 
+  - user_agent_string: 'PyAMF/0.6.1'
+    family: 'PyAMF'
+    major: '0'
+    minor: '6'
+    patch: '1'
