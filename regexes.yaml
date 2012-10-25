@@ -432,6 +432,11 @@ os_parsers:
   - regex: '(iPhone|iPad|iPod).*Mac OS X.*Version/(\d+)\.(\d+)'
     os_replacement: 'iOS'
 
+  - regex: '(AppleTV)/(\d+)\.(\d+)'
+    os_replacement: 'ATV OS X'
+    os_v1_replacement: '$1'
+    os_v2_replacement: '$2'
+
   ##########
   # Chrome OS
   # if version 0.0.0, probably this stuff:
@@ -622,6 +627,14 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
+
+  ##########
+  # AppleTV
+  # No built in browser that I can tell
+  # Stack Overflow indicated iTunes-AppleTV/4.1 as a known UA for app available and I'm seeing it in live traffic
+  ##########
+  - regex: '(AppleTV)'
+    device_replacement: 'AppleTV'
 
   ##########
   # complete but probably catches spoofs
