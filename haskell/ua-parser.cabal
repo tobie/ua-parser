@@ -1,5 +1,6 @@
 Name:                ua-parser
-Version:             0.2
+Description:         Please refer to the git README on the project for example usage.
+Version:             0.2.1
 Synopsis:            Port of ua-parser in Haskell
 License:             BSD3
 License-file:        LICENSE
@@ -9,9 +10,12 @@ Category:            Web
 Build-type:          Simple
 Cabal-version:       >=1.6
 
+data-files: ./*.yaml
 
-data-files:
-  ./*.yaml
+source-repository head
+  type:     git
+  location: https://github.com/tobie/ua-parser
+  subdir:   haskell
 
 Library
   hs-source-dirs: src

@@ -235,6 +235,46 @@ Maintainers
 
 * `regexes.yaml`: Lindsey Simon & Tobie Langel
 
+Usage :: Haskell
+---------------
+```haskell
+# Install via Hackage and cabal like so:
+#
+# cabal update
+# cabal install ua-parser
+#
+# Now you're good to go.
+
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Web.UAParser
+
+-- A test string
+test_string = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
+
+-- Main entry point for Haskell
+main = do
+    ua <- loadUAParser
+    let uaResult = parseUA ua test_string
+    print uaResult
+
+    let osResult = parseOS ua test_string
+    print osResult
+
+-- Result from user agent parse
+Just (UAResult {uarFamily = "Mobile Safari", uarV1 = Just "5", uarV2 = Just "1", uarV3 = Nothing})
+
+-- Result from operating system parse
+Just (OSResult {osrFamily = "iOS", osrV1 = Just "5", osrV2 = Just "1", osrV3 = Nothing, osrV4 = Nothing})
+
+
+Plesae refer to Haddocks for more info - the API is pretty straightforward.
+
+```
+
+
 License
 -------
 
