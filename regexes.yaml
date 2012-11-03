@@ -234,6 +234,9 @@ user_agent_parsers:
   - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Bon Echo'
 
+  - regex: '(WebBrowser)/(\d+)\.(\d+)(?:\.([0-9\-]+))? SmartTV'
+    family_replacement: 'Maple Browser'
+
   - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
   - regex: '(iPod).*Version/(\d+)\.(\d+)'
@@ -551,6 +554,8 @@ device_parsers:
   # Samsung
   - regex: '(SamsungSGHi560)'
     device_replacement: 'Samsung SGHi560'
+  - regex: '(SmartTV)'
+    device_replacement: 'Samsung SmartTV'
 
   #########
   # Ericsson - must come before nokia since they also use symbian
