@@ -7,13 +7,13 @@ var regexes = fs.readFileSync(file, 'utf8');
 regexes = yaml.eval(regexes);
 
 var mobile_agents = {};
-var mobile_user_agent_families = regexes.mobile_user_agent_families.map(function(str) {
-  mobile_agents[str] = true;
-});
 
-var mobile_os_families = regexes.mobile_os_families.map(function(str) {
-  mobile_agents[str] = true;
-});
+for(var i in regexes.mobile_user_agent_families) {
+  mobile_agents[regexes.mobile_user_agent_families[i]] = true;
+}
+for(var i in regexes.mobile_os_families) {
+  mobile_agents[regexes.mobile_os_families[i]] = true;
+}
 
 var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
   var regexp = new RegExp(obj.regex),
@@ -22,6 +22,10 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
       minorVersionRep = obj.v2_replacement;
 
   function parser(ua) {
+    if(!ua || !ua.length) {
+      throw new Error('UserAgent not specified');
+    }
+
     var m = ua.match(regexp);
     
     if (!m) { return null; }
@@ -30,34 +34,18 @@ var ua_parsers = regexes.user_agent_parsers.map(function(obj) {
     
     var obj = new UserAgent(family);
 
-    /**
-     * Making use of the Double Bitwise Not trick. Reference:
-     *  http://www.slideshare.net/madrobby/extreme-javascript-performance
-     *  http://james.padolsey.com/javascript/double-bitwise-not/
-     *
-     * All non-zero equivalents will be truthy and will be floored if float:
-     *  ~~true; // 1
-     *  ~~4.9;  // 4
-     *  ~~(-2.9); // -2
-     * null, undefined and false will be falsey:
-     * ~~null // 0
-     * ~~undefined // 0
-     * ~~false // 0
-     * For NaN and Infinity, internal ToInt32 converts it to 0.
-     * ~~NaN // 0
-     * ~~Infinity // 0
-     * ~~(1/0) // 0
-     */
-
-    obj.major = ~~parseInt(majorVersionRep ? majorVersionRep : m[2]);
-    obj.minor = ~~parseInt(minorVersionRep ? minorVersionRep : m[3]);
-    obj.patch = ~~parseInt(m[4]);
+    obj.major = (majorVersionRep ? majorVersionRep : m[2]) || '';
+    obj.minor = (minorVersionRep ? minorVersionRep : m[3]) || '';
+    obj.patch = m[4] || '';
+    obj.majorInt = ~~parseInt(obj.major);
+    obj.minorInt = ~~parseInt(obj.minor);
+    obj.patchInt = ~~parseInt(obj.patch);
 
     if(mobile_agents.hasOwnProperty(family)) {
-      obj.isMobile = true;
+      obj.device.isMobile = true;
     }
     if(family == "Spider") {
-      obj.isSpider = true;
+      obj.device.isSpider = true;
     }
     
     return obj;
@@ -78,10 +66,10 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
     if(!m) { return null; }
 
     var os = {
-      family: osRep ? osRep.replace('$1', m[1]) : m[1],
-      major : ~~parseInt(majorVersionRep ? majorVersionRep : m[2]),
-      minor : ~~parseInt(minorVersionRep ? minorVersionRep : m[3]),
-      patch : ~~parseInt(m[4])
+      family: (osRep ? osRep.replace('$1', m[1]) : m[1]) || '',
+      major : (majorVersionRep ? majorVersionRep : m[2]) || '',
+      minor : (minorVersionRep ? minorVersionRep : m[3]) || '',
+      patch : m[4] || ''
     };
 
     return os;
@@ -112,21 +100,15 @@ function parse(ua) {
   var result, os, device, i;
 
   ua_parsers.some(function(u) {
-    if(!!(u(ua))) {
-      return result = u(ua);
-    }
+    return result = u(ua);
   });
 
   os_parsers.some(function(o) {
-    if(!!(o(ua))) {
-      return os = o(ua);
-    }
+    return os = o(ua);
   });
 
   device_parsers.some(function(d) {
-    if(!!(d(ua))) {
-      return device = d(ua);
-    }
+    return device = d(ua);
   });
 
   if(!result) { result = new UserAgent(); }
@@ -136,18 +118,21 @@ function parse(ua) {
     result.os.major  = os.major;
     result.os.minor  = os.minor;
     result.os.patch  = os.patch;
+    result.os.majorInt = ~~parseInt(os.major);
+    result.os.minorInt = ~~parseInt(os.minor);
+    result.os.patchInt = ~~parseInt(os.patch);
   }
-  result.device = device || "Other";
+  result.device.family = device || "Other";
   return result;
 }
 
 function toVersionString() {
   var output = '';
-  if (this.major) {
+  if (this.major.length) {
     output += this.major;
-    if (this.minor) {
+    if (this.minor.length) {
       output += '.' + this.minor;
-      if (this.patch) {
+      if (this.patch.length) {
         output += '.' + this.patch;
       }
     }
@@ -162,10 +147,13 @@ function toString() {
 }
 
 function OS() {
-  this.family = "Other";
-  this.major  = 0;
-  this.minor  = 0;
-  this.patch  = 0;
+  this.family = 'Other';
+  this.major  = '';
+  this.minor  = '';
+  this.patch  = '';
+  this.majorInt  = 0;
+  this.minorInt  = 0;
+  this.patchInt  = 0;
 }
 
 OS.prototype.toVersionString = toVersionString;
@@ -176,11 +164,17 @@ function UserAgent(family) {
   this.os = new OS();
 
   this.family = family || 'Other';
-  this.major = 0;
-  this.minor = 0;
-  this.patch = 0;
-  this.isMobile = false;
-  this.isSpider = false;
+  this.major = '';
+  this.minor = '';
+  this.patch = '';
+  this.majorInt = 0;
+  this.minorInt = 0;
+  this.patchInt = 0;
+  this.device = {
+    isMobile: false,
+    isSpider: false,
+    family  : 'Other'
+  }
 }
 
 UserAgent.prototype.toVersionString = toVersionString;
