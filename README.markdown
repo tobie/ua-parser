@@ -18,28 +18,37 @@ console.log(ua.tostring());
 // -> "Mobile Safari 5.1"
 
 console.log(ua.toVersionString());
-// -> "5.0.1"
+// -> "5.1"
+
+console.log(ua.toFullString());
+// -> "Mobile Safari 5.1/iOS 5.1.1"
 
 console.log(ua.family);
 // -> "Mobile Safari"
 
 console.log(ua.major);
-// -> 5
+// -> "5"
 
 console.log(ua.minor);
-// -> 1
+// -> "1"
 
 console.log(ua.patch);
+// -> ""
+
+console.log(ua.majorInt);
+// -> 5
+
+console.log(ua.minorInt);
+// -> 1
+
+console.log(ua.patchInt);
 // -> 0
 
 console.log(ua.os);
-// -> { family: 'iOS', major: 5, minor: 1, patch: 1 }
+// -> { family: "iOS", major: "5", minor: "1", patch: "1", majorInt: 5, minorInt: 1, patch: 1 }
 
-console.log(ua.isMobile);
-// -> true
-
-console.log(ua.isSpider);
-// -> false
+console.log(ua.device);
+// -> { isMobile: true, isSpider: false, family: "iPhone" }
 ```
 
 
