@@ -48,9 +48,10 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
 
 exports.parse = parse;
 function parse(ua) {
-  var os, i;
+  var result, os, i;
+
   for (i=0; i < ua_parsers.length; i++) {
-    var result = ua_parsers[i](ua);
+    result = ua_parsers[i](ua);
     if (result) { break; }
   }
 
