@@ -8,18 +8,18 @@ var USER_AGENT_STRING = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0b6pre) Gecko/2010090
 suite('parse function', function() {  
   test("output with valid UA string", function() {
     var output = parse(USER_AGENT_STRING);
-    assert.strictEqual('Firefox Beta', output.family);
-    assert.strictEqual(4, output.major, 'major version number of the UA');
-    assert.strictEqual(0, output.minor, 'minor version number of the UA');
-    assert.ok(isNaN(output.patch),  'patch version number of the UA');
+    assert.strictEqual(output.family, 'Firefox Beta');
+    assert.strictEqual(output.major, 4);
+    assert.strictEqual(output.minor, 0);
+    assert.ok(isNaN(output.patch));
   });
   
   test("output with invalid UA string", function() {
     var output = parse('');
-    assert.strictEqual('Other', output.family);
-    assert.strictEqual(undefined, output.major);
-    assert.strictEqual(undefined, output.minor);
-    assert.strictEqual(undefined, output.patch);
+    assert.strictEqual(output.family, 'Other');
+    assert.strictEqual(output.major, undefined);
+    assert.strictEqual(output.minor, undefined);
+    assert.strictEqual(output.patch, undefined);
   });
 });
 
