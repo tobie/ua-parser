@@ -88,6 +88,8 @@ user_agent_parsers:
     family_replacement: 'Swiftfox'
 
   # Rekonq
+  - regex: '(rekonq)/(\d+)\.(\d+) Safari'
+    family_replacement: 'Rekonq'
   - regex: 'rekonq'
     family_replacement: 'Rekonq'
 
