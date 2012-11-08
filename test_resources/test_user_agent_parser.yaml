@@ -212,6 +212,12 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) rekonq/1.0 Safari/534.34'
+    family: 'Rekonq'
+    major: '1'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux; de-DE) AppleWebKit/527  (KHTML, like Gecko, Safari/419.3) konqueror/4.3.1'
     family: 'Konqueror'
     major: '4'
