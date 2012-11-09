@@ -31,6 +31,9 @@ console.log(ua.minor);
 
 console.log(ua.patch);
 // -> 1
+
+console.log(ua.device);
+// -> null
 ```
 
 
