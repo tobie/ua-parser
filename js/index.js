@@ -82,6 +82,7 @@ function parse(ua) {
 
   if(!result) { result = new UserAgent(); }
 
+  result.os = os;
   result.device = device;
   return result;
 }
