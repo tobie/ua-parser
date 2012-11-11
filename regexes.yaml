@@ -327,6 +327,9 @@ user_agent_parsers:
     family_replacement: 'IE'
 
   - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+  
+  - regex: '(python-requests)/(\d+)\.(\d+)'
+    family_replacement: 'Python Requests'
 
 os_parsers:
 
@@ -516,6 +519,7 @@ os_parsers:
 
   # just os
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Linux)/(\d+)\.(\d+)'
   - regex: '(Linux|BSD)'
 
 device_parsers:
