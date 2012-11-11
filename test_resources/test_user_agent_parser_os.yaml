@@ -344,3 +344,10 @@ test_cases:
     minor:
     patch:
     patch_minor:
+
+  - user_agent_string: 'python-requests/0.14 CPython/2.6 Linux/2.6-43-server'
+    family: 'Linux'
+    major: '2'
+    minor: '6'
+    patch:
+    patch_minor:

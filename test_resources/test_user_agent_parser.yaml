@@ -369,3 +369,9 @@ test_cases:
     major: '0'
     minor: '6'
     patch: '1'
+
+  - user_agent_string: 'python-requests/0.14 CPython/2.6 Linux/2.6-43-server'
+    family: 'Python Requests'
+    major: '0'
+    minor: '14'
+    patch:
