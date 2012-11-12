@@ -46,6 +46,22 @@ var os_parsers = regexes.os_parsers.map(function(obj) {
   return parser;
 });
 
+var device_parsers = regexes.device_parsers.map(function(obj) {
+  var regexp = new RegExp(obj.regex),
+      deviceRep  = obj.device_replacement;
+
+  function parser(ua) {
+    var m = ua.match(regexp);
+
+    if(!m) { return null; }
+
+    var device = (deviceRep ? deviceRep : m[1]) + (m.length > 2 ? " " + m[2] : "") + (m.length > 3 ? "." + m[3] : "");
+
+    return device;
+  }
+
+  return parser;
+});
 exports.parse = parse;
 function parse(ua) {
   var os, i;
@@ -59,9 +75,15 @@ function parse(ua) {
     if (os) { break; }
   }
 
+  for (i=0; i < device_parsers.length; i++) {
+    device = device_parsers[i](ua);
+    if (device) { break; }
+  }
+
   if(!result) { result = new UserAgent(); }
 
   result.os = os;
+  result.device = device;
   return result;
 }
 
