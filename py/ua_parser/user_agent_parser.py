@@ -61,10 +61,10 @@ class UserAgentParser(object):
 
       if self.v1_replacement:
         v1 = self.v1_replacement
-      elif match.lastindex >= 2:
+      elif match.lastindex and match.lastindex >= 2:
         v1 = match.group(2)
 
-      if match.lastindex >= 3:
+      if match.lastindex and match.lastindex >= 3:
         v2 = match.group(3)
         if match.lastindex >= 4:
           v3 = match.group(4)
