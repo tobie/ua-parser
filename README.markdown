@@ -12,25 +12,28 @@ Usage :: [node.js][1]
 ---------------------
 ```js
 var uaParser = require('ua-parser');
-var ua = uaParser.parse(navigator.userAgent);
+var r = uaParser.parse(navigator.userAgent);
 
-console.log(ua.tostring());
-// -> "Safari 5.0.1"
+console.log(r.ua.tostring());        // -> "Safari 5.0.1"
+console.log(r.ua.toVersionString()); // -> "5.0.1"
+console.log(r.ua.family)             // -> "Safari"
+console.log(r.ua.major);             // -> "5"
+console.log(r.ua.minor);             // -> "0"
+console.log(r.ua.patch);             // -> "1"
 
-console.log(ua.toVersionString());
-// -> "5.0.1"
+console.log(r.os.tostring());        // -> "iOS 5.1"
+console.log(r.os.toVersionString()); // -> "5.1"
+console.log(r.os.family)             // -> "iOS"
+console.log(r.os.major);             // -> "5"
+console.log(r.os.minor);             // -> "1"
+console.log(r.os.patch);             // -> null
 
-console.log(ua.family);
-// -> "Safari"
-
-console.log(ua.major);
-// -> 5
-
-console.log(ua.minor);
-// -> 0
-
-console.log(ua.patch);
-// -> 1
+console.log(r.os.tostring());        // -> "iOS 5.1"
+console.log(r.os.toVersionString()); // -> "5.1"
+console.log(r.os.family)             // -> "iOS"
+console.log(r.os.major);             // -> "5"
+console.log(r.os.minor);             // -> "1"
+console.log(r.os.patch);             // -> null
 ```
 
 
