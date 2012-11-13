@@ -27,13 +27,6 @@ console.log(r.os.family)             // -> "iOS"
 console.log(r.os.major);             // -> "5"
 console.log(r.os.minor);             // -> "1"
 console.log(r.os.patch);             // -> null
-
-console.log(r.os.tostring());        // -> "iOS 5.1"
-console.log(r.os.toVersionString()); // -> "5.1"
-console.log(r.os.family)             // -> "iOS"
-console.log(r.os.major);             // -> "5"
-console.log(r.os.minor);             // -> "1"
-console.log(r.os.patch);             // -> null
 ```
 
 
