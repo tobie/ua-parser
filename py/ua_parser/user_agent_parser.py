@@ -242,8 +242,6 @@ def ParseDevice(user_agent_string, ua_family=None, os_family=None):
     if device:
       break
 
-  os_family = device or 'Other'
-
   if ua_family is None:
     ua_family = ParseUserAgent(user_agent_string)['family']
 
