@@ -68,13 +68,39 @@ class UA {
 				exit;
 			}
 		}
-	
-		
+
+		// Defaults
+		$result = (object) array(
+			'family' => '',
+			'major' => '',
+			'minor' => '',
+			'patch' => '',
+			'version' => '',
+			'browserFull' => '',
+			'os' => '',
+			'osMajor' => '',
+			'osMinor' => '',
+			'osPatch' => '',
+			'osFull' => '',
+			'full' => '',
+			'device' => '',
+			'deviceMajor' => '',
+			'deviceMinor' => '',
+			'deviceVersion' => '',
+			'deviceFull' => '',
+			'isMobileDevice' => false,
+			'isMobile' => false,
+			'isSpider' => false,
+			'isTablet' => false,
+			'isComputer' => true,
+		);
+		$result->uaOriginal = self::$ua;
+
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
 		foreach ($uaRegexes as $uaRegex) {
-			if ($result = self::uaParser($uaRegex)) {
-				$result->uaOriginal = self::$ua;
+			if ($uaObj = self::uaParser($uaRegex)) {
+				$result = (object) array_merge((array) $result, (array) $uaObj);
 				break;
 			}
 		}
