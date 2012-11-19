@@ -48,5 +48,11 @@
   ],
   "dependencies": {
     "yamlparser": ">=0.0.2"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "mocha -u tdd ./js/test/*.js"
   }
 }
