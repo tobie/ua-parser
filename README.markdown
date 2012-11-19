@@ -192,6 +192,12 @@ The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apa
 
 The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
 
+
+Continuous integration
+----------------------
+
+[![Build Status](https://secure.travis-ci.org/tobie/ua-parser.png?branch=master)](https://travis-ci.org/tobie/ua-parser)
+
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
