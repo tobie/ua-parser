@@ -16,9 +16,8 @@
  * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
  *
  */
-
-// address 5.2 compatibility
-if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+//http://www.php.net/manual/en/language.constants.predefined.php#107614
+// address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
 	require_once(__DIR__."/lib/json/jsonwrapper.php");
 }
@@ -35,15 +34,16 @@ class UA {
 	private static $debug    = false; // log requests
 	public static $silent    = false; // no output when running UA::get()
 	public static $nobackup  = false; // don't create a back-up when running UA::get()
-	
+
 	/**
-	* Sets up some standard variables as well as starts the user agent parsing process
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
-	public static function parse($ua = NULL) {
+	 * Sets up some standard variables as well as starts the user agent parsing process
+	 *
+	 * @param string $ua An optional user agent string to test - if omitted uses current browser
+	 * @return bool|object|\stdClass {Object}       the result of the user agent parsing
+	 */
+	public static function parse($ua = '') {
 		
-		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
+		self::$ua      = !empty($ua) ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
@@ -59,10 +59,10 @@ class UA {
 				exit;
 			}
 		}
-	
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
+		$result = false;
 		foreach ($uaRegexes as $uaRegex) {
 			if ($result = self::uaParser($uaRegex)) {
 				$result->uaOriginal = self::$ua;
@@ -110,20 +110,17 @@ class UA {
 		
 		return $result;
 	}
-	
+
 	/**
-	* Attemps to see if the user agent matches the regex for this test. If so it populates an obj
-	* with properties based on the user agent. Will also try to fetch OS & device properties
-	*
-	* @param  {Array}        the regex to be tested as well as any extra variables that need to be swapped
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
+	 * Attempts to see if the user agent matches the regex for this test. If so it populates an obj
+	 * with properties based on the user agent. Will also try to fetch OS & device properties
+	 * @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
+	 * @return bool|stdClass The result of the user agent parsing
+	 */
 	private static function uaParser($regex) {
 		
 		// tests the supplied regex against the user agent
-		if (preg_match("/".str_replace("/","\/",$regex['regex'])."/",self::$ua,$matches)) {
-
+		if (preg_match("/".str_replace("/","\/",$regex['regex'])."/", self::$ua, $matches)) {
 			// Define safe parser defaults
 			$defaults = array(
 				'isMobileDevice' => false,
@@ -172,10 +169,10 @@ class UA {
 			$obj->isUIWebview = (($obj->browser == 'Mobile Safari') && !strstr(self::$ua,'Safari')) ? true : false;
 			
 			// check to see if this is a mobile browser
-			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
-			                        "Nokia","Blackberry","Palm","Silk","Android","Maemo","Obigo","Netfront","AvantGo","Teleca","SEMC-Browser",
-			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
-									"UC Browser","Tizen Browser");
+			$mobileBrowsers = array('Firefox Mobile','Opera Mobile','Opera Mini','Mobile Safari','webOS','IE Mobile','Playstation Portable',
+			                        'Nokia','Blackberry','Palm','Silk','Android','Maemo','Obigo','Netfront','AvantGo','Teleca','SEMC-Browser',
+			                        'Bolt','Iris','UP.Browser','Symphony','Minimo','Bunjaloo','Jasmine','Dolfin','Polaris','BREW','Chrome Mobile',
+			                        'UC Browser','Tizen Browser');
 			foreach($mobileBrowsers as $mobileBrowser) {
 				if (stristr($obj->browser, $mobileBrowser)) {
 					$obj->isMobile = true;
@@ -238,16 +235,16 @@ class UA {
 			return false;
 		}
 	}
-	
+
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the OS and get properties
-	*
-	* @return {Object}       the result of the os parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the OS and get properties
+	 *
+	 * @return bool|\stdClass The result of the os parsing
+	 */
 	private static function osParser() {
 		
 		// build the obj that will be returned
-		$osObj = new stdClass();
+		$osObj = new stdClass;
 		
 		// run the regexes to match things up
 		$osRegexes = self::$regexes['os_parsers'];
@@ -286,12 +283,12 @@ class UA {
 		}
 		return false;
 	}
-	
+
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the device and get its properties
-	*
-	* @return {Object}       the result of the device parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the device and get its properties
+	 *
+	 * @return bool|\stdClass The result of the device parsing
+	 */
 	private static function deviceParser() {
 		
 		// build the obj that will be returned
@@ -386,14 +383,3 @@ class UA {
 		}
 	}
 }
-
-if (defined('STDIN') && isset($argv) && isset($argv[1]) && ($argv[1] == '-get')) {
-	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
-	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
-	if (!UA::$silent) { print("getting the YAML file...\n"); }
-	UA::get();
-} else if (defined('STDIN')) {
-	print("You must use the -get flag to use UAParser.php from the command line.\n");
-}
-
-?>
