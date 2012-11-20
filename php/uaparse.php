@@ -13,6 +13,8 @@ if (php_sapi_name() == 'cli') {
 			print("getting the YAML file...\n");
 		}
 		UA::get();
+	} elseif ($argc == 2) {
+		var_dump(UA::parse($argv[1]));
 	}
 } else {
 	print("You must use the -get flag to use UAParser.php from the command line.\n");
