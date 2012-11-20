@@ -1,4 +1,4 @@
-ua-parser
+ua-parser [![Build Status](https://secure.travis-ci.org/tobie/ua-parser.png?branch=master)](https://travis-ci.org/tobie/ua-parser)
 =========
 
 `ua-parser` is a multi-language port of [BrowserScope][2]'s [user agent string parser][3].
@@ -191,12 +191,6 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
 The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
-
-
-Continuous integration
-----------------------
-
-[![Build Status](https://secure.travis-ci.org/tobie/ua-parser.png?branch=master)](https://travis-ci.org/tobie/ua-parser)
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
