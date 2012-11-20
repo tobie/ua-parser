@@ -16,7 +16,6 @@
  * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
  *
  */
-//http://www.php.net/manual/en/language.constants.predefined.php#107614
 // address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
 	require_once(__DIR__."/lib/json/jsonwrapper.php");

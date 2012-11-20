@@ -14,8 +14,13 @@ if (php_sapi_name() == 'cli') {
 		}
 		UA::get();
 	} elseif ($argc == 2) {
-		var_dump(UA::parse($argv[1]));
+		echo json_encode(UA::parse($argv[1]))."\n";
+	} else {
+		echo "Usage:\n";
+		echo "uaparse.php -get\n";
+		echo "  Fetches an updated YAML file for UAParser, overwriting the current file.\n";
+		echo "  -silent and -nobackup options are available.\n";
+		echo "uaparse.php \"My user agent string\"\n";
+		echo "  Parse a user agent string and dump the results as JSON\n";
 	}
-} else {
-	print("You must use the -get flag to use UAParser.php from the command line.\n");
 }
