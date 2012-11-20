@@ -31,17 +31,26 @@ class UA {
 	private static $ua;
 	private static $accept;
 	private static $regexes;
-	
-	private static $debug    = false; // log requests
-	public static $silent    = false; // no output when running UA::get()
-	public static $nobackup  = false; // don't create a back-up when running UA::get()
+
+	/**
+	 * @var bool: Log requests.
+	 */
+	private static $debug   = false;
+	/**
+	 * @var bool: No output when running UA::get().
+	 */
+	public static $silent   = false;
+	/**
+	 * @var bool: Don't create a back-up when running UA::get().
+	 */
+	public static $nobackup = false;
 	
 	/**
 	* Sets up some standard variables as well as starts the user agent parsing process
 	*
 	* @return {Object}       the result of the user agent parsing
 	*/
-	public static function parse($ua = NULL) {
+	public static function parse($ua = null) {
 		
 		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
@@ -103,6 +112,11 @@ class UA {
 			}
 		}
 
+		// Aliases
+		$result->browser = $result->family;
+		$result->build = $result->patch;
+		$result->osBuild = $result->osPatch;
+
 		// log the results when testing
 		if (self::$debug) {
 			self::log($result);
@@ -120,9 +134,9 @@ class UA {
 	* @return {Object}       the result of the user agent parsing
 	*/
 	private static function uaParser($regex) {
-		
+
 		// tests the supplied regex against the user agent
-		if (preg_match("/".str_replace("/","\/",$regex['regex'])."/",self::$ua,$matches)) {
+		if (preg_match("/" . str_replace("/", "\/", $regex['regex']) . "/", self::$ua, $matches)) {
 
 			// Define safe parser defaults
 			$defaults = array(
@@ -146,15 +160,13 @@ class UA {
 			}
 			if (isset($matches[4])) {
 				$obj->build = $matches[4];
-				$obj->patch = $matches[4];
 			}
 			if (isset($matches[5])) {
 				$obj->revision = $matches[5];
 			}
 			
 			// pull out the browser family. replace the version number if necessary
-			$obj->browser = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
-			$obj->family  = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
+			$obj->family = isset($regex['family_replacement']) ? str_replace("$1", $obj->major, $regex['family_replacement']) : $matches[1];
 			
 			// set-up a clean version number
 			$obj->version = isset($obj->major) ? $obj->major : "";
@@ -163,13 +175,13 @@ class UA {
 			$obj->version = isset($obj->revision) ? $obj->version.'.'.$obj->revision : $obj->version;
 			
 			// prettify
-			$obj->browserFull = $obj->browser;
+			$obj->browserFull = $obj->family;
 			if ($obj->version != '') {
 				$obj->browserFull .= " ".$obj->version;
 			}
 			
 			// detect if this is a uiwebview call on iOS
-			$obj->isUIWebview = (($obj->browser == 'Mobile Safari') && !strstr(self::$ua,'Safari')) ? true : false;
+			$obj->isUIWebview = (($obj->family == 'Mobile Safari') && !strstr(self::$ua, 'Safari')) ? true : false;
 			
 			// check to see if this is a mobile browser
 			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
@@ -177,7 +189,7 @@ class UA {
 			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
 									"UC Browser","Tizen Browser");
 			foreach($mobileBrowsers as $mobileBrowser) {
-				if (stristr($obj->browser, $mobileBrowser)) {
+				if (stristr($obj->family, $mobileBrowser)) {
 					$obj->isMobile = true;
 					break;
 				}
@@ -190,7 +202,7 @@ class UA {
 			
 			// create an attribute combinining browser and os
 			if (isset($obj->osFull) && $obj->osFull) {
-				$obj->full = $obj->browserFull."/".$obj->osFull;
+				$obj->full = $obj->browserFull . "/" . $obj->osFull;
 			}
 			
 			// figure out the device name for the browser, if possible
@@ -231,12 +243,11 @@ class UA {
 			
 			// record if this is a computer
 			$obj->isComputer = (!$obj->isMobile && !$obj->isSpider && !$obj->isMobileDevice) ? true : false;
-				
+
 			return $obj;
-			
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 	
 	/**
@@ -264,7 +275,6 @@ class UA {
 				$osObj->osMajor   = isset($osRegex['os_v1_replacement']) ? $osRegex['os_v1_replacement'] : $matches[2];
 				$osObj->osMinor   = isset($osRegex['os_v2_replacement']) ? $osRegex['os_v2_replacement'] : $matches[3];
 				if (isset($matches[4])) {
-					$osObj->osBuild = $matches[4];
 					$osObj->osPatch = $matches[4];
 				}
 				if (isset($matches[5])) {
@@ -275,7 +285,7 @@ class UA {
 				// os version
 				$osObj->osVersion = isset($osObj->osMajor) ? $osObj->osMajor : "";
 				$osObj->osVersion = isset($osObj->osMinor) ? $osObj->osVersion.'.'.$osObj->osMinor : $osObj->osVersion;
-				$osObj->osVersion = isset($osObj->osBuild) ? $osObj->osVersion.'.'.$osObj->osBuild : $osObj->osVersion;
+				$osObj->osVersion = isset($osObj->osPatch) ? $osObj->osVersion.'.'.$osObj->osPatch : $osObj->osVersion;
 				$osObj->osVersion = isset($osObj->osRevision) ? $osObj->osVersion.'.'.$osObj->osRevision : $osObj->osVersion; 
 				
 				// prettify
@@ -284,6 +294,7 @@ class UA {
 				return $osObj;
 			}
 		}
+
 		return false;
 	}
 	
@@ -395,5 +406,3 @@ if (defined('STDIN') && isset($argv) && isset($argv[1]) && ($argv[1] == '-get'))
 } else if (defined('STDIN')) {
 	print("You must use the -get flag to use UAParser.php from the command line.\n");
 }
-
-?>
