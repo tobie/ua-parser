@@ -16,7 +16,8 @@ exports.parseOS = parseOS;
 
 var mobile_ua_families = regexes.mobile_user_agent_families,
     mobile_os_families = regexes.mobile_os_families,
-    parseDevice = require('./lib/device').makeParser(regexes.device_parsers, mobile_ua_families, mobile_os_families, exports);
+    tablet_families = regexes.tablet_families,
+    parseDevice = require('./lib/device').makeParser(regexes.device_parsers, mobile_ua_families, mobile_os_families, tablet_families, exports);
 exports.parseDevice = parseDevice;
 
 exports.parse = parse;
