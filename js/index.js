@@ -14,17 +14,14 @@ exports.parseUA = parseUA;
 var parseOS = require('./lib/os').makeParser(regexes.os_parsers);
 exports.parseOS = parseOS;
 
-var mobile_ua_families = regexes.mobile_user_agent_families,
-    mobile_os_families = regexes.mobile_os_families,
-    tablet_families = regexes.tablet_families,
-    parseDevice = require('./lib/device').makeParser(regexes.device_parsers, mobile_ua_families, mobile_os_families, tablet_families, exports);
+var parseDevice = require('./lib/device').makeParser(regexes.device_parsers);
 exports.parseDevice = parseDevice;
 
 exports.parse = parse;
 function parse(str) {
   var ua = parseUA(str),
       os = parseOS(str),
-      device = parseDevice(str, ua.family, os.family);
+      device = parseDevice(str);
   return new Results(str, ua, os, device);
 }
 

@@ -27,10 +27,7 @@ console.log(r.os.major);             // -> "5"
 console.log(r.os.minor);             // -> "1"
 console.log(r.os.patch);             // -> null
 
-console.log(r.device.toString());    // -> "iPhone"
 console.log(r.device.family);        // -> "iPhone"
-console.log(r.device.isMobile);      // -> true
-console.log(r.device.isSpider)       // -> false
 ```
 
 Note if you're only interested in one of the `ua`, `device` or `os` objects, you will getter better performance by using the more specific methods (`uaParser.parseUA`, `uaParser.parseOS` and `uaParser.parseDevice` respectively), e.g.:
