@@ -1,7 +1,8 @@
 exports.Device = Device
-function Device(family, isMobile, isSpider) {
+function Device(family, isMobile, isTablet, isSpider) {
   this.family = family || 'Other';
   this.isMobile = !!isMobile;
+  this.isTablet = !!isTablet;
   this.isSpider = !!isSpider;
 }
 
@@ -10,8 +11,12 @@ Device.prototype.toString = function() {
 };
 
 
-exports.makeParser = function(regexes, mobile_ua_families, mobile_os_families, mainModule) {
+exports.makeParser = function(regexes, mobile_ua_families, mobile_os_families, tablet_families, mainModule) {
   var parsers = regexes.map(function (obj) {
+    mobile_ua_families = mobile_ua_families || [];
+    mobile_os_families = mobile_os_families || [];
+    tablet_families = tablet_families || [];
+
     var regexp = new RegExp(obj.regex),
         deviceRep = obj.device_replacement;
 
@@ -21,6 +26,7 @@ exports.makeParser = function(regexes, mobile_ua_families, mobile_os_families, m
 
       var family = deviceRep ? deviceRep.replace('$1', m[1]) : m[1],
           isMobile = false,
+          isTablet = false,
           isSpider = family === 'Spider';
 
       if (!ua_family) {
@@ -31,12 +37,28 @@ exports.makeParser = function(regexes, mobile_ua_families, mobile_os_families, m
         os_family = mainModule.parseOS(str).family;
       }
 
-      if ((mobile_ua_families && mobile_ua_families.indexOf(ua_family) > -1)
-        || (mobile_os_families && mobile_os_families.indexOf(os_family) > -1)) {
-        isMobile = true;
+      for (var i = 0, length = mobile_ua_families.length; i < length; i++) {
+        if (ua_family.indexOf(mobile_ua_families[i]) > -1) {
+          isMobile = true;
+          break;
+        }
       }
 
-      return new Device(family, isMobile, isSpider);
+      for (var i = 0, length = mobile_os_families.length; i < length; i++) {
+        if (os_family.indexOf(mobile_os_families[i]) > -1) {
+          isMobile = true;
+          break;
+        }
+      }
+
+      for (var i = 0, length = tablet_families.length; i < length; i++) {
+        if (family.indexOf(tablet_families[i]) > -1) {
+          isTablet = true;
+          isMobile = false;
+          break;
+        }
+      }
+      return new Device(family, isMobile, isTablet, isSpider);
     }
 
     return parser;

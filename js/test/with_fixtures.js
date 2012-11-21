@@ -51,9 +51,10 @@ function readYAML(fileName) {
     fixtures.forEach(function(f) {
       test(f.user_agent_string, function() {
         var r = uaParser.parse(f.user_agent_string);
-        fixFixtureBools(f, ['is_spider', 'is_mobile'])
+        fixFixtureBools(f, ['is_spider', 'is_mobile', 'is_tablet'])
         assert.strictEqual(r.device.family, f.family);
         assert.strictEqual(r.device.isMobile, f.is_mobile);
+        assert.strictEqual(r.device.isTablet, f.is_tablet);
         assert.strictEqual(r.device.isSpider, f.is_spider);
       });
     });

@@ -872,3 +872,12 @@ mobile_os_families:
   - 'Windows Phone 6.5'
   - 'Windows CE'
   - 'Symbian OS'
+
+tablet_families:
+  - 'Kindle'
+  - 'iPad'
+  - 'Playbook'
+  - 'TouchPad'
+  - 'Dell Streak'
+  - 'Galaxy Tab'
+  - 'Xoom'
