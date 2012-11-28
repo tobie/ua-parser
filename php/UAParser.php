@@ -163,7 +163,6 @@ class UA {
 	private static function uaParser($regex) {
 
 		// tests the supplied regex against the user agent
-		if (preg_match("/" . str_replace("/", "\/", $regex['regex']) . "/", self::$ua, $matches)) {
 
 			// Define safe parser defaults
 			$defaults = array(
@@ -175,6 +174,7 @@ class UA {
 			);
 			// build the obj that will be returned starting with defaults
 			$obj = (object) $defaults;
+		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
 
 			// build the version numbers for the browser
 			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
@@ -290,7 +290,7 @@ class UA {
 		// run the regexes to match things up
 		$osRegexes = self::$regexes['os_parsers'];
 		foreach ($osRegexes as $osRegex) {
-			if (preg_match("/".str_replace("/","\/",$osRegex['regex'])."/",self::$ua,$matches)) {
+			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$osRegex['regex']))."/",self::$ua,$matches)) {
 				
 				// Make sure matches 2 and 3 are at least set to null for setting
 				// Major and Minor defaults
@@ -338,7 +338,7 @@ class UA {
 		// run the regexes to match things up
 		$deviceRegexes = self::$regexes['device_parsers'];
 		foreach ($deviceRegexes as $deviceRegex) {
-			if (preg_match("/".str_replace("/","\/",$deviceRegex['regex'])."/i",self::$ua,$matches)) {
+			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$deviceRegex['regex']))."/i",self::$ua,$matches)) {
 				
 				// Make sure device matches are null
 				// Device Name, Major and Minor defaults
