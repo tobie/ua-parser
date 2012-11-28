@@ -52,7 +52,8 @@ class UA {
 	*/
 	public static function parse($ua = null) {
 		
-		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
+		$sua           = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
+		self::$ua      = ($ua != null) ? $ua : strip_tags($sua);
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
