@@ -187,7 +187,7 @@ class UA {
 			// set-up a clean version number
 			$obj->version = isset($obj->major) ? $obj->major : "";
 			$obj->version = isset($obj->minor) ? $obj->version.'.'.$obj->minor : $obj->version;
-			$obj->version = isset($obj->build) ? $obj->version.'.'.$obj->build : $obj->version;
+			$obj->version = isset($obj->patch) ? $obj->version.'.'.$obj->patch : $obj->version;
 			$obj->version = isset($obj->revision) ? $obj->version.'.'.$obj->revision : $obj->version;
 			
 			// prettify
