@@ -169,7 +169,7 @@ class UA {
 				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
 			}
 			if (isset($matches[4])) {
-				$obj->build = $matches[4];
+				$obj->patch = $matches[4];
 			}
 			if (isset($matches[5])) {
 				$obj->revision = $matches[5];
