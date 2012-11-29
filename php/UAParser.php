@@ -17,8 +17,7 @@
  *
  */
 
-// address 5.2 compatibility
-if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+// address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
 	require_once(__DIR__."/lib/json/jsonwrapper.php");
 }
