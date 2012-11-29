@@ -34,12 +34,11 @@ class UA {
 	private static $debug = false; // log requests
 
 	/**
+	 * Sets up some standard variables as well as starts the user agent parsing process
+	 *
+	 * @param string $ua An optional user agent string to test - if omitted uses current browser
+	 * @return object|\stdClass {Object}       the result of the user agent parsing
 	 */
-	/**
-	* Sets up some standard variables as well as starts the user agent parsing process
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
 	public static function parse($ua = null) {
 		
 		$sua           = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
@@ -143,13 +142,11 @@ class UA {
 	}
 	
 	/**
-	* Attemps to see if the user agent matches the regex for this test. If so it populates an obj
-	* with properties based on the user agent. Will also try to fetch OS & device properties
-	*
-	* @param  {Array}        the regex to be tested as well as any extra variables that need to be swapped
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
+	 * Attempts to see if the user agent matches the regex for this test. If so it populates an obj
+	 * with properties based on the user agent. Will also try to fetch OS & device properties
+	 * @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
+	 * @return bool|stdClass The result of the user agent parsing
+	 */
 	private static function uaParser($regex) {
 
 		// tests the supplied regex against the user agent
@@ -268,10 +265,10 @@ class UA {
 	}
 	
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the OS and get properties
-	*
-	* @return {Object}       the result of the os parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the OS and get properties
+	 *
+	 * @return bool|\stdClass The result of the os parsing
+	 */
 	private static function osParser() {
 		
 		// build the obj that will be returned
@@ -316,10 +313,10 @@ class UA {
 	}
 	
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the device and get its properties
-	*
-	* @return {Object}       the result of the device parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the device and get its properties
+	 *
+	 * @return bool|\stdClass The result of the device parsing
+	 */
 	private static function deviceParser() {
 		
 		// build the obj that will be returned
