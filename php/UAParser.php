@@ -150,18 +150,14 @@ class UA {
 	private static function uaParser($regex) {
 
 		// tests the supplied regex against the user agent
-
-			// Define safe parser defaults
-			$defaults = array(
-				'isMobileDevice' => false,
-				'isMobile' => false,
-				'isSpider' => false,
-				'isTablet' => false,
-				'isComputer' => true,
-			);
-			// build the obj that will be returned starting with defaults
-			$obj = (object) $defaults;
 		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
+			
+			// build the obj that will be returned
+			$obj = new stdClass;
+			
+			// defaults
+			$obj->isMobile       = false;
+			$obj->isMobileDevice = false;
 
 			// build the version numbers for the browser
 			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
