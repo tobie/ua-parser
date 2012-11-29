@@ -1,7 +1,6 @@
 # ua-parser PHP Library #
 
-This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project. This library
-utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device.
+This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project. This library utilizes the user agents regex YAML file from ua-parser but otherwise creates its own set of attributes to describe a browser, OS, and device.
 
 ## Demo ##
 
@@ -49,35 +48,39 @@ print $ua->isComputer;     // true or false
 print $ua->isUIWebview;    // true or false, iOS-only
 ```
 
-## Getting the User-Agent Data ##
+## Using ua-parser PHP Library from the Command Line ##
 
-To get the user-agent data for either the initial load of the project or each night as a cron job you can use the following on the command line:
+A command line utility is now included with the PHP library. The following commands are supported:
 
-    %: cd /path/to/project/
-    %: php UAParser.php -get
+### Get Usage Info
 
-If you use the cron job method it's highly encouraged that you run `UAParser.php -get` in silent mode. To do so do the following:
+Provides simple usage information:
 
-    %: php UAParser.php -get -silent
+    php uaparser-cli.php
 
-You can also turn off back-ups by doing the following:
+### Update the regexes.yaml File
 
-    %: php UAParser.php -get -nobackup
+Fetches an updated YAML file for UAParser and overwrites the current file. You can use the following as part of a cron job that runs nightly. 
 
-And you can run in silent mode and turn off back-ups by doing the following:
+    php uaparser-cli.php -g [-s] [-n]
+        
+        By default is verbose. Use -s to turn that feature off.
+        By default creates a back-up. Use -n to turn that feature off.
 
-    %: php UAParser.php -get -silent -nobackup
+### Parse an Apache Log File
 
-Alternatively, you can create a PHP script that includes the following:
+Parses the linked Apache log file to help determine which user agents might need to be added to regexes.yaml.
 
-    <?php
+    php uaparser-cli.php -l /path/to/apache/logfile
+        
 
-			require("/path/to/UAParser.php");
-			UA::get();
-			
-    ?>
+### Parse a Single User Agent String
 
-The `silent` and `nobackup` variables can also be modified directly in the `UAParser.php` script on lines #36 and #37 respectively.
+Parses a user agent string and dumps the results as a list.
+
+    php uaparser-cli.php [-j] "your user agent string"
+           
+        Use the -j flag to print the result as JSON.
 
 ## Using ua-parser For a Redirect Script ##
 
@@ -104,4 +107,12 @@ You can use any of the properties above to perform the redirect but the boolean 
 
 ## Credits ##
 
-Thanks to the [ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon. Thanks to Bryan Shelton for some fixes.
+Thanks to the [original ua-parser team](http://code.google.com/p/ua-parser/people/list) for making the YAML file available for others to build upon.
+
+Also, many thanks to the following major contributors to the PHP library:
+
+* Bryan Shelton
+* Michael Bond
+* @rjd22
+* Timo Tijhof 
+* Marcus Bointon
