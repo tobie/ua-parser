@@ -2,6 +2,21 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-1.5.0
+ - ADD: command line interface is now in its own file (via @Synchro)
+ - ADD: command line utility now supports parsing an Apache log file & recording the results
+ - ADD: command line utility can now parse a supplied user-agent string and push out a simple list or JSON
+ - ADD: test suite that uses the ua-parser project's test resources
+ - FIX: numerous comment & spacing fixes (via @Synchro & @Krinkle)
+ - FIX: remove PHP4 version of spyc (via @Synchro)
+ - FIX: remove .svn dirs in spyc (via @lopezdonaque)
+ - FIX: notes that the PHP 5.2 fix really was for 5.1 (via @Synchro) (knew this, i was lazy)
+ - FIX: lib now returns an object no matter what. now matches other ua-parser libs (via @Krinkle)
+ - FIX: checks that $_SERVER attr is set before including it. should be better for command line use. 
+ - FIX: family attr now properly set in an edge case
+ - FIX: if regexes.yaml picks up bad slashes the PHP lib will account for it (e.g. GoogleTV regex)
+ - THX: thanks to @Krinkle and @Synchro for the numerous fixes
+
 UAP-1.4.5
  - FIX: an embarrassing debug print survived the last edit
  - THX: thanks to @memakeit for dropping the bug report
