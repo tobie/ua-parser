@@ -96,12 +96,14 @@ class UA {
 		}
 		
 		// if no browser was found check to see if it can be matched at least against a device (e.g. spider, generic feature phone or generic smartphone)
-		if (!$result) {
-			if (($result = self::deviceParser()) && ($result->device != 'Spider')) {
+		if (!$uaObj) {
+			if (($uaObj = self::deviceParser()) && ($uaObj->device != 'Spider')) {
+				$result                 = (object) array_merge((array) $result, (array) $uaObj);
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;	
 				$result->uaOriginal     = self::$ua;
-			} else if (isset($result) && isset($result->device) && ($result->device == "Spider")) {
+			} else if (isset($uaObj) && isset($uaObj->device) && ($uaObj->device == "Spider")) {
+				$result                 = (object) array_merge((array) $result, (array) $uaObj);
 				$result->isMobile       = false;
 				$result->isSpider       = true;
 				$result->uaOriginal     = self::$ua;
@@ -109,16 +111,14 @@ class UA {
 		}
 		
 		// still false?! see if it's a really dumb feature phone, if not just mark it as unknown
-		if (!$result) {
+		if (!$uaObj) {
 			if ((strpos(self::$accept,'text/vnd.wap.wml') > 0) || (strpos(self::$accept,'application/vnd.wap.xhtml+xml') > 0) || isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
-				$result = new stdClass();
 				$result->device         = "Generic Feature Phone";
 				$result->deviceFull     = "Generic Feature Phone";
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;
 				$result->uaOriginal     = self::$ua;
 			} else {
-				$result = new stdClass();
 				$result->device         = "Unknown";
 				$result->deviceFull     = "Unknown";
 				$result->isMobile       = false;
