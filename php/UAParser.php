@@ -61,13 +61,13 @@ class UA {
 
 		// Defaults
 		$result = (object) array(
-			'family' => '',
+			'family' => 'Other',
 			'major' => '',
 			'minor' => '',
 			'patch' => '',
 			'version' => '',
 			'browserFull' => '',
-			'os' => '',
+			'os' => 'Other',
 			'osMajor' => '',
 			'osMinor' => '',
 			'osPatch' => '',
@@ -322,6 +322,10 @@ class UA {
 		// build the obj that will be returned
 		$deviceObj = new stdClass();
 		
+		// defaults
+		$deviceObj->isMobileDevice = false;
+		$deviceObj->isTablet       = false;
+		
 		// run the regexes to match things up
 		$deviceRegexes = self::$regexes['device_parsers'];
 		foreach ($deviceRegexes as $deviceRegex) {
@@ -347,7 +351,6 @@ class UA {
 				
 				// check to see if this is a mobile device
 				// this isn't really needed because if it matches a mobile browser it'll automatically mark it as a mobile device
-				$deviceObj->isMobileDevice = false;
 				$mobileDevices  = array("iPhone","iPod","iPad","HTC","Kindle","Lumia","Amoi","Asus","Bird","Dell","DoCoMo","Huawei","i-mate","Kyocera",
 				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone",
 										"Nintendo DSi","Nintendo 3DS","PlayStation Vita");
@@ -359,7 +362,6 @@ class UA {
 				}
 
 				// check to see if this is a tablet (not perfect)
-				$deviceObj->isTablet = false;
 				$tablets = array("Kindle","iPad","Playbook","TouchPad","Dell Streak","Galaxy Tab","Xoom");
 				foreach($tablets as $tablet) {
 					if (stristr($deviceObj->device, $tablet)) {
