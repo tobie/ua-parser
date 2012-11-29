@@ -1,11 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua-parser", "ua-parser\ua-parser.csproj", "{D46567C0-BF1F-47A5-89F5-FD840375B32D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua-parser-console", "ua-parser-console\ua-parser-console.csproj", "{AD20C9A5-974B-4845-94AF-B87EAEC4F9C3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ua-parser-tests", "ua-parser-tests\ua-parser-tests.csproj", "{099ACC54-BAF1-4A4B-8842-BAF56E240314}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EBF32A14-FE00-4531-B24B-6E2D71A3EB9A}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,18 +18,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD20C9A5-974B-4845-94AF-B87EAEC4F9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD20C9A5-974B-4845-94AF-B87EAEC4F9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD20C9A5-974B-4845-94AF-B87EAEC4F9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD20C9A5-974B-4845-94AF-B87EAEC4F9C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{099ACC54-BAF1-4A4B-8842-BAF56E240314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{099ACC54-BAF1-4A4B-8842-BAF56E240314}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{099ACC54-BAF1-4A4B-8842-BAF56E240314}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{099ACC54-BAF1-4A4B-8842-BAF56E240314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46567C0-BF1F-47A5-89F5-FD840375B32D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ua-parser\ua-parser.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
