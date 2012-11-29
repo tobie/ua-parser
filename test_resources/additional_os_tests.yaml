@@ -132,3 +132,17 @@ test_cases:
     minor:
     patch:
     patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; GoogleTV 4.0.4; LG Google TV Build/000000) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.77 Safari/534.24'
+    family: 'GoogleTV'
+    major: '4'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.77 Large Screen Safari/534.24 GoogleTV/000000'
+    family: 'GoogleTV'
+    major:
+    minor:
+    patch:
+    patch_minor:

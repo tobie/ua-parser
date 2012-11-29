@@ -88,6 +88,8 @@ user_agent_parsers:
     family_replacement: 'Swiftfox'
 
   # Rekonq
+  - regex: '(rekonq)/(\d+)\.(\d+) Safari'
+    family_replacement: 'Rekonq'
   - regex: 'rekonq'
     family_replacement: 'Rekonq'
 
@@ -156,6 +158,9 @@ user_agent_parsers:
   # Twitterbot
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
+
+  # PyAMF
+  - regex: '(PyAMF)/(\d+)\.(\d+)\.(\d+)'
 
   #### END SPECIAL CASES TOP ####
 
@@ -322,6 +327,9 @@ user_agent_parsers:
     family_replacement: 'IE'
 
   - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+  
+  - regex: '(python-requests)/(\d+)\.(\d+)'
+    family_replacement: 'Python Requests'
 
 os_parsers:
 
@@ -429,6 +437,11 @@ os_parsers:
   - regex: '(iPhone|iPad|iPod).*Mac OS X.*Version/(\d+)\.(\d+)'
     os_replacement: 'iOS'
 
+  - regex: '(AppleTV)/(\d+)\.(\d+)'
+    os_replacement: 'ATV OS X'
+    os_v1_replacement: '$1'
+    os_v2_replacement: '$2'
+
   ##########
   # Chrome OS
   # if version 0.0.0, probably this stuff:
@@ -478,6 +491,13 @@ os_parsers:
     os_replacement: 'Blackberry OS'
 
   ##########
+  # Google TV
+  ##########
+  - regex: '(GoogleTV) (\d+)\.(\d+)\.(\d+)'
+  # Old style
+  - regex: '(GoogleTV)\/\d+'
+
+  ##########
   # Misc mobile
   ##########
   - regex: '(webOS|hpwOS)/(\d+)\.(\d+)(?:\.(\d+))?'
@@ -499,6 +519,7 @@ os_parsers:
 
   # just os
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Linux)/(\d+)\.(\d+)'
   - regex: '(Linux|BSD)'
 
 device_parsers:
@@ -619,6 +640,14 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
+
+  ##########
+  # AppleTV
+  # No built in browser that I can tell
+  # Stack Overflow indicated iTunes-AppleTV/4.1 as a known UA for app available and I'm seeing it in live traffic
+  ##########
+  - regex: '(AppleTV)'
+    device_replacement: 'AppleTV'
 
   ##########
   # complete but probably catches spoofs
@@ -772,6 +801,12 @@ device_parsers:
     device_replacement: 'Softbank $1'
   - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
+
+  ##########
+  # Sony
+  ##########
+  - regex: '(PlayStation3 PPC)'
+    device_replacement: 'Playstation 3'
 
   ##########
   # Generic Smart Phone

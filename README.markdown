@@ -1,4 +1,4 @@
-ua-parser
+ua-parser [![Build Status](https://secure.travis-ci.org/tobie/ua-parser.png?branch=master)](https://travis-ci.org/tobie/ua-parser)
 =========
 
 `ua-parser` is a multi-language port of [BrowserScope][2]'s [user agent string parser][3].
@@ -11,28 +11,37 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 Usage :: [node.js][1]
 ---------------------
 ```js
-var uaParser = require('ua-parser');
-var ua = uaParser.parse(navigator.userAgent);
+var r = require('ua-parser').parse(navigator.userAgent);
 
-console.log(ua.tostring());
-// -> "Safari 5.0.1"
+console.log(r.ua.toString());        // -> "Safari 5.0.1"
+console.log(r.ua.toVersionString()); // -> "5.0.1"
+console.log(r.ua.family)             // -> "Safari"
+console.log(r.ua.major);             // -> "5"
+console.log(r.ua.minor);             // -> "0"
+console.log(r.ua.patch);             // -> "1"
 
-console.log(ua.toVersionString());
-// -> "5.0.1"
+console.log(r.os.toString());        // -> "iOS 5.1"
+console.log(r.os.toVersionString()); // -> "5.1"
+console.log(r.os.family)             // -> "iOS"
+console.log(r.os.major);             // -> "5"
+console.log(r.os.minor);             // -> "1"
+console.log(r.os.patch);             // -> null
 
-console.log(ua.family);
-// -> "Safari"
-
-console.log(ua.major);
-// -> 5
-
-console.log(ua.minor);
-// -> 0
-
-console.log(ua.patch);
-// -> 1
+console.log(r.device.family);        // -> "iPhone"
 ```
 
+Note if you're only interested in one of the `ua`, `device` or `os` objects, you will getter better performance by using the more specific methods (`uaParser.parseUA`, `uaParser.parseOS` and `uaParser.parseDevice` respectively), e.g.:
+
+```js
+var p = require('ua-parser');
+
+console.log(p.parseUA(navigator.userAgent).toString());
+// -> "Safari 5.0.1"
+console.log(p.parseOS(navigator.userAgent).toString());
+// -> "iOS 5.1"
+console.log(p.parseDevice(navigator.userAgent).toString());
+// -> "iPhone"
+```
 
 Usage :: python
 ---------------

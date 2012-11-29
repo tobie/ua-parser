@@ -1,24 +1,34 @@
 <?php
 
 /*!
- * ua-parser-php v1.4.4
+ * ua-parser-php v1.5.0
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
  * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
  * 
- * https://github.com/tobie/ua-parser
+ *   https://github.com/tobie/ua-parser
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
  * spyc-0.5, for loading the YAML, is licensed under the MIT license.
  * The initial list of generic feature phones & smartphones came from Mobile Web OSP under the MIT license
  * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
  *
+ * Many thanks to the following major contributors:
+ *
+ *   - Bryan Shelton
+ *   - Michael Bond
+ *   - @rjd22 (https://github.com/rjd22)
+ *   - Timo Tijhof (https://github.com/Krinkle)
+ *   - Marcus Bointon (https://github.com/Synchro)
+ *
  */
 
 // address 5.2 compatibility
 if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
+// address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
 	require_once(__DIR__."/lib/json/jsonwrapper.php");
 }
@@ -32,52 +42,79 @@ class UA {
 	private static $accept;
 	private static $regexes;
 	
-	private static $debug    = false; // log requests
-	public static $silent    = false; // no output when running UA::get()
-	public static $nobackup  = false; // don't create a back-up when running UA::get()
-	
+	private static $debug = false; // log requests
+
 	/**
-	* Sets up some standard variables as well as starts the user agent parsing process
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
-	public static function parse($ua = NULL) {
+	 * Sets up some standard variables as well as starts the user agent parsing process
+	 *
+	 * @param string $ua An optional user agent string to test - if omitted uses current browser
+	 * @return object|\stdClass {Object}       the result of the user agent parsing
+	 */
+	public static function parse($ua = null) {
 		
-		self::$ua      = $ua ? $ua : strip_tags($_SERVER["HTTP_USER_AGENT"]);
+		$sua           = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
+		self::$ua      = ($ua != null) ? $ua : strip_tags($sua);
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 				self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
-				print "loading yaml...<br />";
 			} else {
 				print "<h1>Error</h1>
 					   <p>Please download the regexes.yaml file before using UAParser.php.</p>
 					   <p>You can type the following at the command line to download the latest version:</p>
 					   <blockquote>
-						<code>%: cd /path/to/UAParser</code><br />
-					   	<code>%: php UAParser.php -get</code>
+						<code>%: cd /path/to/UAParser/</code><br />
+					   	<code>%: php uaparser-cli.php -g</code>
 					   </blockquote>";
 				exit;
 			}
 		}
-	
+
+		// Defaults
+		$result = (object) array(
+			'family' => 'Other',
+			'major' => '',
+			'minor' => '',
+			'patch' => '',
+			'version' => '',
+			'browserFull' => '',
+			'os' => 'Other',
+			'osMajor' => '',
+			'osMinor' => '',
+			'osPatch' => '',
+			'osFull' => '',
+			'full' => '',
+			'device' => '',
+			'deviceMajor' => '',
+			'deviceMinor' => '',
+			'deviceVersion' => '',
+			'deviceFull' => '',
+			'isMobileDevice' => false,
+			'isMobile' => false,
+			'isSpider' => false,
+			'isTablet' => false,
+			'isComputer' => true,
+		);
+		$result->uaOriginal = self::$ua;
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
 		foreach ($uaRegexes as $uaRegex) {
-			if ($result = self::uaParser($uaRegex)) {
-				$result->uaOriginal = self::$ua;
+			if ($uaObj = self::uaParser($uaRegex)) {
+				$result = (object) array_merge((array) $result, (array) $uaObj);
 				break;
 			}
 		}
 		
 		// if no browser was found check to see if it can be matched at least against a device (e.g. spider, generic feature phone or generic smartphone)
-		if (!$result) {
-			if (($result = self::deviceParser()) && ($result->device != 'Spider')) {
+		if (!$uaObj) {
+			if (($uaObj = self::deviceParser()) && ($uaObj->device != 'Spider')) {
+				$result                 = (object) array_merge((array) $result, (array) $uaObj);
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;	
 				$result->uaOriginal     = self::$ua;
-			} else if (isset($result) && isset($result->device) && ($result->device == "Spider")) {
+			} else if (isset($uaObj) && isset($uaObj->device) && ($uaObj->device == "Spider")) {
+				$result                 = (object) array_merge((array) $result, (array) $uaObj);
 				$result->isMobile       = false;
 				$result->isSpider       = true;
 				$result->uaOriginal     = self::$ua;
@@ -85,16 +122,14 @@ class UA {
 		}
 		
 		// still false?! see if it's a really dumb feature phone, if not just mark it as unknown
-		if (!$result) {
+		if (!$uaObj) {
 			if ((strpos(self::$accept,'text/vnd.wap.wml') > 0) || (strpos(self::$accept,'application/vnd.wap.xhtml+xml') > 0) || isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
-				$result = new stdClass();
 				$result->device         = "Generic Feature Phone";
 				$result->deviceFull     = "Generic Feature Phone";
 				$result->isMobile       = true;
 				$result->isMobileDevice = true;
 				$result->uaOriginal     = self::$ua;
 			} else {
-				$result = new stdClass();
 				$result->device         = "Unknown";
 				$result->deviceFull     = "Unknown";
 				$result->isMobile       = false;
@@ -104,6 +139,11 @@ class UA {
 			}
 		}
 
+		// Aliases
+		$result->browser = $result->family;
+		$result->build   = $result->patch;
+		$result->osBuild = $result->osPatch;
+
 		// log the results when testing
 		if (self::$debug) {
 			self::log($result);
@@ -111,30 +151,24 @@ class UA {
 		
 		return $result;
 	}
-	
-	/**
-	* Attemps to see if the user agent matches the regex for this test. If so it populates an obj
-	* with properties based on the user agent. Will also try to fetch OS & device properties
-	*
-	* @param  {Array}        the regex to be tested as well as any extra variables that need to be swapped
-	*
-	* @return {Object}       the result of the user agent parsing
-	*/
-	private static function uaParser($regex) {
-		
-		// tests the supplied regex against the user agent
-		if (preg_match("/".str_replace("/","\/",$regex['regex'])."/",self::$ua,$matches)) {
 
-			// Define safe parser defaults
-			$defaults = array(
-				'isMobileDevice' => false,
-				'isMobile' => false,
-				'isSpider' => false,
-				'isTablet' => false,
-				'isComputer' => true,
-			);
-			// build the obj that will be returned starting with defaults
-			$obj = (object) $defaults;
+	/**
+	 * Attempts to see if the user agent matches the regex for this test. If so it populates an obj
+	 * with properties based on the user agent. Will also try to fetch OS & device properties
+	 * @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
+	 * @return bool|stdClass The result of the user agent parsing
+	 */
+	private static function uaParser($regex) {
+
+		// tests the supplied regex against the user agent
+		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
+			
+			// build the obj that will be returned
+			$obj = new stdClass;
+			
+			// defaults
+			$obj->isMobile       = false;
+			$obj->isMobileDevice = false;
 
 			// build the version numbers for the browser
 			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
@@ -146,7 +180,6 @@ class UA {
 				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
 			}
 			if (isset($matches[4])) {
-				$obj->build = $matches[4];
 				$obj->patch = $matches[4];
 			}
 			if (isset($matches[5])) {
@@ -154,31 +187,36 @@ class UA {
 			}
 			
 			// pull out the browser family. replace the version number if necessary
-			$obj->browser = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
-			$obj->family  = isset($regex['family_replacement']) ? str_replace("$1",$obj->major,$regex['family_replacement']) : $matches[1];
+			if (isset($regex['family_replacement']) && strstr($regex['family_replacement'],"$1")) {
+				$obj->family = str_replace("$1", $matches[1], $regex['family_replacement']);
+			} else if (isset($regex['family_replacement'])) {
+				$obj->family = $regex['family_replacement'];
+			} else {
+				$obj->family = $matches[1];
+			}
 			
 			// set-up a clean version number
 			$obj->version = isset($obj->major) ? $obj->major : "";
 			$obj->version = isset($obj->minor) ? $obj->version.'.'.$obj->minor : $obj->version;
-			$obj->version = isset($obj->build) ? $obj->version.'.'.$obj->build : $obj->version;
+			$obj->version = isset($obj->patch) ? $obj->version.'.'.$obj->patch : $obj->version;
 			$obj->version = isset($obj->revision) ? $obj->version.'.'.$obj->revision : $obj->version;
 			
 			// prettify
-			$obj->browserFull = $obj->browser;
+			$obj->browserFull = $obj->family;
 			if ($obj->version != '') {
 				$obj->browserFull .= " ".$obj->version;
 			}
 			
 			// detect if this is a uiwebview call on iOS
-			$obj->isUIWebview = (($obj->browser == 'Mobile Safari') && !strstr(self::$ua,'Safari')) ? true : false;
+			$obj->isUIWebview = (($obj->family == 'Mobile Safari') && !strstr(self::$ua, 'Safari')) ? true : false;
 			
 			// check to see if this is a mobile browser
-			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
-			                        "Nokia","Blackberry","Palm","Silk","Android","Maemo","Obigo","Netfront","AvantGo","Teleca","SEMC-Browser",
-			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
-									"UC Browser","Tizen Browser");
-			foreach($mobileBrowsers as $mobileBrowser) {
-				if (stristr($obj->browser, $mobileBrowser)) {
+			$mobileBrowsers = array('Firefox Mobile','Opera Mobile','Opera Mini','Mobile Safari','webOS','IE Mobile','Playstation Portable',
+			                        'Nokia','Blackberry','Palm','Silk','Android','Maemo','Obigo','Netfront','AvantGo','Teleca','SEMC-Browser',
+			                        'Bolt','Iris','UP.Browser','Symphony','Minimo','Bunjaloo','Jasmine','Dolfin','Polaris','BREW','Chrome Mobile',
+			                        'UC Browser','Tizen Browser');
+			foreach ($mobileBrowsers as $mobileBrowser) {
+				if (stristr($obj->family, $mobileBrowser)) {
 					$obj->isMobile = true;
 					break;
 				}
@@ -191,7 +229,7 @@ class UA {
 			
 			// create an attribute combinining browser and os
 			if (isset($obj->osFull) && $obj->osFull) {
-				$obj->full = $obj->browserFull."/".$obj->osFull;
+				$obj->full = $obj->browserFull . "/" . $obj->osFull;
 			}
 			
 			// figure out the device name for the browser, if possible
@@ -232,28 +270,27 @@ class UA {
 			
 			// record if this is a computer
 			$obj->isComputer = (!$obj->isMobile && !$obj->isSpider && !$obj->isMobileDevice) ? true : false;
-				
+
 			return $obj;
-			
-		} else {
-			return false;
 		}
+
+		return false;
 	}
-	
+
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the OS and get properties
-	*
-	* @return {Object}       the result of the os parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the OS and get properties
+	 *
+	 * @return bool|\stdClass The result of the os parsing
+	 */
 	private static function osParser() {
 		
 		// build the obj that will be returned
-		$osObj = new stdClass();
+		$osObj = new stdClass;
 		
 		// run the regexes to match things up
 		$osRegexes = self::$regexes['os_parsers'];
 		foreach ($osRegexes as $osRegex) {
-			if (preg_match("/".str_replace("/","\/",$osRegex['regex'])."/",self::$ua,$matches)) {
+			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$osRegex['regex']))."/",self::$ua,$matches)) {
 				
 				// Make sure matches 2 and 3 are at least set to null for setting
 				// Major and Minor defaults
@@ -265,7 +302,6 @@ class UA {
 				$osObj->osMajor   = isset($osRegex['os_v1_replacement']) ? $osRegex['os_v1_replacement'] : $matches[2];
 				$osObj->osMinor   = isset($osRegex['os_v2_replacement']) ? $osRegex['os_v2_replacement'] : $matches[3];
 				if (isset($matches[4])) {
-					$osObj->osBuild = $matches[4];
 					$osObj->osPatch = $matches[4];
 				}
 				if (isset($matches[5])) {
@@ -276,7 +312,7 @@ class UA {
 				// os version
 				$osObj->osVersion = isset($osObj->osMajor) ? $osObj->osMajor : "";
 				$osObj->osVersion = isset($osObj->osMinor) ? $osObj->osVersion.'.'.$osObj->osMinor : $osObj->osVersion;
-				$osObj->osVersion = isset($osObj->osBuild) ? $osObj->osVersion.'.'.$osObj->osBuild : $osObj->osVersion;
+				$osObj->osVersion = isset($osObj->osPatch) ? $osObj->osVersion.'.'.$osObj->osPatch : $osObj->osVersion;
 				$osObj->osVersion = isset($osObj->osRevision) ? $osObj->osVersion.'.'.$osObj->osRevision : $osObj->osVersion; 
 				
 				// prettify
@@ -285,23 +321,28 @@ class UA {
 				return $osObj;
 			}
 		}
+
 		return false;
 	}
-	
+
 	/**
-	* If the user agent is matched in uaParser() it also tries to check the device and get its properties
-	*
-	* @return {Object}       the result of the device parsing
-	*/
+	 * If the user agent is matched in uaParser() it also tries to check the device and get its properties
+	 *
+	 * @return bool|\stdClass The result of the device parsing
+	 */
 	private static function deviceParser() {
 		
 		// build the obj that will be returned
 		$deviceObj = new stdClass();
 		
+		// defaults
+		$deviceObj->isMobileDevice = false;
+		$deviceObj->isTablet       = false;
+		
 		// run the regexes to match things up
 		$deviceRegexes = self::$regexes['device_parsers'];
 		foreach ($deviceRegexes as $deviceRegex) {
-			if (preg_match("/".str_replace("/","\/",$deviceRegex['regex'])."/i",self::$ua,$matches)) {
+			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$deviceRegex['regex']))."/i",self::$ua,$matches)) {
 				
 				// Make sure device matches are null
 				// Device Name, Major and Minor defaults
@@ -323,11 +364,10 @@ class UA {
 				
 				// check to see if this is a mobile device
 				// this isn't really needed because if it matches a mobile browser it'll automatically mark it as a mobile device
-				$deviceObj->isMobileDevice = false;
 				$mobileDevices  = array("iPhone","iPod","iPad","HTC","Kindle","Lumia","Amoi","Asus","Bird","Dell","DoCoMo","Huawei","i-mate","Kyocera",
 				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone",
 										"Nintendo DSi","Nintendo 3DS","PlayStation Vita");
-				foreach($mobileDevices as $mobileDevice) {
+				foreach ($mobileDevices as $mobileDevice) {
 					if (stristr($deviceObj->device, $mobileDevice)) {
 						$deviceObj->isMobileDevice = true;
 						break;
@@ -335,9 +375,8 @@ class UA {
 				}
 
 				// check to see if this is a tablet (not perfect)
-				$deviceObj->isTablet = false;
 				$tablets = array("Kindle","iPad","Playbook","TouchPad","Dell Streak","Galaxy Tab","Xoom");
-				foreach($tablets as $tablet) {
+				foreach ($tablets as $tablet) {
 					if (stristr($deviceObj->device, $tablet)) {
 						$deviceObj->isTablet = true;
 						break;
@@ -364,37 +403,4 @@ class UA {
 		fclose($fp);
 	}
 	
-	/**
-	* Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
-	*/
-	public static function get() {
-		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
-			if (file_exists(__DIR__."/resources/regexes.yaml")) {
-				if (!self::$nobackup) { 
-					if (!self::$silent) { print("backing up old YAML file...\n"); }
-					if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
-						if (!self::$silent) { print("back-up failed...\n"); }
-						exit;
-					}
-				}
-			}
-			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
-			fwrite($fp, $data);
-			fclose($fp);
-			if (!self::$silent) { print("success...\n"); }
-		} else {
-			if (!self::$silent) { print("failed to get the file...\n"); }
-		}
-	}
 }
-
-if (defined('STDIN') && isset($argv) && isset($argv[1]) && ($argv[1] == '-get')) {
-	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
-	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
-	if (!UA::$silent) { print("getting the YAML file...\n"); }
-	UA::get();
-} else if (defined('STDIN')) {
-	print("You must use the -get flag to use UAParser.php from the command line.\n");
-}
-
-?>

@@ -61,10 +61,10 @@ class UserAgentParser(object):
 
       if self.v1_replacement:
         v1 = self.v1_replacement
-      elif match.lastindex >= 2:
+      elif match.lastindex and match.lastindex >= 2:
         v1 = match.group(2)
 
-      if match.lastindex >= 3:
+      if match.lastindex and match.lastindex >= 3:
         v2 = match.group(3)
         if match.lastindex >= 4:
           v3 = match.group(4)
@@ -242,8 +242,6 @@ def ParseDevice(user_agent_string, ua_family=None, os_family=None):
     if device:
       break
 
-  os_family = device or 'Other'
-
   if ua_family is None:
     ua_family = ParseUserAgent(user_agent_string)['family']
 
@@ -392,7 +390,13 @@ def GetFilters(user_agent_string, js_user_agent_string=None,
 
 
 # Build the list of user agent parsers from YAML
-yamlFile = open(os.path.join(ROOT_DIR, '../regexes.yaml'))
+UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
+if not UA_PARSER_YAML:
+  yamlPath = os.path.join(ROOT_DIR, '../regexes.yaml')
+else:
+  yamlPath = UA_PARSER_YAML
+
+yamlFile = open(yamlPath)
 yaml = yaml.load(yamlFile)
 yamlFile.close()
 
