@@ -1,19 +1,27 @@
 <?php
 
 /*!
- * ua-parser-php v1.4.5
+ * ua-parser-php v1.5.0
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
  * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
  * 
- * https://github.com/tobie/ua-parser
+ *   https://github.com/tobie/ua-parser
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
  * spyc-0.5, for loading the YAML, is licensed under the MIT license.
  * The initial list of generic feature phones & smartphones came from Mobile Web OSP under the MIT license
  * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
+ *
+ * Many thanks to the following major contributors:
+ *
+ *   - Bryan Shelton
+ *   - Michael Bond
+ *   - @rjd22 (https://github.com/rjd22)
+ *   - Timo Tijhof (https://github.com/Krinkle)
+ *   - Marcus Bointon (https://github.com/Synchro)
  *
  */
 
@@ -52,8 +60,8 @@ class UA {
 					   <p>Please download the regexes.yaml file before using UAParser.php.</p>
 					   <p>You can type the following at the command line to download the latest version:</p>
 					   <blockquote>
-						<code>%: cd /path/to/UAParser</code><br />
-					   	<code>%: php UAParser.php -get</code>
+						<code>%: cd /path/to/UAParser/</code><br />
+					   	<code>%: php uaparser-cli.php -g</code>
 					   </blockquote>";
 				exit;
 			}
