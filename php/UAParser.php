@@ -274,7 +274,7 @@ class UA {
 	private static function osParser() {
 		
 		// build the obj that will be returned
-		$osObj = new stdClass();
+		$osObj = new stdClass;
 		
 		// run the regexes to match things up
 		$osRegexes = self::$regexes['os_parsers'];
