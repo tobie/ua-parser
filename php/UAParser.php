@@ -85,7 +85,7 @@ class UA {
 			'isComputer' => true,
 		);
 		$result->uaOriginal = self::$ua;
-
+		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
 		foreach ($uaRegexes as $uaRegex) {
@@ -130,7 +130,7 @@ class UA {
 
 		// Aliases
 		$result->browser = $result->family;
-		$result->build = $result->patch;
+		$result->build   = $result->patch;
 		$result->osBuild = $result->osPatch;
 
 		// log the results when testing
@@ -140,7 +140,7 @@ class UA {
 		
 		return $result;
 	}
-	
+
 	/**
 	 * Attempts to see if the user agent matches the regex for this test. If so it populates an obj
 	 * with properties based on the user agent. Will also try to fetch OS & device properties
@@ -200,11 +200,11 @@ class UA {
 			$obj->isUIWebview = (($obj->family == 'Mobile Safari') && !strstr(self::$ua, 'Safari')) ? true : false;
 			
 			// check to see if this is a mobile browser
-			foreach($mobileBrowsers as $mobileBrowser) {
 			$mobileBrowsers = array('Firefox Mobile','Opera Mobile','Opera Mini','Mobile Safari','webOS','IE Mobile','Playstation Portable',
 			                        'Nokia','Blackberry','Palm','Silk','Android','Maemo','Obigo','Netfront','AvantGo','Teleca','SEMC-Browser',
 			                        'Bolt','Iris','UP.Browser','Symphony','Minimo','Bunjaloo','Jasmine','Dolfin','Polaris','BREW','Chrome Mobile',
 			                        'UC Browser','Tizen Browser');
+			foreach ($mobileBrowsers as $mobileBrowser) {
 				if (stristr($obj->family, $mobileBrowser)) {
 					$obj->isMobile = true;
 					break;
@@ -265,7 +265,7 @@ class UA {
 
 		return false;
 	}
-	
+
 	/**
 	 * If the user agent is matched in uaParser() it also tries to check the OS and get properties
 	 *
@@ -313,7 +313,7 @@ class UA {
 
 		return false;
 	}
-	
+
 	/**
 	 * If the user agent is matched in uaParser() it also tries to check the device and get its properties
 	 *
@@ -356,7 +356,7 @@ class UA {
 				$mobileDevices  = array("iPhone","iPod","iPad","HTC","Kindle","Lumia","Amoi","Asus","Bird","Dell","DoCoMo","Huawei","i-mate","Kyocera",
 				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone",
 										"Nintendo DSi","Nintendo 3DS","PlayStation Vita");
-				foreach($mobileDevices as $mobileDevice) {
+				foreach ($mobileDevices as $mobileDevice) {
 					if (stristr($deviceObj->device, $mobileDevice)) {
 						$deviceObj->isMobileDevice = true;
 						break;
@@ -365,7 +365,7 @@ class UA {
 
 				// check to see if this is a tablet (not perfect)
 				$tablets = array("Kindle","iPad","Playbook","TouchPad","Dell Streak","Galaxy Tab","Xoom");
-				foreach($tablets as $tablet) {
+				foreach ($tablets as $tablet) {
 					if (stristr($deviceObj->device, $tablet)) {
 						$deviceObj->isTablet = true;
 						break;
