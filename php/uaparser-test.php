@@ -17,6 +17,9 @@
  *
  */
 
+// address 5.2 compatibility
+if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
 // include UAParser.php and make sure to turn off the CLI error
 require __DIR__."/UAParser.php";
 
