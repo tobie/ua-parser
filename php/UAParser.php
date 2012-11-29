@@ -198,11 +198,11 @@ class UA {
 			$obj->isUIWebview = (($obj->family == 'Mobile Safari') && !strstr(self::$ua, 'Safari')) ? true : false;
 			
 			// check to see if this is a mobile browser
-			$mobileBrowsers = array("Firefox Mobile","Opera Mobile","Opera Mini","Mobile Safari","webOS","IE Mobile","Playstation Portable",
-			                        "Nokia","Blackberry","Palm","Silk","Android","Maemo","Obigo","Netfront","AvantGo","Teleca","SEMC-Browser",
-			                        "Bolt","Iris","UP.Browser","Symphony","Minimo","Bunjaloo","Jasmine","Dolfin","Polaris","BREW","Chrome Mobile",
-									"UC Browser","Tizen Browser");
 			foreach($mobileBrowsers as $mobileBrowser) {
+			$mobileBrowsers = array('Firefox Mobile','Opera Mobile','Opera Mini','Mobile Safari','webOS','IE Mobile','Playstation Portable',
+			                        'Nokia','Blackberry','Palm','Silk','Android','Maemo','Obigo','Netfront','AvantGo','Teleca','SEMC-Browser',
+			                        'Bolt','Iris','UP.Browser','Symphony','Minimo','Bunjaloo','Jasmine','Dolfin','Polaris','BREW','Chrome Mobile',
+			                        'UC Browser','Tizen Browser');
 				if (stristr($obj->family, $mobileBrowser)) {
 					$obj->isMobile = true;
 					break;
