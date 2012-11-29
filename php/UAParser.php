@@ -34,15 +34,7 @@ class UA {
 	private static $debug = false; // log requests
 
 	/**
-	/**
-	 * @var bool: No output when running UA::get().
 	 */
-	public static $silent   = false;
-	/**
-	 * @var bool: Don't create a back-up when running UA::get().
-	 */
-	public static $nobackup = false;
-	
 	/**
 	* Sets up some standard variables as well as starts the user agent parsing process
 	*
