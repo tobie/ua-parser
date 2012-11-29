@@ -30,11 +30,10 @@ class UA {
 	private static $ua;
 	private static $accept;
 	private static $regexes;
+	
+	private static $debug = false; // log requests
 
 	/**
-	 * @var bool: Log requests.
-	 */
-	private static $debug   = false;
 	/**
 	 * @var bool: No output when running UA::get().
 	 */
