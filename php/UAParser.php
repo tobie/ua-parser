@@ -392,35 +392,4 @@ class UA {
 		fclose($fp);
 	}
 	
-	/**
-	* Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
-	*/
-	public static function get() {
-		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
-			if (file_exists(__DIR__."/resources/regexes.yaml")) {
-				if (!self::$nobackup) { 
-					if (!self::$silent) { print("backing up old YAML file...\n"); }
-					if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
-						if (!self::$silent) { print("back-up failed...\n"); }
-						exit;
-					}
-				}
-			}
-			$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
-			fwrite($fp, $data);
-			fclose($fp);
-			if (!self::$silent) { print("success...\n"); }
-		} else {
-			if (!self::$silent) { print("failed to get the file...\n"); }
-		}
-	}
-}
-
-if (defined('STDIN') && isset($argv) && isset($argv[1]) && ($argv[1] == '-get')) {
-	UA::$silent   = ((isset($argv[2]) && ($argv[2] == '-silent')) || (isset($argv[3]) && ($argv[3] == '-silent'))) ? true : UA::$silent;
-	UA::$nobackup = ((isset($argv[2]) && ($argv[2] == '-nobackup')) || (isset($argv[3]) && ($argv[3] == '-nobackup'))) ? true : UA::$nobackup;
-	if (!UA::$silent) { print("getting the YAML file...\n"); }
-	UA::get();
-} else if (defined('STDIN')) {
-	print("You must use the -get flag to use UAParser.php from the command line.\n");
 }
