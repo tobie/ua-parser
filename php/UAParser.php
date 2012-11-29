@@ -176,7 +176,13 @@ class UA {
 			}
 			
 			// pull out the browser family. replace the version number if necessary
-			$obj->family = isset($regex['family_replacement']) ? str_replace("$1", $obj->major, $regex['family_replacement']) : $matches[1];
+			if (isset($regex['family_replacement']) && strstr($regex['family_replacement'],"$1")) {
+				$obj->family = str_replace("$1", $matches[1], $regex['family_replacement']);
+			} else if (isset($regex['family_replacement'])) {
+				$obj->family = $regex['family_replacement'];
+			} else {
+				$obj->family = $matches[1];
+			}
 			
 			// set-up a clean version number
 			$obj->version = isset($obj->major) ? $obj->major : "";
