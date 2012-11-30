@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>enemaerke</authors>
+    <owners>enemaerke</owners>
+    <projectUrl>http://github.com/enemaerke/uaparser</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .net wrapper for the uaparser library</description>
+    <copyright>Copyright 2012</copyright>
+    <tags>UAParser .Net UserAgent Parsing</tags>
+  </metadata>
+</package>
