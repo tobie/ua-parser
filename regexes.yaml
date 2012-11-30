@@ -606,7 +606,7 @@ device_parsers:
   # http://www.useragentstring.com/pages/BlackBerry/
   ##########
   - regex: 'BB10; ([A-Za-z0-9\- ]+)\)'
-    family_replacement: 'BlackBerry $1'
+    device_replacement: 'BlackBerry $1'
   - regex: '(PlayBook).+RIM Tablet OS'
     device_replacement: 'Blackberry Playbook'
   - regex: '(Black[Bb]erry [0-9]+);'

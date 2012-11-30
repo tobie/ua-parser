@@ -34,3 +34,8 @@ test_cases:
     family: 'Spider'
     is_mobile: False
     is_spider: True
+
+  - user_agent_string: 'Mozilla/5.0 (BB10; Touch) AppleWebKit/537.3+ (KHTML, like Gecko) Version/10.0.9.388 Mobile Safari/537.3+'
+    family: 'BlackBerry Touch'
+    is_mobile: True
+    is_spider: False
