@@ -15,6 +15,7 @@
  */
 
 using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace ua_parser
@@ -63,14 +64,27 @@ namespace ua_parser
             return h;
         }
 
-        public override string ToString()
-        {
-            return String.Format("{family: {0}, major: {1}, minor: {2}, patch: {3}, patch_minor: {4}}",
-                                 family == null ? null : '"' + family + '"',
-                                 major == null ? null : '"' + major + '"',
-                                 minor == null ? null : '"' + minor + '"',
-                                 patch == null ? null : '"' + patch + '"',
-                                 patchMinor == null ? null : '"' + patchMinor + '"');
-        }
+		public override string ToString ()
+		{
+			StringBuilder sb = new StringBuilder ();
+			sb.Append (this.family);
+			if (this.major != null && this.major.Length > 0) 
+			{
+				sb.Append (' ').Append (this.major);
+				if (this.minor != null && this.minor.Length > 0)
+				{
+					sb.Append ('.').Append (this.minor);
+					if (this.patch != null && this.patch.Length > 0)
+					{
+						sb.Append ('.').Append (this.patch);
+						if (this.patchMinor != null && this.patchMinor.Length > 0)
+						{
+							sb.Append ('.').Append (this.patchMinor);
+						}
+					}
+				}
+			}
+			return sb.ToString();
+		}
     }
 }

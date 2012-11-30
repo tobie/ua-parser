@@ -25,13 +25,14 @@ namespace ua_parser
     public class Device
     {
         public String family;
-        public bool isMobile, isSpider;
+        public bool isMobile, isSpider, isComputer;
 
         public Device(String family, bool isMobile, bool isSpider)
         {
             this.family = family;
             this.isMobile = isMobile;
             this.isSpider = isSpider;
+			this.isComputer = !this.isSpider && ! this.isMobile;
         }
 
         public static Device FromMap(IDictionary<String, Object> m)
