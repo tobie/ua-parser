@@ -1,0 +1,27 @@
+﻿<Project DefaultTargets="All"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TheConfiguration>Release</TheConfiguration>
+    <ThePlatform>Any CPU</ThePlatform>
+    <PathToNUnitExecutable>"$(MSBuildProjectDirectory)/tools/xunit/xunit.console.clr4.exe"</PathToNUnitExecutable>
+    <PathToNuGetExecutable>"$(MSBuildProjectDirectory)/.nuget/nuget.exe"</PathToNuGetExecutable>
+  </PropertyGroup>
+
+
+  <Target Name="Compile">
+    <MSBuild Projects="UAParser.sln" Targets="Rebuild" Properties="Configuration=$(TheConfiguration);Platform=$(ThePlatform)"  />
+  </Target>
+
+  <Target Name="RunTests">
+    <Exec Command="$(PathToNUnitExecutable) UAParser.Tests\bin\$(TheConfiguration)\UAParser.Tests.dll" />
+  </Target>
+
+  <Target Name="CreateNuGet" DependsOnTargets="Compile;RunTests">
+    <Exec Command="$(PathToNuGetExecutable) pack UAParser.csproj -Properties Configuration=$(TheConfiguration)"
+          WorkingDirectory="UAParser"/>
+  </Target>
+
+  <Target Name="All" DependsOnTargets="CreateNuGet" />
+
+</Project>
