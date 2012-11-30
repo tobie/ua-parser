@@ -67,6 +67,7 @@
       <Link>regexes.yaml</Link>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="UAParser.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
