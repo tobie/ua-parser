@@ -4,3 +4,4 @@ TAGS
 dist
 cabal-dev
 *.pyc
+.*.swp
