@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -37,19 +36,21 @@ namespace ua_parser
 
         public static UserAgent FromMap(IDictionary<String, String> m)
         {
-            return new UserAgent(m["family"], m["major"], m["minor"], m["patch"]);
+            return new UserAgent(m ["family"], m ["major"], m ["minor"], m ["patch"]);
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == this) return true;
-            if (!(obj is UserAgent)) return false;
+            if (obj == this)
+                return true;
+            if (!(obj is UserAgent))
+                return false;
 
             UserAgent o = (UserAgent)obj;
             return ((this.family != null && this.family.Equals(o.family)) || this.family == o.family) &&
-                   ((this.major != null && this.major.Equals(o.major)) || this.major == o.major) &&
-                   ((this.minor != null && this.minor.Equals(o.minor)) || this.minor == o.minor) &&
-                   ((this.patch != null && this.patch.Equals(o.patch)) || this.patch == o.patch);
+                ((this.major != null && this.major.Equals(o.major)) || this.major == o.major) &&
+                ((this.minor != null && this.minor.Equals(o.minor)) || this.minor == o.minor) &&
+                ((this.patch != null && this.patch.Equals(o.patch)) || this.patch == o.patch);
         }
 
         public override int GetHashCode()
@@ -61,24 +62,32 @@ namespace ua_parser
             return h;
         }
 
-        public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
-			sb.Append (this.family);
-			if (this.major != null && this.major.Length > 0)
-			{
-				sb.Append (' ').Append (this.major);
-				if (this.minor != null && this.minor.Length > 0)
-				{
-					sb.Append ('.').Append (this.minor);
-					if (this.patch != null && this.patch.Length > 0)
-					{
-						sb.Append ('.').Append (this.patch);
-					}
-				}
-			}
-			return sb.ToString();
+        public string ToVersionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (this.major != null && this.major.Length > 0)
+            {
+                sb.Append(this.major);
+                if (this.minor != null && this.minor.Length > 0)
+                {
+                    sb.Append('.').Append(this.minor);
+                    if (this.patch != null && this.patch.Length > 0)
+                    {
+                        sb.Append('.').Append(this.patch);
+                    }
+                }
+            }
+            return sb.ToString();
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.family);
+            sb.Append(' ').Append(this.ToVersionString());
+            return sb.ToString();
+        }
+
+       
     }
 }

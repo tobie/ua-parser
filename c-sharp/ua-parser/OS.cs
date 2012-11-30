@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -38,20 +37,22 @@ namespace ua_parser
 
         public static OS fromMap(IDictionary<String, String> m)
         {
-            return new OS(m["family"], m["major"], m["minor"], m["patch"], m["patch_minor"]);
+            return new OS(m ["family"], m ["major"], m ["minor"], m ["patch"], m ["patch_minor"]);
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == this) return true;
-            if (!(obj is OS)) return false;
+            if (obj == this)
+                return true;
+            if (!(obj is OS))
+                return false;
 
             OS o = (OS)obj;
             return ((this.family != null && this.family.Equals(o.family)) || this.family == o.family) &&
-                   ((this.major != null && this.major.Equals(o.major)) || this.major == o.major) &&
-                   ((this.minor != null && this.minor.Equals(o.minor)) || this.minor == o.minor) &&
-                   ((this.patch != null && this.patch.Equals(o.patch)) || this.patch == o.patch) &&
-                   ((this.patchMinor != null && this.patchMinor.Equals(o.patchMinor)) || this.patchMinor == o.patchMinor);
+                ((this.major != null && this.major.Equals(o.major)) || this.major == o.major) &&
+                ((this.minor != null && this.minor.Equals(o.minor)) || this.minor == o.minor) &&
+                ((this.patch != null && this.patch.Equals(o.patch)) || this.patch == o.patch) &&
+                ((this.patchMinor != null && this.patchMinor.Equals(o.patchMinor)) || this.patchMinor == o.patchMinor);
         }
 
         public override int GetHashCode()
@@ -64,27 +65,34 @@ namespace ua_parser
             return h;
         }
 
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
-			sb.Append (this.family);
-			if (this.major != null && this.major.Length > 0) 
-			{
-				sb.Append (' ').Append (this.major);
-				if (this.minor != null && this.minor.Length > 0)
-				{
-					sb.Append ('.').Append (this.minor);
-					if (this.patch != null && this.patch.Length > 0)
-					{
-						sb.Append ('.').Append (this.patch);
-						if (this.patchMinor != null && this.patchMinor.Length > 0)
-						{
-							sb.Append ('.').Append (this.patchMinor);
-						}
-					}
-				}
-			}
-			return sb.ToString();
-		}
+        public String ToVersionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (this.major != null && this.major.Length > 0)
+            {
+                sb.Append(this.major);
+                if (this.minor != null && this.minor.Length > 0)
+                {
+                    sb.Append('.').Append(this.minor);
+                    if (this.patch != null && this.patch.Length > 0)
+                    {
+                        sb.Append('.').Append(this.patch);
+                        if (this.patchMinor != null && this.patchMinor.Length > 0)
+                        {
+                            sb.Append('.').Append(this.patchMinor);
+                        }
+                    }
+                }
+            }
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.family);
+            sb.Append(' ').Append(this.ToVersionString());
+            return sb.ToString();
+        }
     }
 }
