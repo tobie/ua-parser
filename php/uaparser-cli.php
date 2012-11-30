@@ -41,7 +41,7 @@ require __DIR__."/UAParser.php";
 
 // deal with timezone issues & logging
 if (!ini_get('date.timezone')) {
-	date_default_timezone_set('America/New_York');
+	date_default_timezone_set(@date_default_timezone_get());
 }
 
 /*
