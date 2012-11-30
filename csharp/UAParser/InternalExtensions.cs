@@ -22,14 +22,18 @@ namespace UAParser
             List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
             foreach (var item in yamlNode.OfType<YamlMappingNode>())
             {
-                Dictionary<string, string> dic = new Dictionary<string, string>();
-                list.Add(dic);
-                foreach (var key in item.Children.Keys)
-                {
-                    dic[key.ToString()] = item.Children[key].ToString();
-                }
+                list.Add(ConvertToDictionary(item));
             }
             return list;
+        }
+        internal static Dictionary<string, string> ConvertToDictionary(this YamlMappingNode yamlNode)
+        {
+          Dictionary<string, string> dic = new Dictionary<string, string>();
+          foreach (var key in yamlNode.Children.Keys)
+          {
+            dic[key.ToString()] = yamlNode.Children[key].ToString();
+          }
+          return dic;
         }
 
         internal static void ThrowIfNull(this object obj, string exceptionMessage)

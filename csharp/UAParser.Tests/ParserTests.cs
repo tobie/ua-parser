@@ -6,12 +6,12 @@ using Xunit;
 
 namespace UAParser.Tests
 {
-    public class ParserTests
+  public class ParserTests
+  {
+    [Fact]
+    public void can_get_default_parser()
     {
-        [Fact]
-        public void can_get_default_parser()
-        {
-            Parser parser = Parser.GetDefault();
-        }
+      Parser parser = Parser.GetDefault();
     }
+  }
 }
