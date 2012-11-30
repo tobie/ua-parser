@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{AB82C54B
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
 		build.proj = build.proj
+		PublicKey.snk = PublicKey.snk
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAParser.ConsoleApp", "UAParser.ConsoleApp\UAParser.ConsoleApp.csproj", "{280CF383-6A6E-487B-9D25-281C98F3A7C8}"
