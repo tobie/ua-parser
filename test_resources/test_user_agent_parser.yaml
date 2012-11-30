@@ -375,3 +375,9 @@ test_cases:
     major: '0'
     minor: '14'
     patch:
+        
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0)'
+    family: 'IE'
+    major: '10'
+    minor: '0'
+    patch: 
