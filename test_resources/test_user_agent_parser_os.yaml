@@ -357,3 +357,4 @@ test_cases:
     major:
     minor: 
     patch:
+    patch_minor:
