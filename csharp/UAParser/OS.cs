@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace UAParser
 {
@@ -44,7 +45,15 @@ namespace UAParser
     /// <returns>The OS instance as a string</returns>
     public override string ToString()
     {
-      return string.Format("OS: {0} {1}.{2} {3} {4}", Family, Major, Minor, Patch, PatchMinor);
+      StringBuilder sb = new StringBuilder(Family);
+      string version = ToVersionString();
+
+      if (!string.IsNullOrEmpty(version))
+      {
+        sb.Append(' ').Append(version);
+      }
+
+      return sb.ToString();
     }
     /// <summary>
     /// The version of the OS as a single string

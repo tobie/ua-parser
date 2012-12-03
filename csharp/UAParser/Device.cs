@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UAParser
 {
@@ -35,7 +34,7 @@ namespace UAParser
     /// <returns>string representation for the device</returns>
     public override string ToString()
     {
-      return string.Format("Device: {0} {1} {2}", Family, IsMobile ? "mobile" : "", IsSpider ? "spider" : "");
+      return Family;
     }
   }
 }

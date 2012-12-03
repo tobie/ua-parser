@@ -41,7 +41,15 @@ namespace UAParser
     /// <returns>string representation of the user agent</returns>
     public override string ToString()
     {
-      return string.Format("UserAgent: {0} {1}.{2} {3}", Family, Major, Minor, Patch);
+      StringBuilder sb = new StringBuilder(Family);
+      string version = ToVersionString();
+
+      if (!string.IsNullOrEmpty(version))
+      {
+        sb.Append(' ').Append(version);
+      }
+
+      return sb.ToString();
     }
     /// <summary>
     /// The version of the user agent as a single string
