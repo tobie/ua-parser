@@ -7,33 +7,21 @@ using System.Text;
 
 namespace UAParser.ConsoleApp
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            String uaString = "Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30";
+      String uaString = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-us) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5";
 
-            Parser uaParser = Parser.GetDefault();
+      Parser uaParser = Parser.GetDefault();
 
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            ClientInfo c = uaParser.Parse(uaString);
-            sw.Stop();
-            Console.WriteLine("Parsing the user agent string took " + sw.ElapsedMilliseconds + "ms\n");
+      ClientInfo c = uaParser.Parse(uaString);
 
-            Console.WriteLine("Browser: ");
-            Console.WriteLine(c.UserAgent);
+      Console.WriteLine(c.UserAgent);  //Safari 5.0.2
+      Console.WriteLine(c.OS); // Mac OS X 10.6.5
+      Console.WriteLine(c.Device); //
 
-            Console.WriteLine();
-            Console.WriteLine("OS: ");
-            Console.WriteLine(c.OS);
-
-
-            Console.WriteLine();
-            Console.WriteLine("Device: ");
-            Console.WriteLine(c.Device);
-
-            Console.ReadLine();
-        }
+      Console.ReadLine();
     }
+  }
 }
