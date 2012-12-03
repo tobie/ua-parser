@@ -28,12 +28,20 @@
  *
  */
 
+// address 5.2 compatibility
+if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
+// address 5.1 compatibility
+if (!function_exists('json_decode') || !function_exists('json_encode')) {
+	require_once(__DIR__."/lib/json/jsonwrapper.php");
+}
+
 // include UAParser.php and make sure to turn off the CLI error
 require __DIR__."/UAParser.php";
 
 // deal with timezone issues & logging
 if (!ini_get('date.timezone')) {
-	date_default_timezone_set('America/New_York');
+	date_default_timezone_set(@date_default_timezone_get());
 }
 
 /*
