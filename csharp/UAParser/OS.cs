@@ -1,30 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UAParser
 {
-    public class OS
+  /// <summary>
+  /// Represents OS information extracted from the user agent string
+  /// </summary>
+  public class OS
+  {
+    internal OS() { }
+    internal OS(string family, string major, string minor, string patch, string patchMinor)
     {
-        public OS() { }
-        public OS(string family, string major, string minor, string patch, string patchMinor)
-        {
-            Family = family;
-            Major = major;
-            Minor = minor;
-            Patch = patch;
-            PatchMinor = patchMinor;
-        }
-        public string Family { get; set; }
-        public string Major { get; set; }
-        public string Minor { get; set; }
-        public string Patch { get; set; }
-        public string PatchMinor { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("OS: {0} {1}.{2} {3} {4}", Family, Major, Minor, Patch, PatchMinor);
-        }
+      Family = family;
+      Major = major;
+      Minor = minor;
+      Patch = patch;
+      PatchMinor = patchMinor;
     }
+    /// <summary>
+    /// The OS family
+    /// </summary>
+    public string Family { get; set; }
+    /// <summary>
+    /// The Major version of the OS
+    /// </summary>
+    public string Major { get; set; }
+    /// <summary>
+    /// The Minor version of the OS
+    /// </summary>
+    public string Minor { get; set; }
+    /// <summary>
+    /// The patch version of the OS, if applicable
+    /// </summary>
+    public string Patch { get; set; }
+    /// <summary>
+    /// The minor patch version of the OS, if applicable
+    /// </summary>
+    public string PatchMinor { get; set; }
+
+    /// <summary>
+    /// Returns the string representation for the OS
+    /// </summary>
+    /// <returns>The OS instance as a string</returns>
+    public override string ToString()
+    {
+      return string.Format("OS: {0} {1}.{2} {3} {4}", Family, Major, Minor, Patch, PatchMinor);
+    }
+    /// <summary>
+    /// The version of the OS as a single string
+    /// </summary>
+    /// <returns></returns>
+    public string ToVersionString()
+    {
+      IEnumerable<string> versions = new string[] { Major, Minor, Patch, PatchMinor }.Where(x => !string.IsNullOrEmpty(x));
+      return string.Join(".", versions.ToArray());
+    }
+  }
 }
