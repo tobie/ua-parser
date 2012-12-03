@@ -24,5 +24,11 @@ namespace UAParser
         {
             return string.Format("UserAgent: {0} {1}.{2} {3}", Family, Major, Minor, Patch);
         }
+
+        public string ToVersionString()
+        {
+          IEnumerable<string> versions = new string[] { Major, Minor, Patch }.Where(x => !string.IsNullOrEmpty(x));
+          return string.Join(".", versions.ToArray());
+        }
     }
 }

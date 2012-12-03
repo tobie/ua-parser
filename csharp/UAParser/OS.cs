@@ -26,5 +26,11 @@ namespace UAParser
         {
             return string.Format("OS: {0} {1}.{2} {3} {4}", Family, Major, Minor, Patch, PatchMinor);
         }
+
+        public string ToVersionString()
+        {
+          IEnumerable<string> versions = new string[] { Major, Minor, Patch, PatchMinor }.Where(x => !string.IsNullOrEmpty(x));
+          return string.Join(".", versions.ToArray());
+        }
     }
 }
