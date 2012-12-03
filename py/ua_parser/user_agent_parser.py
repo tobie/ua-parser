@@ -392,7 +392,7 @@ def GetFilters(user_agent_string, js_user_agent_string=None,
 # Build the list of user agent parsers from YAML
 UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
 if not UA_PARSER_YAML:
-  yamlPath = os.path.join(ROOT_DIR, '../regexes.yaml')
+  yamlPath = os.path.join(ROOT_DIR, '../../regexes.yaml')
 else:
   yamlPath = UA_PARSER_YAML
 
