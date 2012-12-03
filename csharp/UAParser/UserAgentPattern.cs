@@ -37,7 +37,7 @@ namespace UAParser
             {
                 if (m_familyReplacement.Contains("$1") && groupCount >= 1 && match.Groups[1] != null)
                 {
-                    family = m_familyReplacement.ReplaceFirstOccurence("\\$1", Regex.Escape(match.Groups[1].Value));
+                    family = m_familyReplacement.ReplaceFirstOccurence("$1", Regex.Escape(match.Groups[1].Value));
                 }
                 else
                 {

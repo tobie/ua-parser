@@ -68,17 +68,26 @@ namespace UAParser.Tests
         "test_cases",
         testCaseFunction);
 
+      RunTestCases<TTestCase>(testCases);
+    }
+
+    private static void RunTestCases<TTestCase>(List<TTestCase> testCases) where TTestCase : YamlTestCase
+    {
       Parser parser = Parser.GetDefault();
 
       StringBuilder sb = new StringBuilder();
       foreach (var tc in testCases)
       {
+        if (tc == null)
+          continue;
+
         var clientInfo = parser.Parse(tc.UserAgent);
         try
         {
           tc.Verify(clientInfo);
         }
-        catch (AssertException ex) {
+        catch (AssertException ex)
+        {
           sb.AppendLine(ex.Message);
         }
       }
@@ -105,7 +114,12 @@ namespace UAParser.Tests
 
       var testCasesNode = (YamlSequenceNode)regexConfig[yamlNodeName];
       List<TTestCase> testCases = testCasesNode.ConvertToDictionaryList()
-        .Select(configMap => testCaseFunction(configMap))
+        .Select(configMap =>
+        {
+          if (!configMap.ContainsKey("js_ua")) //we deliberatly skip tests with js-user agents
+            return testCaseFunction(configMap);
+          return default(TTestCase);
+        })
         .ToList();
       return testCases;
     }
