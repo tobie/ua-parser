@@ -173,6 +173,32 @@ void main() {
 }
 ```
 
+Usage :: C#
+-------------
+```csharp
+using System;
+
+namespace UAParser.ConsoleApp
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      String uaString = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-us) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5";
+
+      Parser uaParser = Parser.GetDefault();
+
+      ClientInfo c = uaParser.Parse(uaString);
+
+      Console.WriteLine(c.UserAgent);  //Safari 5.0.2
+      Console.WriteLine(c.OS); // Mac OS X 10.6.5
+      Console.WriteLine(c.Device); //
+
+      Console.ReadLine();
+    }
+  }
+}
+```
 
 License
 -------
@@ -187,7 +213,9 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
-The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
+The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10]. 
+
+The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11]. 
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
@@ -199,4 +227,5 @@ The D port is Copyright (c) 2012 Shripad K and is available under the [MIT licen
 [8]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
 [9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
+[11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{967089C7-1D9D-453E-AAA8-ED26BCECCE20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UAParser.Tests</RootNamespace>
+    <AssemblyName>UAParser.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\PublicKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\packages\xunit.extensions.1.9.1\lib\net20\xunit.extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet.Core">
+      <HintPath>..\packages\YamlDotNet.Core.1.1.15\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet.RepresentationModel, Version=0.2.4453.29939, Culture=neutral, PublicKeyToken=2b53052c5884d7a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\YamlDotNet.RepresentationModel.1.1.15\lib\YamlDotNet.RepresentationModel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DeviceYamlTestCase.cs" />
+    <Compile Include="YamlTestCase.cs" />
+    <Compile Include="TestResourceTests.cs" />
+    <Compile Include="ParserTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\test_resources\additional_os_tests.yaml">
+      <Link>TestResources\additional_os_tests.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\firefox_user_agent_strings.yaml">
+      <Link>TestResources\firefox_user_agent_strings.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\pgts_browser_list-orig.yaml">
+      <Link>TestResources\pgts_browser_list-orig.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\pgts_browser_list.yaml">
+      <Link>TestResources\pgts_browser_list.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\test_device.yaml">
+      <Link>TestResources\test_device.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser.yaml">
+      <Link>TestResources\test_user_agent_parser.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser_os.yaml">
+      <Link>TestResources\test_user_agent_parser_os.yaml</Link>
+    </EmbeddedResource>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UAParser\UAParser.csproj">
+      <Project>{83c63bea-1859-4dd5-ae08-9a0fec269b17}</Project>
+      <Name>UAParser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
