@@ -142,7 +142,7 @@ user_agent_parsers:
   # Sogou Explorer 2.X
   - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
     family_replacement: 'Sogou Explorer'
-    
+
   # Baidu Browser
   - regex: '(FlyFlow)/(\d+)\.(\d+)'
     family_replacement: 'Baidu Explorer'
@@ -258,6 +258,10 @@ user_agent_parsers:
   - regex: '(Avant)'
     v1_replacement: '1'
 
+  # This is the Tesla Model S (see similar entry in device parsers)
+  - regex: '(QtCarBrowser)'
+    v1_replacement: '1'
+
   # nokia browsers
   # based on: http://www.developer.nokia.com/Community/Wiki/User-Agent_headers_for_Nokia_devices
   - regex: '^(Nokia)'
@@ -327,7 +331,7 @@ user_agent_parsers:
     family_replacement: 'IE'
 
   - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
-  
+
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
 
@@ -387,7 +391,7 @@ os_parsers:
 
   - regex: '(Windows NT 6\.2; ARM;)'
     os_replacement: 'Windows RT'
-      
+
   # is this a spoof or is nt 6.2 out and about in some capacity?
   - regex: '(Windows NT 6\.2)'
     os_replacement: 'Windows 8'
@@ -564,6 +568,10 @@ device_parsers:
     device_replacement: 'HTC $1'
   - regex: '(HTC)'
 
+  # Tesla Model S
+  - regex: '(QtCarBrowser)'
+    device_replacement: 'Tesla Model S'
+
   # Samsung
   - regex: '(SamsungSGHi560)'
     device_replacement: 'Samsung SGHi560'
@@ -634,7 +642,7 @@ device_parsers:
   ##########
   - regex: '(PlayStation Portable)'
   - regex: '(PlayStation Vita)'
-  
+
   ##########
   # incomplete!
   # Kindle
