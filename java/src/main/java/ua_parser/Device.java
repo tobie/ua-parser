@@ -25,17 +25,13 @@ import java.util.Map;
  */
 public class Device {
   public final String family;
-  public final boolean isMobile, isSpider;
 
-  public Device(String family, boolean isMobile, boolean isSpider) {
+  public Device(String family) {
     this.family = family;
-    this.isMobile = isMobile;
-    this.isSpider = isSpider;
   }
 
   public static Device fromMap(Map<String, Object> m) {
-    return new Device((String) m.get("family"), (Boolean) m.get("is_mobile"),
-                      (Boolean) m.get("is_spider"));
+    return new Device((String) m.get("family"));
   }
 
   @Override
@@ -44,23 +40,17 @@ public class Device {
     if (!(other instanceof Device)) return false;
 
     Device o = (Device) other;
-    return ((this.family != null && this.family.equals(o.family)) || this.family == o.family) &&
-           this.isMobile == o.isMobile &&
-           this.isSpider == o.isSpider;
+    return (this.family != null && this.family.equals(o.family)) || this.family == o.family;
   }
 
   @Override
   public int hashCode() {
-    int h = family == null ? 0 : family.hashCode();
-    h += isMobile ? 1429 : 2713;
-    h += isSpider ? 1187 : 953;
-    return h;
+    return family == null ? 0 : family.hashCode();
   }
 
   @Override
   public String toString() {
-    return String.format("{family: %s, is_mobile: %s, is_spider: %s}",
-                         family == null ? null : '"' + family + '"',
-                         isMobile, isSpider);
+    return String.format("{family: %s}",
+                         family == null ? null : '"' + family + '"');
   }
 }

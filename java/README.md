@@ -1,7 +1,7 @@
 ua_parser Java Library
 ======================
 
-This is the Java implementation of [ua-parser](https://github.com/tobie/ua-parser).  
+This is the Java implementation of [ua-parser](https://github.com/tobie/ua-parser).
 The implementation uses the shared regex patterns and overrides from regexes.yaml.
 
 Build:
@@ -31,8 +31,6 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
-  System.out.println(c.device.isMobile);  // => true
-  System.out.println(c.device.isSpider);  // => false
 ```
 
 Author:
