@@ -1,5 +1,11 @@
 test_cases:
 
+  - user_agent_string: 'Mozilla/5.0 (X11i; Linux; C) AppleWebKikt/533.3 (KHTML, like Gecko) QtCarBrowser Safari/533.3'
+    family: 'QtCarBrowser'
+    major: '1'
+    minor:
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.8+ (KHTML, like Gecko) Version/6.0 Safari/536.25'
     family: 'WebKit Nightly'
     major: '537'
@@ -9,9 +15,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'
     major: '534'
-    minor: 
+    minor:
     patch:
-    
+
   - user_agent_string: 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
     family: 'FacebookBot'
     major: '1'
@@ -375,9 +381,9 @@ test_cases:
     major: '0'
     minor: '14'
     patch:
-        
+
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0)'
     family: 'IE'
     major: '10'
     minor: '0'
-    patch: 
+    patch:

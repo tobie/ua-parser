@@ -15,7 +15,6 @@
 # limitations under the License.
 
 
-
 """User Agent Parser Unit Tests.
 Run:
 # python -m user_agent_parser_test  (runs all the tests, takes awhile)
@@ -28,7 +27,6 @@ __author__ = 'slamm@google.com (Stephen Lamm)'
 
 import os
 import re
-import sys
 import unittest
 import yaml
 
@@ -45,7 +43,7 @@ class ParseTest(unittest.TestCase):
 
     def testBrowserscopeStringsOS(self):
         self.runOSTestsFromYAML(os.path.join(
-            TEST_RESOURCES_DIR ,  'test_user_agent_parser_os.yaml'))
+            TEST_RESOURCES_DIR, 'test_user_agent_parser_os.yaml'))
 
     def testStringsOS(self):
         self.runOSTestsFromYAML(os.path.join(
@@ -73,8 +71,6 @@ class ParseTest(unittest.TestCase):
         user_agent_string = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)'
         expected = {
           'device': {
-            'is_spider': False,
-            'is_mobile': False,
             'family': None
           },
           'os': {
@@ -100,7 +96,7 @@ class ParseTest(unittest.TestCase):
     # Make a YAML file for manual comparsion with pgts_browser_list-orig.yaml
     def makePGTSComparisonYAML(self):
         import codecs
-        outfile = codecs.open('outfile.yaml', 'w', 'utf-8');
+        outfile = codecs.open('outfile.yaml', 'w', 'utf-8')
         print >> outfile, "test_cases:"
 
         yamlFile = open(os.path.join(TEST_RESOURCES_DIR,
@@ -202,21 +198,15 @@ class ParseTest(unittest.TestCase):
 
             # The expected results
             expected = {
-              'family': test_case['family'],
-              'is_mobile': test_case['is_mobile'],
-              'is_spider': test_case['is_spider']
+              'family': test_case['family']
             }
 
             result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
             self.assertEqual(result, expected,
-                u"UA: {0}\n expected<{1} {2} {3}> != actual<{4} {5} {6}>".format(
+                u"UA: {0}\n expected<{1}> != actual<{2}>".format(
                     user_agent_string,
                     expected['family'],
-                    expected['is_mobile'],
-                    expected['is_spider'],
-                    result['family'],
-                    result['is_mobile'],
-                    result['is_spider']))
+                    result['family']))
 
 
 class GetFiltersTest(unittest.TestCase):
