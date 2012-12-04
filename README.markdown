@@ -187,7 +187,9 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
-The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
+The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10]. 
+
+The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11]. 
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
@@ -199,4 +201,5 @@ The D port is Copyright (c) 2012 Shripad K and is available under the [MIT licen
 [8]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
 [9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
+[11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 

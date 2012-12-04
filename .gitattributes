@@ -1,0 +1,2 @@
+#Ensure the markdown uses lf
+*.markdown text eol=lf 
