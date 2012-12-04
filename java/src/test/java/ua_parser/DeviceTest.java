@@ -24,13 +24,11 @@ public class DeviceTest extends DataTest<Device> {
   protected Device getRandomInstance(long seed, StringGenerator g) {
     random.setSeed(seed);
     String family = g.getString(256);
-    boolean isMobile = random.nextBoolean(),
-            isSpider = random.nextBoolean();
-    return new Device(family, isMobile, isSpider);
+    return new Device(family);
   }
 
   @Override
   protected Device getBlankInstance() {
-    return new Device(null, false, false);
+    return new Device(null);
   }
 }

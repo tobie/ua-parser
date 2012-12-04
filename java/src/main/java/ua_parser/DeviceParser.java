@@ -30,22 +30,12 @@ import java.util.regex.Pattern;
  */
 public class DeviceParser {
   List<DevicePattern> patterns;
-  private final Set<String> mobileUAFamilies, mobileOSFamilies;
-  private final UserAgentParser uaParser;
 
-  public DeviceParser(List<DevicePattern> patterns, UserAgentParser uaParser,
-                      Set<String> mobileUAFamilies, Set<String> mobileOSFamilies) {
+  public DeviceParser(List<DevicePattern> patterns) {
     this.patterns = patterns;
-    this.uaParser = uaParser;
-    this.mobileUAFamilies = mobileUAFamilies;
-    this.mobileOSFamilies = mobileOSFamilies;
   }
 
   public Device parse(String agentString) {
-    return parse(agentString, uaParser.parse(agentString).family);
-  }
-
-  public Device parse(String agentString, String userAgentFamily) {
     String device = null;
     for (DevicePattern p : patterns) {
       if ((device = p.match(agentString)) != null) {
@@ -53,21 +43,15 @@ public class DeviceParser {
       }
     }
 
-    String osFamily = device == null ? "Other" : device;
-    userAgentFamily = userAgentFamily == null ? "Other" : userAgentFamily;
-
-    return new Device(device,
-                      mobileUAFamilies.contains(userAgentFamily) || mobileOSFamilies.contains(osFamily),
-                      (device != null && device.equals("Spider")));
+    return new Device(device);
   }
 
-  public static DeviceParser fromList(List<Map> configList, UserAgentParser uaParser,
-                                      Set<String> mobileUAFamilies, Set<String> mobileOSFamilies) {
+  public static DeviceParser fromList(List<Map> configList) {
     List<DevicePattern> configPatterns = new ArrayList<DevicePattern>();
     for (Map<String,String> configMap : configList) {
       configPatterns.add(DeviceParser.patternFromMap(configMap));
     }
-    return new DeviceParser(configPatterns, uaParser, mobileUAFamilies, mobileOSFamilies);
+    return new DeviceParser(configPatterns);
   }
 
   protected static DevicePattern patternFromMap(Map<String, String> configMap) {
