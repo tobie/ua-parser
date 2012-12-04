@@ -50,7 +50,7 @@ public class Parser {
   public Client parse(String agentString) {
     UserAgent ua = parseUserAgent(agentString);
     OS os = parseOS(agentString);
-    Device device = deviceParser.parse(agentString, (ua == null ? null : ua.family));
+    Device device = deviceParser.parse(agentString);
     return new Client(ua, os, device);
   }
 
@@ -86,11 +86,6 @@ public class Parser {
     if (deviceParserConfigs == null) {
       throw new IllegalArgumentException("device_parsers is missing from yaml");
     }
-    List<String> mobileUAFamiliesList = regexConfig.get("mobile_user_agent_families");
-    List<String> mobileOSFamiliesList = regexConfig.get("mobile_os_families");
-    Set<String> mobileUAFamilies = (mobileUAFamiliesList == null ? Collections.EMPTY_SET : new HashSet<String>(mobileUAFamiliesList));
-    Set<String> mobileOSFamilies = (mobileOSFamiliesList == null ? Collections.EMPTY_SET : new HashSet<String>(mobileOSFamiliesList));
-
-    deviceParser = DeviceParser.fromList(deviceParserConfigs, uaParser, mobileUAFamilies, mobileOSFamilies);
+    deviceParser = DeviceParser.fromList(deviceParserConfigs);
   }
 }
