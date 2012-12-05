@@ -14,23 +14,17 @@ namespace UAParser.Tests
       {
         UserAgent = map["user_agent_string"],
         Family = map["family"],
-        IsMobile = map["is_mobile"] == "True",
-        IsSpider = map["is_spider"] == "True",
 
       };
       return tc;
     }
 
     public string Family { get; set; }
-    public bool IsMobile { get; set; }
-    public bool IsSpider { get; set; }
 
     public override void Verify(ClientInfo clientInfo)
     {
       Assert.NotNull(clientInfo);
       AssertMatch(Family,clientInfo.Device.Family,"Family");
-      AssertMatch(IsMobile, clientInfo.Device.IsMobile, "IsMobile");
-      AssertMatch(IsSpider, clientInfo.Device.IsSpider, "IsSpider");
     }
   }
 

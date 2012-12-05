@@ -8,17 +8,12 @@ namespace UAParser
     internal class DeviceParser
     {
        private readonly List<DevicePattern> m_patterns;
-        private readonly List<string> m_mobileUAFamilies;
-        private readonly List<string> m_mobileOSFamilies;
         private readonly UserAgentParser m_userAgentParser;
 
-        public DeviceParser(List<DevicePattern> patterns, UserAgentParser uaParser,
-                            List<string> mobileUAFamilies, List<string> mobileOSFamilies)
+        public DeviceParser(List<DevicePattern> patterns, UserAgentParser uaParser)
         {
             m_patterns = patterns;
             m_userAgentParser = uaParser;
-            m_mobileUAFamilies = mobileUAFamilies;
-            m_mobileOSFamilies = mobileOSFamilies;
         }
 
         public Device ParseUserAgentString(string agentString)
@@ -40,9 +35,7 @@ namespace UAParser
             string osFamily = device == null ? "Other" : device;
             userAgentFamily = userAgentFamily == null ? "Other" : userAgentFamily;
 
-            return new Device(device,
-                              m_mobileUAFamilies.Contains(userAgentFamily) || m_mobileOSFamilies.Contains(osFamily),
-                              (device != null && device.Equals("Spider")));
+            return new Device(device, (device != null && device.Equals("Spider")));
         }
     }
 }

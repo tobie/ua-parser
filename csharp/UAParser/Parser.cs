@@ -18,7 +18,7 @@ namespace UAParser
     private DeviceParser m_deviceParser;
     private UserAgentParser m_userAgentParser;
 
-    protected Parser(string rawYaml)
+    internal Parser(string rawYaml)
     {
       ReadYaml(rawYaml);
     }
@@ -132,13 +132,8 @@ namespace UAParser
         // device parser setup
         var deviceParserConfigs = (YamlSequenceNode)regexConfig["device_parsers"];
         deviceParserConfigs.ThrowIfNull("device_parsers is missing from yaml");
-        var mobileUAFamiliesList = (YamlSequenceNode)regexConfig["mobile_user_agent_families"];
-        var mobileOSFamiliesList = (YamlSequenceNode)regexConfig["mobile_os_families"];
-        List<string> mobileUAFamilies = (new List<string>(mobileUAFamiliesList.Select(f => f.ToString())));
-        List<string> mobileOSFamilies = (new List<string>(mobileOSFamiliesList.Select(f => f.ToString())));
-
         List<DevicePattern> devicePatterns = deviceParserConfigs.ConvertToDictionaryList().Select(configMap => YamlParsing.DevicePatternFromMap(configMap)).ToList();
-        m_deviceParser = new DeviceParser(devicePatterns, m_userAgentParser, mobileUAFamilies, mobileOSFamilies);
+        m_deviceParser = new DeviceParser(devicePatterns, m_userAgentParser);
       }
     }
   }

@@ -9,20 +9,15 @@ namespace UAParser
   /// </summary>
   public class Device
   {
-    internal Device(string family, bool isMobile, bool isSpider)
+    internal Device(string family, bool isSpider)
     {
       Family = family;
-      IsMobile = isMobile;
       IsSpider = isSpider;
     }
     /// <summary>
     /// The family element of the device
     /// </summary>
     public string Family { get; set; }
-    /// <summary>
-    /// True if the device is considered a mobile device
-    /// </summary>
-    public bool IsMobile { get; set; }
     /// <summary>
     /// True if the device is considered a spider or web crawler
     /// </summary>
