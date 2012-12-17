@@ -137,7 +137,15 @@ if (php_sapi_name() == 'cli') {
 			print "unable to read the file at the supplied path...\n";
 		}
 	} else if (isset($args["j"]) && $args["j"]) {
-		print json_encode(UA::parse($args["j"]));
+		
+		/* Parse the supplied UA from the command line and kick it out as JSON */
+		
+		// load the parser
+		$parser = new UA();
+		
+		// parse and encode the results
+		print json_encode($parser->parse($args["j"]));
+		
 	} else if (isset($argv[1]) && (($argv[1] != "-j") && ($argv[1] != "-l") && ($argv[1] != "-s") && ($argv[1] != "-n"))) {
 		
 		/* Parse the supplied UA from the command line and kick it out as JSON */
