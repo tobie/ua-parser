@@ -17,11 +17,15 @@
  *
  */
 
-// address 5.2 compatibility
-if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+// define the base path for the file
+$basePath = dirname(__FILE__).DIRECTORY_SEPARATOR;
 
-// include UAParser.php and make sure to turn off the CLI error
-require __DIR__."/UAParser.php";
+// include the YAML library
+require_once($basePath."lib/spyc-0.5/spyc.php");
+
+// include UAParser.php
+require_once($basePath."UAParser.php");
+
 
 /**
  * Take the elements from the test cases and test them against the results from UAParser.php
