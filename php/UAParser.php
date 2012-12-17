@@ -333,12 +333,14 @@ class UA {
 	 */
 	public function deviceParser($uaString) {
 		
-		// build the obj that will be returned
-		$deviceObj = new stdClass();
 		
 		// defaults
 		$deviceObj->isMobileDevice = false;
 		$deviceObj->isTablet       = false;
+		// build the default obj that will be returned
+		$device = (object) array(
+					'family' => 'Other'
+				  );
 		
 		// run the regexes to match things up
 		$deviceRegexes = self::$regexes['device_parsers'];
