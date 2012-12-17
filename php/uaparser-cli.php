@@ -139,11 +139,25 @@ if (php_sapi_name() == 'cli') {
 	} else if (isset($args["j"]) && $args["j"]) {
 		print json_encode(UA::parse($args["j"]));
 	} else if (isset($argv[1]) && (($argv[1] != "-j") && ($argv[1] != "-l") && ($argv[1] != "-s") && ($argv[1] != "-n"))) {
-		$result = UA::parse($argv[1]);
+		
+		/* Parse the supplied UA from the command line and kick it out as JSON */
+		
+		// load the parser
+		$parser = new UA();
+		
+		// parse and print the results
+		$result = $parser->parse($argv[1]);
 		print "  ua-parser results for \"".$argv[1]."\"\n";
-		foreach ($result as $key=>$value) {
-			print "    ".$key.": ".$value."\n";
+		foreach ($result as $key => $value) {
+			if (gettype($value) == "object") {
+				foreach ($value as $key2 => $value2) {
+					print "    ".$key."->".$key2.": ".$value2."\n";
+				}
+			} else {
+				print "    ".$key.": ".$value."\n";
+			}
 		}
+		
 	} else {
 		print "\n";
 		print "Usage:\n";
