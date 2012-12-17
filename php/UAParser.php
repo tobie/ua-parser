@@ -147,9 +147,9 @@ class UA {
 				$ua->toString        = $this->toString($ua);
 				$ua->toVersionString = $this->toVersionString($ua);
 				
+				return $ua;
 			}
 			
-			return $obj;
 		}
 
 		return $ua;
@@ -199,7 +199,10 @@ class UA {
 				// extra strings
 				$os->toString        = $this->toString($os);
 				$os->toVersionString = $this->toVersionString($os);
+
+				return $os;
 			}
+			
 		}
 
 		return $os;
@@ -230,8 +233,8 @@ class UA {
 				// device name
 				$device->family = isset($deviceRegex->device_replacement) ? str_replace('$1',str_replace("_"," ",$matches[1]),$deviceRegex->device_replacement) : str_replace("_"," ",$matches[1]);
 				
+				return $device;
 				
-				return $deviceObj;
 			}
 		}
 		
