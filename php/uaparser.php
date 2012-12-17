@@ -27,7 +27,7 @@
 
 // address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
-    require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'/lib/json/jsonwrapper.php');
+    require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'lib/json/jsonwrapper.php');
 }
 
 class UA {
