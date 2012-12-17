@@ -28,16 +28,19 @@
  *
  */
 
-// address 5.2 compatibility
-if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+// define the base path for the file
+$basePath = dirname(__FILE__).DIRECTORY_SEPARATOR;
 
 // address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
-	require_once(__DIR__."/lib/json/jsonwrapper.php");
+	require_once($basePath."lib/json/jsonwrapper.php");
 }
 
+// include the YAML library
+require_once($basePath."lib/spyc-0.5/spyc.php");
+
 // include UAParser.php and make sure to turn off the CLI error
-require __DIR__."/UAParser.php";
+require_once($basePath."UAParser.php");
 
 // deal with timezone issues & logging
 if (!ini_get('date.timezone')) {
@@ -122,7 +125,7 @@ if (php_sapi_name() == 'cli') {
 		$saved   = array();
 		$data    = @fopen($args["l"], "r");
 		if ($data) {
-			$fp = fopen(__DIR__."/log/results-".date("YmdHis").".txt", "w");
+			$fp = fopen($basePath."log/results-".date("YmdHis").".txt", "w");
 		    while (($line = fgets($data)) !== false) {
 				$failure = false;
 				$show    = "";
