@@ -32,9 +32,8 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 
 class UA {
 	
-	private static $regexes;
-	
-	private static $debug = false; // log requests
+	private $regexes;
+	private $debug = false;
 
 	/**
 	 * Sets up some standard variables as well as starts the user agent parsing process
@@ -42,7 +41,7 @@ class UA {
 	 * @param string $ua An optional user agent string to test - if omitted uses current browser
 	 * @return object|\stdClass {Object}       the result of the user agent parsing
 	 */
-	public static function parse($ua = null) {
+	public function __construct() {
 		
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
@@ -71,6 +70,7 @@ class UA {
 			
 			exit;
 		}
+	public function parse($ua = '') {
 
 		// Defaults
 		$result = (object) array(
@@ -160,7 +160,7 @@ class UA {
 	 * @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
 	 * @return bool|stdClass The result of the user agent parsing
 	 */
-	private static function uaParser($regex) {
+	public function uaParser($uaString) {
 
 		// tests the supplied regex against the user agent
 		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
@@ -284,7 +284,7 @@ class UA {
 	 *
 	 * @return bool|\stdClass The result of the os parsing
 	 */
-	private static function osParser() {
+	public function osParser($uaString) {
 		
 		// build the obj that will be returned
 		$osObj = new stdClass;
@@ -332,7 +332,7 @@ class UA {
 	 *
 	 * @return bool|\stdClass The result of the device parsing
 	 */
-	private static function deviceParser() {
+	public function deviceParser($uaString) {
 		
 		// build the obj that will be returned
 		$deviceObj = new stdClass();
@@ -394,11 +394,11 @@ class UA {
 	/**
 	* Logs the user agent info
 	*/
-	private static function log($data) {
 		if (!$data) {
 			$data = new stdClass();
 			$data->ua = self::$ua;
 		} 
+	private function log($data) {
 		$jsonData = json_encode($data);
 		$fp = fopen(__DIR__."/log/user_agents.log", "a");
 		fwrite($fp, $jsonData."\r\n");
