@@ -89,6 +89,8 @@ class UA {
 		$result->os           = $this->osParser($ua);
 		$result->device       = $this->deviceParser($ua);
 		
+		// create a full string version based on the ua and os objects
+		$result->toFullString = $this->toFullString($result->ua, $result->os);
 		
 
 		// Aliases
@@ -166,11 +168,6 @@ class UA {
 			}
 			
 					
-			
-			// create an attribute combinining browser and os
-			if (isset($obj->osFull) && $obj->osFull) {
-				$obj->full = $obj->browserFull . "/" . $obj->osFull;
-			}
 			
 			}
 			
@@ -308,6 +305,20 @@ class UA {
 		$versionString = isset($obj->patch_minor) ? $versionString.'.'.$obj->patch_minor : $versionString;
 		
 		return $versionString;
+		
+	}
+	
+	/**
+	 * Returns a string consistig of the family and full version number for both the browser and os
+	 * @param  object  the ua object
+	 * @param  object  the os object
+	 * @return string  the result of combining family and version
+	 */
+	public function toFullString($ua,$os) {
+		
+		$fullString = $this->toString($ua).'/'.$this->toString($os);
+		
+		return $fullString;
 		
 	}
 	
