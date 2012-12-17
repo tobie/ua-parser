@@ -36,10 +36,7 @@ class UA {
 	private $debug = false;
 
 	/**
-	 * Sets up some standard variables as well as starts the user agent parsing process
-	 *
-	 * @param string $ua An optional user agent string to test - if omitted uses current browser
-	 * @return object|\stdClass {Object}       the result of the user agent parsing
+	 * Start up the parser by importing the json file to $this->regexes
 	 */
 	public function __construct() {
 		
@@ -70,6 +67,12 @@ class UA {
 			
 			exit;
 		}
+	
+	/**
+	 * Sets up some standard variables as well as starts the user agent parsing process
+	 * @param  string a user agent string to test, defaults to an empty string
+	 * @return object the result of the user agent parsing
+	 */
 	public function parse($ua = '') {
 
 		// Defaults
@@ -155,10 +158,9 @@ class UA {
 	}
 
 	/**
-	 * Attempts to see if the user agent matches the regex for this test. If so it populates an obj
-	 * with properties based on the user agent. Will also try to fetch OS & device properties
-	 * @param  array $regex The regex to be tested as well as any extra variables that need to be swapped
-	 * @return bool|stdClass The result of the user agent parsing
+	 * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.json
+	 * @param  string  a user agent string to test
+	 * @return object  the result of the user agent parsing
 	 */
 	public function uaParser($uaString) {
 
@@ -280,9 +282,9 @@ class UA {
 	}
 
 	/**
-	 * If the user agent is matched in uaParser() it also tries to check the OS and get properties
-	 *
-	 * @return bool|\stdClass The result of the os parsing
+	 * Attempts to see if the user agent matches an os_parsers regex from regexes.json
+	 * @param  string  a user agent string to test
+	 * @return object  the result of the os parsing
 	 */
 	public function osParser($uaString) {
 		
@@ -328,9 +330,9 @@ class UA {
 	}
 
 	/**
-	 * If the user agent is matched in uaParser() it also tries to check the device and get its properties
-	 *
-	 * @return bool|\stdClass The result of the device parsing
+	 * Attempts to see if the user agent matches a device_parsers regex from regexes.json
+	 * @param  string  a user agent string to test
+	 * @return object  the result of the device parsing
 	 */
 	public function deviceParser($uaString) {
 		
