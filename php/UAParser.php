@@ -32,8 +32,6 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 
 class UA {
 	
-	private static $ua;
-	private static $accept;
 	private static $regexes;
 	
 	private static $debug = false; // log requests
@@ -46,9 +44,6 @@ class UA {
 	 */
 	public static function parse($ua = null) {
 		
-		$sua           = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
-		self::$ua      = ($ua != null) ? $ua : strip_tags($sua);
-		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 		if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
