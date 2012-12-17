@@ -47,21 +47,23 @@ if (!ini_get('date.timezone')) {
 /*
  * Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
  */
-function get($silent,$nobackup) {
-	if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
-		if (file_exists(__DIR__."/resources/regexes.yaml")) {
+function get($file,$silent,$nobackup,$basePath) {
+	if ($data = @file_get_contents($file)) {
+		if (!$silent) { print "loading and converting YAML data...\n"; };
+		$data = Spyc::YAMLLoad($data);
+		$data = json_encode($data);
+		if (!$silent) { print "encoded as JSON...\n"; };
+		if (file_exists($basePath."resources/regexes.json")) {
 			if (!$nobackup) { 
-				if (!$silent) { print("backing up old YAML file...\n"); }
-				if (!copy(__DIR__."/resources/regexes.yaml", __DIR__."/resources/regexes.".date("Ymdhis").".yaml")) {
+				if (!$silent) { print("backing up old JSON file...\n"); }
+				if (!copy($basePath."resources/regexes.json", $basePath."resources/regexes.".date("Ymdhis").".json")) {
 					if (!$silent) { print("back-up failed...\n"); }
 					exit;
 				}
 			}
 		}
-		$fp = fopen(__DIR__."/resources/regexes.yaml", "w");
-		fwrite($fp, $data);
-		fclose($fp);
-		if (!$silent) { print("success...\n"); }
+		file_put_contents($basePath."resources/regexes.json", $data);
+		if (!$silent) { print("saved JSON file...\n"); }
 	} else {
 		if (!$silent) { print("failed to get the file...\n"); }
 	}
@@ -74,6 +76,21 @@ if (php_sapi_name() == 'cli') {
 	
 	$args = getopt("gsnl:j:");
 	if (isset($args["g"])) {
+		
+		/* Get regexes.yaml from the repo and convert it to JSON */
+		
+		// set-up some standard vars
+		$silent   = isset($args["s"]) ? true : false;
+		$nobackup = isset($args["n"]) ? true : false;
+		
+		// start chatty
+		if (!$silent) {
+			print "getting the YAML file from the repo...\n";
+		}
+		
+		// get the file
+		get("https://raw.github.com/tobie/ua-parser/master/regexes.yaml",$silent,$nobackup,$basePath);
+		
 		$silent   = isset($args["s"]) ? true : false;
 		$nobackup = isset($args["n"]) ? true : false;
 		if (!$silent) {
