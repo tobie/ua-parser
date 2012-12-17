@@ -30,9 +30,6 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'/lib/json/jsonwrapper.php');
 }
 
-// load spyc as a YAML loader
-require_once(__DIR__."/lib/spyc-0.5/spyc.php");
-
 class UA {
 	
 	private static $ua;
@@ -54,19 +51,30 @@ class UA {
 		self::$accept  = empty($_SERVER["HTTP_ACCEPT"]) ? '' : strip_tags($_SERVER["HTTP_ACCEPT"]);
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
-				self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
 		if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
 			$this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
+		} else {
+			$title        = 'Error loading ua-parser';
+			$message      = 'Please download the regexes.json file before using UAParser.php. You can type the following at the command line to download the latest version: ';
+			$instruction1 = '%: cd /path/to/UAParser/';
+			$instruction2 = '%: php uaparser-cli.php -g';
+			
+			if (php_sapi_name() == 'cli') {
+				print "\n".$title."\n";
+				print $message."\n\n";
+				print "    ".$instruction2."\n\n";
 			} else {
-				print "<h1>Error</h1>
-					   <p>Please download the regexes.yaml file before using UAParser.php.</p>
-					   <p>You can type the following at the command line to download the latest version:</p>
-					   <blockquote>
-						<code>%: cd /path/to/UAParser/</code><br />
-					   	<code>%: php uaparser-cli.php -g</code>
-					   </blockquote>";
-				exit;
+				print '<html><head><title>'.$title.'</title></head><body>';
+				print '<h1>'.$title.'</h1>';
+				print '<p>'.$message.'</p>';
+				print '<blockquote>';
+				print '<code>'.$instruction1.'</code><br>';
+				print '<code>'.$instruction2.'</code>';
+				print '</blockquote>';
+				print '</body></html>';
 			}
+			
+			exit;
 		}
 
 		// Defaults
