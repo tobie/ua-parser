@@ -56,54 +56,47 @@ function test($obj,$tc_family,$tc_major,$tc_minor,$tc_patch,$tc_ua) {
 if (php_sapi_name() == 'cli') {
 	
 	print "\nrunning UAParser.php against test_user_agent_parser.yaml...\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/test_user_agent_parser.yaml");
-	foreach($data['test_cases'] as $test_case) {
-		if (!isset($test_case['js_ua'])) {
-			test($test_case['user_agent_string'],$test_case['family'],$test_case['major'],$test_case['minor'],$test_case['patch'],"b");
+	$data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser.yaml");
+	foreach($data["test_cases"] as $test_case) {
+		if (!isset($test_case["js_ua"])) {
+			$result = $parser->parse($test_case["user_agent_string"]);
+			test($result->ua,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
 		}
 	}
 
 	print "\n\nrunning UAParser.php against test_user_agent_parser_os.yaml...\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/test_user_agent_parser_os.yaml");
-	foreach ($data['test_cases'] as $test_case) {
-		test($test_case['user_agent_string'],$test_case['family'],$test_case['major'],$test_case['minor'],$test_case['patch'],"os");
+	$data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser_os.yaml");
+	foreach ($data["test_cases"] as $test_case) {
+		$result = $parser->parse($test_case["user_agent_string"]);
+		test($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
 	}
 
 	print "\n\nrunning UAParser.php against additional_os_tests.yaml...\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/additional_os_tests.yaml");
-	foreach ($data['test_cases'] as $test_case) {
-		test($test_case['user_agent_string'],$test_case['family'],$test_case['major'],$test_case['minor'],$test_case['patch'],"os");
+	$data = Spyc::YAMLLoad($basePath."../test_resources/additional_os_tests.yaml");
+	foreach ($data["test_cases"] as $test_case) {
+		$result = $parser->parse($test_case["user_agent_string"]);
+		test($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
 	}
 
 	print "\n\nrunning UAParser.php against test_device.yaml...\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/test_device.yaml");
-	foreach ($data['test_cases'] as $test_case) {
-		if ($test_case['family'] != "Blackberry Playbook") {
-			$ua = UA::parse($test_case['user_agent_string']);
-			$family_result = ($ua->device == $test_case['family']) ? true : false;
-			$mobile_result = ($ua->isMobileDevice == $test_case['is_mobile']) ? true : false;
-			$spider_result = ($ua->isSpider == $test_case['is_spider']) ? true : false;
+	$data = Spyc::YAMLLoad($basePath."../test_resources/test_device.yaml");
+	foreach ($data["test_cases"] as $test_case) {
+		$result = $parser->parse($test_case["user_agent_string"]);
+		$family_result = ($result->device->family == $test_case["family"]) ? true : false;
 
-			if (!$family_result || !$mobile_result || !$spider_result) {
-				print "\n    mismatch: got d: ".$ua->device." m: ".$ua->isMobile." s: ".$ua->isSpider." and expected d: ".$test_case['family']." m: ".$test_case['is_mobile']." s: ".$test_case['is_spider'];
-				print "\n    the mismatched ua: ".$test_case['user_agent_string'];
-			} else {
-				print ".";
-			}
+		if (!$family_result) {
+			print "\n    mismatch: got d: ".$ua->device->family." and expected d: ".$test_case["family"];
+			print "\n    the mismatched ua: ".$test_case["user_agent_string"];
+		} else {
+			print ".";
 		}
 	}
 
 	print "\n\nrunning UAParser.php against firefox_user_agent_strings.yaml...\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/firefox_user_agent_strings.yaml");
-	foreach ($data['test_cases'] as $test_case) {
-		test($test_case['user_agent_string'],$test_case['family'],$test_case['major'],$test_case['minor'],$test_case['patch'],"b");
-	}
-
-
-	print "\n\nrunning UAParser.php against pgts_browser_list.yaml... (takes a long time to load)\n";
-	$data = Spyc::YAMLLoad(__DIR__."/../test_resources/pgts_browser_list.yaml");
-	foreach ($data['test_cases'] as $test_case) {
-		test($test_case['user_agent_string'],$test_case['family'],$test_case['major'],$test_case['minor'],$test_case['patch'],"b");
+	$data = Spyc::YAMLLoad($basePath."../test_resources/firefox_user_agent_strings.yaml");
+	foreach ($data["test_cases"] as $test_case) {
+		$result = $parser->parse($test_case["user_agent_string"]);
+		test($result->ua,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
 	}
 
 	print "\ndone testing...\n";
