@@ -84,9 +84,6 @@ class UA {
 			'uaOriginal'   => $ua
 		);
 		
-		// run the regexes to match things up
-		$uaRegexes = self::$regexes['user_agent_parsers'];
-		foreach ($uaRegexes as $uaRegex) {
 			if ($uaObj = self::uaParser($uaRegex)) {
 				$result = (object) array_merge((array) $result, (array) $uaObj);
 				break;
@@ -158,6 +155,9 @@ class UA {
 				'toString'        => '',
 				'toVersionString' => ''
 			  );
+		// run the regexes to match things up
+		$uaRegexes = $this->regexes->user_agent_parsers;
+		foreach ($uaRegexes as $uaRegex) {
 			
 			// defaults
 			$obj->isMobile       = false;
@@ -289,7 +289,7 @@ class UA {
 		 	  );
 		
 		// run the regexes to match things up
-		$osRegexes = self::$regexes['os_parsers'];
+		$osRegexes = $this->regexes->os_parsers;
 		foreach ($osRegexes as $osRegex) {
 			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$osRegex['regex']))."/",self::$ua,$matches)) {
 				
@@ -343,7 +343,7 @@ class UA {
 				  );
 		
 		// run the regexes to match things up
-		$deviceRegexes = self::$regexes['device_parsers'];
+		$deviceRegexes = $this->regexes->device_parsers;
 		foreach ($deviceRegexes as $deviceRegex) {
 			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$deviceRegex['regex']))."/i",self::$ua,$matches)) {
 				
