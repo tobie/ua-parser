@@ -72,10 +72,10 @@ Fetches an updated YAML file for UAParser and overwrites the current JSON file. 
 
 With the change to v2.0 you may have an existing and customized YAML file for ua-parser. Use the following to convert it to JSON.
 
-		php uaparser-cli.php -c [-s] [-n]
+    php uaparser-cli.php -c [-s] [-n]
 
-				 By default is verbose. Use -s to turn that feature off.
-				 By default creates a back-up. Use -n to turn that feature off.
+        By default is verbose. Use -s to turn that feature off.
+        By default creates a back-up. Use -n to turn that feature off.
 
 ### Parse an Apache Log File
 
