@@ -267,7 +267,8 @@ class UA {
 			return $obj;
 		}
 
-		return false;
+		return $ua;
+		
 	}
 
 	/**
@@ -323,7 +324,8 @@ class UA {
 			}
 		}
 
-		return false;
+		return $os;
+		
 	}
 
 	/**
@@ -389,7 +391,9 @@ class UA {
 				return $deviceObj;
 			}
 		}
-		return false;
+		
+		return $device;
+		
 	}
 	
 	/**
