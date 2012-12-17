@@ -24,27 +24,26 @@ if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
 require __DIR__."/UAParser.php";
 
 /**
- * Take the elements from the test and test the against the results from UAParser.php
- *
- * @return string the result of the test
+ * Take the elements from the test cases and test them against the results from UAParser.php
+ * @param  object  the result of parsing the supplied test UA
+ * @param  string  the expected test case family result
+ * @param  string  the expected test case major version result
+ * @param  string  the expected test case minor version result
+ * @param  string  the expected test case patch version result
+ * @param  string  the test case user agent
+ * @return string  the result of the test
  */
-function test($tc_ua,$tc_family,$tc_major,$tc_minor,$tc_patch,$type) {
-	$ua = UA::parse($tc_ua);
-	if ($type == "b") {
-		$family_result = ($ua->family == $tc_family) ? true : false;
-		$major_result  = ($ua->major == $tc_major) ? true : false;
-		$minor_result  = ($ua->minor == $tc_minor) ? true : false;
-		$patch_result  = ($ua->patch == $tc_patch) ? true : false;
-	} else if ($type == "os") {
-		$family_result = ($ua->os == $tc_family) ? true : false;
-		$major_result  = ($ua->osMajor == $tc_major) ? true : false;
-		$minor_result  = ($ua->osMinor == $tc_minor) ? true : false;
-		$patch_result  = ($ua->osPatch == $tc_patch) ? true : false;
-	}
+function test($obj,$tc_family,$tc_major,$tc_minor,$tc_patch,$tc_ua) {
 	
+	$family_result = ($obj->family == $tc_family) ? true : false;
+	$major_result  = ($obj->major  == $tc_major)  ? true : false;
+	$minor_result  = ($obj->minor  == $tc_minor)  ? true : false;
+	$patch_result  = ($obj->patch  == $tc_patch)  ? true : false;
+
 	if (!$family_result || !$major_result || !$minor_result || !$patch_result) {
-		print "\n    mismatch: got ".$ua->family." ".$ua->major." ".$ua->minor." ".$ua->patch." and expected ".$tc_family." ".$tc_major." ".$tc_minor." ".$tc_patch;
+		print "\n    mismatch: got f: ".$obj->family." ma: ".$obj->major." mi: ".$obj->minor." p: ".$obj->patch." and expected f: ".$tc_family." ma: ".$tc_major." mi: ".$tc_minor." p: ".$tc_patch;
 		print "\n    the mismatched ua: ".$tc_ua;
+		print "\n";
 	} else {
 		print ".";
 	}
