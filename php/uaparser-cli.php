@@ -167,7 +167,7 @@ if (php_sapi_name() == 'cli') {
 				}
 		    }
 		    if (!feof($data)) {
-		        echo "Error: unexpected fgets() fail\n";
+		        print "Error: unexpected fgets() fail\n";
 		    }
 			fclose($fp);
 		    fclose($data);
