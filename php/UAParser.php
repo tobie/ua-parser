@@ -113,9 +113,6 @@ class UA {
 	 */
 	public function uaParser($uaString) {
 
-		// tests the supplied regex against the user agent
-		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
-			
 		// build the default obj that will be returned
 		$ua = (object) array(
 				'family'          => 'Other',
@@ -129,6 +126,8 @@ class UA {
 		$uaRegexes = $this->regexes->user_agent_parsers;
 		foreach ($uaRegexes as $uaRegex) {
 			
+			// tests the supplied regex against the user agent
+			if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$uaRegex->regex)).'/i',$uaString,$matches)) {
 				
 				// Make sure matches are at least set to null or Other
 				if (!isset($matches[1])) { $matches[1] = 'Other'; }
@@ -178,7 +177,9 @@ class UA {
 		// run the regexes to match things up
 		$osRegexes = $this->regexes->os_parsers;
 		foreach ($osRegexes as $osRegex) {
-			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$osRegex['regex']))."/",self::$ua,$matches)) {
+			
+			if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$osRegex->regex)).'/i',$uaString,$matches)) {
+
 				// Make sure matches are at least set to null or Other
 				if (!isset($matches[1])) { $matches[1] = 'Other'; }
 				if (!isset($matches[2])) { $matches[2] = null; }
@@ -220,7 +221,8 @@ class UA {
 		// run the regexes to match things up
 		$deviceRegexes = $this->regexes->device_parsers;
 		foreach ($deviceRegexes as $deviceRegex) {
-			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$deviceRegex['regex']))."/i",self::$ua,$matches)) {
+			
+			if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$deviceRegex->regex)).'/i',$uaString,$matches)) {
 
 				// Make sure matches are at least set to null or Other
 				if (!isset($matches[1])) { $matches[1] = 'Other'; }
