@@ -53,7 +53,12 @@ function test($obj,$tc_family,$tc_major,$tc_minor,$tc_patch,$tc_ua) {
  * Main logic for the test suite
  */
 
-if (php_sapi_name() == 'cli') {
+if (php_sapi_name() == "cli") {
+	
+	if (!is_dir("../test_resources")) {
+		print "the full ua-parser project needs to be loaded for the test suite to work. sorry.\n";
+		exit;
+	}
 	
 	print "\nrunning UAParser.php against test_user_agent_parser.yaml...\n";
 	$data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser.yaml");
