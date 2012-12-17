@@ -83,12 +83,12 @@ class UA {
 			'toFullString' => '',
 			'uaOriginal'   => $ua
 		);
+
+		// figure out the ua, os, and device properties if possible
+		$result->ua           = $this->uaParser($ua);
+		$result->os           = $this->osParser($ua);
+		$result->device       = $this->deviceParser($ua);
 		
-			if ($uaObj = self::uaParser($uaRegex)) {
-				$result = (object) array_merge((array) $result, (array) $uaObj);
-				break;
-			}
-		}
 		
 
 		// Aliases
@@ -166,19 +166,10 @@ class UA {
 			}
 			
 					
-			// figure out the OS for the browser, if possible
-			if ($osObj = self::osParser()) {
-				$obj = (object) array_merge((array) $obj, (array) $osObj);
-			}
 			
 			// create an attribute combinining browser and os
 			if (isset($obj->osFull) && $obj->osFull) {
 				$obj->full = $obj->browserFull . "/" . $obj->osFull;
-			}
-			
-			// figure out the device name for the browser, if possible
-			if ($deviceObj = self::deviceParser()) {
-				$obj = (object) array_merge((array) $obj, (array) $deviceObj);
 			}
 			
 			}
