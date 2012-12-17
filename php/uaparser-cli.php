@@ -87,6 +87,7 @@ if (php_sapi_name() == 'cli') {
 	// define the supported argument flags
 	$args = getopt("gsncl:j:");
 	
+	// process the arguments
 	if (isset($args["g"])) {
 		
 		/* Get regexes.yaml from the repo and convert it to JSON */
@@ -131,6 +132,7 @@ if (php_sapi_name() == 'cli') {
 		$output  = "";
 		$saved   = array();
 		$data    = @fopen($args["l"], "r");
+		
 		if ($data) {
 			$fp = fopen($basePath."log/results-".date("YmdHis").".txt", "w");
 		    while (($line = fgets($data)) !== false) {
@@ -175,6 +177,7 @@ if (php_sapi_name() == 'cli') {
 		} else { 
 			print "unable to read the file at the supplied path...\n";
 		}
+		
 	} else if (isset($args["j"]) && $args["j"]) {
 		
 		/* Parse the supplied UA from the command line and kick it out as JSON */
@@ -231,7 +234,11 @@ if (php_sapi_name() == 'cli') {
 		print "    when the UA or OS family aren't found or when the UA is listed as a generic\n";
 		print "    smartphone or as a generic feature phone.\n";
 		print "\n";
+		
 	}
+	
 } else {
+	
 	print "You must run this file from the command line.";
+	
 }
