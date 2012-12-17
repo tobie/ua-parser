@@ -74,7 +74,9 @@ function get($file,$silent,$nobackup,$basePath) {
  */
 if (php_sapi_name() == 'cli') {
 	
-	$args = getopt("gsnl:j:");
+	// define the supported argument flags
+	$args = getopt("gsncl:j:");
+	
 	if (isset($args["g"])) {
 		
 		/* Get regexes.yaml from the repo and convert it to JSON */
@@ -91,12 +93,22 @@ if (php_sapi_name() == 'cli') {
 		// get the file
 		get("https://raw.github.com/tobie/ua-parser/master/regexes.yaml",$silent,$nobackup,$basePath);
 		
+	} else if (isset($args["c"])) {
+	
+		/* Convert regexes.yaml to regexes.json */
+		
+		// set-up some standard vars
 		$silent   = isset($args["s"]) ? true : false;
 		$nobackup = isset($args["n"]) ? true : false;
+		
+		// start chatty
 		if (!$silent) {
-			print("getting the YAML file...\n");
+			print "getting the old YAML file...\n";
 		}
-		get($silent,$nobackup);
+		
+		// get the file
+		get($basePath."resources/regexes.yaml",$silent,$nobackup,$basePath);
+		
 	} else if (isset($args["l"]) && $args["l"]) {
 		
 		/* Parse the supplied Apache log file */
