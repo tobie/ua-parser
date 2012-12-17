@@ -10,10 +10,7 @@
  * the standards set forth for ua-parser libraries.
  *
  * IMPORTANT: This test suite skips the Chrome Frame tests because
- *            this lib doesn't support that feature. It also skips
- *            the Blackberry Playbook test in test_device.yaml
- *            because my lib considers it a mobile device. The test
- *            suite apparently doesn't.
+ *            the PHP lib doesn"t support that feature.
  *
  */
 
