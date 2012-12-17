@@ -149,8 +149,15 @@ class UA {
 		// tests the supplied regex against the user agent
 		if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$regex['regex']))."/", self::$ua, $matches)) {
 			
-			// build the obj that will be returned
-			$obj = new stdClass;
+		// build the default obj that will be returned
+		$ua = (object) array(
+				'family'          => 'Other',
+				'major'           => null,
+				'minor'           => null,
+				'patch'           => null,
+				'toString'        => '',
+				'toVersionString' => ''
+			  );
 			
 			// defaults
 			$obj->isMobile       = false;
