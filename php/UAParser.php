@@ -283,6 +283,18 @@ class UA {
 	}
 	
 	/**
+	 * Returns a string consisting of the family and full version number based on the provided type
+	 * @param  object  the object (ua or os) to be used
+	 * @return string  the result of combining family and version
+	 */
+	public function toString($obj) {
+		
+		$versionString = $this->toVersionString($obj);
+		$string        = !empty($versionString) ? $obj->family.' '.$versionString : $obj->family;
+		
+		return $string;
+	}
+	
 	/**
 	 * Returns a string consisting of just the full version number based on the provided type
 	 * @param  object  the obj that contains version number bits
