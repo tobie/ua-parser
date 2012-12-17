@@ -129,46 +129,25 @@ class UA {
 		$uaRegexes = $this->regexes->user_agent_parsers;
 		foreach ($uaRegexes as $uaRegex) {
 			
+				
+				// Make sure matches are at least set to null or Other
+				if (!isset($matches[1])) { $matches[1] = 'Other'; }
+				if (!isset($matches[2])) { $matches[2] = null; }
+				if (!isset($matches[3])) { $matches[3] = null; }
+				if (!isset($matches[4])) { $matches[4] = null; }
+				
+				// ua name
+				$ua->family          = isset($uaRegex->family_replacement) ? str_replace('$1',$matches[1],$uaRegex->family_replacement) : $matches[1];
 
-			// build the version numbers for the browser
-			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
-				$obj->major  = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
-			} else {
-				$obj->major = '';
-			}
-			if (isset($matches[3]) || isset($regex['v2_replacement'])) {
-				$obj->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
-			}
-			if (isset($matches[4])) {
-				$obj->patch = $matches[4];
-			}
-			if (isset($matches[5])) {
-				$obj->revision = $matches[5];
-			}
-			
-			// pull out the browser family. replace the version number if necessary
-			if (isset($regex['family_replacement']) && strstr($regex['family_replacement'],"$1")) {
-				$obj->family = str_replace("$1", $matches[1], $regex['family_replacement']);
-			} else if (isset($regex['family_replacement'])) {
-				$obj->family = $regex['family_replacement'];
-			} else {
-				$obj->family = $matches[1];
-			}
-			
-			// set-up a clean version number
-			$obj->version = isset($obj->major) ? $obj->major : "";
-			$obj->version = isset($obj->minor) ? $obj->version.'.'.$obj->minor : $obj->version;
-			$obj->version = isset($obj->patch) ? $obj->version.'.'.$obj->patch : $obj->version;
-			$obj->version = isset($obj->revision) ? $obj->version.'.'.$obj->revision : $obj->version;
-			
-			// prettify
-			$obj->browserFull = $obj->family;
-			if ($obj->version != '') {
-				$obj->browserFull .= " ".$obj->version;
-			}
-			
-					
-			
+				// version properties
+				$ua->major           = isset($uaRegex->v1_replacement) ? $uaRegex->v1_replacement : $matches[2];
+				$ua->minor           = isset($uaRegex->v2_replacement) ? $uaRegex->v2_replacement : $matches[3];
+				$ua->patch           = isset($uaRegex->v3_replacement) ? $uaRegex->v3_replacement : $matches[4];
+
+				// extra strings
+				$ua->toString        = $this->toString($ua);
+				$ua->toVersionString = $this->toVersionString($ua);
+				
 			}
 			
 			return $obj;
@@ -200,34 +179,25 @@ class UA {
 		$osRegexes = $this->regexes->os_parsers;
 		foreach ($osRegexes as $osRegex) {
 			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$osRegex['regex']))."/",self::$ua,$matches)) {
-				
-				// Make sure matches 2 and 3 are at least set to null for setting
-				// Major and Minor defaults
-				if (!isset($matches[1])) { $matches[1] = null; }
+				// Make sure matches are at least set to null or Other
+				if (!isset($matches[1])) { $matches[1] = 'Other'; }
 				if (!isset($matches[2])) { $matches[2] = null; }
 				if (!isset($matches[3])) { $matches[3] = null; }
-
-				// basic properties
-				$osObj->osMajor   = isset($osRegex['os_v1_replacement']) ? $osRegex['os_v1_replacement'] : $matches[2];
-				$osObj->osMinor   = isset($osRegex['os_v2_replacement']) ? $osRegex['os_v2_replacement'] : $matches[3];
-				if (isset($matches[4])) {
-					$osObj->osPatch = $matches[4];
-				}
-				if (isset($matches[5])) {
-					$osObj->osRevision = $matches[5];
-				}
-				$osObj->os        = isset($osRegex['os_replacement'])    ? str_replace("$1",$osObj->osMajor,$osRegex['os_replacement'])  : $matches[1];
-
-				// os version
-				$osObj->osVersion = isset($osObj->osMajor) ? $osObj->osMajor : "";
-				$osObj->osVersion = isset($osObj->osMinor) ? $osObj->osVersion.'.'.$osObj->osMinor : $osObj->osVersion;
-				$osObj->osVersion = isset($osObj->osPatch) ? $osObj->osVersion.'.'.$osObj->osPatch : $osObj->osVersion;
-				$osObj->osVersion = isset($osObj->osRevision) ? $osObj->osVersion.'.'.$osObj->osRevision : $osObj->osVersion; 
+				if (!isset($matches[4])) { $matches[4] = null; }
+				if (!isset($matches[5])) { $matches[5] = null; }
 				
-				// prettify
-				$osObj->osFull    = $osObj->os." ".$osObj->osVersion;
+				// os name
+				$os->family          = isset($osRegex->os_replacement)    ? $osRegex->os_replacement    : $matches[1];
 				
-				return $osObj;
+				// version properties
+				$os->major           = isset($osRegex->os_v1_replacement) ? $osRegex->os_v1_replacement : $matches[2];
+				$os->minor           = isset($osRegex->os_v2_replacement) ? $osRegex->os_v2_replacement : $matches[3];
+				$os->patch           = isset($osRegex->os_v3_replacement) ? $osRegex->os_v3_replacement : $matches[4];
+				$os->patch_minor     = isset($osRegex->os_v4_replacement) ? $osRegex->os_v4_replacement : $matches[5];
+				
+				// extra strings
+				$os->toString        = $this->toString($os);
+				$os->toVersionString = $this->toVersionString($os);
 			}
 		}
 
@@ -251,24 +221,12 @@ class UA {
 		$deviceRegexes = $this->regexes->device_parsers;
 		foreach ($deviceRegexes as $deviceRegex) {
 			if (preg_match("/".str_replace("/","\/",str_replace("\/","/",$deviceRegex['regex']))."/i",self::$ua,$matches)) {
-				
-				// Make sure device matches are null
-				// Device Name, Major and Minor defaults
-				if (!isset($matches[1])) { $matches[1] = null; }
-				if (!isset($matches[2])) { $matches[2] = null; }
-				if (!isset($matches[3])) { $matches[3] = null; }
 
-				// basic properties
-				$deviceObj->deviceMajor  = isset($deviceRegex['device_v1_replacement']) ? $deviceRegex['device_v1_replacement'] : $matches[2];
-				$deviceObj->deviceMinor  = isset($deviceRegex['device_v2_replacement']) ? $deviceRegex['device_v2_replacement'] : $matches[3];
-				$deviceObj->device       = isset($deviceRegex['device_replacement']) ? str_replace("$1",$matches[1],$deviceRegex['device_replacement']) : str_replace("_"," ",$matches[1]);
+				// Make sure matches are at least set to null or Other
+				if (!isset($matches[1])) { $matches[1] = 'Other'; }
 				
-				// device version?
-				$deviceObj->deviceVersion = isset($deviceObj->deviceMajor) ? $deviceObj->deviceMajor : "";
-				$deviceObj->deviceVersion = isset($deviceObj->deviceMinor) ? $deviceObj->deviceVersion.'.'.$deviceObj->deviceMinor : $deviceObj->deviceVersion;
-				
-				// prettify
-				$deviceObj->deviceFull = $deviceObj->device." ".$deviceObj->deviceVersion;
+				// device name
+				$device->family = isset($deviceRegex->device_replacement) ? str_replace('$1',str_replace("_"," ",$matches[1]),$deviceRegex->device_replacement) : str_replace("_"," ",$matches[1]);
 				
 				
 				return $deviceObj;
