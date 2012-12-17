@@ -40,8 +40,6 @@ class UA {
 	 */
 	public function __construct() {
 		
-		if (empty(self::$regexes)) {
-			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 		if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
 			$this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
 		} else {
