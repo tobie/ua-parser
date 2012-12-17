@@ -47,7 +47,7 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 require_once($basePath."lib/spyc-0.5/spyc.php");
 
 // include UAParser.php and make sure to turn off the CLI error
-require_once($basePath."UAParser.php");
+require_once($basePath."uaparser.php");
 
 // deal with timezone issues & logging
 if (!ini_get('date.timezone')) {

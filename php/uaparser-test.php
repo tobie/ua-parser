@@ -21,7 +21,7 @@ $basePath = dirname(__FILE__).DIRECTORY_SEPARATOR;
 require_once($basePath."lib/spyc-0.5/spyc.php");
 
 // include UAParser.php
-require_once($basePath."UAParser.php");
+require_once($basePath."uaparser.php");
 
 // set-up the parser
 $parser = new UA;

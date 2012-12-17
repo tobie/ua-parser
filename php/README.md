@@ -21,7 +21,7 @@ You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
 Straightforward:
 
 ```php
-require("UAParser.php");
+require("uaparser.php");
 
 $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
