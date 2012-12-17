@@ -11,17 +11,24 @@
  *   php uaparser-cli.php
  *       Provides the usage information.
  *
+ *   php uaparser-cli.php [-j] "your user agent string"
+ *       Parses a user agent string and dumps the results as a list.
+ *       Use the -j flag to print the result as JSON.
+ *
  *   php uaparser-cli.php -g [-s] [-n]
- *       Fetches an updated YAML file for UAParser and overwrites the current file.
+ *       Fetches an updated YAML file for UAParser and overwrites the current JSON file.
+ *       By default is verbose. Use -s to turn that feature off.
+ *       By default creates a back-up. Use -n to turn that feature off.
+ *
+ *   php uaparser-cli.php -c [-s] [-n]
+ *       Converts an existing regexes.yaml file to a regexes.json file.
  *       By default is verbose. Use -s to turn that feature off.
  *       By default creates a back-up. Use -n to turn that feature off.
  *
  *   php uaparser-cli.php -l /path/to/apache/logfile
- *       Parses the supplied Apache log file to test UAParser.php
- *
- *   php uaparser-cli.php [-j] "your user agent string"
- *       Parses a user agent string and dumps the results as a list.
- *       Use the -j flag to print the result as JSON.
+ *       Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file
+ *       when the UA or OS family aren't found or when the UA is listed as a generic
+ *       smartphone or as a generic feature phone.
  *
  * Thanks to Marcus Bointon (https://github.com/Synchro) for getting this file started
  * and adding the initial JSON parser for a UA string.
@@ -199,20 +206,30 @@ if (php_sapi_name() == 'cli') {
 		}
 		
 	} else {
+		
+		/* Print usage information */
+		
 		print "\n";
 		print "Usage:\n";
-		print "\n";
-		print "  php uaparser-cli.php -g [-s] [-n]\n";
-		print "    Fetches an updated YAML file for ua-parser and overwrites the current file.\n";
-		print "    By default is verbose. Use -s to turn that feature off.\n";
-		print "    By default creates a back-up. Use -n to turn that feature off.\n";
-		print "\n";
-		print "  php uaparser-cli.php -l \"/path/to/apache/logfile\"\n";
-		print "    Parses the supplied Apache log file to test UAParser.php\n";
 		print "\n";
 		print "  php uaparser-cli.php [-j] \"your user agent string\"\n";
 		print "    Parses a user agent string and dumps the results as a list.\n";
 		print "    Use the -j flag to print the result as JSON.\n";
+		print "\n";
+		print "  php uaparser-cli.php -g [-s] [-n]\n";
+		print "    Fetches an updated YAML file for ua-parser and overwrites the current JSON file.\n";
+		print "    By default is verbose. Use -s to turn that feature off.\n";
+		print "    By default creates a back-up. Use -n to turn that feature off.\n";
+		print "\n";
+		print "  php uaparser-cli.php -c [-s] [-n]\n";
+		print "    Converts an existing regexes.yaml file to a regexes.json file.\n";
+		print "    By default is verbose. Use -s to turn that feature off.\n";
+		print "    By default creates a back-up. Use -n to turn that feature off.\n";
+		print "\n";
+		print "  php uaparser-cli.php -l \"/path/to/apache/logfile\"\n";
+		print "    Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file\n";
+		print "    when the UA or OS family aren't found or when the UA is listed as a generic\n";
+		print "    smartphone or as a generic feature phone.\n";
 		print "\n";
 	}
 } else {
