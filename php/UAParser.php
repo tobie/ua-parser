@@ -75,32 +75,14 @@ class UA {
 	 */
 	public function parse($ua = '') {
 
-		// Defaults
+		// build the default obj that will be returned
 		$result = (object) array(
-			'family' => 'Other',
-			'major' => '',
-			'minor' => '',
-			'patch' => '',
-			'version' => '',
-			'browserFull' => '',
-			'os' => 'Other',
-			'osMajor' => '',
-			'osMinor' => '',
-			'osPatch' => '',
-			'osFull' => '',
-			'full' => '',
-			'device' => '',
-			'deviceMajor' => '',
-			'deviceMinor' => '',
-			'deviceVersion' => '',
-			'deviceFull' => '',
-			'isMobileDevice' => false,
-			'isMobile' => false,
-			'isSpider' => false,
-			'isTablet' => false,
-			'isComputer' => true,
+			'ua'           => (object) array(),
+			'os'           => (object) array(),
+			'device'       => (object) array(),
+			'toFullString' => '',
+			'uaOriginal'   => $ua
 		);
-		$result->uaOriginal = self::$ua;
 		
 		// run the regexes to match things up
 		$uaRegexes = self::$regexes['user_agent_parsers'];
