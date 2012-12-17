@@ -283,6 +283,22 @@ class UA {
 	}
 	
 	/**
+	/**
+	 * Returns a string consisting of just the full version number based on the provided type
+	 * @param  object  the obj that contains version number bits
+	 * @return string  the result of combining the version number bits together
+	 */
+	public function toVersionString($obj) {
+				
+		$versionString = isset($obj->major) ? $obj->major : '';
+		$versionString = isset($obj->minor) ? $versionString.'.'.$obj->minor : $versionString;
+		$versionString = isset($obj->patch) ? $versionString.'.'.$obj->patch : $versionString;
+		$versionString = isset($obj->patch_minor) ? $versionString.'.'.$obj->patch_minor : $versionString;
+		
+		return $versionString;
+		
+	}
+	
 	* Logs the user agent info
 	*/
 		if (!$data) {
