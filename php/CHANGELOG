@@ -2,6 +2,24 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-2.0.0
+ - DEL: is* boolean attributes (e.g. isMobile) have been removed
+ - DEL: no longer will auto-parse $_SERVER['HTTP_USER_AGENT'] if available
+ - DEL: tests no longer run against pgts_browser_list.yaml
+ - FIX: library is now a dynamic class
+ - FIX: attributes are now nested & populated like the other ua-parser libraries (e.g. $result->family is now $result->ua->family)
+ - FIX: uaParser(), osParser(), and deviceParser() are now public functions
+ - FIX: saves regexes.yaml as JSON for better performance
+ - FIX: removed the __DIR__ "fix"
+ - FIX: Apache log parsing now returns results when UA or OS families are set to "Other" and the device is listed as a smartphone or generic feature phone
+ - FIX: all tabs are now spaces
+ - FIX: a UA is now run against all three parsers
+ - ADD: toString() converts the version bits and family into a simple string
+ - ADD: toVersionString() converts the version bits into a simple string
+ - ADD: toFullString() combines the UA and OS family and version bits
+ - ADD: "convert" flag for uaparser-cli.php
+ - THX: thanks to @rjd22 for the dynamic code
+
 UAP-1.5.0
  - ADD: command line interface is now in its own file (via @Synchro)
  - ADD: command line utility now supports parsing an Apache log file & recording the results
