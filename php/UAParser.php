@@ -90,38 +90,6 @@ class UA {
 			}
 		}
 		
-		// if no browser was found check to see if it can be matched at least against a device (e.g. spider, generic feature phone or generic smartphone)
-		if (!$uaObj) {
-			if (($uaObj = self::deviceParser()) && ($uaObj->device != 'Spider')) {
-				$result                 = (object) array_merge((array) $result, (array) $uaObj);
-				$result->isMobile       = true;
-				$result->isMobileDevice = true;	
-				$result->uaOriginal     = self::$ua;
-			} else if (isset($uaObj) && isset($uaObj->device) && ($uaObj->device == "Spider")) {
-				$result                 = (object) array_merge((array) $result, (array) $uaObj);
-				$result->isMobile       = false;
-				$result->isSpider       = true;
-				$result->uaOriginal     = self::$ua;
-			}
-		}
-		
-		// still false?! see if it's a really dumb feature phone, if not just mark it as unknown
-		if (!$uaObj) {
-			if ((strpos(self::$accept,'text/vnd.wap.wml') > 0) || (strpos(self::$accept,'application/vnd.wap.xhtml+xml') > 0) || isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
-				$result->device         = "Generic Feature Phone";
-				$result->deviceFull     = "Generic Feature Phone";
-				$result->isMobile       = true;
-				$result->isMobileDevice = true;
-				$result->uaOriginal     = self::$ua;
-			} else {
-				$result->device         = "Unknown";
-				$result->deviceFull     = "Unknown";
-				$result->isMobile       = false;
-				$result->isMobileDevice = false;
-				$result->isComputer     = true;
-				$result->uaOriginal     = self::$ua;
-			}
-		}
 
 		// Aliases
 		$result->browser = $result->family;
@@ -159,9 +127,6 @@ class UA {
 		$uaRegexes = $this->regexes->user_agent_parsers;
 		foreach ($uaRegexes as $uaRegex) {
 			
-			// defaults
-			$obj->isMobile       = false;
-			$obj->isMobileDevice = false;
 
 			// build the version numbers for the browser
 			if (isset($matches[2]) || isset($regex['v1_replacement'])) {
@@ -200,20 +165,6 @@ class UA {
 				$obj->browserFull .= " ".$obj->version;
 			}
 			
-			// detect if this is a uiwebview call on iOS
-			$obj->isUIWebview = (($obj->family == 'Mobile Safari') && !strstr(self::$ua, 'Safari')) ? true : false;
-			
-			// check to see if this is a mobile browser
-			$mobileBrowsers = array('Firefox Mobile','Opera Mobile','Opera Mini','Mobile Safari','webOS','IE Mobile','Playstation Portable',
-			                        'Nokia','Blackberry','Palm','Silk','Android','Maemo','Obigo','Netfront','AvantGo','Teleca','SEMC-Browser',
-			                        'Bolt','Iris','UP.Browser','Symphony','Minimo','Bunjaloo','Jasmine','Dolfin','Polaris','BREW','Chrome Mobile',
-			                        'UC Browser','Tizen Browser');
-			foreach ($mobileBrowsers as $mobileBrowser) {
-				if (stristr($obj->family, $mobileBrowser)) {
-					$obj->isMobile = true;
-					break;
-				}
-			}
 					
 			// figure out the OS for the browser, if possible
 			if ($osObj = self::osParser()) {
@@ -230,40 +181,8 @@ class UA {
 				$obj = (object) array_merge((array) $obj, (array) $deviceObj);
 			}
 			
-			// if this is a mobile browser make sure mobile device is set to true
-			if ($obj->isMobile) {
-				$obj->isMobileDevice = true; // this is going to catch android devices
-			} else if ($obj->isMobileDevice) {
-				$obj->isMobile = true;       // this will catch some weird htc devices
 			}
 			
-			// if OS is Android check to see if this is a tablet. won't work on UA strings less than Android 3.0
-			// based on: http://googlewebmastercentral.blogspot.com/2011/03/mo-better-to-also-detect-mobile-user.html
-			// opera doesn't follow this convention though...
-			if ((isset($obj->os) && $obj->os == 'Android') && !strstr(self::$ua, 'Mobile') && !strstr(self::$ua, 'Opera')) {
-				$obj->isTablet = true;
-				$obj->isMobile = false;
-			}
-			
-			// some select mobile OSs report a desktop browser. make sure we note they're mobile
-			$mobileOSs = array('Windows Phone 6.5','Windows CE','Symbian OS');
-			if (isset($obj->os) && in_array($obj->os,$mobileOSs)) {
-				$obj->isMobile       = true;
-				$obj->isMobileDevice = true;
-			}
-			
-			if (stristr(self::$ua,"tablet")) {
-				$obj->isTablet       = true;
-				$obj->isMobileDevice = true;
-				$obj->isMobile       = false;
-			}
-			
-			// record if this is a spider
-			$obj->isSpider = (isset($obj->device) && $obj->device == "Spider") ? true : false;
-			
-			// record if this is a computer
-			$obj->isComputer = (!$obj->isMobile && !$obj->isSpider && !$obj->isMobileDevice) ? true : false;
-
 			return $obj;
 		}
 
@@ -335,10 +254,6 @@ class UA {
 	 */
 	public function deviceParser($uaString) {
 		
-		
-		// defaults
-		$deviceObj->isMobileDevice = false;
-		$deviceObj->isTablet       = false;
 		// build the default obj that will be returned
 		$device = (object) array(
 					'family' => 'Other'
@@ -367,26 +282,6 @@ class UA {
 				// prettify
 				$deviceObj->deviceFull = $deviceObj->device." ".$deviceObj->deviceVersion;
 				
-				// check to see if this is a mobile device
-				// this isn't really needed because if it matches a mobile browser it'll automatically mark it as a mobile device
-				$mobileDevices  = array("iPhone","iPod","iPad","HTC","Kindle","Lumia","Amoi","Asus","Bird","Dell","DoCoMo","Huawei","i-mate","Kyocera",
-				                        "Lenovo","LG","Kin","Motorola","Philips","Samsung","Softbank","Palm","HP ","Generic Feature Phone","Generic Smartphone",
-										"Nintendo DSi","Nintendo 3DS","PlayStation Vita");
-				foreach ($mobileDevices as $mobileDevice) {
-					if (stristr($deviceObj->device, $mobileDevice)) {
-						$deviceObj->isMobileDevice = true;
-						break;
-					}
-				}
-
-				// check to see if this is a tablet (not perfect)
-				$tablets = array("Kindle","iPad","Playbook","TouchPad","Dell Streak","Galaxy Tab","Xoom");
-				foreach ($tablets as $tablet) {
-					if (stristr($deviceObj->device, $tablet)) {
-						$deviceObj->isTablet = true;
-						break;
-					}
-				}
 				
 				return $deviceObj;
 			}
