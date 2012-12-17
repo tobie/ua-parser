@@ -81,39 +81,44 @@ if (php_sapi_name() == 'cli') {
 		}
 		get($silent,$nobackup);
 	} else if (isset($args["l"]) && $args["l"]) {
+		
+		/* Parse the supplied Apache log file */
+		
+		// load the parser
+		$parser = new UA();
+		
+		// set-up some standard vars
 		$i       = 0;
 		$output  = "";
-		$saved   = array(); // UAs that have already been saved to the reporting file
-		$data = @fopen($args["l"], "r");
+		$saved   = array();
+		$data    = @fopen($args["l"], "r");
 		if ($data) {
 			$fp = fopen(__DIR__."/log/results-".date("YmdHis").".txt", "w");
 		    while (($line = fgets($data)) !== false) {
 				$failure = false;
+				$show    = "";
 				$line    = str_replace("\n","",$line);
 				preg_match("/^(\S+) (\S+) (\S+) \[([^:]+):(\d+:\d+:\d+) ([^\]]+)\] \"(\S+) (.*?) (\S+)\" (\S+) (\S+) (\".*?\") (\"(.*?)\")$/", $line, $items);
 				$ua = (isset($items[14])) ? $items[14] : "";
 				if (!empty($ua) && ($ua != "-")) {
-					$result = UA::parse($ua);
-					if (($result->family == "Other") && ($result->device == "Generic Feature Phone")) {
-						$output  = "Not found [GFP]:     ".$ua."  [".$line."]\n";
-						$failure = true;
-					} else if (($result->family == "Other") && ($result->device == "Unknown")) {
-						$output  = "Not Found [Unknown]: ".$ua."  [".$line."]\n";
-						$failure = true;
-					} if ($result->family == "Other") {
-						$output  = "Not Found [Unknown]: ".$ua."  [".$line."]\n";
-						$failure = true;
-					} else if ($result->device == "Generic Feature Phone") {
-						$output  = "Found [GFP]:         ".$ua."  [".$line."]\n";
-						$failure = true;
-					} else if ($result->device == "Generic Smartphone") {
-						$output  = "Found [GSP]:         ".$ua."  [".$line."]\n";
-						$failure = true;
+					$result = $parser->parse($ua);
+					if ($result->ua->family == "Other") {
+						$output  = "UA Not Found: ".$ua."  [".$line."]\n";
+						$show    = "U";
+					} else if ($result->os->family == "Other") {
+						$output  = "OS Not Found: ".$ua."  [".$line."]\n";
+						$show    = "O";
+					} else if ($result->device->family == "Generic Smartphone") {
+						$output  = "GS:           ".$ua."  [".$line."]\n";
+						$show    = "GS";
+					} else if ($result->device->family == "Generic Feature Phone") {
+						$output  = "GFP:          ".$ua."  [".$line."]\n";
+						$show    = "GFP";
 					}
-					if ($failure && !in_array($ua,$saved)) {
+					if ((($show == "U") || ($show == "O") || ($show == "GS") || ($show == "GFP")) && !in_array($ua,$saved)) {
 						fwrite($fp, $output);
 						$saved[] = $ua;
-						print "I";
+						print $show;
 					} else {
 						$i = ($i < 20) ? $i+1 : 0;
 						if ($i == 0) {
