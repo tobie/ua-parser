@@ -25,12 +25,9 @@
  *
  */
 
-// address 5.2 compatibility
-if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
-
 // address 5.1 compatibility
 if (!function_exists('json_decode') || !function_exists('json_encode')) {
-	require_once(__DIR__."/lib/json/jsonwrapper.php");
+	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'/lib/json/jsonwrapper.php');
 }
 
 // load spyc as a YAML loader
@@ -58,6 +55,8 @@ class UA {
 		if (empty(self::$regexes)) {
 			if (file_exists(__DIR__."/resources/regexes.yaml")) {
 				self::$regexes = Spyc::YAMLLoad(__DIR__."/resources/regexes.yaml");
+		if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
+			$this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
 			} else {
 				print "<h1>Error</h1>
 					   <p>Please download the regexes.yaml file before using UAParser.php.</p>
