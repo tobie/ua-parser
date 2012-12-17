@@ -28,25 +28,25 @@ $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 $parser = new UA;
 $result = $parser->parse($ua);
 
-print $result->ua->family;         			  // Safari
-print $result->ua->major;          			  // 6
-print $result->ua->minor;          			  // 0
-print $result->ua->patch;          			  // 2
-print $result->ua->toString;    				  // Safari 6.0.2
-print $result->ua->toVersionString;			  // 6.0.2
+print $result->ua->family;                // Safari
+print $result->ua->major;                 // 6
+print $result->ua->minor;                 // 0
+print $result->ua->patch;                 // 2
+print $result->ua->toString;              // Safari 6.0.2
+print $result->ua->toVersionString;       // 6.0.2
 
-print $result->os->family;								// Mac OS X
-print $result->os->major;									// 10
-print $result->os->minor;									// 7
-print $result->os->patch;									// 5
-print $result->os->patch_minor;						// [null]
-print $result->os->toString;							// Mac OS X 10.7.5
-print $result->os->toVersionString;				// 10.7.5
+print $result->os->family;                // Mac OS X
+print $result->os->major;                 // 10
+print $result->os->minor;                 // 7
+print $result->os->patch;                 // 5
+print $result->os->patch_minor;           // [null]
+print $result->os->toString;              // Mac OS X 10.7.5
+print $result->os->toVersionString;       // 10.7.5
 
-print $result->device->family; 						// Other
+print $result->device->family;            // Other
 
-print $result->toFullString;							// Safari 6.0.2/Mac OS X 10.7.5
-print $result->uaOriginal;								// Mozilla/5.0 (Macintosh; Intel Ma...
+print $result->toFullString;              // Safari 6.0.2/Mac OS X 10.7.5
+print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
 
 ## Using ua-parser PHP Library from the Command Line ##
