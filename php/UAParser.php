@@ -93,8 +93,8 @@ class UA {
 		$result->toFullString = $this->toFullString($result->ua, $result->os);
 		
 		// log the results when testing
-		if (self::$debug) {
-			self::log($result);
+		if ($this->debug) {
+			$this->log($result);
 		}
 		
 		return $result;
