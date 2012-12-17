@@ -277,8 +277,16 @@ class UA {
 	 */
 	public function osParser($uaString) {
 		
-		// build the obj that will be returned
-		$osObj = new stdClass;
+		// build the default obj that will be returned
+		$os = (object) array(
+				'family'          => 'Other',
+				'major'           => null,
+				'minor'           => null,
+				'patch'           => null,
+				'patch_minor'     => null,
+				'toString'        => '',
+				'toVersionString' => ''
+		 	  );
 		
 		// run the regexes to match things up
 		$osRegexes = self::$regexes['os_parsers'];
