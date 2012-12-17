@@ -65,6 +65,7 @@ class UA {
 			
 			exit;
 		}
+	}
 	
 	/**
 	 * Sets up some standard variables as well as starts the user agent parsing process
@@ -96,6 +97,7 @@ class UA {
 		}
 		
 		return $result;
+		
 	}
 
 	/**
@@ -114,6 +116,7 @@ class UA {
 				'toString'        => '',
 				'toVersionString' => ''
 			  );
+		
 		// run the regexes to match things up
 		$uaRegexes = $this->regexes->user_agent_parsers;
 		foreach ($uaRegexes as $uaRegex) {
@@ -228,6 +231,7 @@ class UA {
 				return $device;
 				
 			}
+			
 		}
 		
 		return $device;
@@ -277,6 +281,7 @@ class UA {
 		
 	}
 	
+	/**
 	* Logs the user agent info
 	*/
 	private function log($data) {
