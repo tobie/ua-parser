@@ -92,12 +92,6 @@ class UA {
 		// create a full string version based on the ua and os objects
 		$result->toFullString = $this->toFullString($result->ua, $result->os);
 		
-
-		// Aliases
-		$result->browser = $result->family;
-		$result->build   = $result->patch;
-		$result->osBuild = $result->osPatch;
-
 		// log the results when testing
 		if (self::$debug) {
 			self::log($result);
