@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php CLI v1.0.0
+ * ua-parser-php CLI v2.0.0
  *
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
