@@ -102,7 +102,7 @@ if (php_sapi_name() == "cli") {
         }
     }
 
-    print "\n\nrunning UAParser.php against firefox_user_agent_strings.yaml...\n";
+    print "\n\nrunning uaparser.php against firefox_user_agent_strings.yaml...\n";
     $data = Spyc::YAMLLoad($basePath."../test_resources/firefox_user_agent_strings.yaml");
     foreach ($data["test_cases"] as $test_case) {
         $result = $parser->parse($test_case["user_agent_string"]);
