@@ -63,7 +63,7 @@ if (php_sapi_name() == "cli") {
         exit;
     }
     
-    print "\nrunning UAParser.php against test_user_agent_parser.yaml...\n";
+    print "\nrunning uaparser.php against test_user_agent_parser.yaml...\n";
     $data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser.yaml");
     foreach($data["test_cases"] as $test_case) {
         if (!isset($test_case["js_ua"])) {
@@ -72,21 +72,21 @@ if (php_sapi_name() == "cli") {
         }
     }
 
-    print "\n\nrunning UAParser.php against test_user_agent_parser_os.yaml...\n";
+    print "\n\nrunning uaparser.php against test_user_agent_parser_os.yaml...\n";
     $data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser_os.yaml");
     foreach ($data["test_cases"] as $test_case) {
         $result = $parser->parse($test_case["user_agent_string"]);
         test($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
     }
 
-    print "\n\nrunning UAParser.php against additional_os_tests.yaml...\n";
+    print "\n\nrunning uaparser.php against additional_os_tests.yaml...\n";
     $data = Spyc::YAMLLoad($basePath."../test_resources/additional_os_tests.yaml");
     foreach ($data["test_cases"] as $test_case) {
         $result = $parser->parse($test_case["user_agent_string"]);
         test($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
     }
 
-    print "\n\nrunning UAParser.php against test_device.yaml...\n";
+    print "\n\nrunning uaparser.php against test_device.yaml...\n";
     $data = Spyc::YAMLLoad($basePath."../test_resources/test_device.yaml");
     foreach ($data["test_cases"] as $test_case) {
         $result = $parser->parse($test_case["user_agent_string"]);
