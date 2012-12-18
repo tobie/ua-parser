@@ -141,7 +141,7 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied Apache log file */
         
         // load the parser
-        $parser = new UA();
+        $parser = new UAParser;
         
         // set-up some standard vars
         $i       = 0;
@@ -199,7 +199,7 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied UA from the command line and kick it out as JSON */
         
         // load the parser
-        $parser = new UA();
+        $parser = new UAParser;
         
         // parse and encode the results
         print json_encode($parser->parse($args["j"]));
@@ -209,7 +209,7 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied UA from the command line and kick it out as JSON */
         
         // load the parser
-        $parser = new UA();
+        $parser = new UAParser;
         
         // parse and print the results
         $result = $parser->parse($argv[1]);

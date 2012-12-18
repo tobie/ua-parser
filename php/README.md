@@ -25,7 +25,7 @@ require("uaparser.php");
 
 $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-$parser = new UA;
+$parser = new UAParser;
 $result = $parser->parse($ua);
 
 print $result->ua->family;                // Safari

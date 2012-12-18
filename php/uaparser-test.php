@@ -24,7 +24,7 @@ require_once($basePath."lib/spyc-0.5/spyc.php");
 require_once($basePath."uaparser.php");
 
 // set-up the parser
-$parser = new UA;
+$parser = new UAParser;
 
 /**
  * Take the elements from the test cases and test them against the results from UAParser.php
