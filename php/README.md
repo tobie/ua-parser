@@ -77,6 +77,15 @@ With the change to v2.0 you may have an existing and customized YAML file for ua
         By default is verbose. Use -s to turn that feature off.
         By default creates a back-up. Use -n to turn that feature off.
 
+### Grab just the latest regexes.yaml file from the repo
+
+If you need to add a new UA it's easier to edit the original YAML and then convert it to JSON.
+
+    php uaparser-cli.php -y
+
+        Fetches an updated YAML file. Warning: This method overwrites the 
+        existing regexes.yaml file.
+
 ### Parse an Apache Log File
 
 Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file when the UA or OS family aren't found or when the UA is listed as a generic smartphone or as a generic feature phone.

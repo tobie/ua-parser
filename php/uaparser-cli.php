@@ -25,6 +25,11 @@
  *       By default is verbose. Use -s to turn that feature off.
  *       By default creates a back-up. Use -n to turn that feature off.
  *
+ *   php uaparser-cli.php -y
+ *       Fetches an updated YAML file. If you need to add a new UA it's easier to edit
+ *       the original YAML and then convert it. Warning: This method overwrites the 
+ *       existing regexes.yaml file.
+ *
  *   php uaparser-cli.php -l /path/to/apache/logfile
  *       Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file
  *       when the UA or OS family aren't found or when the UA is listed as a generic
@@ -85,7 +90,7 @@ function get($file,$silent,$nobackup,$basePath) {
 if (php_sapi_name() == 'cli') {
     
     // define the supported argument flags
-    $args = getopt("gsncl:j:");
+    $args = getopt("gsncyl:j:");
     
     // process the arguments
     if (isset($args["g"])) {
@@ -119,6 +124,17 @@ if (php_sapi_name() == 'cli') {
         
         // get the file
         get($basePath."resources/regexes.yaml",$silent,$nobackup,$basePath);
+
+    } else if (isset($args["y"])) {
+	
+		/* Grabs regexes.yaml from the repo and saves it */
+		
+		if ($data = @file_get_contents("https://raw.github.com/tobie/ua-parser/master/regexes.yaml")) {
+	        file_put_contents($basePath."resources/regexes.yaml", $data);
+	        print("saved YAML file from the repo...\n");
+	    } else {
+	        print("failed to get the YAML file from the repo...\n");
+	    }
         
     } else if (isset($args["l"]) && $args["l"]) {
         
@@ -228,6 +244,11 @@ if (php_sapi_name() == 'cli') {
         print "    Converts an existing regexes.yaml file to a regexes.json file.\n";
         print "    By default is verbose. Use -s to turn that feature off.\n";
         print "    By default creates a back-up. Use -n to turn that feature off.\n";
+        print "\n";
+        print "  php uaparser-cli.php -y\n";
+        print "    Fetches an updated YAML file. If you need to add a new UA it's easier to edit\n";
+        print "    the original YAML and then convert it. Warning: This method overwrites the\n";
+        print "    existing regexes.yaml file.\n";
         print "\n";
         print "  php uaparser-cli.php -l \"/path/to/apache/logfile\"\n";
         print "    Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file\n";
