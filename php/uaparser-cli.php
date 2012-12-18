@@ -6,6 +6,9 @@
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
+ * spyc-0.5, for loading the YAML, is licensed under the MIT license.
+ * Services_JSON, for loading the JSON in sub-PHP 5.2 installs, is licensed under the MIT license
+ *
  * This is the CLI for ua-parser-php. The following commands are supported:
  *
  *   php uaparser-cli.php

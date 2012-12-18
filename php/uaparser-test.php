@@ -6,6 +6,8 @@
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
  *
+ * spyc-0.5, for loading the YAML, is licensed under the MIT license.
+ *
  * This is the test suit for ua-parser-php to make sure it matches
  * the standards set forth for ua-parser libraries.
  *

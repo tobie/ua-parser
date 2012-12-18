@@ -12,6 +12,7 @@
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
  * spyc-0.5, for loading the YAML, is licensed under the MIT license.
+ * Services_JSON, for loading the JSON in sub-PHP 5.2 installs, is licensed under the MIT license
  * The initial list of generic feature phones & smartphones came from Mobile Web OSP under the MIT license
  * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
  *
