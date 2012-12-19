@@ -4,7 +4,7 @@ ME ORGANIZE WHEN I MADE A SET OF FIXES
 
 UAP-2.0.0
  - DEL: is* boolean attributes (e.g. isMobile) have been removed
- - DEL: no longer will auto-parse $_SERVER['HTTP_USER_AGENT'] if available
+ - DEL: will no longer auto-parse $_SERVER['HTTP_USER_AGENT'] if available
  - DEL: tests no longer run against pgts_browser_list.yaml
  - FIX: library is now a dynamic class
  - FIX: attributes are now nested & populated like the other ua-parser libraries (e.g. $result->family is now $result->ua->family)
@@ -18,7 +18,8 @@ UAP-2.0.0
  - ADD: toVersionString() converts the version bits into a simple string
  - ADD: toFullString() combines the UA and OS family and version bits
  - ADD: "convert" flag for uaparser-cli.php
- - THX: thanks to @rjd22 for the dynamic code
+ - ADD: "pull & save just regexes.yaml" flag for uaparser-cli.php
+ - THX: thanks to @rjd22 for the dynamic class code/fix
 
 UAP-1.5.0
  - ADD: command line interface is now in its own file (via @Synchro)
