@@ -287,7 +287,7 @@ class UAParser {
     */
     private function log($data) {
         $jsonData = json_encode($data);
-        $fp = fopen(__DIR__."/log/user_agents.log", "a");
+        $fp = fopen(dirname(__FILE__).DIRECTORY_SEPARATOR.'log/user_agents.log', 'a');
         fwrite($fp, $jsonData."\r\n");
         fclose($fp);
     }
