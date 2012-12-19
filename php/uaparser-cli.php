@@ -30,7 +30,7 @@
  *
  *   php uaparser-cli.php -y
  *       Fetches an updated YAML file. If you need to add a new UA it's easier to edit
- *       the original YAML and then convert it. Warning: This method overwrites the 
+ *       the original YAML and then convert it. Warning: This method overwrites any 
  *       existing regexes.yaml file.
  *
  *   php uaparser-cli.php -l /path/to/apache/logfile
@@ -250,7 +250,7 @@ if (php_sapi_name() == 'cli') {
         print "\n";
         print "  php uaparser-cli.php -y\n";
         print "    Fetches an updated YAML file. If you need to add a new UA it's easier to edit\n";
-        print "    the original YAML and then convert it. Warning: This method overwrites the\n";
+        print "    the original YAML and then convert it. Warning: This method overwrites any\n";
         print "    existing regexes.yaml file.\n";
         print "\n";
         print "  php uaparser-cli.php -l \"/path/to/apache/logfile\"\n";
