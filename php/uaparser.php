@@ -106,7 +106,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the user agent parsing
      */
-    public function uaParser($uaString) {
+    public function uaParser($uaString = '') {
 
         // build the default obj that will be returned
         $ua = (object) array(
@@ -157,7 +157,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the os parsing
      */
-    public function osParser($uaString) {
+    public function osParser($uaString = '') {
         
         // build the default obj that will be returned
         $os = (object) array(
@@ -210,7 +210,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the device parsing
      */
-    public function deviceParser($uaString) {
+    public function deviceParser($uaString = '') {
         
         // build the default obj that will be returned
         $device = (object) array(
