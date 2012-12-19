@@ -67,7 +67,7 @@ Fetches an updated YAML file for `ua-parser` and overwrites the current JSON fil
         
 By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
 
-### Convert an existing regexes.yaml file to regexes.json
+### Convert an Existing regexes.yaml File to regexes.json
 
 With the change to v2.0 you may have an existing and customized YAML file for `ua-parser`. Use the following to convert it to JSON.
 
@@ -75,7 +75,7 @@ With the change to v2.0 you may have an existing and customized YAML file for `u
 
 By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
 
-### Grab just the latest regexes.yaml file from the repo
+### Grab Just the Latest regexes.yaml File From the Repository
 
 If you need to add a new UA it's easier to edit the original YAML and then convert it to JSON.
 
