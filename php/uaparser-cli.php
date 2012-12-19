@@ -162,10 +162,10 @@ if (php_sapi_name() == 'cli') {
                 $ua = (isset($items[14])) ? $items[14] : "";
                 if (!empty($ua) && ($ua != "-")) {
                     $result = $parser->parse($ua);
-                    if ($result->ua->family == "Other") {
+                    if (($result->ua->family == "Other") && ($result->device->family != "Spider")) {
                         $output  = "UA Not Found: ".$ua."  [".$line."]\n";
                         $show    = "U";
-                    } else if ($result->os->family == "Other") {
+                    } else if (($result->os->family == "Other") && ($result->device->family != "Spider")) {
                         $output  = "OS Not Found: ".$ua."  [".$line."]\n";
                         $show    = "O";
                     } else if ($result->device->family == "Generic Smartphone") {
