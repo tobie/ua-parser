@@ -12,6 +12,8 @@ v2.0 of the PHP library, released in December 2012, marked a huge transition fro
 * `uaParser()`, `osParser()`, and `deviceParser()` are public and can be used to just return those select bits for a given user agent string.
 * the `is*` boolean properties _(e.g. isMobile)_ have been dropped. they now exist as part of the `ua-classifier` project.
 
+Please refer to the `CHANGELOG` for the full list of changes.
+
 ## Demo ##
 
 You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
