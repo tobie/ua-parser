@@ -34,7 +34,7 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 class UAParser {
     
     private $regexes;
-    private $debug = false;
+    private $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
@@ -93,7 +93,7 @@ class UAParser {
         $result->toFullString = $this->toFullString($result->ua, $result->os);
         
         // log the results when testing
-        if ($this->debug) {
+        if ($this->log) {
             $this->log($result);
         }
         

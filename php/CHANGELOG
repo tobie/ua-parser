@@ -16,6 +16,7 @@ UAP-2.0.0
  - FIX: Apache log parsing now returns results when UA or OS families are set to "Other" and the device is listed as a smartphone or generic feature phone
  - FIX: all tabs are now spaces
  - FIX: a UA is now run against all three parsers
+ - FIX: renamed $debug var to $log to better reflect what it does
  - DEL: is* boolean attributes (e.g. isMobile) have been removed
  - DEL: will no longer auto-parse $_SERVER['HTTP_USER_AGENT'] if available
  - DEL: tests no longer run against pgts_browser_list.yaml
