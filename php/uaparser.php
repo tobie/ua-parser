@@ -45,7 +45,7 @@ class UAParser {
             $this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
         } else {
             $title        = 'Error loading ua-parser';
-            $message      = 'Please download the regexes.json file before using UAParser.php. You can type the following at the command line to download the latest version: ';
+            $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
             $instruction1 = '%: cd /path/to/UAParser/';
             $instruction2 = '%: php uaparser-cli.php -g';
             
