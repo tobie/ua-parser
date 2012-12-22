@@ -1,0 +1,6 @@
+Revision history for Perl extension HTTP::UA::Parser.
+
+0.001  Sat Dec 23 23:25:21 2012
+	- original version; created by h2xs 1.23 with options
+		-X -n HTTP::UA::Parser
+

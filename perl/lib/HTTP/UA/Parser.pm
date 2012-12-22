@@ -1,0 +1,1332 @@
+package HTTP::UA::Parser;
+use strict;
+use warnings;
+use YAML::Any qw (LoadFile Load);
+our $VERSION = 0.001;
+
+my $REGEX;
+my $PACKAGE = __PACKAGE__;
+
+sub new {
+    my ($class,$op) = @_;
+    
+    my ($ua,$path);
+    if (ref $ua eq 'HASH'){
+	$path = $op->{path};
+	$ua = $op->{ua};
+    } else {
+	$ua = $op;
+    }
+    
+    if ($path){
+	$REGEX ||= LoadFile( $path.'/regexes.yaml' );
+    } else {
+	$REGEX ||= Load( HTTP::UA::Parser::Utils::YamlRegex() );
+    }
+    
+    my $self = {
+        user_agent => $ua || $ENV{HTTP_USER_AGENT},
+    };
+    return bless($self,$class);
+}
+
+sub parse {
+    my $self = shift;
+    $self->{user_agent} = $_[0];
+    $self->{os} = undef;
+    $self->{ua} = undef;
+    $self->{device} = undef;
+    return $self;
+}
+
+sub os {
+    my ($self) = @_;
+    $self->{os} ||= HTTP::UA::Parser::OS->parse($self->{user_agent});
+    return $self->{os};
+}
+
+sub ua {
+    my ($self) = @_;
+    $self->{ua} ||= HTTP::UA::Parser::UA->parse($self->{user_agent});
+    return $self->{ua};
+}
+
+sub device {
+    my ($self) = @_;
+    $self->{device} ||= HTTP::UA::Parser::Device->parse($self->{user_agent});
+    return $self->{device};
+}
+
+sub isMobile {
+    my $self = shift;
+    my $family = $self->ua->family;
+    if ($family){
+	foreach my $agent (@{$REGEX->{mobile_user_agent_families}}){
+	    return 1 if $family eq $agent;
+	}
+    }
+    return 0;
+}
+
+sub isSpider {
+    my $self = shift;
+    if ($self->device->{family} eq 'Spider') {
+	return 1;
+    }
+    return 0;
+}
+
+sub isComputer {
+    my $self = shift;
+    if (!$self->isSpider){
+	return 1 if !$self->isMobile;
+    }
+    return 0;
+}
+
+##=============================================================================
+## UA Package
+##=============================================================================
+package HTTP::UA::Parser::UA;
+sub new {
+    my $class = shift;
+    my $self = {
+	family => $_[0],
+	major => $_[1],
+	minor => $_[2],
+	patch => $_[3]
+    };
+    return bless($self, $PACKAGE.'::Stringify' );
+}
+
+sub parse {
+    my $class = shift;
+    my $ua = shift;
+    
+    my $parsers = $REGEX->{user_agent_parsers};
+    my @parsers = map {
+        _makeParsers($_);
+    } @{$parsers};
+    
+    my @obj;
+    foreach my $parser (@parsers){
+        @obj = $parser->($ua);
+        return $class->new(@obj) if $obj[0];
+    }
+    return $class->new();
+}
+
+sub _makeParsers {
+    
+    my ($obj) = shift;
+    my $regexp = $obj->{regex};
+    my $famRep = $obj->{family_replacement};
+    my $majorRep = $obj->{v1_replacement};
+    my $minorRep = $obj->{v2_replacement};
+    my $patchRep = $obj->{v3_replacement};
+    
+    my $parser = sub {
+        my $str = shift;
+        my @m = HTTP::UA::Parser::Utils::exe( $regexp , $str );
+        if (!@m) { return undef; }
+        my $family = $famRep ? HTTP::UA::Parser::Utils::replace($famRep,qr/\$1/,$m[0]) : $m[0];
+        my $major = $majorRep || $m[1];
+        my $minor = $minorRep || $m[2];
+        my $patch = $patchRep || $m[3];
+        return ($family, $major, $minor, $patch);
+    };
+    
+    return $parser;
+}
+
+##=============================================================================
+## OS Package
+##=============================================================================
+package HTTP::UA::Parser::OS;
+
+sub new {
+    my $class = shift;
+    my $self = {
+	family => $_[0],
+	major => $_[1],
+	minor => $_[2],
+	patch => $_[3],
+	patchMinor => $_[4]
+    };
+    return bless($self, $PACKAGE.'::Stringify' );
+}
+
+sub parse {
+    my $class = shift;
+    my $ua = shift;
+    my $parsers = $REGEX->{os_parsers};
+    my @parsers = map {
+        _makeParsers($_);
+    } @{$parsers};
+    
+    my @obj;
+    foreach my $parser (@parsers){
+        @obj = $parser->($ua);
+        return $class->new(@obj) if $obj[0];
+    }
+    return $class->new();
+}
+
+sub _makeParsers {
+    
+    my ($obj) = shift;
+    my $regexp = $obj->{regex};
+    my $famRep = $obj->{os_replacement};
+    my $majorRep = $obj->{os_v1_replacement};
+    my $minorRep = $obj->{os_v2_replacement};
+    my $patchRep = $obj->{os_v3_replacement};
+    my $patchMinorRep = $obj->{os_v4_replacement};
+    
+    my $parser = sub {
+        my $str = shift;
+        my @m = HTTP::UA::Parser::Utils::exe( $regexp , $str );
+        #return $m[0];
+        #die Dumper \@m;
+        if (!@m) { return undef; }
+        my $family = $famRep ? HTTP::UA::Parser::Utils::replace($famRep,qr/\$1/,$m[0]) : $m[0];
+        my $major = $majorRep || $m[1];
+        my $minor = $minorRep || $m[2];
+        my $patch = $patchRep || $m[3];
+        my $patchMinor = $patchMinorRep || $m[4];
+        return ($family, $major, $minor, $patch, $patchMinor);
+    };
+    
+    return $parser;
+}
+
+##=============================================================================
+## Device Package
+##=============================================================================
+package HTTP::UA::Parser::Device;
+
+sub new {
+    my $class = shift;
+    
+    my $self = {
+	family => $_[0]
+    };
+    
+    return bless($self, $PACKAGE.'::Stringify' );
+}
+
+sub parse {
+    my $class = shift;
+    my $ua = shift;
+    
+    my $parsers = $REGEX->{device_parsers};
+    my @parsers = map {
+        _makeParsers($_);
+    } @{$parsers};
+    
+    my @obj;
+    foreach my $parser (@parsers){
+        @obj = $parser->($ua);
+        return $class->new(@obj) if $obj[0];
+    }
+    
+    return $class->new();
+}
+
+sub _makeParsers {
+    my ($obj) = shift;
+    my $regexp = $obj->{regex};
+    my $deviceRep = $obj->{device_replacement};
+    my $parser = sub {
+        my $str = shift;
+        my @m = HTTP::UA::Parser::Utils::exe( $regexp , $str );
+        if (!@m) { return undef; }
+        my $family = $deviceRep ? HTTP::UA::Parser::Utils::replace($deviceRep,qr/\$1/,$m[0]) : $m[0];
+        return ($family);
+    };
+    return $parser;
+}
+##=============================================================================
+## Stringify Package
+##=============================================================================
+package HTTP::UA::Parser::Stringify;
+sub toVersionString {
+    my $self  = shift;
+    my $output = '';
+    if (defined $self->{major}){
+	$output .= $self->{major};
+	if (defined $self->{minor}){
+	    $output .= '.' . $self->{minor};
+	    if (defined $self->{patch}) {
+		if (HTTP::UA::Parser::Utils::startsWithDigit($self->{patch})) { $output .= '.'; }
+		$output .= $self->{patch};
+		if (defined $self->{patchMinor}) {
+		    if (HTTP::UA::Parser::Utils::startsWithDigit($self->{patchMinor})) { $output .= '.'; }
+		    $output .= $self->{patchMinor};
+		}
+	    }
+	}
+    }
+    return $output;
+}
+
+sub toString {
+    my $self = shift;
+    my $suffix = $self->toVersionString();
+    if ($suffix){
+	$suffix = ' ' . $suffix;
+    }
+    return $self->family . $suffix;
+}
+
+sub family	{	shift->{family}		}
+sub major	{	shift->{major}		}
+sub minor  	{	shift->{minor}		}
+sub patch  	{	shift->{patch}		}
+sub patchMinor	{	shift->{patchMinor}	}
+
+##=============================================================================
+## Utils Package
+##=============================================================================
+package HTTP::UA::Parser::Utils;
+sub replace {
+    my ($stringToReplace,$expr,$replaceWith) = @_;
+    $stringToReplace =~ s/$expr/$replaceWith/;
+    return $stringToReplace;
+}
+
+sub exe {
+    my ($expr,$string) = @_;
+    my @m = $string =~ $expr;
+    return @m;
+}
+
+sub startsWithDigit {
+    my $str = shift;
+    return $str =~ /^\d/;
+}
+
+sub YamlRegex {
+return <<'REGEX';
+user_agent_parsers:
+  #### SPECIAL CASES TOP ####
+
+  # must go before Opera
+  - regex: '^(Opera)/(\d+)\.(\d+) \(Nintendo Wii'
+    family_replacement: 'Wii'
+
+  # must go before Firefox to catch SeaMonkey/Camino
+  - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
+
+  # Firefox
+  - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)\.?(\d+)?'
+    family_replacement: 'Pale Moon (Firefox Variant)'
+  - regex: '(Fennec)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
+    family_replacement: 'Firefox Mobile'
+  - regex: '(Fennec)/(\d+)\.(\d+)(pre)'
+    family_replacement: 'Firefox Mobile'
+  - regex: '(Fennec)/(\d+)\.(\d+)'
+    family_replacement: 'Firefox Mobile'
+  - regex: 'Mobile.*(Firefox)/(\d+)\.(\d+)'
+    family_replacement: 'Firefox Mobile'
+  - regex: '(Namoroka|Shiretoko|Minefield)/(\d+)\.(\d+)\.(\d+(?:pre)?)'
+    family_replacement: 'Firefox ($1)'
+  - regex: '(Firefox)/(\d+)\.(\d+)(a\d+[a-z]*)'
+    family_replacement: 'Firefox Alpha'
+  - regex: '(Firefox)/(\d+)\.(\d+)(b\d+[a-z]*)'
+    family_replacement: 'Firefox Beta'
+  - regex: '(Firefox)-(?:\d+\.\d+)?/(\d+)\.(\d+)(a\d+[a-z]*)'
+    family_replacement: 'Firefox Alpha'
+  - regex: '(Firefox)-(?:\d+\.\d+)?/(\d+)\.(\d+)(b\d+[a-z]*)'
+    family_replacement: 'Firefox Beta'
+  - regex: '(Namoroka|Shiretoko|Minefield)/(\d+)\.(\d+)([ab]\d+[a-z]*)?'
+    family_replacement: 'Firefox ($1)'
+  - regex: '(Firefox).*Tablet browser (\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'MicroB'
+  - regex: '(MozillaDeveloperPreview)/(\d+)\.(\d+)([ab]\d+[a-z]*)?'
+
+  # e.g.: Flock/2.0b2
+  - regex: '(Flock)/(\d+)\.(\d+)(b\d+?)'
+
+  # RockMelt
+  - regex: '(RockMelt)/(\d+)\.(\d+)\.(\d+)'
+
+  # e.g.: Fennec/0.9pre
+  - regex: '(Navigator)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(Navigator)/(\d+)\.(\d+)([ab]\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(Netscape6)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Netscape'
+
+  - regex: '(MyIBrow)/(\d+)\.(\d+)'
+    family_replacement: 'My Internet Browser'
+
+  # Opera will stop at 9.80 and hide the real version in the Version string.
+  # see: http://dev.opera.com/articles/view/opera-ua-string-changes/
+  - regex: '(Opera Tablet).*Version/(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Opera)/.+Opera Mobi.+Version/(\d+)\.(\d+)'
+    family_replacement: 'Opera Mobile'
+  - regex: 'Opera Mobi'
+    family_replacement: 'Opera Mobile'
+  - regex: '(Opera Mini)/(\d+)\.(\d+)'
+  - regex: '(Opera Mini)/att/(\d+)\.(\d+)'
+  - regex: '(Opera)/9.80.*Version/(\d+)\.(\d+)(?:\.(\d+))?'
+
+  # Palm WebOS looks a lot like Safari.
+  - regex: '(webOSBrowser)/(\d+)\.(\d+)'
+  - regex: '(webOS)/(\d+)\.(\d+)'
+    family_replacement: 'webOSBrowser'
+  - regex: '(wOSBrowser).+TouchPad/(\d+)\.(\d+)'
+    family_replacement: 'webOS TouchPad'
+
+  # LuaKit has no version info.
+  # http://luakit.org/projects/luakit/
+  - regex: '(luakit)'
+    family_replacement: 'LuaKit'
+
+  # Lightning (for Thunderbird)
+  # http://www.mozilla.org/projects/calendar/lightning/
+  - regex: '(Lightning)/(\d+)\.(\d+)([ab]?\d+[a-z]*)'
+
+  # Swiftfox
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+(?:pre)?) \(Swiftfox\)'
+    family_replacement: 'Swiftfox'
+  - regex: '(Firefox)/(\d+)\.(\d+)([ab]\d+[a-z]*)? \(Swiftfox\)'
+    family_replacement: 'Swiftfox'
+
+  # Rekonq
+  - regex: '(rekonq)/(\d+)\.(\d+) Safari'
+    family_replacement: 'Rekonq'
+  - regex: 'rekonq'
+    family_replacement: 'Rekonq'
+
+  # Conkeror lowercase/uppercase
+  # http://conkeror.org/
+  - regex: '(conkeror|Conkeror)/(\d+)\.(\d+)\.?(\d+)?'
+    family_replacement: 'Conkeror'
+
+  # catches lower case konqueror
+  - regex: '(konqueror)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Konqueror'
+
+  - regex: '(WeTab)-Browser'
+
+  - regex: '(Comodo_Dragon)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Comodo Dragon'
+
+  # Bots
+  - regex: '(YottaaMonitor|BrowserMob|HttpMonitor|YandexBot|Slurp|BingPreview|PagePeeker|ThumbShotsBot|WebThumb|URL2PNG|ZooShot|GomezA|Catchpoint bot|Willow Internet Crawler|Google SketchUp|Read%20Later)'
+
+  # must go before NetFront below
+  - regex: '(Kindle)/(\d+)\.(\d+)'
+
+  - regex: '(Symphony) (\d+).(\d+)'
+
+  - regex: '(Minimo)'
+
+  # Chrome Mobile
+  - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Chrome Mobile'
+  - regex: '(CriOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Chrome Mobile iOS'
+  - regex: '(Chrome)/(\d+)\.(\d+)\.(\d+)\.(\d+) Mobile'
+    family_replacement: 'Chrome Mobile'
+
+  # Chrome Frame must come before MSIE.
+  - regex: '(chromeframe)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Chrome Frame'
+
+  # UC Browser
+  - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
+
+  # Tizen Browser (second case included in browser/major.minor regex)
+  - regex: '(SLP Browser)/(\d+)\.(\d+)'
+    family_replacement: 'Tizen Browser'
+
+  # Epiphany browser (identifies as Chromium)
+  - regex: '(Epiphany)/(\d+)\.(\d+).(\d+)'
+
+  # Sogou Explorer 2.X
+  - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
+    family_replacement: 'Sogou Explorer'
+
+  # Baidu Browser
+  - regex: '(FlyFlow)/(\d+)\.(\d+)'
+    family_replacement: 'Baidu Explorer'
+
+  # Pingdom
+  - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
+    family_replacement: 'PingdomBot'
+
+  # Facebook
+  - regex: '(facebookexternalhit)/(\d+)\.(\d+)'
+    family_replacement: 'FacebookBot'
+
+  # Twitterbot
+  - regex: '(Twitterbot)/(\d+)\.(\d+)'
+    family_replacement: 'TwitterBot'
+
+  # PyAMF
+  - regex: '(PyAMF)/(\d+)\.(\d+)\.(\d+)'
+
+  #### END SPECIAL CASES TOP ####
+
+  #### MAIN CASES - this catches > 50% of all browsers ####
+
+  # Browser/major_version.minor_version.beta_version
+  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjaloo|Google Earth|Raven for Mac)/(\d+)\.(\d+)\.(\d+)'
+
+  # Browser/major_version.minor_version
+  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser)/(\d+)\.(\d+)'
+
+  # Browser major_version.minor_version.beta_version (space instead of slash)
+  - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
+  # Browser major_version.minor_version (space instead of slash)
+  - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris|BREW) (\d+)\.(\d+)\.?(\d+)?'
+
+  # weird android UAs
+  - regex: '(Android) Donut'
+    v1_replacement: '1'
+    v2_replacement: '2'
+
+  - regex: '(Android) Eclair'
+    v1_replacement: '2'
+    v2_replacement: '1'
+
+  - regex: '(Android) Froyo'
+    v1_replacement: '2'
+    v2_replacement: '2'
+
+  - regex: '(Android) Gingerbread'
+    v1_replacement: '2'
+    v2_replacement: '3'
+
+  - regex: '(Android) Honeycomb'
+    v1_replacement: '3'
+
+  # IE Mobile
+  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
+    family_replacement: 'IE Mobile'
+  # desktop mode
+  # http://www.anandtech.com/show/3982/windows-phone-7-review
+  - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
+    family_replacement: 'IE Large Screen'
+
+  # AFTER THE EDGE CASES ABOVE!
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
+
+  #### END MAIN CASES ####
+
+  #### SPECIAL CASES ####
+  - regex: '(Obigo)InternetBrowser'
+  - regex: '(Obigo)\-Browser'
+  - regex: '(Obigo|OBIGO)[^\d]*(\d+)(?:.(\d+))?'
+
+  - regex: '(MAXTHON|Maxthon) (\d+)\.(\d+)'
+    family_replacement: 'Maxthon'
+  - regex: '(Maxthon|MyIE2|Uzbl|Shiira)'
+    v1_replacement: '0'
+
+  - regex: '(PLAYSTATION) (\d+)'
+    family_replacement: 'PlayStation'
+  - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
+
+  - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
+
+  # Polaris/d.d is above
+  - regex: '(POLARIS)/(\d+)\.(\d+)'
+    family_replacement: 'Polaris'
+  - regex: '(Embider)/(\d+)\.(\d+)'
+    family_replacement: 'Polaris'
+
+  - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Bon Echo'
+
+  - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPod).*Version/(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPhone).*Version/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPhone).*Version/(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPad).*Version/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPad).*Version/(\d+)\.(\d+)'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)(?:_\d+)?_(\d+).*Mobile'
+    family_replacement: 'Mobile Safari'
+  - regex: '(iPod|iPhone|iPad)'
+    family_replacement: 'Mobile Safari'
+
+  - regex: '(AvantGo) (\d+).(\d+)'
+
+  - regex: '(Avant)'
+    v1_replacement: '1'
+
+  # This is the Tesla Model S (see similar entry in device parsers)
+  - regex: '(QtCarBrowser)'
+    v1_replacement: '1'
+
+  # nokia browsers
+  # based on: http://www.developer.nokia.com/Community/Wiki/User-Agent_headers_for_Nokia_devices
+  - regex: '^(Nokia)'
+    family_replacement: 'Nokia Services (WAP) Browser'
+  - regex: '(NokiaBrowser)/(\d+)\.(\d+).(\d+)\.(\d+)'
+  - regex: '(NokiaBrowser)/(\d+)\.(\d+).(\d+)'
+  - regex: '(NokiaBrowser)/(\d+)\.(\d+)'
+  - regex: '(BrowserNG)/(\d+)\.(\d+).(\d+)'
+    family_replacement: 'NokiaBrowser'
+  - regex: '(Series60)/5\.0'
+    family_replacement: 'NokiaBrowser'
+    v1_replacement: '7'
+    v2_replacement: '0'
+  - regex: '(Series60)/(\d+)\.(\d+)'
+    family_replacement: 'Nokia OSS Browser'
+  - regex: '(S40OviBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Nokia Series 40 Ovi Browser'
+  - regex: '(Nokia)[EN]?(\d+)'
+
+  # BlackBerry devices
+  - regex: '(PlayBook).+RIM Tablet OS (\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Blackberry WebKit'
+  - regex: '(Black[bB]erry).+Version/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Blackberry WebKit'
+  - regex: '(Black[bB]erry)\s?(\d+)'
+    family_replacement: 'Blackberry'
+
+  - regex: '(OmniWeb)/v(\d+)\.(\d+)'
+
+  - regex: '(Blazer)/(\d+)\.(\d+)'
+    family_replacement: 'Palm Blazer'
+
+  - regex: '(Pre)/(\d+)\.(\d+)'
+    family_replacement: 'Palm Pre'
+
+  - regex: '(Links) \((\d+)\.(\d+)'
+
+  - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
+
+  #- regex: '\(iPad;.+(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
+  #  family_replacement: 'iPad'
+
+  # Amazon Silk, should go before Safari
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+
+  # WebKit Nightly
+  - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Safari'
+    family_replacement: 'WebKit Nightly'
+
+  # Safari
+  - regex: '(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
+    family_replacement: 'Safari'
+  # Safari didn't provide "Version/d.d.d" prior to 3.0
+  - regex: '(Safari)/\d+'
+
+  - regex: '(OLPC)/Update(\d+)\.(\d+)'
+
+  - regex: '(OLPC)/Update()\.(\d+)'
+    v1_replacement: '0'
+
+  - regex: '(SEMC\-Browser)/(\d+)\.(\d+)'
+
+  - regex: '(Teleca)'
+    family_replacement: 'Teleca Browser'
+
+  - regex: '(MSIE) (\d+)\.(\d+)'
+    family_replacement: 'IE'
+
+  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+
+  - regex: '(python-requests)/(\d+)\.(\d+)'
+    family_replacement: 'Python Requests'
+
+os_parsers:
+
+  ##########
+  # Android
+  # can actually detect rooted android os. do we care?
+  ##########
+  - regex: '(Android) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+  - regex: '(Android)\-(\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+
+  - regex: '(Android) Donut'
+    os_v1_replacement: '1'
+    os_v2_replacement: '2'
+
+  - regex: '(Android) Eclair'
+    os_v1_replacement: '2'
+    os_v2_replacement: '1'
+
+  - regex: '(Android) Froyo'
+    os_v1_replacement: '2'
+    os_v2_replacement: '2'
+
+  - regex: '(Android) Gingerbread'
+    os_v1_replacement: '2'
+    os_v2_replacement: '3'
+
+  - regex: '(Android) Honeycomb'
+    os_v1_replacement: '3'
+
+  ##########
+  # Windows
+  # http://en.wikipedia.org/wiki/Windows_NT#Releases
+  # possibility of false positive when different marketing names share same NT kernel
+  # e.g. windows server 2003 and windows xp
+  # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
+  # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
+  ##########
+  - regex: '(Windows Phone 6\.5)'
+
+  - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
+    os_replacement: 'Windows XP'
+
+  # ie mobile des ktop mode
+  # spoofs nt 6.1. must come before windows 7
+  - regex: '(XBLWP7)'
+    os_replacement: 'Windows Phone OS'
+
+  - regex: '(Windows NT 6\.1)'
+    os_replacement: 'Windows 7'
+
+  - regex: '(Windows NT 6\.0)'
+    os_replacement: 'Windows Vista'
+
+  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000)'
+
+  - regex: '(Windows NT 6\.2; ARM;)'
+    os_replacement: 'Windows RT'
+
+  # is this a spoof or is nt 6.2 out and about in some capacity?
+  - regex: '(Windows NT 6\.2)'
+    os_replacement: 'Windows 8'
+
+  - regex: '(Windows NT 5\.0)'
+    os_replacement: 'Windows 2000'
+
+  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
+
+  - regex: '(Windows ?Mobile)'
+    os_replacement: 'Windows Mobile'
+
+  - regex: '(WinNT4.0)'
+    os_replacement: 'Windows NT 4.0'
+
+  - regex: '(Win98)'
+    os_replacement: 'Windows 98'
+
+  ##########
+  # Tizen OS from Samsung
+  # spoofs Android so pushing it above
+  ##########
+  - regex: '(Tizen)/(\d+)\.(\d+)'
+
+
+
+  ##########
+  # Mac OS
+  # http://en.wikipedia.org/wiki/Mac_OS_X#Versions
+  ##########
+  - regex: '(Mac OS X) (\d+)[_.](\d+)(?:[_.](\d+))?'
+
+  # builds before tiger don't seem to specify version?
+
+  # ios devices spoof (mac os x), so including intel/ppc prefixes
+  - regex: '(?:PPC|Intel) (Mac OS X)'
+
+  ##########
+  # iOS
+  # http://en.wikipedia.org/wiki/IOS_version_history
+  ##########
+  - regex: '(CPU OS|iPhone OS) (\d+)_(\d+)(?:_(\d+))?'
+    os_replacement: 'iOS'
+
+  # remaining cases are mostly only opera uas, so catch opera as to not catch iphone spoofs
+  - regex: '(iPhone|iPad|iPod); Opera'
+    os_replacement: 'iOS'
+
+  # few more stragglers
+  - regex: '(iPhone|iPad|iPod).*Mac OS X.*Version/(\d+)\.(\d+)'
+    os_replacement: 'iOS'
+
+  - regex: '(AppleTV)/(\d+)\.(\d+)'
+    os_replacement: 'ATV OS X'
+    os_v1_replacement: '$1'
+    os_v2_replacement: '$2'
+
+  ##########
+  # Chrome OS
+  # if version 0.0.0, probably this stuff:
+  # http://code.google.com/p/chromium-os/issues/detail?id=11573
+  # http://code.google.com/p/chromium-os/issues/detail?id=13790
+  ##########
+  - regex: '(CrOS) [a-z0-9_]+ (\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'Chrome OS'
+
+  ##########
+  # Linux distros
+  ##########
+  - regex: '(Debian)-(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Linux Mint)(?:/(\d+))?'
+  - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+
+  ##########
+  # Symbian + Symbian OS
+  # http://en.wikipedia.org/wiki/History_of_Symbian
+  ##########
+  - regex: '(Symbian[Oo][Ss])/(\d+)\.(\d+)'
+    os_replacement: 'Symbian OS'
+  - regex: '(Symbian/3).+NokiaBrowser/7\.3'
+    os_replacement: 'Symbian^3 Anna'
+  - regex: '(Symbian/3).+NokiaBrowser/7\.4'
+    os_replacement: 'Symbian^3 Belle'
+  - regex: '(Symbian/3)'
+    os_replacement: 'Symbian^3'
+  - regex: '(Series 60|SymbOS|S60)'
+    os_replacement: 'Symbian OS'
+  - regex: '(MeeGo)'
+  - regex: 'Symbian [Oo][Ss]'
+    os_replacement: 'Symbian OS'
+
+  ##########
+  # BlackBerry devices
+  ##########
+  - regex: '(Black[Bb]erry)[0-9a-z]+/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'BlackBerry OS'
+  - regex: '(Black[Bb]erry).+Version/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'BlackBerry OS'
+  - regex: '(RIM Tablet OS) (\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'BlackBerry Tablet OS'
+  - regex: '(Play[Bb]ook)'
+    os_replacement: 'BlackBerry Tablet OS'
+  - regex: '(Black[Bb]erry)'
+    os_replacement: 'Blackberry OS'
+
+  ##########
+  # Google TV
+  ##########
+  - regex: '(GoogleTV) (\d+)\.(\d+)\.(\d+)'
+  # Old style
+  - regex: '(GoogleTV)\/\d+'
+
+  ##########
+  # Misc mobile
+  ##########
+  - regex: '(webOS|hpwOS)/(\d+)\.(\d+)(?:\.(\d+))?'
+    os_replacement: 'webOS'
+
+  ##########
+  # Generic patterns
+  # since the majority of os cases are very specific, these go last
+  ##########
+  # first.second.third.fourth bits
+  - regex: '(SUSE|Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+
+  # first.second.third bits
+  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS|CentOS)/(\d+)\.(\d+)\.(\d+)'
+
+  # first.second bits
+  - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
+  - regex: '(PlayStation Vita) (\d+)\.(\d+)'
+
+  # just os
+  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Linux)/(\d+)\.(\d+)'
+  - regex: '(Linux|BSD)'
+
+device_parsers:
+  ##########
+  # incomplete!
+  # multiple replacement placeholds i.e. ($1) ($2) help solve problem of single device with multiple representations in ua
+  # e.g. HTC Dream S should parse to the same device as HTC_DreamS
+  ##########
+
+  ##########
+  # incomplete!
+  # HTC
+  # http://en.wikipedia.org/wiki/List_of_HTC_phones
+  # this is quickly getting unwieldy
+  ##########
+  # example: Mozilla/5.0 (Linux; U; Android 2.3.2; fr-fr; HTC HD2 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+  - regex: 'HTC ([A-Z][a-z0-9]+) Build'
+    device_replacement: 'HTC $1'
+  # example: Mozilla/5.0 (Linux; U; Android 2.1; es-es; HTC Legend 1.23.161.1 Build/ERD79) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17,gzip
+  - regex: 'HTC ([A-Z][a-z0-9 ]+) \d+\.\d+\.\d+\.\d+'
+    device_replacement: 'HTC $1'
+  # example: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; HTC_Touch_Diamond2_T5353; Windows Phone 6.5.3.5)
+  - regex: 'HTC_Touch_([A-Za-z0-9]+)'
+    device_replacement: 'HTC Touch ($1)'
+  # should come after HTC_Touch
+  - regex: 'USCCHTC(\d+)'
+    device_replacement: 'HTC $1 (US Cellular)'
+  - regex: 'Sprint APA(9292)'
+    device_replacement: 'HTC $1 (Sprint)'
+  - regex: 'HTC ([A-Za-z0-9]+ [A-Z])'
+    device_replacement: 'HTC $1'
+  - regex: 'HTC-([A-Za-z0-9]+)'
+    device_replacement: 'HTC $1'
+  - regex: 'HTC_([A-Za-z0-9]+)'
+    device_replacement: 'HTC $1'
+  - regex: 'HTC ([A-Za-z0-9]+)'
+    device_replacement: 'HTC $1'
+  - regex: '(ADR[A-Za-z0-9]+)'
+    device_replacement: 'HTC $1'
+  - regex: '(HTC)'
+
+  # Tesla Model S
+  - regex: '(QtCarBrowser)'
+    device_replacement: 'Tesla Model S'
+
+  # Samsung
+  - regex: '(SamsungSGHi560)'
+    device_replacement: 'Samsung SGHi560'
+
+  #########
+  # Ericsson - must come before nokia since they also use symbian
+  #########
+  - regex: 'SonyEricsson([A-Za-z0-9]+)/'
+    device_replacement: 'Ericsson $1'
+
+  #########
+  # Android General Device Matching (far from perfect)
+  #########
+  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-Za-z]{2}\-[A-Za-z]{2}\; WOWMobile (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\-update1\; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\; [A-Za-z]{2}\-[A-Za-z]{2}\; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
+
+  ##########
+  # NOKIA
+  # nokia NokiaN8-00 comes before iphone. sometimes spoofs iphone
+  ##########
+  - regex: 'NokiaN([0-9]+)'
+    device_replacement: 'Nokia N$1'
+  - regex: 'Nokia([A-Za-z0-9\v-]+)'
+    device_replacement: 'Nokia $1'
+  - regex: 'NOKIA ([A-Za-z0-9\-]+)'
+    device_replacement: 'Nokia $1'
+  - regex: 'Nokia ([A-Za-z0-9\-]+)'
+    device_replacement: 'Nokia $1'
+  - regex: 'Lumia ([A-Za-z0-9\-]+)'
+    device_replacement: 'Lumia $1'
+  - regex: 'Symbian'
+    device_replacement: 'Nokia'
+
+  ##########
+  # Blackberry
+  # http://www.useragentstring.com/pages/BlackBerry/
+  ##########
+  - regex: '(PlayBook).+RIM Tablet OS'
+    device_replacement: 'Blackberry Playbook'
+  - regex: '(Black[Bb]erry [0-9]+);'
+  - regex: 'Black[Bb]erry([0-9]+)'
+    device_replacement: 'BlackBerry $1'
+
+  ##########
+  # PALM / HP
+  ##########
+  # some palm devices must come before iphone. sometimes spoofs iphone in ua
+  - regex: '(Pre)/(\d+)\.(\d+)'
+    device_replacement: 'Palm Pre'
+  - regex: '(Pixi)/(\d+)\.(\d+)'
+    device_replacement: 'Palm Pixi'
+  - regex: '(Touchpad)/(\d+)\.(\d+)'
+    device_replacement: 'HP Touchpad'
+  - regex: 'HPiPAQ([A-Za-z0-9]+)/(\d+).(\d+)'
+    device_replacement: 'HP iPAQ $1'
+  - regex: 'Palm([A-Za-z0-9]+)'
+    device_replacement: 'Palm $1'
+  - regex: 'Treo([A-Za-z0-9]+)'
+    device_replacement: 'Palm Treo $1'
+  - regex: 'webOS.*(P160UNA)/(\d+).(\d+)'
+    device_replacement: 'HP Veer'
+
+  ##########
+  # PlayStation
+  ##########
+  - regex: '(PlayStation Portable)'
+  - regex: '(PlayStation Vita)'
+
+  ##########
+  # incomplete!
+  # Kindle
+  ##########
+  - regex: '(Kindle Fire)'
+  - regex: '(Kindle)'
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    device_replacement: 'Kindle Fire'
+
+  ##########
+  # AppleTV
+  # No built in browser that I can tell
+  # Stack Overflow indicated iTunes-AppleTV/4.1 as a known UA for app available and I'm seeing it in live traffic
+  ##########
+  - regex: '(AppleTV)'
+    device_replacement: 'AppleTV'
+
+  ##########
+  # complete but probably catches spoofs
+  # iSTUFF
+  ##########
+  # ipad and ipod must be parsed before iphone
+  # cannot determine specific device type from ua string. (3g, 3gs, 4, etc)
+  - regex: '(iPad) Simulator;'
+  - regex: '(iPad);'
+  - regex: '(iPod);'
+  - regex: '(iPhone) Simulator;'
+  - regex: '(iPhone);'
+
+  ##########
+  # Acer
+  ##########
+  - regex: 'acer_([A-Za-z0-9]+)_'
+    device_replacement: 'Acer $1'
+  - regex: 'acer_([A-Za-z0-9]+)_'
+    device_replacement: 'Acer $1'
+
+  ##########
+  # Amoi
+  ##########
+  - regex: 'Amoi\-([A-Za-z0-9]+)'
+    device_replacement: 'Amoi $1'
+  - regex: 'AMOI\-([A-Za-z0-9]+)'
+    device_replacement: 'Amoi $1'
+
+  ##########
+  # Amoi
+  ##########
+  - regex: 'Asus\-([A-Za-z0-9]+)'
+    device_replacement: 'Asus $1'
+  - regex: 'ASUS\-([A-Za-z0-9]+)'
+    device_replacement: 'Asus $1'
+
+  ##########
+  # Bird
+  ##########
+  - regex: 'BIRD\-([A-Za-z0-9]+)'
+    device_replacement: 'Bird $1'
+  - regex: 'BIRD\.([A-Za-z0-9]+)'
+    device_replacement: 'Bird $1'
+  - regex: 'BIRD ([A-Za-z0-9]+)'
+    device_replacement: 'Bird $1'
+
+  ##########
+  # Dell
+  ##########
+  - regex: 'Dell ([A-Za-z0-9]+)'
+    device_replacement: 'Dell $1'
+
+  ##########
+  # DoCoMo
+  ##########
+  - regex: 'DoCoMo/2\.0 ([A-Za-z0-9]+)'
+    device_replacement: 'DoCoMo $1'
+  - regex: '([A-Za-z0-9]+)_W\;FOMA'
+    device_replacement: 'DoCoMo $1'
+  - regex: '([A-Za-z0-9]+)\;FOMA'
+    device_replacement: 'DoCoMo $1'
+
+  ##########
+  # Huawei Vodafone
+  ##########
+  - regex: 'vodafone([A-Za-z0-9]+)'
+    device_replacement: 'Huawei Vodafone $1'
+
+  ##########
+  # i-mate
+  ##########
+  - regex: 'i\-mate ([A-Za-z0-9]+)'
+    device_replacement: 'i-mate $1'
+
+  ##########
+  # kyocera
+  ##########
+  - regex: 'Kyocera\-([A-Za-z0-9]+)'
+    device_replacement: 'Kyocera $1'
+  - regex: 'KWC\-([A-Za-z0-9]+)'
+    device_replacement: 'Kyocera $1'
+
+  ##########
+  # lenovo
+  ##########
+  - regex: 'Lenovo\-([A-Za-z0-9]+)'
+    device_replacement: 'Lenovo $1'
+  - regex: 'Lenovo_([A-Za-z0-9]+)'
+    device_replacement: 'Lenovo $1'
+
+  ##########
+  # lg
+  ##########
+  - regex: 'LG/([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LG-LG([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LGE-LG([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LGE VX([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LG ([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LGE LG\-AX([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LG\-([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LGE\-([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+  - regex: 'LG([A-Za-z0-9]+)'
+    device_replacement: 'LG $1'
+
+  ##########
+  # kin
+  ##########
+  - regex: '(KIN)\.One (\d+)\.(\d+)'
+    device_replacement: 'Microsoft $1'
+  - regex: '(KIN)\.Two (\d+)\.(\d+)'
+    device_replacement: 'Microsoft $1'
+
+  ##########
+  # motorola
+  ##########
+  - regex: '(Motorola)\-([A-Za-z0-9]+)'
+  - regex: 'MOTO\-([A-Za-z0-9]+)'
+    device_replacement: 'Motorola $1'
+  - regex: 'MOT\-([A-Za-z0-9]+)'
+    device_replacement: 'Motorola $1'
+
+  ##########
+  # philips
+  ##########
+  - regex: 'Philips([A-Za-z0-9]+)'
+    device_replacement: 'Philips $1'
+  - regex: 'Philips ([A-Za-z0-9]+)'
+    device_replacement: 'Philips $1'
+
+  ##########
+  # Samsung
+  ##########
+  - regex: 'SAMSUNG-([A-Za-z0-9\-]+)'
+    device_replacement: 'Samsung $1'
+  - regex: 'SAMSUNG\; ([A-Za-z0-9\-]+)'
+    device_replacement: 'Samsung $1'
+
+  ##########
+  # Softbank
+  ##########
+  - regex: 'Softbank/1\.0/([A-Za-z0-9]+)'
+    device_replacement: 'Softbank $1'
+  - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
+    device_replacement: 'Softbank $1'
+
+  ##########
+  # Sony
+  ##########
+  - regex: '(PlayStation3 PPC)'
+    device_replacement: 'Playstation 3'
+
+  ##########
+  # Generic Smart Phone
+  ##########
+  - regex: '(hiptop|avantgo|plucker|xiino|blazer|elaine|up.browser|up.link|mmp|smartphone|midp|wap|vodafone|o2|pocket|mobile|pda)'
+    device_replacement: "Generic Smartphone"
+
+  ##########
+  # Generic Feature Phone
+  ##########
+  - regex: '^(1207|3gso|4thp|501i|502i|503i|504i|505i|506i|6310|6590|770s|802s|a wa|acer|acs\-|airn|alav|asus|attw|au\-m|aur |aus |abac|acoo|aiko|alco|alca|amoi|anex|anny|anyw|aptu|arch|argo|bell|bird|bw\-n|bw\-u|beck|benq|bilb|blac|c55/|cdm\-|chtm|capi|comp|cond|craw|dall|dbte|dc\-s|dica|ds\-d|ds12|dait|devi|dmob|doco|dopo|el49|erk0|esl8|ez40|ez60|ez70|ezos|ezze|elai|emul|eric|ezwa|fake|fly\-|fly_|g\-mo|g1 u|g560|gf\-5|grun|gene|go.w|good|grad|hcit|hd\-m|hd\-p|hd\-t|hei\-|hp i|hpip|hs\-c|htc |htc\-|htca|htcg)'
+    device_replacement: 'Generic Feature Phone'
+  - regex: '^(htcp|htcs|htct|htc_|haie|hita|huaw|hutc|i\-20|i\-go|i\-ma|i230|iac|iac\-|iac/|ig01|im1k|inno|iris|jata|java|kddi|kgt|kgt/|kpt |kwc\-|klon|lexi|lg g|lg\-a|lg\-b|lg\-c|lg\-d|lg\-f|lg\-g|lg\-k|lg\-l|lg\-m|lg\-o|lg\-p|lg\-s|lg\-t|lg\-u|lg\-w|lg/k|lg/l|lg/u|lg50|lg54|lge\-|lge/|lynx|leno|m1\-w|m3ga|m50/|maui|mc01|mc21|mcca|medi|meri|mio8|mioa|mo01|mo02|mode|modo|mot |mot\-|mt50|mtp1|mtv |mate|maxo|merc|mits|mobi|motv|mozz|n100|n101|n102|n202|n203|n300|n302|n500|n502|n505|n700|n701|n710|nec\-|nem\-|newg|neon)'
+    device_replacement: 'Generic Feature Phone'
+  - regex: '^(netf|noki|nzph|o2 x|o2\-x|opwv|owg1|opti|oran|ot\-s|p800|pand|pg\-1|pg\-2|pg\-3|pg\-6|pg\-8|pg\-c|pg13|phil|pn\-2|pt\-g|palm|pana|pire|pock|pose|psio|qa\-a|qc\-2|qc\-3|qc\-5|qc\-7|qc07|qc12|qc21|qc32|qc60|qci\-|qwap|qtek|r380|r600|raks|rim9|rove|s55/|sage|sams|sc01|sch\-|scp\-|sdk/|se47|sec\-|sec0|sec1|semc|sgh\-|shar|sie\-|sk\-0|sl45|slid|smb3|smt5|sp01|sph\-|spv |spv\-|sy01|samm|sany|sava|scoo|send|siem|smar|smit|soft|sony|t\-mo|t218|t250|t600|t610|t618|tcl\-|tdg\-|telm|tim\-|ts70|tsm\-|tsm3|tsm5|tx\-9|tagt)'
+    device_replacement: 'Generic Feature Phone'
+  - regex: '^(talk|teli|topl|tosh|up.b|upg1|utst|v400|v750|veri|vk\-v|vk40|vk50|vk52|vk53|vm40|vx98|virg|vite|voda|vulc|w3c |w3c\-|wapj|wapp|wapu|wapm|wig |wapi|wapr|wapv|wapy|wapa|waps|wapt|winc|winw|wonu|x700|xda2|xdag|yas\-|your|zte\-|zeto|aste|audi|avan|blaz|brew|brvw|bumb|ccwa|cell|cldc|cmd\-|dang|eml2|fetc|hipt|http|ibro|idea|ikom|ipaq|jbro|jemu|jigs|keji|kyoc|kyok|libw|m\-cr|midp|mmef|moto|mwbp|mywa|newt|nok6|o2im|pant|pdxg|play|pluc|port|prox|rozo|sama|seri|smal|symb|treo|upsi|vx52|vx53|vx60|vx61|vx70|vx80|vx81|vx83|vx85|wap\-|webc|whit|wmlb|xda\-|xda_)'
+    device_replacement: 'Generic Feature Phone'
+
+  ##########
+  # Spiders (this is hack...)
+  ##########
+  - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks)'
+    device_replacement: 'Spider'
+
+
+mobile_user_agent_families:
+  - 'Firefox Mobile'
+  - 'Opera Mobile'
+  - 'Opera Mini'
+  - 'Mobile Safari'
+  - 'webOS'
+  - 'IE Mobile'
+  - 'Playstation Portable'
+  - 'Nokia'
+  - 'Blackberry'
+  - 'Palm'
+  - 'Silk'
+  - 'Android'
+  - 'Maemo'
+  - 'Obigo'
+  - 'Netfront'
+  - 'AvantGo'
+  - 'Teleca'
+  - 'SEMC-Browser'
+  - 'Bolt'
+  - 'Iris'
+  - 'UP.Browser'
+  - 'Symphony'
+  - 'Minimo'
+  - 'Bunjaloo'
+  - 'Jasmine'
+  - 'Dolfin'
+  - 'Polaris'
+  - 'BREW'
+  - 'Chrome Mobile'
+  - 'UC Browser'
+  - 'Tizen Browser'
+
+# Some select mobile OSs report a desktop browser.
+# make sure we note they're mobile
+mobile_os_families:
+  - 'Windows Phone 6.5'
+  - 'Windows CE'
+  - 'Symbian OS'
+REGEX
+}
+
+1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+HTTP::UA::Parser - Perl User Agent Parser
+
+=head1 DESCRIPTION
+
+Perl port of the [ua-parser](https://github.com/tobie/ua-parser) project.
+
+=head1 SYNOPSIS
+
+    use HTTP::UA::Parser;
+    my $r = HTTP::UA::Parser->new();
+    
+    print $r->ua->toString();         # -> "Safari 5.0.1"
+    print $r->ua->toVersionString();  # -> "5.0.1"
+    print $r->ua->family;             # -> "Safari"
+    print $r->ua->major;              # -> "5"
+    print $r->ua->minor;              # -> "0"
+    print $r->ua->patch;              # -> "1"
+    
+    print $r->os->toString();         # -> "iOS 5.1"
+    print $r->os->toVersionString();  # -> "5.1"
+    print $r->os->family              # -> "iOS"
+    print $r->os->major;              # -> "5"
+    print $r->os->minor;              # -> "1"
+    print $r->os->patch;              # -> undef
+    
+    print $r->device->family;         # -> "iPhone"
+    
+=head1 Methods
+
+=head2 new()
+
+Accepts a user agent string to parse, leave empty to parse caller user agent.
+
+=head2 parse()
+
+Accepts a new user agent to parse
+
+=head2 ua()
+
+Parses browser part of the user agent
+
+=head2 os()
+
+Parsers operating system part of the user agent
+
+=head2 device()
+
+Parses device part of the user agent
+
+=head1 Strigify Methods
+
+Methods to print results as strings
+
+=over 4
+
+=item toString()
+
+returns os / ua name
+
+=item toVersionString()
+
+returns full version number of os/browser
+
+=item family()
+
+returns family name of os/browser/device
+
+=item major()
+
+returns version's major part of os/browser
+
+=item minor()
+
+returns version's minor part of os/browser
+
+=item patch()
+
+returns versions patch part of os/browser
+
+=item patchMinor()
+
+returns version patch minor part of os/browser
+
+=back
+
+=head1 Helper Methods
+
+=head2 isMobile()
+
+returns 1 if user agent comes from a mobile device 0 otherwise
+
+=head2 isSpider()
+
+returns 1 if user agent comes from a spider agent 0 otherwise
+
+=head2 isComputer()
+
+returns 1 if user agent comes from a computer device 0 otherwise
+    
+=head1 INSTALLATION
+
+From CPAN shell simply type
+
+    % perl -MCPAN -e 'install HTTP::UA::Parser'
+
+Or from your local download, unpack and:
+
+    % perl Makefile.PL
+    % make && make test
+    
+Then install:
+
+    % make install
+
+=head1 AUTHOR
+
+Mamod A. Mehyar, E<lt>mamod.mehyar@gmail.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2012 by Mamod A. Mehyar
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.10.1 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut
