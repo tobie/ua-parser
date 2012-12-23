@@ -4,8 +4,7 @@ HTTP::UA::Parser
 
 =head1 DESCRIPTION
 
-Perl port of the ua-parser project.
-L<https://github.com/tobie/ua-parser>
+Perl port of the ua-parser project - L<https://github.com/tobie/ua-parser>
 
 =head1 SYNOPSIS
 
