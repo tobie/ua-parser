@@ -44,23 +44,23 @@ my $uaTest = sub {
     my $tests = shift;
     $P->parse($ua);
     
-    if ($P->ua->family ne $tests->{uaFamily}) {
+    if (defined $tests->{uaFamily} && $P->ua->family ne $tests->{uaFamily}) {
         #print $P->ua->family;
         return 0;
     }
-    if ($P->ua->toVersionString ne $tests->{uaVersion}) {
+    if (defined $tests->{uaVersion} && $P->ua->toVersionString ne $tests->{uaVersion}) {
         #print $P->ua->toVersionString;
         return 0;
     }
-    if ($P->os->family ne $tests->{osFamily}){
+    if (defined $tests->{osFamily} && $P->os->family ne $tests->{osFamily}){
         #print $P->os->family;
         return 0;
     }
-    if ($P->os->toVersionString ne $tests->{osVersion}) {
+    if (defined $tests->{osVersion} && $P->os->toVersionString ne $tests->{osVersion}) {
         #print $P->os->toVersionString;
         return 0;
     }
-    if ($P->device->family ne $tests->{devFamily}){
+    if (defined $tests->{devFamily} && $P->device->family ne $tests->{devFamily}){
         #print $P->device->family;
         return 0;
     }

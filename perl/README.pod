@@ -114,6 +114,29 @@ Then install:
 
     % make install
 
+=head1 USING WITHOUT INSTALLATION
+
+You can use HTTP::UA::Parser Module without installation directly from the forked ua-parser
+project, to do so, you need to include lib path of the perl port
+
+    use lib '/full/path/to/ua-parser/perl/lib';
+    use HTTP::UA::Parser;
+    ...
+
+=head1 COMMAND LINE
+
+To update regexes.yaml file from command line
+    
+    % ua_parser -u
+
+To parse some user agent from command line
+
+    % ua_parser -p "some user agent"
+    
+Help usage
+
+    % ua_parser -h
+
 =head1 AUTHOR
 
 Mamod A. Mehyar, E<lt>mamod.mehyar@gmail.comE<gt>

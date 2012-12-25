@@ -1,0 +1,116 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long;
+use File::Copy;
+use HTTP::UA::Parser;
+
+my ($help,$update,@parse);
+
+GetOptions(
+    "h|help"     => \$help,
+    "u|update"   => \$update,
+    "p|parse=s"  => \@parse,
+) or help();
+
+#@parse = split(/,/,join(',',@parse));
+
+update() if $update;
+parse() if @parse;
+help() if $help;
+
+sub help {
+    print "\nUSAGE\n";
+    print "=================================================\n\n";
+    print "% ua_parser -u\n";
+    print "  Update regexes.yaml file \n\n";
+    print "% ua_parser -p \"some user agent\"\n";
+    print "  Parses user agent and print back the results\n";
+}
+
+sub update {
+    print "Fetching Regex file from server...\n";
+    my $content = getFile();
+    my $PATH = HTTP::UA::Parser::Utils::getPath();
+    my $temp = $PATH.'/temp_regexes.yaml';
+    my $old = $PATH.'/regexes.yaml';
+    open my $file,'>',$temp or die "can't open create file tmp $!";
+    print $file $content;
+    close $file;
+    unlink $old;
+    rename $temp, $old;
+    print "File updated successfully\n";
+}
+
+sub getFile {
+    my $response;
+    my $stream;
+    my $url = 'https://raw.github.com/tobie/ua-parser/master/regexes.yaml';
+    #trying curl
+    print "Trying curl\n";
+    open $stream, "-|", "curl $url" or die;
+    while(<$stream>) { $response .= "$_" };
+    
+    ##trying wget
+    if (!$response){
+	print "Trying wget\n";
+	open $stream, "-|", "wget $url" or die;
+	while(<$stream>) { $response .= "$_" };
+    }
+    
+    ##trying lwp-request
+    if (!$response){
+	print "Trying lwp-request\n";
+	open $stream, "-|", "lwp-request $url" or die;
+	while(<$stream>) { $response .= "$_" };
+    }
+    
+    return $response if $response;
+    print "Trying to fetch using LWP::UserAgent\n";
+    eval "use LWP::UserAgent";
+    if ($@){
+	print "We couldn't locate LWP::UserAgent Module\n";
+	print "LWP::UserAgent required to fetch regexes.yaml from server\n";
+	print "Please install it or get regexes.yaml file manually from\n";
+	print "https://raw.github.com/tobie/ua-parser/master/regexes.yaml\n";
+	print "and place it in the root folder of this distro\n";
+	print "then run Makefile.PL again\n";
+	exit;
+    }
+    my $ua = LWP::UserAgent->new;
+    $ua->timeout(5);
+    $ua->env_proxy();
+    $response = $ua->get($url);
+    if ($response->is_success) {
+        return $response->content;
+    } else {
+        print "Request aborted\n";
+        exit;
+    }
+}
+
+sub parse {
+    my $PARSER = HTTP::UA::Parser->new();
+    #print Dumper @parse;
+    print "\n";
+    for (@parse){
+        my $u = $PARSER->parse($_);
+        stringify($u->ua,'Browser');
+        stringify($u->os,'OS');
+        stringify($u->device,'Device');
+    }
+}
+
+sub stringify {
+    my $hash = shift;
+    my $name = shift;
+    while (my ($key,$val) = each %{$hash}){
+        $val = '' if !$val;
+        my $ss = $name . " " . $key;
+        $ss .= ' ' x (16 - length($ss));
+        print $ss . ' : ' . $val . "\n";
+    }
+}
+
+1;
+
