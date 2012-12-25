@@ -1,0 +1,9 @@
+Changes
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+README.pod
+t/HTTP-UA-Parser.t
+lib/HTTP/UA/Parser.pm
+lib/HTTP/UA/Parser/regexes.yaml
+script/ua_parser

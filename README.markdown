@@ -200,6 +200,31 @@ namespace UAParser.ConsoleApp
 }
 ```
 
+Usage :: Perl
+-------------
+```perl
+use HTTP::UA::Parser;
+my $r = HTTP::UA::Parser->new();
+
+print $r->ua->toString();         # -> "Safari 5.0.1"
+print $r->ua->toVersionString();  # -> "5.0.1"
+print $r->ua->family;             # -> "Safari"
+print $r->ua->major;              # -> "5"
+print $r->ua->minor;              # -> "0"
+print $r->ua->patch;              # -> "1"
+    
+print $r->os->toString();         # -> "iOS 5.1"
+print $r->os->toVersionString();  # -> "5.1"
+print $r->os->family              # -> "iOS"
+print $r->os->major;              # -> "5"
+print $r->os->minor;              # -> "1"
+print $r->os->patch;              # -> undef
+    
+print $r->device->family;         # -> "iPhone"
+
+More information is available in the README in the perl directory
+```
+
 License
 -------
 
@@ -215,7 +240,9 @@ The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apa
 
 The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10]. 
 
-The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11]. 
+The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11].
+
+The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
@@ -228,4 +255,4 @@ The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [A
 [9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
-
+[12]: http://dev.perl.org/licenses
