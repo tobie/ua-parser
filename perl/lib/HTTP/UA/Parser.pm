@@ -37,9 +37,7 @@ sub new {
     }
     
     my $self = {
-        user_agent => $ua || $ENV{HTTP_USER_AGENT},
-	modules => \%INC,
-	path => $PATH
+        user_agent => $ua || $ENV{HTTP_USER_AGENT}
     };
     return bless($self,$class);
 }
