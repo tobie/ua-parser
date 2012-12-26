@@ -1,0 +1,150 @@
+=head1 NAME
+
+HTTP::UA::Parser
+
+=head1 DESCRIPTION
+
+Perl port of the ua-parser project - L<https://github.com/tobie/ua-parser>
+
+=head1 SYNOPSIS
+
+    use HTTP::UA::Parser;
+    my $r = HTTP::UA::Parser->new();
+    
+    print $r->ua->toString();         # -> "Safari 5.0.1"
+    print $r->ua->toVersionString();  # -> "5.0.1"
+    print $r->ua->family;             # -> "Safari"
+    print $r->ua->major;              # -> "5"
+    print $r->ua->minor;              # -> "0"
+    print $r->ua->patch;              # -> "1"
+    
+    print $r->os->toString();         # -> "iOS 5.1"
+    print $r->os->toVersionString();  # -> "5.1"
+    print $r->os->family              # -> "iOS"
+    print $r->os->major;              # -> "5"
+    print $r->os->minor;              # -> "1"
+    print $r->os->patch;              # -> undef
+    
+    print $r->device->family;         # -> "iPhone"
+    
+=head1 Methods
+
+=head2 new()
+
+Accepts a user agent string to parse, leave empty to parse caller user agent.
+
+=head2 parse()
+
+Accepts a new user agent to parse
+
+=head2 ua()
+
+Parses browser part of the user agent
+
+=head2 os()
+
+Parsers operating system part of the user agent
+
+=head2 device()
+
+Parses device part of the user agent
+
+=head1 Strigify Methods
+
+Methods to print results as strings
+
+=over 4
+
+=item toString()
+
+returns os / ua name
+
+=item toVersionString()
+
+returns full version number of os/browser
+
+=item family()
+
+returns family name of os/browser/device
+
+=item major()
+
+returns version's major part of os/browser
+
+=item minor()
+
+returns version's minor part of os/browser
+
+=item patch()
+
+returns versions patch part of os/browser
+
+=item patchMinor()
+
+returns version patch minor part of os/browser
+
+=back
+
+=head1 Helper Methods
+
+=head2 isMobile()
+
+returns 1 if user agent comes from a mobile device 0 otherwise
+
+=head2 isSpider()
+
+returns 1 if user agent comes from a spider agent 0 otherwise
+
+=head2 isComputer()
+
+returns 1 if user agent comes from a computer device 0 otherwise
+    
+=head1 INSTALLATION
+
+From CPAN shell simply type
+
+    % perl -MCPAN -e 'install HTTP::UA::Parser'
+
+Or from your local download, unpack and:
+
+    % perl Makefile.PL
+    % make && make test
+    
+Then install:
+
+    % make install
+
+=head1 USING WITHOUT INSTALLATION
+
+You can use HTTP::UA::Parser Module without installation directly from the forked ua-parser
+project, to do so, you need to include lib path of the perl port
+
+    use lib '/full/path/to/ua-parser/perl/lib';
+    use HTTP::UA::Parser;
+    ...
+
+=head1 COMMAND LINE
+
+To update regexes.yaml file from command line
+    
+    % ua_parser -u
+
+To parse some user agent from command line
+
+    % ua_parser -p "some user agent"
+    
+Help usage
+
+    % ua_parser -h
+
+=head1 AUTHOR
+
+Mamod A. Mehyar, E<lt>mamod.mehyar@gmail.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2012 by Mamod A. Mehyar
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.10.1 or,
+at your option, any later version of Perl 5 you may have available.
