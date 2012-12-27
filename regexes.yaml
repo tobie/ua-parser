@@ -283,7 +283,7 @@ user_agent_parsers:
 
   # BlackBerry devices
   - regex: '(BB10);'
-    family_replacement: 'BlackBerry WebKit'
+    family_replacement: 'Blackberry WebKit'
   - regex: '(PlayBook).+RIM Tablet OS (\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Blackberry WebKit'
   - regex: '(Black[bB]erry).+Version/(\d+)\.(\d+)\.(\d+)'
