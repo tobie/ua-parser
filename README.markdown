@@ -105,41 +105,35 @@ Usage :: php
 ------------
 
 ```php
-require("UAParser.php");
-$ua = UA::parse();
+require("uaparser.php");
 
-print $ua->family;        // Chrome (can also use $ua->browser)
-print $ua->major;         // 16
-print $ua->minor;         // 0
-print $ua->patch;         // 912 (can also use $ua->build)
-print $ua->browserFull;   // Chrome 16.0.912
-print $ua->version;       // 16.0.912
+$ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-print $ua->os;            // Mac OS X
-print $ua->osMajor;       // 10
-print $ua->osMinor;       // 6
-print $ua->osPatch;       // 8 (can also use $ua->osBuild)
-print $ua->osFull;        // Mac OS X 10.6.8
-print $ua->osVersion;     // 10.6.8
+$parser = new UAParser;
+$result = $parser->parse($ua);
 
-print $ua->full;          // Chrome 16.0.912/Mac OS X 10.6.8
+print $result->ua->family;                // Safari
+print $result->ua->major;                 // 6
+print $result->ua->minor;                 // 0
+print $result->ua->patch;                 // 2
+print $result->ua->toString;              // Safari 6.0.2
+print $result->ua->toVersionString;       // 6.0.2
 
-// in select cases the device information will also be captured
+print $result->os->family;                // Mac OS X
+print $result->os->major;                 // 10
+print $result->os->minor;                 // 7
+print $result->os->patch;                 // 5
+print $result->os->patch_minor;           // [null]
+print $result->os->toString;              // Mac OS X 10.7.5
+print $result->os->toVersionString;       // 10.7.5
 
-print $ua->device;        // Palm Pixi
-print $ua->deviceMajor;   // 1
-print $ua->deviceMinor;   // 0
-print $ua->deviceFull;    // Palm Pixi 1.0
-print $ua->deviceVersion; // 1.0
+print $result->device->family;            // Other
 
-// some other generic boolean options
-
-print $ua->isMobile;      // true or false
-print $ua->isSpider;      // true or false
-print $ua->isComputer;    // true or false
-
-More information is available in the README in the PHP directory
+print $result->toFullString;              // Safari 6.0.2/Mac OS X 10.7.5
+print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
+
+[More information is available in the README](https://github.com/tobie/ua-parser/tree/master/php) in the PHP directory
 
 Usage :: D
 -------------
