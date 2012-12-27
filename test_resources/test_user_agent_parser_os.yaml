@@ -364,3 +364,4 @@ test_cases:
     major: '10'
     minor: '0'
     patch: '9'
+    patch_minor: 
