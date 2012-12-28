@@ -18,6 +18,7 @@
 
 __author__ = 'Lindsey Simon <elsigh@gmail.com>'
 
+import json
 import os
 import re
 import yaml
@@ -376,17 +377,30 @@ def GetFilters(user_agent_string, js_user_agent_string=None,
 
 # Build the list of user agent parsers from YAML
 UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
+regexes = None
 if not UA_PARSER_YAML:
     yamlPath = os.path.join(ROOT_DIR, '../../regexes.yaml')
+    json_path = os.path.join(ROOT_DIR, '../../regexes.json')
 else:
-    yamlPath = UA_PARSER_YAML
+    yamlFile = open(UA_PARSER_YAML)
+    regexes = yaml.load(yamlFile)
+    yamlFile.close()
 
-yamlFile = open(yamlPath)
-yaml = yaml.load(yamlFile)
-yamlFile.close()
+# If UA_PARSER_YAML is not specified, load regexes from regexes.json before
+# falling back to with yaml
+if regexes is None:
+    try:
+        json_file = open(json_path)
+        regexes = json.loads(json_file.read())
+        json_file.close()
+    except IOError:
+        yamlFile = open(yamlPath)
+        regexes = yaml.load(yamlFile)
+        yamlFile.close()
+
 
 USER_AGENT_PARSERS = []
-for _ua_parser in yaml['user_agent_parsers']:
+for _ua_parser in regexes['user_agent_parsers']:
     _regex = _ua_parser['regex']
 
     _family_replacement = None
@@ -402,7 +416,7 @@ for _ua_parser in yaml['user_agent_parsers']:
                                               _v1_replacement))
 
 OS_PARSERS = []
-for _os_parser in yaml['os_parsers']:
+for _os_parser in regexes['os_parsers']:
     _regex = _os_parser['regex']
 
     _os_replacement = None
@@ -413,7 +427,7 @@ for _os_parser in yaml['os_parsers']:
 
 
 DEVICE_PARSERS = []
-for _device_parser in yaml['device_parsers']:
+for _device_parser in regexes['device_parsers']:
     _regex = _device_parser['regex']
 
     _device_replacement = None
