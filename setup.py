@@ -48,7 +48,7 @@ setup(
     install_requires=[
         'pyyaml',
     ],
-    cmdclass={'install': install},
+    cmdclass={'install': install, 'develop': install},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
