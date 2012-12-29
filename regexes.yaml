@@ -418,7 +418,14 @@ os_parsers:
   ##########
   - regex: '(Tizen)/(\d+)\.(\d+)'
 
-
+  #########
+  # Android OS correction for Kindle Fires
+  # Early versions claim to be running Mac OS X when in desktop browsing mode
+  #########
+  - regex: '(Kindle Fire)'
+  - regex: '(Kindle)'
+  - regex: '(Silk-Accelerated)'
+    os_replacement: 'Android'
 
   ##########
   # Mac OS
@@ -655,7 +662,7 @@ device_parsers:
   ##########
   - regex: '(Kindle Fire)'
   - regex: '(Kindle)'
-  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+  - regex: '(Silk-Accelerated)'
     device_replacement: 'Kindle Fire'
 
   ##########
