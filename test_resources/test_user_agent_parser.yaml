@@ -110,9 +110,9 @@ test_cases:
     patch:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
-    family: 'Kindle'
-    major: '1'
-    minor: '0'
+    family: 'NetFront'
+    major: '3'
+    minor: '3'
     patch:
 
   - user_agent_string: 'Opera/9.80 (Android 3.2; Linux; Opera Tablet/ADR-1106291546; U; en) Presto/2.8.149 Version/11.10'
