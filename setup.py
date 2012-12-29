@@ -32,9 +32,9 @@ class install(_install):
 
 
 setup(
-    name='ua_parser',
-    version='1.0',
-    description='',
+    name='ua-parser',
+    version='0.3.0',
+    description="Python port of Browserscope's user agent parser",
     author='PBS',
     author_email='no-reply@pbs.org',
     packages=find_packages('py'),
@@ -45,9 +45,7 @@ setup(
     include_package_data=True,
     package_data={'': ['README.markdown']},
     data_files=[('data', ['regexes.yaml'])],
-    install_requires=[
-        'pyyaml',
-    ],
+    install_requires=['pyyaml'],
     cmdclass={'install': install, 'develop': install},
     classifiers=[
         'Development Status :: 4 - Beta',
