@@ -282,6 +282,8 @@ user_agent_parsers:
   - regex: '(Nokia)[EN]?(\d+)'
 
   # BlackBerry devices
+  - regex: '(BB10);'
+    family_replacement: 'Blackberry WebKit'
   - regex: '(PlayBook).+RIM Tablet OS (\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Blackberry WebKit'
   - regex: '(Black[bB]erry).+Version/(\d+)\.(\d+)\.(\d+)'
@@ -486,6 +488,8 @@ os_parsers:
   ##########
   # BlackBerry devices
   ##########
+  - regex: '(BB10);.+Version/(\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'BlackBerry OS'
   - regex: '(Black[Bb]erry)[0-9a-z]+/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
     os_replacement: 'BlackBerry OS'
   - regex: '(Black[Bb]erry).+Version/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
@@ -612,6 +616,8 @@ device_parsers:
   # Blackberry
   # http://www.useragentstring.com/pages/BlackBerry/
   ##########
+  - regex: 'BB10; ([A-Za-z0-9\- ]+)\)'
+    device_replacement: 'BlackBerry $1'
   - regex: '(PlayBook).+RIM Tablet OS'
     device_replacement: 'Blackberry Playbook'
   - regex: '(Black[Bb]erry [0-9]+);'
@@ -843,43 +849,3 @@ device_parsers:
   - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks)'
     device_replacement: 'Spider'
 
-
-mobile_user_agent_families:
-  - 'Firefox Mobile'
-  - 'Opera Mobile'
-  - 'Opera Mini'
-  - 'Mobile Safari'
-  - 'webOS'
-  - 'IE Mobile'
-  - 'Playstation Portable'
-  - 'Nokia'
-  - 'Blackberry'
-  - 'Palm'
-  - 'Silk'
-  - 'Android'
-  - 'Maemo'
-  - 'Obigo'
-  - 'Netfront'
-  - 'AvantGo'
-  - 'Teleca'
-  - 'SEMC-Browser'
-  - 'Bolt'
-  - 'Iris'
-  - 'UP.Browser'
-  - 'Symphony'
-  - 'Minimo'
-  - 'Bunjaloo'
-  - 'Jasmine'
-  - 'Dolfin'
-  - 'Polaris'
-  - 'BREW'
-  - 'Chrome Mobile'
-  - 'UC Browser'
-  - 'Tizen Browser'
-
-# Some select mobile OSs report a desktop browser.
-# make sure we note they're mobile
-mobile_os_families:
-  - 'Windows Phone 6.5'
-  - 'Windows CE'
-  - 'Symbian OS'
