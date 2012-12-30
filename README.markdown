@@ -222,14 +222,14 @@ More information is available in the README in the perl directory
 Maintainers
 -----------
 
-C#:             Søren Enemærke ([enemaerke](https://github.com/enemaerke))
-D:              Shripad K ([shripadk](https://github.com/shripadk))
-Haskell:        Ozgun Ataman ([ozataman](https://github.com/ozataman))
-Java:           Steve Jiang ([sjiang](https://github.com/sjiang))
-JavaScript:     Tobie Langel ([tobie](https://github.com/tobie))
-Perl:           Mamod Mehyar ([mamod](https://github.com/mamod))
-PHP:            Dave Olsen ([dmolsen](https://github.com/dmolsen))
-Python:         Lindsey Simon ([elsigh](https://github.com/elsigh))
+C#:         Søren Enemærke ([enemaerke](https://github.com/enemaerke))  
+D:          Shripad K ([shripadk](https://github.com/shripadk))  
+Haskell:    Ozgun Ataman ([ozataman](https://github.com/ozataman))  
+Java:       Steve Jiang ([sjiang](https://github.com/sjiang))  
+JavaScript: Tobie Langel ([tobie](https://github.com/tobie))  
+Perl:       Mamod Mehyar ([mamod](https://github.com/mamod))  
+PHP:        Dave Olsen ([dmolsen](https://github.com/dmolsen))  
+Python:     Lindsey Simon ([elsigh](https://github.com/elsigh))  
 
 `regexes.yaml`: Lindsey Simon & Tobie Langel
 
