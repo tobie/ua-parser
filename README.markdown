@@ -45,13 +45,15 @@ console.log(p.parseDevice(navigator.userAgent).toString());
 
 Usage :: python
 ---------------
-```python
-# Install this into python site_packages like so:
-#
-# python setup.py install
-#
-# Now you're good to go.
+You can install `ua-parser` by running:
 
+```python
+pip install ua-parser
+```
+
+And here's how to use it:
+
+```python
 from ua_parser import user_agent_parser
 
 # On the server, you could use a WebOB request object.
