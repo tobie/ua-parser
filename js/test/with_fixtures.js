@@ -11,18 +11,22 @@ function readYAML(fileName) {
   return fixtures;
 }
 
+function msg(name, actual, expected) {
+  return "Expected " + name + " to be " + JSON.stringify(expected) + " got " + JSON.stringify(actual) + " instead.";
+}
+
 ['firefox_user_agent_strings.yaml', 'test_user_agent_parser.yaml'].forEach(function(fileName) {
   var fixtures = readYAML(fileName).test_cases;
   suite(fileName, function() {
     fixtures.forEach(function(f) {
       if (f.js_ua) return;
       test(f.user_agent_string, function() {
-        var r = uaParser.parse(f.user_agent_string);
+        var ua = uaParser.parse(f.user_agent_string).userAgent;
         fixFixture(f, ['major', 'minor', 'patch']);
-        assert.strictEqual(r.userAgent.family, f.family);
-        assert.strictEqual(r.userAgent.major, f.major);
-        assert.strictEqual(r.userAgent.minor, f.minor);
-        assert.strictEqual(r.userAgent.patch, f.patch);
+        assert.strictEqual(ua.family, f.family, msg('ua.family', ua.family, f.family));
+        assert.strictEqual(ua.major, f.major, msg('ua.major', ua.major, f.major));
+        assert.strictEqual(ua.minor, f.minor, msg('ua.minor', ua.minor, f.minor));
+        assert.strictEqual(ua.patch, f.patch, msg('ua.patch', ua.patch, f.patch));
       });
     });
   });
@@ -33,13 +37,13 @@ function readYAML(fileName) {
   suite(fileName, function() {
     fixtures.forEach(function(f) {
       test(f.user_agent_string, function() {
-        var r = uaParser.parse(f.user_agent_string);
+        var os = uaParser.parse(f.user_agent_string).os;
         fixFixture(f, ['major', 'minor', 'patch', 'patch_minor']);
-        assert.strictEqual(r.os.family, f.family);
-        assert.strictEqual(r.os.major, f.major);
-        assert.strictEqual(r.os.minor, f.minor);
-        assert.strictEqual(r.os.patch, f.patch);
-        assert.strictEqual(r.os.patchMinor, f.patch_minor);
+        assert.strictEqual(os.family, f.family, msg('os.family', os.family, f.family));
+        assert.strictEqual(os.major, f.major, msg('os.major', os.major, f.major));
+        assert.strictEqual(os.minor, f.minor, msg('os.minor', os.minor, f.minor));
+        assert.strictEqual(os.patch, f.patch, msg('os.patch', os.patch, f.patch));
+        assert.strictEqual(os.patchMinor, f.patch_minor, msg('os.patchMinor', os.patchMinor, f.patch_minor));
       });
     });
   });
@@ -50,8 +54,8 @@ function readYAML(fileName) {
   suite(fileName, function() {
     fixtures.forEach(function(f) {
       test(f.user_agent_string, function() {
-        var r = uaParser.parse(f.user_agent_string);
-        assert.strictEqual(r.device.family, f.family);
+        var device = uaParser.parse(f.user_agent_string).device;
+        assert.strictEqual(device.family, f.family, msg('device.family', device.family, f.family));
       });
     });
   });
