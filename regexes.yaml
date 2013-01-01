@@ -110,9 +110,6 @@ user_agent_parsers:
   # Bots
   - regex: '(YottaaMonitor|BrowserMob|HttpMonitor|YandexBot|Slurp|BingPreview|PagePeeker|ThumbShotsBot|WebThumb|URL2PNG|ZooShot|GomezA|Catchpoint bot|Willow Internet Crawler|Google SketchUp|Read%20Later)'
 
-  # must go before NetFront below
-  - regex: '(Kindle)/(\d+)\.(\d+)'
-
   - regex: '(Symphony) (\d+).(\d+)'
 
   - regex: '(Minimo)'
@@ -176,7 +173,10 @@ user_agent_parsers:
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris|BREW) (\d+)\.(\d+)\.?(\d+)?'
-
+  
+  # Kindle WebKit
+  - regex: '(Kindle)/(\d+)\.(\d+)'
+  
   # weird android UAs
   - regex: '(Android) Donut'
     v1_replacement: '1'
@@ -308,6 +308,7 @@ user_agent_parsers:
 
   # Amazon Silk, should go before Safari
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    family_replacement: 'Amazon Silk'
 
   # WebKit Nightly
   - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Safari'
@@ -366,6 +367,12 @@ os_parsers:
     os_v1_replacement: '3'
 
   ##########
+  # Kindle Android
+  ##########
+  - regex: '(Silk-Accelerated=[a-z]{4,5})'
+    os_replacement: 'Android'
+
+  ##########
   # Windows
   # http://en.wikipedia.org/wiki/Windows_NT#Releases
   # possibility of false positive when different marketing names share same NT kernel
@@ -417,8 +424,6 @@ os_parsers:
   # spoofs Android so pushing it above
   ##########
   - regex: '(Tizen)/(\d+)\.(\d+)'
-
-
 
   ##########
   # Mac OS
@@ -586,6 +591,24 @@ device_parsers:
   - regex: 'SonyEricsson([A-Za-z0-9]+)/'
     device_replacement: 'Ericsson $1'
 
+  ##########
+  # incomplete!
+  # Kindle
+  # http://amazonsilk.wordpress.com/useful-bits/silk-user-agent/
+  ##########
+  - regex: '(KFOT Build)'
+    device_replacement: 'Kindle Fire'
+  - regex: '(KFTT Build)'
+    device_replacement: 'Kindle Fire HD'
+  - regex: '(KFJWI Build)'
+    device_replacement: 'Kindle Fire HD 8.9" WiFi'
+  - regex: '(KFJWA Build)'
+    device_replacement: 'Kindle Fire HD 8.9" 4G'
+  - regex: '(Kindle Fire)'
+  - regex: '(Kindle)'
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    device_replacement: 'Kindle Fire'
+      
   #########
   # Android General Device Matching (far from perfect)
   #########
@@ -648,15 +671,6 @@ device_parsers:
   ##########
   - regex: '(PlayStation Portable)'
   - regex: '(PlayStation Vita)'
-
-  ##########
-  # incomplete!
-  # Kindle
-  ##########
-  - regex: '(Kindle Fire)'
-  - regex: '(Kindle)'
-  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
-    device_replacement: 'Kindle Fire'
 
   ##########
   # AppleTV
