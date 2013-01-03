@@ -238,12 +238,15 @@ Maintainers
 Usage :: Haskell
 ---------------
 ```haskell
-# Install via Hackage and cabal like so:
-#
-# cabal update
-# cabal install ua-parser
-#
-# Now you're good to go.
+{-
+
+Install via Hackage and cabal like so:
+
+cabal update
+cabal install ua-parser
+Now you're good to go.
+
+-}
 
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -268,11 +271,10 @@ Just (UAResult {uarFamily = "Mobile Safari", uarV1 = Just "5", uarV2 = Just "1",
 
 -- Result from operating system parse
 Just (OSResult {osrFamily = "iOS", osrV1 = Just "5", osrV2 = Just "1", osrV3 = Nothing, osrV4 = Nothing})
-
-
-Plesae refer to Haddocks for more info - the API is pretty straightforward.
-
 ```
+
+Plesae refer to Haddocks for more info; the API is pretty straightforward.
+
 
 
 License

@@ -1,5 +1,5 @@
 Name:                ua-parser
-Description:         Please refer to the git README on the project for example usage.
+Description:         Please refer to the git/github README on the project for example usage.
 Version:             0.2.1
 Synopsis:            Port of ua-parser in Haskell
 License:             BSD3
@@ -27,7 +27,7 @@ Library
 
 
   Build-depends:       
-      base
+      base < 5
     , bytestring
     , text
     , pcre-light
