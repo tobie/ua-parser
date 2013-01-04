@@ -171,6 +171,8 @@ void main() {
 
 Usage :: C#
 -------------
+You can access the package via [NuGet][13]
+
 ```csharp
 using System;
 
@@ -307,3 +309,4 @@ The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Per
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
+[13]: https://nuget.org/packages/uaparser
