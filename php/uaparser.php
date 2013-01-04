@@ -85,9 +85,9 @@ class UAParser {
         );
 
         // figure out the ua, os, and device properties if possible
-        $result->ua           = $this->uaParser($ua);
-        $result->os           = $this->osParser($ua);
-        $result->device       = $this->deviceParser($ua);
+        $result->ua           = $this->uaParse($ua);
+        $result->os           = $this->osParse($ua);
+        $result->device       = $this->deviceParse($ua);
         
         // create a full string version based on the ua and os objects
         $result->toFullString = $this->toFullString($result->ua, $result->os);
@@ -106,7 +106,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the user agent parsing
      */
-    public function uaParser($uaString = '') {
+    public function uaParse($uaString = '') {
 
         // build the default obj that will be returned
         $ua = (object) array(
@@ -157,7 +157,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the os parsing
      */
-    public function osParser($uaString = '') {
+    public function osParse($uaString = '') {
         
         // build the default obj that will be returned
         $os = (object) array(
@@ -210,7 +210,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the device parsing
      */
-    public function deviceParser($uaString = '') {
+    public function deviceParse($uaString = '') {
         
         // build the default obj that will be returned
         $device = (object) array(
