@@ -100,8 +100,9 @@ if (php_sapi_name() == "cli") {
     foreach ($data["test_cases"] as $test_case) {
         $result = $parser->parse($test_case["user_agent_string"]);
         if (!assertEqual($result->device->family,$test_case["family"])) {
-            print "\n    mismatch: got d: ".$ua->device->family." and expected d: ".$test_case["family"];
+            print "\n    mismatch: got d: ".$result->device->family." and expected d: ".$test_case["family"];
             print "\n    the mismatched ua: ".$test_case["user_agent_string"];
+            print "\n";
         } else {
             print ".";
         }
