@@ -9,7 +9,7 @@ v2.0 of the PHP library, released in December 2012, marked a huge transition fro
 * the `UAParser` class is now dynamic
 * properties are nested _(e.g. $result->family is now $result->ua->family)_
 * a user agent string is now required when using `parse()`. the auto-magical "use the server provided UA" is no longer supported.
-* `uaParser()`, `osParser()`, and `deviceParser()` are public and can be used to just return those select bits for a given user agent string.
+* `uaParse()`, `osParse()`, and `deviceParse()` are public and can be used to just return those select bits for a given user agent string.
 * the `is*` boolean properties _(e.g. isMobile)_ have been dropped. they now exist as part of the `ua-classifier` project.
 
 Please refer to the `CHANGELOG` for the full list of changes.
