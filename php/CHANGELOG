@@ -2,6 +2,10 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-2.0.1
+ - FIX: renamed uaParser, osParser, & deviceParser to uaParse, osParse, & deviceParse to address a bug with uaParser being recognized as the contruct function for the overall lib
+ - FIX: updated the test lib so that device failures are properly formatted
+
 UAP-2.0.0
  - ADD: toString() converts the version bits and family into a simple string
  - ADD: toVersionString() converts the version bits into a simple string
