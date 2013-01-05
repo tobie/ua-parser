@@ -48,7 +48,7 @@ Usage :: python
 You can install `ua-parser` by running:
 
 ```python
-pip install ua-parser
+pip install pyyaml ua-parser
 ```
 
 And here's how to use it:
