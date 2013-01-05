@@ -73,32 +73,7 @@ sub device {
     return $self->{device};
 }
 
-sub isMobile {
-    my $self = shift;
-    my $family = $self->ua->family;
-    if ($family){
-	foreach my $agent (@{$REGEX->{mobile_user_agent_families}}){
-	    return 1 if $family eq $agent;
-	}
-    }
-    return 0;
-}
 
-sub isSpider {
-    my $self = shift;
-    if ($self->device->{family} eq 'Spider') {
-	return 1;
-    }
-    return 0;
-}
-
-sub isComputer {
-    my $self = shift;
-    if (!$self->isSpider){
-	return 1 if !$self->isMobile;
-    }
-    return 0;
-}
 
 ##=============================================================================
 ## UA Package
@@ -422,20 +397,6 @@ returns versions patch part of os/browser
 returns version patch minor part of os/browser
 
 =back
-
-=head1 Helper Methods
-
-=head2 isMobile()
-
-returns 1 if user agent comes from a mobile device 0 otherwise
-
-=head2 isSpider()
-
-returns 1 if user agent comes from a spider agent 0 otherwise
-
-=head2 isComputer()
-
-returns 1 if user agent comes from a computer device 0 otherwise
     
 =head1 INSTALLATION
 

@@ -84,20 +84,6 @@ returns versions patch part of os/browser
 returns version patch minor part of os/browser
 
 =back
-
-=head1 Helper Methods
-
-=head2 isMobile()
-
-returns 1 if user agent comes from a mobile device 0 otherwise
-
-=head2 isSpider()
-
-returns 1 if user agent comes from a spider agent 0 otherwise
-
-=head2 isComputer()
-
-returns 1 if user agent comes from a computer device 0 otherwise
     
 =head1 INSTALLATION
 
