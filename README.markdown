@@ -7,6 +7,11 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 
 `ua-parser` is just a small wrapper around this data.
 
+irc channel
+-----------
+
+[#ua-parser on freenode](irc://chat.freenode.net#ua-parse).
+
 
 Usage :: [node.js][1]
 ---------------------
