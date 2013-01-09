@@ -39,10 +39,10 @@ class UAParser {
     /**
      * Start up the parser by importing the json file to $this->regexes
      */
-    public function __construct() {
-        
-        if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
-            $this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
+    public function __construct($custom_regexes_file = null) {
+        $regexes_file = $custom_regexes_file !== null ? $custom_regexes_file : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
+        if (file_exists($regexes_file)) {
+            $this->regexes = json_decode(file_get_contents($regexes_file));
         } else {
             $title        = 'Error loading ua-parser';
             $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
