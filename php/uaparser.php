@@ -33,8 +33,8 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 
 class UAParser {
     
-    private $regexes;
-    private $log = false;
+    protected $regexes;
+    protected $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
@@ -285,7 +285,7 @@ class UAParser {
     /**
     * Logs the user agent info
     */
-    private function log($data) {
+    protected function log($data) {
         $jsonData = json_encode($data);
         $fp = fopen(dirname(__FILE__).DIRECTORY_SEPARATOR.'log/user_agents.log', 'a');
         fwrite($fp, $jsonData."\r\n");
