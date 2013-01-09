@@ -7,11 +7,24 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 
 `ua-parser` is just a small wrapper around this data.
 
+Maintainers
+-----------
+
+* C#:         [Søren Enemærke ](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))  
+* D:          [Shripad K ](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))  
+* Haskell:    [Ozgun Ataman ](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))  
+* Java:       [Steve Jiang ](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))  
+* JavaScript: [Tobie Langel ](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))  
+* Perl:       [Mamod Mehyar ](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))  
+* PHP:        [Dave Olsen ](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))  
+* Python:     [Lindsey Simon ](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))  
+
+* `regexes.yaml`: Lindsey Simon & Tobie Langel
+
 irc channel
 -----------
 
 [#ua-parser on freenode](irc://chat.freenode.net#ua-parse).
-
 
 Usage :: [node.js][1]
 ---------------------
@@ -265,21 +278,6 @@ Just (OSResult {osrFamily = "iOS", osrV1 = Just "5", osrV2 = Just "1", osrV3 = N
 ```
 
 Plesae refer to Haddocks for more info; the API is pretty straightforward.
-
-Maintainers
------------
-
-* C#:         Søren Enemærke ([enemaerke](https://github.com/enemaerke))  
-* D:          Shripad K ([shripadk](https://github.com/shripadk))  
-* Haskell:    Ozgun Ataman ([ozataman](https://github.com/ozataman))  
-* Java:       Steve Jiang ([sjiang](https://github.com/sjiang))  
-* JavaScript: Tobie Langel ([tobie](https://github.com/tobie))  
-* Perl:       Mamod Mehyar ([mamod](https://github.com/mamod))  
-* PHP:        Dave Olsen ([dmolsen](https://github.com/dmolsen))  
-* Python:     Lindsey Simon ([elsigh](https://github.com/elsigh))  
-
-* `regexes.yaml`: Lindsey Simon & Tobie Langel
-
 
 License
 -------
