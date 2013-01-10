@@ -1,9 +1,13 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
+  # must go before WebKit
+  - regex: '(NintendoBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Wii U Browser'
+
   # must go before Opera
   - regex: '^(Opera)/(\d+)\.(\d+) \(Nintendo Wii'
-    family_replacement: 'Wii'
+    family_replacement: 'Wii Browser'
 
   # must go before Firefox to catch SeaMonkey/Camino
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
@@ -173,10 +177,10 @@ user_agent_parsers:
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris|BREW) (\d+)\.(\d+)\.?(\d+)?'
-  
+
   # Kindle WebKit
   - regex: '(Kindle)/(\d+)\.(\d+)'
-  
+
   # weird android UAs
   - regex: '(Android) Donut'
     v1_replacement: '1'
@@ -491,6 +495,12 @@ os_parsers:
     os_replacement: 'Symbian OS'
 
   ##########
+  # Nintendo Wii U
+  ##########
+  - regex: '(Nintendo WiiU).+NX/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'Nintendo Wii U'
+
+  ##########
   # BlackBerry devices
   ##########
   - regex: '(BB10);.+Version/(\d+)\.(\d+)\.(\d+)'
@@ -608,7 +618,7 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
-      
+
   #########
   # Android General Device Matching (far from perfect)
   #########
@@ -838,6 +848,12 @@ device_parsers:
   ##########
   - regex: '(PlayStation3 PPC)'
     device_replacement: 'Playstation 3'
+
+  ##########
+  # Nintendo Wii U
+  ##########
+  - regex: '(Nintendo WiiU)'
+    device_replacement: 'Nintendo Wii U'
 
   ##########
   # Generic Smart Phone
