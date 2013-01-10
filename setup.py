@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
 import shutil
-import sys
 
+from pkg_resources import resource_filename
 from setuptools import setup, find_packages
 from setuptools.command.install import install as _install
 
@@ -17,7 +17,7 @@ class install(_install):
         import yaml
         import ua_parser
         INSTALLATION_DIR = os.path.dirname(ua_parser.__file__)
-        source_path = os.path.join(sys.prefix, 'data', 'regexes.yaml')
+        source_path = resource_filename(__name__, 'regexes.yaml')
         destination_path = os.path.join(INSTALLATION_DIR,
                                         'regexes.yaml')
         shutil.move(source_path, destination_path)
