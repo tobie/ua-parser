@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php Test Suite v2.0.0
+ * ua-parser-php Test Suite v2.5.0
  *
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -12,7 +12,7 @@
  * the standards set forth for ua-parser libraries.
  *
  * IMPORTANT: This test suite skips the Chrome Frame tests because
- *            the PHP lib doesn"t support that feature.
+ *            the PHP lib doesn't support that feature.
  *
  */
 
@@ -42,23 +42,23 @@ function assertEqual($actual,$expected) {
 }
 
 /**
- * Take the elements from the test cases and test them against the results from uaparser.php
+ * reports the mismatch between a test and what was returned from uaparser.php
  * @param  object  the result of parsing the supplied test UA
- * @param  string  the expected test case family result
- * @param  string  the expected test case major version result
- * @param  string  the expected test case minor version result
- * @param  string  the expected test case patch version result
- * @param  string  the test case user agent
- * @return string  the result of the test
+ * @param  array  the test case properties
+ * @param  string  the name of the test file
+ * @return string  error report for the failing test
  */
-function testCase($obj,$tc_family,$tc_major,$tc_minor,$tc_patch,$tc_ua) {
-    if (!assertEqual($obj->family,$tc_family) || !assertEqual($obj->major,$tc_major) || !assertEqual($obj->minor,$tc_minor) || !assertEqual($obj->patch,$tc_patch)) {
-        print "\n    mismatch: got f: ".$obj->family." ma: ".$obj->major." mi: ".$obj->minor." p: ".$obj->patch." and expected f: ".$tc_family." ma: ".$tc_major." mi: ".$tc_minor." p: ".$tc_patch;
-        print "\n    the mismatched ua: ".$tc_ua;
-        print "\n";
-    } else {
-        print ".";
-    }
+function reportMismatch($obj,$tc,$tf) {
+	if ($tf == "test_device") {
+		$info = "mismatch: got d: ".$obj->device->family." and expected d: ".$tc['family'];
+	} else if (($tf == "test_user_agent_parser_os") || ($tf == "additional_os_tests")) {
+		$info = "mismatch: got f: ".$obj->os->family." ma: ".$obj->os->major." mi: ".$obj->os->minor." p: ".$obj->os->patch." pm: ".$obj->patch_minor."  expected f: ".$tc['family']." ma: ".$tc['major']." mi: ".$tc['minor']." p: ".$tc['patch']." pm: ".$tc['patch_minor'];
+	} else {
+		$info = "mismatch: got f: ".$obj->ua->family." ma: ".$obj->ua->major." mi: ".$obj->ua->minor." p: ".$obj->ua->patch." expected f: ".$tc['family']." ma: ".$tc['major']." mi: ".$tc['minor']." p: ".$tc['patch'];
+	}
+	print "\n    ".$info;
+	print "\n    the mismatched ua: ".$tc['user_agent_string'];
+	print "\n";
 }
 
 /*
@@ -72,48 +72,31 @@ if (php_sapi_name() == "cli") {
         exit;
     }
     
-    print "\nrunning uaparser.php against test_user_agent_parser.yaml...\n";
-    $data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser.yaml");
-    foreach($data["test_cases"] as $test_case) {
-        if (!isset($test_case["js_ua"])) {
-            $result = $parser->parse($test_case["user_agent_string"]);
-            testCase($result->ua,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
-        }
-    }
+	// test files and properties normally in them
+	$test_files = array("test_user_agent_parser","test_user_agent_parser_os","additional_os_tests","test_device","firefox_user_agent_strings");
+	$test_props = array("family", "major", "minor", "patch", "patch_minor");
+	$test_types = array("test_device" => "device", "test_user_agent_parser_os" => "os", "additional_os_tests" => "os", "test_user_agent_parser" => "ua", "firefox_user_agent_strings" => "ua");
 
-    print "\n\nrunning uaparser.php against test_user_agent_parser_os.yaml...\n";
-    $data = Spyc::YAMLLoad($basePath."../test_resources/test_user_agent_parser_os.yaml");
-    foreach ($data["test_cases"] as $test_case) {
-        $result = $parser->parse($test_case["user_agent_string"]);
-        testCase($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
-    }
-
-    print "\n\nrunning uaparser.php against additional_os_tests.yaml...\n";
-    $data = Spyc::YAMLLoad($basePath."../test_resources/additional_os_tests.yaml");
-    foreach ($data["test_cases"] as $test_case) {
-        $result = $parser->parse($test_case["user_agent_string"]);
-        testCase($result->os,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
-    }
-
-    print "\n\nrunning uaparser.php against test_device.yaml...\n";
-    $data = Spyc::YAMLLoad($basePath."../test_resources/test_device.yaml");
-    foreach ($data["test_cases"] as $test_case) {
-        $result = $parser->parse($test_case["user_agent_string"]);
-        if (!assertEqual($result->device->family,$test_case["family"])) {
-            print "\n    mismatch: got d: ".$result->device->family." and expected d: ".$test_case["family"];
-            print "\n    the mismatched ua: ".$test_case["user_agent_string"];
-            print "\n";
-        } else {
-            print ".";
-        }
-    }
-
-    print "\n\nrunning uaparser.php against firefox_user_agent_strings.yaml...\n";
-    $data = Spyc::YAMLLoad($basePath."../test_resources/firefox_user_agent_strings.yaml");
-    foreach ($data["test_cases"] as $test_case) {
-        $result = $parser->parse($test_case["user_agent_string"]);
-        testCase($result->ua,$test_case["family"],$test_case["major"],$test_case["minor"],$test_case["patch"],$test_case["user_agent_string"]);
-    }
+	foreach($test_files as $test_file) {
+		print "\n\nrunning uaparser.php against ".$test_file.".yaml...\n";
+	    $data = Spyc::YAMLLoad($basePath."../test_resources/".$test_file.".yaml");
+		foreach($data["test_cases"] as $test_case) {
+	        if (!isset($test_case["js_ua"])) {
+				$bool   = true;
+	            $result = $parser->parse($test_case["user_agent_string"]);
+				foreach ($test_props as $test_prop) {
+					if ($bool) {
+						$bool = isset($test_case[$test_prop]) ? assertEqual($result->$test_types[$test_file]->$test_prop,$test_case[$test_prop]) : $bool;
+					}
+				}
+				if (!$bool) {
+					reportMismatch($result,$test_case,$test_file);
+				} else {
+					print ".";
+				}
+	        }
+	    }
+	}
 
     print "\n\ndone testing...\n";
 } else {
