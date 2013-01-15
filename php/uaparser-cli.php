@@ -211,6 +211,7 @@ if (php_sapi_name() == 'cli') {
         } else {
             print json_encode($parser->parse($args["j"]));
         }
+        print PHP_EOL;
         
     } else if (isset($argv[1]) && (($argv[1] != "-j") && ($argv[1] != "-p") && ($argv[1] != "-l") && ($argv[1] != "-s") && ($argv[1] != "-n"))) {
         
