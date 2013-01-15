@@ -76,6 +76,9 @@ user_agent_parsers:
   # http://luakit.org/projects/luakit/
   - regex: '(luakit)'
     family_replacement: 'LuaKit'
+    
+  # Snowshoe
+  - regex: '(Snowshoe)/(\d+)\.(\d+).(\d+)'
 
   # Lightning (for Thunderbird)
   # http://www.mozilla.org/projects/calendar/lightning/
