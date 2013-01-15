@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php v2.0.1
+ * ua-parser-php v2.1.0
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -23,7 +23,8 @@
  *   - @rjd22 (https://github.com/rjd22)
  *   - Timo Tijhof (https://github.com/Krinkle)
  *   - Marcus Bointon (https://github.com/Synchro)
- *
+ *   - Ryan Parman (https://github.com/skyzyx)
+ *   - Pravin Dahal (https://github.com/pravindahal)
  */
 
 // address 5.1 compatibility
