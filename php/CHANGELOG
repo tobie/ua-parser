@@ -7,6 +7,7 @@ UAP-2.1.0
  - FIX: formerly private vars/functions are now protected (via @pravindahal)
  - FIX: command line tool gets 'pretty' option for PHP 5.4 users (via @skyzyx)
  - FIX: refactored the regexes.yaml test suite
+ - FIX: now check to see if allow_url_fopen is set to 'On' before trying to download the YAML file from the command line
  - THX: thanks to @pravindahal and @skyzyx for the pull requests
  
 UAP-2.0.1

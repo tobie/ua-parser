@@ -67,24 +67,28 @@ if (!ini_get('date.timezone')) {
  * Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
  */
 function get($file,$silent,$nobackup,$basePath) {
-    if ($data = @file_get_contents($file)) {
-        if (!$silent) { print "loading and converting YAML data...\n"; };
-        $data = Spyc::YAMLLoad($data);
-        $data = json_encode($data);
-        if (!$silent) { print "encoded as JSON...\n"; };
-        if (file_exists($basePath."resources/regexes.json")) {
-            if (!$nobackup) { 
-                if (!$silent) { print("backing up old JSON file...\n"); }
-                if (!copy($basePath."resources/regexes.json", $basePath."resources/regexes.".date("Ymdhis").".json")) {
-                    if (!$silent) { print("back-up failed...\n"); }
-                    exit;
+	if (ini_get('allow_url_fopen')) {
+       if ($data = @file_get_contents($file)) {
+            if (!$silent) { print "loading and converting YAML data...\n"; };
+            $data = Spyc::YAMLLoad($data);
+            $data = json_encode($data);
+            if (!$silent) { print "encoded as JSON...\n"; };
+            if (file_exists($basePath."resources/regexes.json")) {
+                if (!$nobackup) { 
+                    if (!$silent) { print("backing up old JSON file...\n"); }
+                    if (!copy($basePath."resources/regexes.json", $basePath."resources/regexes.".date("Ymdhis").".json")) {
+                        if (!$silent) { print("back-up failed...\n"); }
+                        exit;
+                    }
                 }
             }
+            file_put_contents($basePath."resources/regexes.json", $data);
+            if (!$silent) { print("saved JSON file...\n"); }
+        } else {
+            if (!$silent) { print("failed to get the file...\n"); }
         }
-        file_put_contents($basePath."resources/regexes.json", $data);
-        if (!$silent) { print("saved JSON file...\n"); }
     } else {
-        if (!$silent) { print("failed to get the file...\n"); }
+        if (!$silent) { print("ERROR: the allow_url_fopen option is not enabled in php.ini. it needs to be set to 'On' for this feature to work...\n"); }
     }
 }
 
