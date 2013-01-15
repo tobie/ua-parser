@@ -39,15 +39,22 @@ class UAParser {
     /**
      * Start up the parser by importing the json file to $this->regexes
      */
-    public function __construct() {
-        
-        if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
-            $this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
+    public function __construct($customRegexesFile = null) {
+	
+        $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
+        if (file_exists($regexesFile)) {
+            $this->regexes = json_decode(file_get_contents($regexesFile));
         } else {
-            $title        = 'Error loading ua-parser';
-            $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
-            $instruction1 = '%: cd /path/to/UAParser/';
-            $instruction2 = '%: php uaparser-cli.php -g';
+            $title            = 'Error loading ua-parser';
+            if ($customRegexesFile !== null) {
+                $message      = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
+                $instruction1 = '';
+                $instruction2 = '';
+            } else {
+                $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
+                $instruction1 = '%: cd /path/to/UAParser/';
+                $instruction2 = '%: php uaparser-cli.php -g';
+            }
             
             if (php_sapi_name() == 'cli') {
                 print "\n".$title."\n";
@@ -63,7 +70,7 @@ class UAParser {
                 print '</blockquote>';
                 print '</body></html>';
             }
-            
+
             exit;
         }
     }
