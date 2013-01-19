@@ -226,6 +226,8 @@ user_agent_parsers:
   
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'NetFront NX'
+  - regex: '(Nintendo 3DS)'
+    family_replacement: 'NetFront NX'
 
   - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
 
@@ -334,9 +336,6 @@ user_agent_parsers:
 
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
-
-  - regex: '(Nintendo 3DS)'
-    family_replacement: 'NetFront NX'
 
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
