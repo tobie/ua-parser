@@ -818,6 +818,7 @@ device_parsers:
   ##########
   - regex: '(Nintendo DS);'
   - regex: '(Nintendo 3DS);'
+  - regex: '(Nintendo DSi);'
 
   ##########
   # philips

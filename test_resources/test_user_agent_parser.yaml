@@ -316,6 +316,12 @@ test_cases:
     minor: '10'
     patch:
 
+  - user_agent_string: 'Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)'
+    family: 'Opera'
+    major: '9'
+    minor: '50'
+    patch:
+
   - user_agent_string: 'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.5.24 Version/10.53'
     family: 'Opera'
     major: '10'
