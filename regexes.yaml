@@ -815,12 +815,10 @@ device_parsers:
   ##########
   # nintendo
   ##########
-  - regex: '(Nintendo DS);'
-  - regex: '(Nintendo 3DS);'
-  - regex: '(Nintendo DSi);'
-  - regex: '(Nintendo Wii);'
   - regex: '(Nintendo WiiU)'
     device_replacement: 'Nintendo Wii U'
+  - regex: 'Nintendo (DS|3DS|DSi|Wii);'
+    device_replacement: 'Nintendo $1'
 
   ##########
   # philips
