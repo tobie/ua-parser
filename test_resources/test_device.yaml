@@ -60,6 +60,9 @@ test_cases:
   - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
     family: 'Nintendo Wii'
 
+  - user_agent_string: 'Mozilla/5.0 (Nintendo WiiU) AppleWebKit/534.52 (KHTML, like Gecko) NX/2.1.0.8.21 NintendoBrowser/1.0.0.7494.US'
+    family: 'Nintendo Wii U'
+
   - user_agent_string: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
     family: 'Spider'
 

@@ -223,6 +223,9 @@ user_agent_parsers:
   - regex: '(PLAYSTATION) (\d+)'
     family_replacement: 'PlayStation'
   - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
+  
+  - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'NetFront NX'
 
   - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
 
@@ -816,6 +819,8 @@ device_parsers:
   - regex: '(Nintendo 3DS);'
   - regex: '(Nintendo DSi);'
   - regex: '(Nintendo Wii);'
+  - regex: '(Nintendo WiiU)'
+    device_replacement: 'Nintendo Wii U'
 
   ##########
   # philips
