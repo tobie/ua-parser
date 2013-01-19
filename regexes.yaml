@@ -336,7 +336,8 @@ user_agent_parsers:
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
-  - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+  - regex: '(Nintendo 3DS)'
+    family_replacement: 'NetFront NX'
 
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
@@ -811,6 +812,11 @@ device_parsers:
     device_replacement: 'Motorola $1'
   - regex: 'MOT\-([A-Za-z0-9]+)'
     device_replacement: 'Motorola $1'
+    
+  ##########
+  # nintendo
+  ##########
+  - regex: '(Nintendo 3DS);'
 
   ##########
   # philips

@@ -279,6 +279,12 @@ test_cases:
     major: '3'
     minor: '3'
     patch:
+        
+  - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
+    family: 'NetFront NX'
+    major:
+    minor:
+    patch:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
     family: 'NetFront'
