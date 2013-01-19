@@ -230,7 +230,14 @@ test_cases:
     minor:
     patch:
     patch_minor:
-        
+
+  - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
     family: 'Other'
     major:

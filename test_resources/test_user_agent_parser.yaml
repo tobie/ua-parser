@@ -90,6 +90,12 @@ test_cases:
     minor: '101'
     patch:
 
+  - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
+    family: 'Bunjalloo'
+    major: '0'
+    minor: '7'
+    patch: '6'
+
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; chromeframe; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)'
     js_ua: "{'js_user_agent_string': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/530.1 (KHTML, like Gecko) Chrome/2.0.169.1 Safari/530.1'}"
     family: 'Chrome Frame (IE 8)'
