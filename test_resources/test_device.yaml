@@ -57,6 +57,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
     family: 'Nintendo 3DS'
 
+  - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
+    family: 'Nintendo Wii'
+
   - user_agent_string: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
     family: 'Spider'
 

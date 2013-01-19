@@ -1,10 +1,6 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
-  # must go before Opera
-  - regex: '^(Opera)/(\d+)\.(\d+) \(Nintendo Wii'
-    family_replacement: 'Wii'
-
   # must go before Firefox to catch SeaMonkey/Camino
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
 
@@ -819,6 +815,7 @@ device_parsers:
   - regex: '(Nintendo DS);'
   - regex: '(Nintendo 3DS);'
   - regex: '(Nintendo DSi);'
+  - regex: '(Nintendo Wii);'
 
   ##########
   # philips

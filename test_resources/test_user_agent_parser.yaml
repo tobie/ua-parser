@@ -316,6 +316,12 @@ test_cases:
     minor: '10'
     patch:
 
+  - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
+    family: 'Opera'
+    major: '9'
+    minor: '30'
+    patch:
+
   - user_agent_string: 'Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)'
     family: 'Opera'
     major: '9'

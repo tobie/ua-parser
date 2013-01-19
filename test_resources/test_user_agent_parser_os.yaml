@@ -252,6 +252,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'Other'
     major:
