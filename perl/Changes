@@ -8,4 +8,8 @@ Revision history for Perl extension HTTP::UA::Parser.
 	- Adding command line options
 	- When makefile script will install latest regexes.yaml file
 	- Using Yaml::Tiny instead of Yaml::Any
+
+0.003 Sun Jan 20 2013
+	- Adding more tests using original ua-project tests yaml
+	- Fixing "Other" devices detection
 	
