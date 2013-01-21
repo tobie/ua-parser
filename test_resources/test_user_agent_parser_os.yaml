@@ -224,6 +224,20 @@ test_cases:
     patch: '5'
     patch_minor:
 
+  - user_agent_string: 'ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Alcatel-OH5/1.0 UP.Browser/6.1.0.7.7 (GUI) MMP/1.0'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+              
   - user_agent_string: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
     family: 'Other'
     major:
