@@ -54,6 +54,21 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/528.5+ (KHTML, like Gecko, Safari/528.5+) Version/4.0 Kindle/3.0 (screen 600x800; rotate)'
     family: 'Kindle'
 
+  - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
+    family: 'Nintendo DS'
+    
+  - user_agent_string: 'Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)'
+    family: 'Nintendo DSi'
+      
+  - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
+    family: 'Nintendo 3DS'
+
+  - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
+    family: 'Nintendo Wii'
+
+  - user_agent_string: 'Mozilla/5.0 (Nintendo WiiU) AppleWebKit/534.52 (KHTML, like Gecko) NX/2.1.0.8.21 NintendoBrowser/1.0.0.7494.US'
+    family: 'Nintendo Wii U'
+
   - user_agent_string: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
     family: 'Spider'
 
