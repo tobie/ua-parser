@@ -703,6 +703,14 @@ device_parsers:
   - regex: 'acer_([A-Za-z0-9]+)_'
     device_replacement: 'Acer $1'
 
+  ##########   
+  # Alcatel
+  ##########
+  - regex: 'ALCATEL-([A-Za-z0-9]+)'
+    device_replacement: 'Alcatel $1'
+  - regex: 'Alcatel-([A-Za-z0-9]+)'
+    device_replacement: 'Alcatel $1'
+
   ##########
   # Amoi
   ##########

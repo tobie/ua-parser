@@ -286,6 +286,12 @@ test_cases:
     minor: '3'
     patch:
 
+  - user_agent_string: 'ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A'
+    family: 'Obigo'
+    major:
+    minor:
+    patch:
+              
   - user_agent_string: 'Opera/9.80 (Series 60; Opera Mini/6.24455/25.677; U; fr) Presto/2.5.25 Version/10.54'
     family: 'Opera Mini'
     major: '6'
@@ -394,6 +400,12 @@ test_cases:
     minor: '3'
     patch: '5'
 
+  - user_agent_string: 'Alcatel-OH5/1.0 UP.Browser/6.1.0.7.7 (GUI) MMP/1.0'
+    family: 'UP.Browser'
+    major: '6'
+    minor: '1'
+    patch: '0'
+    
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'
     major: '534'
