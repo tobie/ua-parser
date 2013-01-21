@@ -54,7 +54,7 @@ private alias AgentStore BrowserStore;
 private class Device {
     public string family;
 
-    const string toString() {
+    override const string toString() {
         return family;
     }
 }
