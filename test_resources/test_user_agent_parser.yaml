@@ -90,6 +90,12 @@ test_cases:
     minor: '101'
     patch:
 
+  - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
+    family: 'Bunjalloo'
+    major: '0'
+    minor: '7'
+    patch: '6'
+
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; chromeframe; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)'
     js_ua: "{'js_user_agent_string': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/530.1 (KHTML, like Gecko) Chrome/2.0.169.1 Safari/530.1'}"
     family: 'Chrome Frame (IE 8)'
@@ -279,6 +285,18 @@ test_cases:
     major: '3'
     minor: '3'
     patch:
+        
+  - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
+    family: 'NetFront NX'
+    major:
+    minor:
+    patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Nintendo WiiU) AppleWebKit/534.52 (KHTML, like Gecko) NX/2.1.0.8.21 NintendoBrowser/1.0.0.7494.US'
+    family: 'NetFront NX'
+    major: '2'
+    minor: '1'
+    patch: '0'
 
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
     family: 'NetFront'
@@ -308,6 +326,18 @@ test_cases:
     family: 'Opera Tablet'
     major: '11'
     minor: '10'
+    patch:
+
+  - user_agent_string: 'Opera/9.30 (Nintendo Wii; U; ; 3642; en)'
+    family: 'Opera'
+    major: '9'
+    minor: '30'
+    patch:
+
+  - user_agent_string: 'Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)'
+    family: 'Opera'
+    major: '9'
+    minor: '50'
     patch:
 
   - user_agent_string: 'Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.5.24 Version/10.53'
