@@ -466,6 +466,42 @@ test_cases:
     minor: '3'
     patch: '5'
 
+  - user_agent_string: 'J2ME/UCWEB7.0.3.45/139/7682'
+    family: 'UC Browser'
+    major: '7'
+    minor: '0'
+    patch: '3'
+
+  - user_agent_string: 'NOKIA6120c/UC Browser7.4.0.65/28/352'
+    family: 'UC Browser'
+    major: '7'
+    minor: '4'
+    patch: '0'
+
+  - user_agent_string: 'IUC(U;iOS 5.1.1;Zh-cn;320*480;)/UCWEB7.9.0.94/41/997'
+    family: 'UC Browser'
+    major: '7'
+    minor: '9'
+    patch: '0'
+
+  - user_agent_string: 'Nokia5320di/UCWEB8.0.3.99/28/999'
+    family: 'UC Browser'
+    major: '8'
+    minor: '0'
+    patch: '3'
+
+  - user_agent_string: 'Nokia201/2.0 (11.21) Profile/MIDP-2.1 Configuration/CLDC-1.1 Mozilla/5.0 (Java; U; en-us; nokia201) UCBrowser8.3.0.154/70/355/UCWEB Mobile'
+    family: 'UC Browser'
+    major: '8'
+    minor: '3'
+    patch: '0'
+
+  - user_agent_string: 'Mozilla/5.0 (S60V5; U; en-us; NokiaC5-03) AppleWebKit/530.13 (KHTML, like Gecko) UCBrowser/8.7.0.218/50/352/UCWEB Mobile'
+    family: 'UC Browser'
+    major: '8'
+    minor: '7'
+    patch: '0'
+
   - user_agent_string: 'Alcatel-OH5/1.0 UP.Browser/6.1.0.7.7 (GUI) MMP/1.0'
     family: 'UP.Browser'
     major: '6'

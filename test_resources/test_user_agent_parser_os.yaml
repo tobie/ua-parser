@@ -322,6 +322,41 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'NOKIA6120c/UC Browser7.4.0.65/28/352'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Nokia5320di/UCWEB8.0.3.99/28/999'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Nokia201/2.0 (11.21) Profile/MIDP-2.1 Configuration/CLDC-1.1 Mozilla/5.0 (Java; U; en-us; nokia201) UCBrowser8.3.0.154/70/355/UCWEB Mobile'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'IUC(U;iOS 5.1.1;Zh-cn;320*480;)/UCWEB7.9.0.94/41/997'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'J2ME/UCWEB7.0.3.45/139/7682'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'Other'
     major:
@@ -344,6 +379,13 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Opera/9.80 (S60; SymbOS; Opera Mobi/275; U; es-ES) Presto/2.4.13 Version/10.00'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (S60V5; U; en-us; NokiaC5-03) AppleWebKit/530.13 (KHTML, like Gecko) UCBrowser/8.7.0.218/50/352/UCWEB Mobile'
     family: 'Symbian OS'
     major:
     minor:
