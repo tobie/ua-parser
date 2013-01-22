@@ -126,7 +126,11 @@ user_agent_parsers:
     family_replacement: 'Chrome Frame'
 
   # UC Browser
-  - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
+  - regex: '(UCBrowser)[ /](\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'UC Browser'
+  - regex: '(UC Browser)[ /](\d+)\.(\d+)\.(\d+)'
+  - regex: '(UC Browser|UCBrowser|UCWEB)(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'UC Browser'
 
   # Tizen Browser (second case included in browser/major.minor regex)
   - regex: '(SLP Browser)/(\d+)\.(\d+)'
@@ -628,6 +632,8 @@ device_parsers:
   ##########
   - regex: 'NokiaN([0-9]+)'
     device_replacement: 'Nokia N$1'
+  - regex: 'NOKIA([A-Za-z0-9\v-]+)'
+    device_replacement: 'Nokia $1'
   - regex: 'Nokia([A-Za-z0-9\v-]+)'
     device_replacement: 'Nokia $1'
   - regex: 'NOKIA ([A-Za-z0-9\-]+)'
