@@ -7,7 +7,7 @@ test_cases:
     family: 'Alcatel OH5'
 
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; Amaze_4G Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
-    family: 'Amaze 4G'
+    family: 'Amaze_4G'
  
   - user_agent_string: 'Mozilla/5.0 (BlackBerry; U; BlackBerry 9320; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.398 Mobile Safari/534.11+'
     family: 'BlackBerry 9320'
