@@ -632,6 +632,8 @@ device_parsers:
   ##########
   - regex: 'NokiaN([0-9]+)'
     device_replacement: 'Nokia N$1'
+  - regex: 'NOKIA([A-Za-z0-9\v-]+)'
+    device_replacement: 'Nokia $1'
   - regex: 'Nokia([A-Za-z0-9\v-]+)'
     device_replacement: 'Nokia $1'
   - regex: 'NOKIA ([A-Za-z0-9\-]+)'
