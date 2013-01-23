@@ -340,6 +340,36 @@ test_cases:
     minor: '3'
     patch:
 
+  - user_agent_string: 'Mozilla/4.0 (BREW 3.1.5; U; en-us; Sanyo; NetFront/3.5.1/AMB) Boost SCP3810'
+    family: 'NetFront'
+    major: '3'
+    minor: '5'
+    patch: '1'
+
+  - user_agent_string: 'NetFront/3.5.1 (BREW 3.1.5; U; en-us; LG; NetFront/3.5.1/WAP) Sprint LN240 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'NetFront'
+    major: '3'
+    minor: '5'
+    patch: '1'
+
+  - user_agent_string: 'Mozilla/4.0 (Brew MP 1.0.2; U; en-us; Sanyo; NetFront/3.5.1/AMB) Sprint E4100'
+    family: 'NetFront'
+    major: '3'
+    minor: '5'
+    patch: '1'
+
+  - user_agent_string: 'PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'NetFront'
+    major: '4'
+    minor: '1'
+    patch:
+    
+  - user_agent_string: 'NetFront/4.2 (BMP 1.0.4; U; en-us; LG; NetFront/4.2/AMB) Boost LG272 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'NetFront'
+    major: '4'
+    minor: '2'
+    patch:
+
   - user_agent_string: 'ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A'
     family: 'Obigo'
     major:
@@ -352,6 +382,12 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Opera/9.80 (BREW; Opera Mini/5.1.191/27.2202; U; en) Presto/2.8.119 240X400 LG VN271'
+    family: 'Opera Mini'
+    major: '5'
+    minor: '1'
+    patch:
+         
   - user_agent_string: 'Opera/9.80 (Series 60; Opera Mini/6.24455/25.677; U; fr) Presto/2.5.25 Version/10.54'
     family: 'Opera Mini'
     major: '6'

@@ -140,6 +140,48 @@ test_cases:
     patch: '0'
     patch_minor:
 
+  - user_agent_string: 'Opera/9.80 (BREW; Opera Mini/5.1.191/27.2202; U; en) Presto/2.8.119 240X400 LG VN271'
+    family: 'BREW'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 (BREW 3.1.5; U; en-us; Sanyo; NetFront/3.5.1/AMB) Boost SCP3810'
+    family: 'BREW'
+    major: '3'
+    minor: '1'
+    patch: '5'
+    patch_minor:
+
+  - user_agent_string: 'NetFront/3.5.1 (BREW 3.1.5; U; en-us; LG; NetFront/3.5.1/WAP) Sprint LN240 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'BREW'
+    major: '3'
+    minor: '1'
+    patch: '5'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 (Brew MP 1.0.2; U; en-us; Sanyo; NetFront/3.5.1/AMB) Sprint E4100'
+    family: 'Brew MP'
+    major: '1'
+    minor: '0'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: 'NetFront/4.2 (BMP 1.0.4; U; en-us; LG; NetFront/4.2/AMB) Boost LG272 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'Brew MP'
+    major: '1'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'Brew MP'
+    major: '1'
+    minor: '0'
+    patch: '2'
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; BSD Four; en-US) AppleWebKit/533.3 (KHTML, like Gecko) rekonq Safari/533.3'
     family: 'BSD'
     major:
