@@ -175,7 +175,7 @@ user_agent_parsers:
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
-  - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris|BREW) (\d+)\.(\d+)\.?(\d+)?'
+  - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris) (\d+)\.(\d+)\.?(\d+)?'
   
   # Kindle WebKit
   - regex: '(Kindle)/(\d+)\.(\d+)'
@@ -218,6 +218,7 @@ user_agent_parsers:
   - regex: '(Obigo)InternetBrowser'
   - regex: '(Obigo)\-Browser'
   - regex: '(Obigo|OBIGO)[^\d]*(\d+)(?:.(\d+))?'
+    family_replacement: 'Obigo'
 
   - regex: '(MAXTHON|Maxthon) (\d+)\.(\d+)'
     family_replacement: 'Maxthon'
@@ -511,6 +512,17 @@ os_parsers:
     os_replacement: 'BlackBerry Tablet OS'
   - regex: '(Black[Bb]erry)'
     os_replacement: 'Blackberry OS'
+
+  ##########
+  # BREW
+  # yes, Brew is lower-cased for Brew MP
+  ##########
+  - regex: '(BREW)[ /](\d+)\.(\d+)\.(\d+)'
+  - regex: '(BREW);'
+  - regex: '(Brew MP|BMP)[ /](\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'Brew MP'
+  - regex: 'BMP;'
+    os_replacement: 'Brew MP'
 
   ##########
   # Google TV
@@ -835,6 +847,12 @@ device_parsers:
   - regex: 'Nintendo (DS|3DS|DSi|Wii);'
     device_replacement: 'Nintendo $1'
 
+  ##########
+  # pantech
+  ##########
+  - regex: 'Pantech([A-Za-z0-9]+)'
+    device_replacement: 'Pantech $1'
+ 
   ##########
   # philips
   ##########
