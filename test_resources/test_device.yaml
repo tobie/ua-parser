@@ -129,6 +129,9 @@ test_cases:
   - user_agent_string: 'Mozilla/4.0 (PSP (PlayStation Portable); 2.00)'
     family: 'PlayStation Portable'
 
+  - user_agent_string: 'Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
+    family: 'PlayStation Vita'
+
   - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.1.1; SPH-L710 Build/JRO03L) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19'
     family: 'SPH-L710'
 
