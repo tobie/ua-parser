@@ -229,7 +229,8 @@ user_agent_parsers:
     family_replacement: 'NetFront NX'
   - regex: 'PLAYSTATION 3'
     family_replacement: 'NetFront'
-  - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
+  - regex: '(PlayStation Portable)'
+    family_replacement: 'NetFront'
   
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'NetFront NX'

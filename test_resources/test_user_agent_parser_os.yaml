@@ -420,6 +420,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/4.0 (PSP (PlayStation Portable); 2.00)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'Other'
     major:
