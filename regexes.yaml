@@ -292,13 +292,13 @@ user_agent_parsers:
 
   # BlackBerry devices
   - regex: '(BB10);'
-    family_replacement: 'Blackberry WebKit'
+    family_replacement: 'BlackBerry WebKit'
   - regex: '(PlayBook).+RIM Tablet OS (\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'Blackberry WebKit'
+    family_replacement: 'BlackBerry WebKit'
   - regex: '(Black[bB]erry).+Version/(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'Blackberry WebKit'
+    family_replacement: 'BlackBerry WebKit'
   - regex: '(Black[bB]erry)\s?(\d+)'
-    family_replacement: 'Blackberry'
+    family_replacement: 'BlackBerry'
 
   - regex: '(OmniWeb)/v(\d+)\.(\d+)'
 
@@ -511,7 +511,7 @@ os_parsers:
   - regex: '(Play[Bb]ook)'
     os_replacement: 'BlackBerry Tablet OS'
   - regex: '(Black[Bb]erry)'
-    os_replacement: 'Blackberry OS'
+    os_replacement: 'BlackBerry OS'
 
   ##########
   # BREW
@@ -658,16 +658,19 @@ device_parsers:
     device_replacement: 'Nokia'
 
   ##########
-  # Blackberry
+  # BlackBerry
   # http://www.useragentstring.com/pages/BlackBerry/
   ##########
   - regex: 'BB10; ([A-Za-z0-9\- ]+)\)'
     device_replacement: 'BlackBerry $1'
   - regex: '(PlayBook).+RIM Tablet OS'
-    device_replacement: 'Blackberry Playbook'
-  - regex: '(Black[Bb]erry [0-9]+);'
+    device_replacement: 'BlackBerry Playbook'
+  - regex: 'Black[Bb]erry ([0-9]+);'
+    device_replacement: 'BlackBerry $1'
   - regex: 'Black[Bb]erry([0-9]+)'
     device_replacement: 'BlackBerry $1'
+  - regex: 'Black[Bb]erry;'
+    device_replacement: 'BlackBerry'
 
   ##########
   # PALM / HP
