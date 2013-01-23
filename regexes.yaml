@@ -218,6 +218,7 @@ user_agent_parsers:
   - regex: '(Obigo)InternetBrowser'
   - regex: '(Obigo)\-Browser'
   - regex: '(Obigo|OBIGO)[^\d]*(\d+)(?:.(\d+))?'
+    family_replacement: 'Obigo'
 
   - regex: '(MAXTHON|Maxthon) (\d+)\.(\d+)'
     family_replacement: 'Maxthon'
