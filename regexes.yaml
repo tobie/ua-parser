@@ -701,8 +701,6 @@ device_parsers:
   - regex: 'webOS.*(P160UNA)/(\d+).(\d+)'
     device_replacement: 'HP Veer'
 
-
-
   ##########
   # AppleTV
   # No built in browser that I can tell
