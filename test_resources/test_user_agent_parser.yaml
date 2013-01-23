@@ -316,6 +316,30 @@ test_cases:
     minor: '7'
     patch: 'a1'
 
+  - user_agent_string: 'Mozilla/5.0 (PLAYSTATION 3; 3.55)'
+    family: 'NetFront'
+    major:
+    minor:
+    patch:
+
+  - user_agent_string: 'Mozilla/5.0 (PLAYSTATION 3 4.31) AppleWebKit/531.22.8 (KHTML, like Gecko)'
+    family: 'NetFront NX'
+    major:
+    minor:
+    patch:
+
+  - user_agent_string: 'Mozilla/4.0 (PSP (PlayStation Portable); 2.00)'
+    family: 'NetFront'
+    major:
+    minor:
+    patch:
+
+  - user_agent_string: 'Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
+    family: 'NetFront NX'
+    major:
+    minor:
+    patch:
+
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
     family: 'NetFront'
     major: '3'

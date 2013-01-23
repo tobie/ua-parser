@@ -225,9 +225,14 @@ user_agent_parsers:
   - regex: '(Maxthon|MyIE2|Uzbl|Shiira)'
     v1_replacement: '0'
 
-  - regex: '(PLAYSTATION) (\d+)'
-    family_replacement: 'PlayStation'
-  - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
+  - regex: 'PLAYSTATION 3.+WebKit'
+    family_replacement: 'NetFront NX'
+  - regex: 'PLAYSTATION 3'
+    family_replacement: 'NetFront'
+  - regex: '(PlayStation Portable)'
+    family_replacement: 'NetFront'
+  - regex: '(PlayStation Vita)'
+    family_replacement: 'NetFront NX'
   
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'NetFront NX'
@@ -549,7 +554,6 @@ os_parsers:
 
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
-  - regex: '(PlayStation Vita) (\d+)\.(\d+)'
 
   # just os
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
@@ -608,6 +612,15 @@ device_parsers:
   #########
   - regex: 'SonyEricsson([A-Za-z0-9]+)/'
     device_replacement: 'Ericsson $1'
+
+  ##########
+  # PlayStation
+  # The Vita spoofs the Kindle
+  ##########
+  - regex: 'PLAYSTATION 3'
+    device_replacement: 'PlayStation 3'
+  - regex: '(PlayStation Portable)'
+  - regex: '(PlayStation Vita)'
 
   ##########
   # incomplete!
@@ -690,12 +703,6 @@ device_parsers:
     device_replacement: 'Palm Treo $1'
   - regex: 'webOS.*(P160UNA)/(\d+).(\d+)'
     device_replacement: 'HP Veer'
-
-  ##########
-  # PlayStation
-  ##########
-  - regex: '(PlayStation Portable)'
-  - regex: '(PlayStation Vita)'
 
   ##########
   # AppleTV
@@ -879,12 +886,6 @@ device_parsers:
     device_replacement: 'Softbank $1'
   - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
-
-  ##########
-  # Sony
-  ##########
-  - regex: '(PlayStation3 PPC)'
-    device_replacement: 'Playstation 3'
 
   ##########
   # Generic Smart Phone
