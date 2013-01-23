@@ -225,8 +225,10 @@ user_agent_parsers:
   - regex: '(Maxthon|MyIE2|Uzbl|Shiira)'
     v1_replacement: '0'
 
-  - regex: '(PLAYSTATION) (\d+)'
-    family_replacement: 'PlayStation'
+  - regex: 'PLAYSTATION 3.+WebKit'
+    family_replacement: 'NetFront NX'
+  - regex: 'PLAYSTATION 3'
+    family_replacement: 'NetFront'
   - regex: '(PlayStation Portable)[^\d]+(\d+).(\d+)'
   
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
@@ -691,6 +693,8 @@ device_parsers:
   ##########
   # PlayStation
   ##########
+  - regex: 'PLAYSTATION 3'
+    device_replacement: 'PlayStation 3'
   - regex: '(PlayStation Portable)'
   - regex: '(PlayStation Vita)'
 
@@ -876,12 +880,6 @@ device_parsers:
     device_replacement: 'Softbank $1'
   - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
-
-  ##########
-  # Sony
-  ##########
-  - regex: '(PlayStation3 PPC)'
-    device_replacement: 'Playstation 3'
 
   ##########
   # Generic Smart Phone
