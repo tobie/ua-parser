@@ -345,7 +345,13 @@ test_cases:
     major:
     minor:
     patch:
-              
+ 
+  - user_agent_string: 'PantechP7040/JLUS04042011 Browser/Obigo/Q05A OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
+    family: 'Obigo'
+    major: '05'
+    minor:
+    patch:
+
   - user_agent_string: 'Opera/9.80 (Series 60; Opera Mini/6.24455/25.677; U; fr) Presto/2.5.25 Version/10.54'
     family: 'Opera Mini'
     major: '6'

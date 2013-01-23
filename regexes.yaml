@@ -837,6 +837,12 @@ device_parsers:
     device_replacement: 'Nintendo $1'
 
   ##########
+  # pantech
+  ##########
+  - regex: 'Pantech([A-Za-z0-9]+)'
+    device_replacement: 'Pantech $1'
+ 
+  ##########
   # philips
   ##########
   - regex: 'Philips([A-Za-z0-9]+)'
