@@ -52,7 +52,7 @@ function reportMismatch($obj,$tc,$tf) {
 	if ($tf == "test_device") {
 		$info = "mismatch: got d: ".$obj->device->family." and expected d: ".$tc['family'];
 	} else if (($tf == "test_user_agent_parser_os") || ($tf == "additional_os_tests")) {
-		$info = "mismatch: got f: ".$obj->os->family." ma: ".$obj->os->major." mi: ".$obj->os->minor." p: ".$obj->os->patch." pm: ".$obj->patch_minor."  expected f: ".$tc['family']." ma: ".$tc['major']." mi: ".$tc['minor']." p: ".$tc['patch']." pm: ".$tc['patch_minor'];
+		$info = "mismatch: got f: ".$obj->os->family." ma: ".$obj->os->major." mi: ".$obj->os->minor." p: ".$obj->os->patch." pm: ".$obj->os->patch_minor."  expected f: ".$tc['family']." ma: ".$tc['major']." mi: ".$tc['minor']." p: ".$tc['patch']." pm: ".$tc['patch_minor'];
 	} else {
 		$info = "mismatch: got f: ".$obj->ua->family." ma: ".$obj->ua->major." mi: ".$obj->ua->minor." p: ".$obj->ua->patch." expected f: ".$tc['family']." ma: ".$tc['major']." mi: ".$tc['minor']." p: ".$tc['patch'];
 	}
