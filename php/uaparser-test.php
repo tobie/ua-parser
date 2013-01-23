@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php Test Suite v2.5.0
+ * ua-parser-php Test Suite v2.1.1
  *
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
