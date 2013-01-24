@@ -315,6 +315,27 @@ test_cases:
     patch: '5'
     patch_minor:
 
+  - user_agent_string: 'Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13'
+    family: 'MeeGo'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaC2-03/07.48; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.33'
+    family: 'Nokia Series 40'
+    major: 
+    minor: 
+    patch: 
+    patch_minor: 
+
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaX2-05/08.35; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.0.2.68.14'
+    family: 'Nokia Series 40'
+    major: 
+    minor: 
+    patch: 
+    patch_minor:
+
   - user_agent_string: 'ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A'
     family: 'Other'
     major:
@@ -476,6 +497,34 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/5.0 (SymbianOS/9.4; U; Series60/5.0 Nokia5800d-1/21.0.025; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413'
+    family: 'Symbian OS'
+    major: '9'
+    minor: '4'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/013.016; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.8.10 3gpp-gba'
+    family: 'Symbian^3'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/012.002; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.3.0 Mobile Safari/533.4 3gpp-gba'
+    family: 'Symbian^3 Anna'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.3 Nokia701/111.020.0307; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.4.1.14 Mobile Safari/533.4 3gpp-gba'
+    family: 'Symbian^3 Belle'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101027 Ubuntu/10.04 (lucid) Firefox/3.6.12'
     family: 'Ubuntu'
     major: '10'
@@ -547,15 +596,29 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)'
-    family: 'Windows Phone OS'
+    family: 'Windows Phone'
     major:
     minor:
     patch:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)'
-    family: 'Windows Phone OS'
+    family: 'Windows Phone'
     major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)'
+    family: 'Windows Phone'
+    major: '7'
+    minor: '5'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)'
+    family: 'Windows Phone'
+    major: '8'
     minor: '0'
     patch:
     patch_minor:
