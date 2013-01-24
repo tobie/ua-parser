@@ -547,15 +547,29 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)'
-    family: 'Windows Phone OS'
+    family: 'Windows Phone'
     major:
     minor:
     patch:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)'
-    family: 'Windows Phone OS'
+    family: 'Windows Phone'
     major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)'
+    family: 'Windows Phone'
+    major: '7'
+    minor: '5'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)'
+    family: 'Windows Phone'
+    major: '8'
     minor: '0'
     patch:
     patch_minor:

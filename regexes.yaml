@@ -392,15 +392,14 @@ os_parsers:
   # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
-  - regex: '(Windows Phone 6\.5)'
-
+  
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
     os_replacement: 'Windows XP'
 
   # ie mobile des ktop mode
   # spoofs nt 6.1. must come before windows 7
   - regex: '(XBLWP7)'
-    os_replacement: 'Windows Phone OS'
+    os_replacement: 'Windows Phone'
 
   - regex: '(Windows NT 6\.1)'
     os_replacement: 'Windows 7'
@@ -420,8 +419,8 @@ os_parsers:
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
 
-  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
-
+  - regex: '(Windows Phone) (\d+)\.(\d+)'
+  - regex: '(Windows Phone) OS (\d+)\.(\d+)'
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
