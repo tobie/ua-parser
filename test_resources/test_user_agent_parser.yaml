@@ -472,6 +472,12 @@ test_cases:
     minor: '4'
     patch:
 
+  - user_agent_string: 'Mozilla/3.0 (Planetweb/2.100 JS SSL US; Dreamcast US)'
+    family: 'Planetweb'
+    major: '2'
+    minor: '100'
+    patch:
+
   - user_agent_string: 'PyAMF/0.6.1'
     family: 'PyAMF'
     major: '0'
