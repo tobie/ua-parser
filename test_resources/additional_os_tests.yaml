@@ -141,7 +141,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; SAMSUNG; SGH-i917)'
-    family: 'Windows Phone OS'
+    family: 'Windows Phone'
     major: '7'
     minor: '5'
     patch:

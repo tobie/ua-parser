@@ -281,18 +281,21 @@ user_agent_parsers:
   - regex: '^(Nokia)'
     family_replacement: 'Nokia Services (WAP) Browser'
   - regex: '(NokiaBrowser)/(\d+)\.(\d+).(\d+)\.(\d+)'
+    family_replacement: 'Nokia Browser'
   - regex: '(NokiaBrowser)/(\d+)\.(\d+).(\d+)'
+    family_replacement: 'Nokia Browser'
   - regex: '(NokiaBrowser)/(\d+)\.(\d+)'
+    family_replacement: 'Nokia Browser'
   - regex: '(BrowserNG)/(\d+)\.(\d+).(\d+)'
-    family_replacement: 'NokiaBrowser'
+    family_replacement: 'Nokia Browser'
   - regex: '(Series60)/5\.0'
-    family_replacement: 'NokiaBrowser'
+    family_replacement: 'Nokia Browser'
     v1_replacement: '7'
     v2_replacement: '0'
   - regex: '(Series60)/(\d+)\.(\d+)'
     family_replacement: 'Nokia OSS Browser'
   - regex: '(S40OviBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'Nokia Series 40 Ovi Browser'
+    family_replacement: 'Ovi Browser'
   - regex: '(Nokia)[EN]?(\d+)'
 
   # BlackBerry devices
@@ -392,15 +395,14 @@ os_parsers:
   # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
-  - regex: '(Windows Phone 6\.5)'
-
+  
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
     os_replacement: 'Windows XP'
 
   # ie mobile des ktop mode
   # spoofs nt 6.1. must come before windows 7
   - regex: '(XBLWP7)'
-    os_replacement: 'Windows Phone OS'
+    os_replacement: 'Windows Phone'
 
   - regex: '(Windows NT 6\.1)'
     os_replacement: 'Windows 7'
@@ -420,8 +422,8 @@ os_parsers:
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
 
-  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
-
+  - regex: '(Windows Phone) (\d+)\.(\d+)'
+  - regex: '(Windows Phone) OS (\d+)\.(\d+)'
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
@@ -501,6 +503,8 @@ os_parsers:
   - regex: '(MeeGo)'
   - regex: 'Symbian [Oo][Ss]'
     os_replacement: 'Symbian OS'
+  - regex: 'Series40;'
+    os_replacement: 'Nokia Series 40'
 
   ##########
   # BlackBerry devices
