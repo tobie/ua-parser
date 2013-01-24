@@ -241,6 +241,9 @@ user_agent_parsers:
 
   - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
 
+  - regex: '(NCSA_Mosaic)/(\d+)\.(\d+)'
+    family_replacement: 'NCSA Mosaic'
+
   # Polaris/d.d is above
   - regex: '(POLARIS)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
@@ -410,7 +413,7 @@ os_parsers:
   - regex: '(Windows NT 6\.0)'
     os_replacement: 'Windows Vista'
 
-  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000)'
+  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000|Windows 3.1)'
 
   - regex: '(Windows NT 6\.2; ARM;)'
     os_replacement: 'Windows RT'
