@@ -99,8 +99,14 @@ test_cases:
   - user_agent_string: 'Nokia5320di/UCWEB8.0.3.99/28/999'
     family: 'Nokia 5320di'
 
+  - user_agent_string: 'Mozilla/5.0 (SymbianOS/9.4; U; Series60/5.0 Nokia5800d-1/21.0.025; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413'
+    family: 'Nokia 5800d-1'
+
   - user_agent_string: 'NOKIA6120c/UC Browser7.4.0.65/28/352'
     family: 'Nokia 6120c'
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.3 Nokia701/111.020.0307; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.4.1.14 Mobile Safari/533.4 3gpp-gba'
+    family: 'Nokia 701'
 
   - user_agent_string: 'Mozilla/5.0 (Series40; NokiaC2-03/07.48; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.33'
     family: 'Nokia C2-03'
@@ -110,6 +116,15 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (Series40; NokiaX2-05/08.35; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.0.2.68.14'
     family: 'Nokia X2-05'
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/013.016; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.8.10 3gpp-gba'
+    family: 'Nokia N8'
+
+  - user_agent_string: 'Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/012.002; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.3.0 Mobile Safari/533.4 3gpp-gba'
+    family: 'Nokia N8'
+
+  - user_agent_string: 'Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13'
+    family: 'Nokia N9'
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)'
     family: 'Other'
