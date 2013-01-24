@@ -292,7 +292,7 @@ user_agent_parsers:
   - regex: '(Series60)/(\d+)\.(\d+)'
     family_replacement: 'Nokia OSS Browser'
   - regex: '(S40OviBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'Nokia Series 40 Ovi Browser'
+    family_replacement: 'Ovi Browser'
   - regex: '(Nokia)[EN]?(\d+)'
 
   # BlackBerry devices
@@ -500,6 +500,8 @@ os_parsers:
   - regex: '(MeeGo)'
   - regex: 'Symbian [Oo][Ss]'
     os_replacement: 'Symbian OS'
+  - regex: 'Series40;'
+    os_replacement: 'Nokia Series 40'
 
   ##########
   # BlackBerry devices

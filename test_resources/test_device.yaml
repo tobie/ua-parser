@@ -102,8 +102,14 @@ test_cases:
   - user_agent_string: 'NOKIA6120c/UC Browser7.4.0.65/28/352'
     family: 'Nokia 6120c'
 
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaC2-03/07.48; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.33'
+    family: 'Nokia C2-03'
+
   - user_agent_string: 'Mozilla/5.0 (S60V5; U; en-us; NokiaC5-03) AppleWebKit/530.13 (KHTML, like Gecko) UCBrowser/8.7.0.218/50/352/UCWEB Mobile'
     family: 'Nokia C5-03'
+
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaX2-05/08.35; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.0.2.68.14'
+    family: 'Nokia X2-05'
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)'
     family: 'Other'

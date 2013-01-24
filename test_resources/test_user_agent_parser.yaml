@@ -478,6 +478,18 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaC2-03/07.48; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.33'
+    family: 'Ovi Browser'
+    major: '2'
+    minor: '2'
+    patch: '0'
+
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaX2-05/08.35; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.0.2.68.14'
+    family: 'Ovi Browser'
+    major: '2'
+    minor: '0'
+    patch: '2'
+
   - user_agent_string: 'Mozilla/5.0 (Windows NT 5.1; rv:2.0) Gecko/20110407 Firefox/4.0.3 PaleMoon/4.0.3'
     family: 'Pale Moon (Firefox Variant)'
     major: '4'
