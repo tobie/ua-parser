@@ -790,8 +790,12 @@ device_parsers:
     device_replacement: 'DoCoMo $1'
 
   ##########
-  # Huawei Vodafone
+  # Huawei
   ##########
+  - regex: 'Huawei([A-Za-z0-9]+)'
+    device_replacement: 'Huawei $1'
+  - regex: 'HUAWEI-([A-Za-z0-9]+)'
+    device_replacement: 'Huawei $1'
   - regex: 'vodafone([A-Za-z0-9]+)'
     device_replacement: 'Huawei Vodafone $1'
 

@@ -469,6 +469,20 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'HUAWEI-M750/001.00 ACS-NetFront/3.2'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+              
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'Other'
     major:
@@ -717,3 +731,7 @@ test_cases:
     minor:
     patch:
     patch_minor:
+
+
+
+
