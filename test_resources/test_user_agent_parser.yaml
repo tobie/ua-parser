@@ -382,6 +382,12 @@ test_cases:
     minor: '1'
     patch: '0'
 
+  - user_agent_string: 'HUAWEI-M750/001.00 ACS-NetFront/3.2'
+    family: 'NetFront'
+    major: '3'
+    minor: '2'
+    patch:
+
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
     family: 'NetFront'
     major: '3'
@@ -454,6 +460,12 @@ test_cases:
     minor:
     patch:
  
+  - user_agent_string: 'Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2'
+    family: 'Obigo'
+    major:
+    minor:
+    patch:
+
   - user_agent_string: 'PantechP7040/JLUS04042011 Browser/Obigo/Q05A OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
     family: 'Obigo'
     major: '05'
