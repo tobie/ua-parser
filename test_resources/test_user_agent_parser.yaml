@@ -224,6 +224,12 @@ test_cases:
     minor: '1'
     patch:
 
+  - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
+    family: 'ICE Browser'
+    major: '5'
+    minor: '05'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110417 IceCat/4.0'
     family: 'IceCat'
     major: '4'
