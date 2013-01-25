@@ -30,6 +30,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.2.2; en-gb; HTC Desire Build/FRG83G) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
     family: 'HTC Desire'
 
+  - user_agent_string: 'QQBrowser (Linux; U; zh-cn; HTC Hero Build/FRF91)'
+    family: 'HTC Hero'
+
   - user_agent_string: 'Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2'
     family: 'Huawei G2800'
 
@@ -154,6 +157,9 @@ test_cases:
     family: 'Other'
 
   - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
+    family: 'Other'
+    
+  - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
     family: 'Other'
 
   - user_agent_string: 'PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
