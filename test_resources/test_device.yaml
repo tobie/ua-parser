@@ -177,6 +177,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
     family: 'PlayStation Vita'
 
+  - user_agent_string: 'SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0'
+    family: 'Samsung C3053'
+
   - user_agent_string: 'Mozilla/3.0 (Planetweb/2.100 JS SSL US; Dreamcast US)'
     family: 'Sega Dreamcast'
 
