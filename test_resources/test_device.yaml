@@ -153,6 +153,9 @@ test_cases:
   - user_agent_string: 'NCSA_Mosaic/2.0 (Windows 3.1)'
     family: 'Other'
 
+  - user_agent_string: 'Mozilla/5.0 (X11; U; SunOS i86pc; en-US; rv:1.8.0.5) Gecko/20060728 Firefox/1.5.0.5'
+    family: 'Other'
+
   - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
     family: 'Other'
 

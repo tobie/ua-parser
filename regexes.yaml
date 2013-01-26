@@ -566,6 +566,8 @@ os_parsers:
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
   - regex: '(Linux)/(\d+)\.(\d+)'
   - regex: '(Linux|BSD)'
+  - regex: 'SunOS'
+    os_replacement: 'Solaris'
 
 device_parsers:
   ##########
