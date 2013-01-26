@@ -294,6 +294,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)'
+    family: 'Mac OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/418.8 (KHTML, like Gecko) Safari/419.3'
     family: 'Mac OS X'
     major:
