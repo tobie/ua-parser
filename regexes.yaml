@@ -447,6 +447,10 @@ os_parsers:
   # http://en.wikipedia.org/wiki/Mac_OS_X#Versions
   ##########
   - regex: '(Mac OS X) (\d+)[_.](\d+)(?:[_.](\d+))?'
+  
+  # IE on Mac doesn't specify version number
+  - regex: 'Mac_PowerPC'
+    os_replacement: 'Mac OS'
 
   # builds before tiger don't seem to specify version?
 
