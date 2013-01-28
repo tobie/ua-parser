@@ -253,7 +253,7 @@ user_agent_parsers:
   - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Bon Echo'
 
-  - regex: '(M|)QQBrowser'
+  - regex: 'M?QQBrowser'
     family_replacement: 'QQ Browser'
 
   - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
