@@ -27,7 +27,7 @@ irc channel
 [#ua-parser on freenode](irc://chat.freenode.net#ua-parse).
 
 Contributing Changes to regexes.yaml
-____________________________________
+------------------------------------
 
 Contributing to the project, especially `regexes.yaml`, is both welcomed and encouraged. To do so just do the following:
 
