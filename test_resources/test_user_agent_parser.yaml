@@ -598,6 +598,12 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Rackspace Monitoring/1.1 (https://monitoring.api.rackspacecloud.com)'
+    family: 'RackspaceBot'
+    major: '1'
+    minor: '1'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; BSD Four; en-US) AppleWebKit/533.3 (KHTML, like Gecko) rekonq Safari/533.3'
     family: 'Rekonq'
     major:
