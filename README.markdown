@@ -26,6 +26,23 @@ irc channel
 
 [#ua-parser on freenode](irc://chat.freenode.net#ua-parse).
 
+Contributing Changes to regexes.yaml
+____________________________________
+
+Contributing to the project, especially `regexes.yaml`, is both welcomed and encouraged. To do so just do the following:
+
+# Fork the project
+# Create a branch for your changes
+# Modify `regexes.yaml` as appropriate
+# Add tests to the following files and follow their format:
+    * `test_resources/test_device.yaml`
+    * `test_resources/test_user_agent_parser.yaml`
+    * `test_resources/test_user_agent_parser_os.yaml`
+# Push your branch to GitHub and submit a pull request
+# Monitor the pull request to make sure the Travis build succeeds. If it fails simply make the necessary changes to your branch and push it. Travis will re-test the changes.
+
+That's it. If you don't feel comfortable forking the project or modifying the YAML you can also [submit an issue](https://github.com/tobie/ua-parser/issues) that includes the appropriate user agent string and the expected results of parsing.
+
 Usage :: [node.js][1]
 ---------------------
 ```js
