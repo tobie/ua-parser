@@ -158,6 +158,10 @@ user_agent_parsers:
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
 
+  # Rackspace Monitoring
+  - regex: '(Rackspace Monitoring)/(\d+)\.(\d+)'
+    family_replacement: 'RackspaceBot'
+
   # PyAMF
   - regex: '(PyAMF)/(\d+)\.(\d+)\.(\d+)'
 
