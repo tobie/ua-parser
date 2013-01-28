@@ -62,11 +62,8 @@ user_agent_parsers:
   - regex: '(Opera)/9.80.*Version/(\d+)\.(\d+)(?:\.(\d+))?'
 
   # Palm WebOS looks a lot like Safari.
-  - regex: '(webOSBrowser)/(\d+)\.(\d+)'
-  - regex: '(webOS)/(\d+)\.(\d+)'
-    family_replacement: 'webOSBrowser'
-  - regex: '(wOSBrowser).+TouchPad/(\d+)\.(\d+)'
-    family_replacement: 'webOS TouchPad'
+  - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
+    family_replacement: 'webOS Browser'
 
   # LuaKit has no version info.
   # http://luakit.org/projects/luakit/
@@ -550,7 +547,7 @@ os_parsers:
   ##########
   # Misc mobile
   ##########
-  - regex: '(webOS|hpwOS)/(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
     os_replacement: 'webOS'
 
   ##########
@@ -706,8 +703,8 @@ device_parsers:
     device_replacement: 'Palm Pre'
   - regex: '(Pixi)/(\d+)\.(\d+)'
     device_replacement: 'Palm Pixi'
-  - regex: '(Touchpad)/(\d+)\.(\d+)'
-    device_replacement: 'HP Touchpad'
+  - regex: '(Touch[Pp]ad)/(\d+)\.(\d+)'
+    device_replacement: 'HP TouchPad'
   - regex: 'HPiPAQ([A-Za-z0-9]+)/(\d+).(\d+)'
     device_replacement: 'HP iPAQ $1'
   - regex: 'Palm([A-Za-z0-9]+)'
