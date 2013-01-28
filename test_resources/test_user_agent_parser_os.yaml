@@ -217,6 +217,13 @@ test_cases:
     patch: '2'
     patch_minor:
 
+  - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
+    family: 'iOS'
+    major: '6'
+    minor: '0'
+    patch: '1'
+    patch_minor:
+
   - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
     family: 'Kindle'
     major: '1'
@@ -288,6 +295,13 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; Linux x86_64; rv:2.0b8pre) Gecko/20101031 Firefox-4.0/4.0b8pre'
+    family: 'Linux'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'QQBrowser (Linux; U; zh-cn; HTC Hero Build/FRF91)'
     family: 'Linux'
     major:
     minor:
