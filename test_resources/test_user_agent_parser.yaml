@@ -508,6 +508,12 @@ test_cases:
     minor: '2'
     patch: '3'
 
+  - user_agent_string: 'Opera/9.80 (VRE; Opera Mini/4.2/28.2794; U; en) Presto/2.8.119 Version/11.10'
+    family: 'Opera Mini'
+    major: '4'
+    minor: '2'
+    patch:
+
   - user_agent_string: 'Opera/9.80 (BREW; Opera Mini/5.1.191/27.2202; U; en) Presto/2.8.119 240X400 LG VN271'
     family: 'Opera Mini'
     major: '5'
