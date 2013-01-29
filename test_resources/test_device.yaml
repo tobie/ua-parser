@@ -33,6 +33,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.2.2; en-gb; HTC Desire Build/FRG83G) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
     family: 'HTC Desire'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.3.3; en-fr; HTC/WildfireS/1.33.163.2 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+    family: 'HTC WildfireS'
+
   - user_agent_string: 'QQBrowser (Linux; U; zh-cn; HTC Hero Build/FRF91)'
     family: 'HTC Hero'
 
