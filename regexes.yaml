@@ -355,6 +355,9 @@ user_agent_parsers:
 
   - regex: '(Teleca)'
     family_replacement: 'Teleca Browser'
+    
+  - regex: '(Phantom)/V(\d+)\.(\d+)'
+    family_replacement: 'Phantom Browser'
 
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
