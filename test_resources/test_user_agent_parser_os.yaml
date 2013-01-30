@@ -504,6 +504,20 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'OneBrowser/3.0 (SAMSUNG-GT-S5253/S5253DDKJ2)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'OneBrowser/3.0 (NokiaC2-00/03.42)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2'
     family: 'Other'
     major:

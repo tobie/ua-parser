@@ -277,6 +277,9 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
 
   - regex: '(AvantGo) (\d+).(\d+)'
+  
+  - regex: '(OneBrowser)/(\d+).(\d+)'
+    family_replacement: 'ONE Browser'
 
   - regex: '(Avant)'
     v1_replacement: '1'
