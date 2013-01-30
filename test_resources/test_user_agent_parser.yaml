@@ -42,6 +42,12 @@ test_cases:
     minor: '2'
     patch: '2'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.3.3; en-fr; HTC/WildfireS/1.33.163.2 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '3'
+
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; Kindle Fire Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
     family: 'Android'
     major: '2'
