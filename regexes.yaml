@@ -558,6 +558,7 @@ os_parsers:
   ##########
   - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
     os_replacement: 'webOS'
+  - regex: '(VRE);'
 
   ##########
   # Generic patterns
