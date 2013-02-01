@@ -542,6 +542,12 @@ os_parsers:
     os_replacement: 'BlackBerry OS'
 
   ##########
+  # Firefox OS
+  ##########
+  - regex: '\(Mobile;.+Firefox/\d+\.\d+'
+    os_replacement: 'Firefox OS'
+
+  ##########
   # BREW
   # yes, Brew is lower-cased for Brew MP
   ##########

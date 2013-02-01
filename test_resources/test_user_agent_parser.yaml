@@ -236,6 +236,12 @@ test_cases:
     minor: '6'
     patch: '12'
 
+  - user_agent_string: 'Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0'
+    family: 'Firefox Mobile'
+    major: '15'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) FireWeb/1.0.0.0'
     family: 'FireWeb'
     major: '1'
