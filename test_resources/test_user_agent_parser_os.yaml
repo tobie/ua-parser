@@ -546,6 +546,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'KDDI-TS3W UP.Browser/6.2_7.2.7.1.K.6.210 (GUI) MMP/2.0'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'Other'
     major:

@@ -753,6 +753,12 @@ test_cases:
     major: '6'
     minor: '1'
     patch: '0'
+
+  - user_agent_string: 'KDDI-TS3W UP.Browser/6.2_7.2.7.1.K.6.210 (GUI) MMP/2.0'
+    family: 'UP.Browser'
+    major: '6'
+    minor: '2_7'
+    patch: '2'
     
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'

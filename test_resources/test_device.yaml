@@ -186,6 +186,9 @@ test_cases:
   - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
     family: 'Other'
 
+  - user_agent_string: 'KDDI-TS3W UP.Browser/6.2_7.2.7.1.K.6.210 (GUI) MMP/2.0'
+    family: 'Other'
+
   - user_agent_string: 'Opera/9.80 (VRE; Opera Mini/4.2/28.2794; U; en) Presto/2.8.119 Version/11.10'
     family: 'Other'
 
