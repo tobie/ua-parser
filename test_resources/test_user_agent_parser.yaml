@@ -254,6 +254,12 @@ test_cases:
     minor: '1'
     patch:
 
+  - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
+    family: 'iBrowser Mini'
+    major: '2'
+    minor: '8'
+    patch:
+
   - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
     family: 'ICE Browser'
     major: '5'

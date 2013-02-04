@@ -288,6 +288,8 @@ user_agent_parsers:
   - regex: '(QtCarBrowser)'
     v1_replacement: '1'
 
+  - regex: '(iBrowser/Mini)(\d+).(\d+)'
+    family_replacement: 'iBrowser Mini'
   # nokia browsers
   # based on: http://www.developer.nokia.com/Community/Wiki/User-Agent_headers_for_Nokia_devices
   - regex: '^(Nokia)'
