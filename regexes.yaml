@@ -565,6 +565,8 @@ os_parsers:
   # Old style
   - regex: '(GoogleTV)\/\d+'
 
+  - regex: '(WebTV)/(\d+).(\d+)'
+  
   ##########
   # Misc mobile
   ##########
@@ -924,6 +926,11 @@ device_parsers:
     device_replacement: 'Softbank $1'
   - regex: 'Softbank/2\.0/([A-Za-z0-9]+)'
     device_replacement: 'Softbank $1'
+
+  ##########
+  # WebTV
+  ##########
+  - regex: '(WebTV)/(\d+).(\d+)'
 
   ##########
   # Generic Smart Phone
