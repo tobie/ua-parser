@@ -532,6 +532,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0'
     family: 'Other'
     major:
