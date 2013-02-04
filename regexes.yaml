@@ -44,7 +44,7 @@ user_agent_parsers:
   - regex: '(Navigator)/(\d+)\.(\d+)([ab]\d+)'
     family_replacement: 'Netscape'
 
-  - regex: '(Netscape6)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Netscape6)/(\d+)\.(\d+(?:[b]\d+)?)(?:\.(\d+))?'
     family_replacement: 'Netscape'
 
   - regex: '(MyIBrow)/(\d+)\.(\d+)'
