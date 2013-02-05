@@ -364,6 +364,12 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.47 Safari/535.11 MRCHROME'
+    family: 'Mail.ru Chromium Browser'
+    major: '17'
+    minor: '0'
+    patch: '963'
+
   - user_agent_string: 'Midori/0.2 (X11; Linux; U; en-us) WebKit/531.2 '
     family: 'Midori'
     major: '0'
@@ -813,6 +819,12 @@ test_cases:
     major:
     minor:
     patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1104.222 YaBrowser/1.5.1104.222 Safari/537.4'
+    family: 'Yandex Browser'
+    major: '1'
+    minor: '5'
+    patch: '1104'
 
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'YottaaMonitor'

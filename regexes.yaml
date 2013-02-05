@@ -165,6 +165,14 @@ user_agent_parsers:
   # PyAMF
   - regex: '(PyAMF)/(\d+)\.(\d+)\.(\d+)'
 
+  # Yandex Browser
+  - regex: '(YaBrowser)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Yandex Browser'
+
+  # Mail.ru Amigo/Internet Browser (Chromium-based)
+  - regex: '(Chrome)/(\d+)\.(\d+)\.(\d+).* MRCHROME'
+    family_replacement: 'Mail.ru Chromium Browser'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
