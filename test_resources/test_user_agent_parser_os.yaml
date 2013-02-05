@@ -672,6 +672,13 @@ test_cases:
     patch: '5'
     patch_minor:
 
+  - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
+    family: 'WebTV'
+    major: '2'
+    minor: '6'
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; nl-NL) AppleWebKit/534.3 (KHTML, like Gecko) WeTab-Browser Safari/534.3'
     family: 'WeTab'
     major:
