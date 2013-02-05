@@ -315,6 +315,12 @@ test_cases:
     minor: '0'
     patch: '1'
 
+  - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
+    family: 'IE'
+    major: '4'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)'
     family: 'IE'
     major: '5'

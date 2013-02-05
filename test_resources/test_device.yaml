@@ -236,3 +236,6 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11i; Linux; C) AppleWebKikt/533.3 (KHTML, like Gecko) QtCarBrowser Safari/533.3'
     family: 'Tesla Model S'
+
+  - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
+    family: 'WebTV'
