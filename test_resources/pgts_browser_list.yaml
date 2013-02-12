@@ -4389,7 +4389,7 @@ test_cases:
       major: '2'
       minor: '7'
       patch:
-    - user_agent_string: "NCSA Mosaic/2.7b5 (X11;Linux 2.6.7 i686) libwww/2.12 modified"
+    - user_agent_string: "NCSA_Mosaic/2.7b5 (X11;Linux 2.6.7 i686) libwww/2.12 modified"
       family: "NCSA Mosaic"
       major: '2'
       minor: '7'
@@ -4399,10 +4399,10 @@ test_cases:
       major: '2'
       minor: '7'
       patch:
-    - user_agent_string: "NCSA Mosaic/2-7-6 (X11;OpenVMS V7.2 VAX)"
-      family: "NCSA Mosaic"
-      major: '2'
-      minor: '7'
+    - user_agent_string: "NCSA_Mosaic/2-7-6 (X11;OpenVMS V7.2 VAX)"
+      family: "Other"
+      major:
+      minor:
       patch:
     - user_agent_string: "Mozilla/4.0 (compatible; Mosaic/2.8; Windows NT 5.1)"
       family: "Other"
@@ -4414,10 +4414,10 @@ test_cases:
       major: '2'
       minor: '8'
       patch:
-    - user_agent_string: "NCSA Mosaic/3.0.0 (Windows x86)"
+    - user_agent_string: "NCSA_Mosaic/3.0.0 (Windows x86)"
       family: "NCSA Mosaic"
-      major: '2'
-      minor: '8'
+      major: '3'
+      minor: '0'
       patch:
     - user_agent_string: "AIR_Mosaic(16bit)(demo)/v3.09.05.08"
       family: "Other"
