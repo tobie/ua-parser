@@ -532,6 +532,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0'
     family: 'Other'
     major:
@@ -663,6 +670,13 @@ test_cases:
     major: '3'
     minor: '0'
     patch: '5'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
+    family: 'WebTV'
+    major: '2'
+    minor: '6'
+    patch:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; nl-NL) AppleWebKit/534.3 (KHTML, like Gecko) WeTab-Browser Safari/534.3'

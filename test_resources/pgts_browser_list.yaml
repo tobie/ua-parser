@@ -350,7 +350,7 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "BlackBerry7730/3.7.1 UP.Link/5.1.2.5"
-      family: "Blackberry"
+      family: "BlackBerry"
       major: '7730'
       minor:
       patch:
@@ -2365,9 +2365,9 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "ICE Browser/5.05 (Java 1.4.1; Windows 2000 5.0 x86)"
-      family: "Other"
-      major:
-      minor:
+      family: "ICE Browser"
+      major: '5'
+      minor: '05'
       patch:
     - user_agent_string: "ICEBrowser 5.31"
       family: "Other"
@@ -4355,9 +4355,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/1.0 (X11; FreeBSD 1.2.0 i286) via proxy gateway CERN-HTTPD/1.0"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '1'
+      minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (compatible; MSIE 6.0;Windows XP),gzip(gfe) (via translate.google.com)"
       family: "IE"

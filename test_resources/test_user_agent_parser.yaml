@@ -254,6 +254,12 @@ test_cases:
     minor: '1'
     patch:
 
+  - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
+    family: 'iBrowser Mini'
+    major: '2'
+    minor: '8'
+    patch:
+
   - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
     family: 'ICE Browser'
     major: '5'
@@ -309,6 +315,12 @@ test_cases:
     minor: '0'
     patch: '1'
 
+  - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
+    family: 'IE'
+    major: '4'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)'
     family: 'IE'
     major: '5'
@@ -351,6 +363,12 @@ test_cases:
     major:
     minor:
     patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.47 Safari/535.11 MRCHROME'
+    family: 'Mail.ru Chromium Browser'
+    major: '17'
+    minor: '0'
+    patch: '963'
 
   - user_agent_string: 'Midori/0.2 (X11; Linux; U; en-us) WebKit/531.2 '
     family: 'Midori'
@@ -801,6 +819,12 @@ test_cases:
     major:
     minor:
     patch:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1104.222 YaBrowser/1.5.1104.222 Safari/537.4'
+    family: 'Yandex Browser'
+    major: '1'
+    minor: '5'
+    patch: '1104'
 
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'
     family: 'YottaaMonitor'
