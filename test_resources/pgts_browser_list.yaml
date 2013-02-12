@@ -53055,9 +53055,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/2.6 (X11;IRIX 4.0.5F IP12)"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '6'
       patch:
     - user_agent_string: "Mozilla/3.01 (compatible; Netbox/3.5 R92.5; Linux 2.2)"
       family: "Other"
