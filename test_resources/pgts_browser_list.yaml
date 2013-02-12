@@ -4360,8 +4360,8 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (compatible; MSIE 6.0;Windows XP),gzip(gfe) (via translate.google.com)"
-      family: "IE"
-      major: '6'
+      family: "NCSA Mosaic"
+      major: '2'
       minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (Windows 3.1)"
