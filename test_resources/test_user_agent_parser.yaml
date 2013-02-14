@@ -90,18 +90,6 @@ test_cases:
     minor: '0'
     patch: '4'
 
-#  - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; zh_CN) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0 baidubrowser/1.x Safari/534.7'
-#    family: 'Baidu Browser'
-#    major: '1'
-#    minor:
-#    patch:
-
-#  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; baidubrowser 1.x)'
-#    family: 'Baidu Browser'
-#    major: '1'
-#    minor:
-#    patch:
-
   - user_agent_string: 'Mozilla/5.0 (BB10; Touch) AppleWebKit/537.3+ (KHTML, like Gecko) Version/10.0.9.388 Mobile Safari/537.3+'
     family: 'BlackBerry WebKit'
     major:
@@ -224,23 +212,11 @@ test_cases:
     minor: '0'
     patch: 'b8pre'
 
-#  - user_agent_string: 'Mozilla/5.0 (X11; U; SunOS i86pc; en-US; rv:1.8.0.5) Gecko/20060728 Firefox/1.5.0.5'
-#    family: 'Firefox'
-#    major: '1'
-#    minor: '5'
-#    patch: '0'
-
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101027 Ubuntu/10.04 (lucid) Firefox/3.6.12'
     family: 'Firefox'
     major: '3'
     minor: '6'
     patch: '12'
-
-#  - user_agent_string: 'Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0'
-#    family: 'Firefox Mobile'
-#    major: '15'
-#    minor: '0'
-#    patch:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) FireWeb/1.0.0.0'
     family: 'FireWeb'
@@ -260,23 +236,11 @@ test_cases:
     minor:
     patch:
 
-#  - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
-#    family: 'ICE Browser'
-#    major: '5'
-#    minor: '05'
-#    patch:
-
   - user_agent_string: 'Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110417 IceCat/4.0'
     family: 'IceCat'
     major: '4'
     minor: '0'
     patch:
-
-#  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)'
-#    family: 'IE Large Screen'
-#    major: '9'
-#    minor: '0'
-#    patch:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)'
     family: 'IE Mobile'
@@ -320,12 +284,6 @@ test_cases:
     major: '4'
     minor: '0'
     patch:
-
-#  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)'
-#    family: 'IE'
-#    major: '5'
-#    minor: '17'
-#   patch:
 
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0)'
     family: 'IE'
@@ -394,12 +352,6 @@ test_cases:
     minor: '7'
     patch: 'a1'
 
-#  - user_agent_string: 'NCSA_Mosaic/2.0 (Windows 3.1)'
-#    family: 'NCSA Mosaic'
-#    major: '2'
-#    minor: '0'
-#    patch:
-
   - user_agent_string: 'Mozilla/5.0 (PLAYSTATION 3; 3.55)'
     family: 'NetFront'
     major:
@@ -453,24 +405,6 @@ test_cases:
     major: '3'
     minor: '3'
     patch:
-
-#  - user_agent_string: 'Mozilla/4.0 (BREW 3.1.5; U; en-us; Sanyo; NetFront/3.5.1/AMB) Boost SCP3810'
-#    family: 'NetFront'
-#    major: '3'
-#    minor: '5'
-#    patch: '1'
-
-#  - user_agent_string: 'NetFront/3.5.1 (BREW 3.1.5; U; en-us; LG; NetFront/3.5.1/WAP) Sprint LN240 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
-#    family: 'NetFront'
-#    major: '3'
-#    minor: '5'
-#    patch: '1'
-
-#  - user_agent_string: 'Mozilla/4.0 (Brew MP 1.0.2; U; en-us; Sanyo; NetFront/3.5.1/AMB) Sprint E4100'
-#    family: 'NetFront'
-#    major: '3'
-#    minor: '5'
-#    patch: '1'
 
   - user_agent_string: 'PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
     family: 'NetFront'
@@ -549,12 +483,6 @@ test_cases:
     major: '6'
     minor: '2'
     patch: '3'
-
-#  - user_agent_string: 'Opera/9.80 (VRE; Opera Mini/4.2/28.2794; U; en) Presto/2.8.119 Version/11.10'
-#    family: 'Opera Mini'
-#    major: '4'
-#    minor: '2'
-#    patch:
 
   - user_agent_string: 'Opera/9.80 (BREW; Opera Mini/5.1.191/27.2202; U; en) Presto/2.8.119 240X400 LG VN271'
     family: 'Opera Mini'
@@ -658,12 +586,6 @@ test_cases:
     minor: '14'
     patch:
 
-#  - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
-#    family: 'QQ Browser'
-#    major:
-#    minor:
-#    patch:
-
   - user_agent_string: 'QQBrowser (Linux; U; zh-cn; HTC Hero Build/FRF91)'
     family: 'QQ Browser'
     major:
@@ -730,23 +652,11 @@ test_cases:
     minor: '3'
     patch: '5'
 
-#  - user_agent_string: 'J2ME/UCWEB7.0.3.45/139/7682'
-#    family: 'UC Browser'
-#    major: '7'
-#    minor: '0'
-#    patch: '3'
-
   - user_agent_string: 'NOKIA6120c/UC Browser7.4.0.65/28/352'
     family: 'UC Browser'
     major: '7'
     minor: '4'
     patch: '0'
-
-#  - user_agent_string: 'IUC(U;iOS 5.1.1;Zh-cn;320*480;)/UCWEB7.9.0.94/41/997'
-#    family: 'UC Browser'
-#    major: '7'
-#    minor: '9'
-#    patch: '0'
 
   - user_agent_string: 'Nokia5320di/UCWEB8.0.3.99/28/999'
     family: 'UC Browser'
