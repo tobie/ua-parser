@@ -231,9 +231,9 @@ test_cases:
     patch:
 
   - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
-    family: 'Nokia'
-    major: '5130'
-    minor:
+    family: 'iBrowser Mini'
+    major: '2'
+    minor: '8'
     patch:
 
   - user_agent_string: 'Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110417 IceCat/4.0'
@@ -323,7 +323,7 @@ test_cases:
     patch:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.47 Safari/535.11 MRCHROME'
-    family: 'Chrome'
+    family: 'Mail.ru Chromium Browser'
     major: '17'
     minor: '0'
     patch: '963'
@@ -731,9 +731,9 @@ test_cases:
     patch:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1104.222 YaBrowser/1.5.1104.222 Safari/537.4'
-    family: 'Chrome'
-    major: '22'
-    minor: '0'
+    family: 'Yandex Browser'
+    major: '1'
+    minor: '5'
     patch: '1104'
 
   - user_agent_string: 'Mozilla/5.0 YottaaMonitor;'

@@ -603,9 +603,9 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
-    family: 'Other'
-    major:
-    minor:
+    family: 'WebTV'
+    major: '2'
+    minor: '6'
     patch:
     patch_minor:
 

@@ -193,4 +193,4 @@ test_cases:
     family: 'Tesla Model S'
 
   - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
-    family:
+    family: 'WebTV'
