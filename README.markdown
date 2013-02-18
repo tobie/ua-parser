@@ -43,6 +43,13 @@ Contributing to the project, especially `regexes.yaml`, is both welcomed and enc
 
 That's it. If you don't feel comfortable forking the project or modifying the YAML you can also [submit an issue](https://github.com/tobie/ua-parser/issues) that includes the appropriate user agent string and the expected results of parsing.
 
+Other ua-parser Libraries
+-------------------------
+
+There are a few other libraries which make use of ua-parser's patterns. These include:
+
+* Ruby - [user_agent_parser](https://github.com/toolmantim/user_agent_parser)
+
 Usage :: [node.js][1]
 ---------------------
 ```js
