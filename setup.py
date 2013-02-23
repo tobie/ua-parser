@@ -22,7 +22,7 @@ class install(_install):
                                         'regexes.yaml')
         shutil.move(source_path, destination_path)
 
-        print 'Converting regexes.yaml to json...'
+        print('Converting regexes.yaml to json...')
         yaml_file = open(destination_path)
         yaml = yaml.load(yaml_file)
         yaml_file.close()
