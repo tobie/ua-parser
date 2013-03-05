@@ -604,6 +604,12 @@ test_cases:
     minor: '53'
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android; 4.1.2; GT-I9100 Build/000000) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1234.12 Mobile Safari/537.22 OPR/14.0.123.123'
+    family: 'Opera Mobile'
+    major: '14'
+    minor: '0'
+    patch: '123'
+
   - user_agent_string: 'SomethingWeNeverKnewExisted'
     family: 'Other'
     major:

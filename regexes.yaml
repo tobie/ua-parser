@@ -61,6 +61,10 @@ user_agent_parsers:
   - regex: '(Opera Mini)/att/(\d+)\.(\d+)'
   - regex: '(Opera)/9.80.*Version/(\d+)\.(\d+)(?:\.(\d+))?'
 
+  # Opera 14 for Android uses a WebKit render engine.
+  - regex: '(?:Mobile Safari).*(OPR)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Opera Mobile'
+
   # Palm WebOS looks a lot like Safari.
   - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
     family_replacement: 'webOS Browser'
