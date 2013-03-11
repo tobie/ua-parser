@@ -350,7 +350,7 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "BlackBerry7730/3.7.1 UP.Link/5.1.2.5"
-      family: "Blackberry"
+      family: "BlackBerry"
       major: '7730'
       minor:
       patch:
@@ -2365,9 +2365,9 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "ICE Browser/5.05 (Java 1.4.1; Windows 2000 5.0 x86)"
-      family: "Other"
-      major:
-      minor:
+      family: "ICE Browser"
+      major: '5'
+      minor: '05'
       patch:
     - user_agent_string: "ICEBrowser 5.31"
       family: "Other"
@@ -4355,24 +4355,24 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/1.0 (X11; FreeBSD 1.2.0 i286) via proxy gateway CERN-HTTPD/1.0"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '1'
+      minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (compatible; MSIE 6.0;Windows XP),gzip(gfe) (via translate.google.com)"
-      family: "IE"
-      major: '6'
+      family: "NCSA Mosaic"
+      major: '2'
       minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (Windows 3.1)"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '0'
       patch:
     - user_agent_string: "NCSA_Mosaic/2.0 (Windows NT 5.2)"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '0'
       patch:
     - user_agent_string: "Mosaic/2.1 (Amiga ARexx)"
       family: "Other"
@@ -4385,9 +4385,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/2.7b5 (X11;Linux 2.0.13 i386) libwww/2.12 modified"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '7'
       patch:
     - user_agent_string: "NCSA Mosaic/2.7b5 (X11;Linux 2.6.7 i686) libwww/2.12 modified"
       family: "Other"
@@ -4395,9 +4395,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/2.7b5 (X11;Linux 2.6.7 i686) libwww/2.12 modified"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '7'
       patch:
     - user_agent_string: "NCSA Mosaic/2-7-6 (X11;OpenVMS V7.2 VAX)"
       family: "Other"
@@ -4410,9 +4410,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/2.8 (X11; FreeBSD 5.2.1 i686)"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '8'
       patch:
     - user_agent_string: "NCSA Mosaic/3.0.0 (Windows x86)"
       family: "Other"
@@ -4620,9 +4620,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Mozilla/3.0 (Planetweb/2.100 JS SSL US; Dreamcast US)"
-      family: "Other"
-      major:
-      minor:
+      family: "Planetweb"
+      major: '2'
+      minor: '100'
       patch:
     - user_agent_string: "Mozilla/3.0 (Windows 98;U) [en]"
       family: "Other"
@@ -53055,9 +53055,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "NCSA_Mosaic/2.6 (X11;IRIX 4.0.5F IP12)"
-      family: "Other"
-      major:
-      minor:
+      family: "NCSA Mosaic"
+      major: '2'
+      minor: '6'
       patch:
     - user_agent_string: "Mozilla/3.01 (compatible; Netbox/3.5 R92.5; Linux 2.2)"
       family: "Other"
