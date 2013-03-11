@@ -42,6 +42,7 @@ public class DeviceParser {
         break;
       }
     }
+    if (device == null) device = "Other";
 
     return new Device(device);
   }
