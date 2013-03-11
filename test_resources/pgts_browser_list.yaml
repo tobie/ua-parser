@@ -56824,7 +56824,7 @@ test_cases:
       major: '6'
       minor: '01'
       patch:
-    - user_agent_string: "Mozilla/5.0 (Windows XP; U) Opera 6.01  [en]\""
+    - user_agent_string: "Mozilla/5.0 (Windows XP; U) Opera 6.01  [en]"
       family: "Opera"
       major: '6'
       minor: '01'
