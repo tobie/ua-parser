@@ -23,8 +23,14 @@ import os
 import re
 import yaml
 
+# pip may copy regexes.yaml to different places depending on the OS.
+# For example, on Mac pip copies regexes.yaml to the folder where
+# user_agent_parser.py lives where as Fedora leaves regexes.yaml to "data" dir
+# See https://github.com/tobie/ua-parser/issues/209 for the complete discussion
 
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
+DATA_DIR = os.path.abspath(os.path.join(ROOT_DIR, '..', 'data'))
+regex_dir = ROOT_DIR if os.path.exists(os.path.join(ROOT_DIR, 'regexes.yaml')) else DATA_DIR
 
 
 class UserAgentParser(object):
@@ -380,15 +386,15 @@ UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
 regexes = None
 
 if not UA_PARSER_YAML:
-    yamlPath = os.path.join(ROOT_DIR, 'regexes.yaml')
-    json_path = os.path.join(ROOT_DIR, 'regexes.json')
+    yamlPath = os.path.join(regex_dir, 'regexes.yaml')
+    json_path = os.path.join(regex_dir, 'regexes.json')
 else:
     yamlFile = open(UA_PARSER_YAML)
     regexes = yaml.load(yamlFile)
     yamlFile.close()
 
 # If UA_PARSER_YAML is not specified, load regexes from regexes.json before
-# falling back to with yaml
+# falling back to yaml format
 if regexes is None:
     try:
         json_file = open(json_path)
