@@ -22,9 +22,7 @@ import json
 import os
 import re
 import yaml
-
-
-ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
+from pkg_resources import resource_filename
 
 
 class UserAgentParser(object):
@@ -380,8 +378,8 @@ UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
 regexes = None
 
 if not UA_PARSER_YAML:
-    yamlPath = os.path.join(ROOT_DIR, 'regexes.yaml')
-    json_path = os.path.join(ROOT_DIR, 'regexes.json')
+    yamlPath = resource_filename(__name__, 'regexes.yaml')
+    json_path = resource_filename(__name__, 'regexes.json')
 else:
     yamlFile = open(UA_PARSER_YAML)
     regexes = yaml.load(yamlFile)

@@ -9,31 +9,28 @@ from setuptools.command.install import install as _install
 
 class install(_install):
     def run(self):
-        # After installation:
-        # 1. Move regexes.yaml to directory where ua_parser is installed
-        # 2. Convert regexes.yaml to regexes.json
-        _install.run(self)
+        # copy regexes.yaml down into the package directory
+        print 'Copying regexes.yaml to package directory...'
+        import os
+        import shutil
+        cwd = os.path.abspath('.')
+        yaml_src = os.path.join(cwd, 'regexes.yaml')
+        yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
+        shutil.copy(yaml_src, yaml_dest)
+
+        # convert yaml to json
+        print 'Converting regexes.yaml to json...'
         import json
         import yaml
-        import ua_parser
-        INSTALLATION_DIR = os.path.dirname(ua_parser.__file__)
-        source_path = resource_filename(__name__, 'regexes.yaml')
-        destination_path = os.path.join(INSTALLATION_DIR,
-                                        'regexes.yaml')
-        shutil.move(source_path, destination_path)
-
-        print 'Converting regexes.yaml to json...'
-        yaml_file = open(destination_path)
-        yaml = yaml.load(yaml_file)
-        yaml_file.close()
-        json_file = open(os.path.join(INSTALLATION_DIR, 'regexes.json'), 'w')
-        json_file.write(json.dumps(yaml))
-        json_file.close()
+        regexes = yaml.load(open(yaml_dest))
+        json_dest = yaml_dest.replace('.yaml', '.json')
+        json.dump(regexes, open(json_dest, 'w'))
+        _install.run(self)
 
 
 setup(
     name='ua-parser',
-    version='0.3.1',
+    version='0.3.3',
     description="Python port of Browserscope's user agent parser",
     author='PBS',
     author_email='no-reply@pbs.org',
@@ -43,8 +40,7 @@ setup(
     zip_safe=False,
     url='https://github.com/tobie/ua-parser',
     include_package_data=True,
-    package_data={'': ['README.markdown']},
-    data_files=[('data', ['regexes.yaml'])],
+    package_data={'': ['regexes.yaml', 'regexes.json']},
     install_requires=['pyyaml'],
     cmdclass={'install': install, 'develop': install},
     classifiers=[
