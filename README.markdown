@@ -114,7 +114,7 @@ print result_dict['os']
 # {'major': '5', 'patch_minor': None, 'minor': '1', 'family': 'iOS', 'patch': None}
 
 print result_dict['device']
-# {'is_spider': False, 'is_mobile': True, 'family': 'iPhone'}
+# {'family': 'iPhone'}
 ```
 
 
