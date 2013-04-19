@@ -354,7 +354,7 @@ user_agent_parsers:
     family_replacement: 'Amazon Silk'
 
   # Phantomjs, should go before Safari
-  - regex: '(PhantomJS)/(\d+)\.(\d+).(\d+)'
+  - regex: '(PhantomJS)/(\d+)\.(\d+)\.(\d+)'
 
   # WebKit Nightly
   - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Safari'
