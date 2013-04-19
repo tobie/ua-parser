@@ -353,6 +353,9 @@ user_agent_parsers:
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     family_replacement: 'Amazon Silk'
 
+  # Phantomjs, should go before Safari
+  - regex: '(PhantomJS)/(\d+)\.(\d+)\.(\d+)'
+
   # WebKit Nightly
   - regex: '(AppleWebKit)/(\d+)\.?(\d+)?\+ .* Safari'
     family_replacement: 'WebKit Nightly'
@@ -376,7 +379,7 @@ user_agent_parsers:
   - regex: '(Phantom)/V(\d+)\.(\d+)'
     family_replacement: 'Phantom Browser'
 
-  - regex: '(MSIE) (\d+)\.(\d+)'
+  - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
   - regex: '(python-requests)/(\d+)\.(\d+)'
