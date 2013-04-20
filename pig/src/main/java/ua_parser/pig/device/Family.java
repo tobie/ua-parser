@@ -1,0 +1,38 @@
+package ua_parser.pig.device;
+
+import java.io.IOException;
+
+import org.apache.pig.EvalFunc;
+import org.apache.pig.data.Tuple;
+
+import ua_parser.Device;
+import ua_parser.pig.PigParser;
+
+public class Family extends EvalFunc<String> {
+
+    PigParser parser;
+
+    public Family() throws IOException {
+        parser = PigParser.getParser();
+    }
+
+    public String exec(Tuple input) throws IOException {
+        String agentString = null ;
+        if (input == null || input.size() == 0)
+            return null;
+        try {
+            agentString = (String) input.get(0);
+            if (agentString == null || agentString.isEmpty()) {
+                return null;
+            }
+            Device device = parser.parseDevice(agentString);
+            if (device == null) {
+                return null;
+            }
+            return device.family;
+        } catch (Exception e) {
+            throw new IOException("Caught exception processing input row \""+agentString+"\"", e);
+        }
+    }
+
+}
