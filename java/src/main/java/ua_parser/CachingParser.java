@@ -50,6 +50,9 @@ public class CachingParser extends Parser {
   @SuppressWarnings("unchecked")
   @Override
   public Client parse(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
     if (cacheClient == null) {
       cacheClient = new LRUMap(CACHE_SIZE);
     }
@@ -67,6 +70,9 @@ public class CachingParser extends Parser {
   @SuppressWarnings("unchecked")
   @Override
   public UserAgent parseUserAgent(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
     if (cacheUserAgent == null) {
       cacheUserAgent = new LRUMap(CACHE_SIZE);
     }
@@ -84,6 +90,9 @@ public class CachingParser extends Parser {
   @SuppressWarnings("unchecked")
   @Override
   public Device parseDevice(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
     if (cacheDevice == null) {
       cacheDevice = new LRUMap(CACHE_SIZE);
     }
@@ -101,6 +110,10 @@ public class CachingParser extends Parser {
   @SuppressWarnings("unchecked")
   @Override
   public OS parseOS(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
+
     if (cacheOS == null) {
       cacheOS = new LRUMap(CACHE_SIZE);
     }

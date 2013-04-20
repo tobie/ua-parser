@@ -34,7 +34,7 @@ public class OSParser {
     this.patterns = patterns;
   }
 
-  public static OSParser fromList(List<Map> configList) {
+  public static OSParser fromList(List<Map<String,String>> configList) {
     List<OSPattern> configPatterns = new ArrayList<OSPattern>();
 
     for (Map<String,String> configMap : configList) {
@@ -44,6 +44,10 @@ public class OSParser {
   }
 
   public OS parse(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
+
     OS os;
     for (OSPattern p : patterns) {
       if ((os = p.match(agentString)) != null) {
