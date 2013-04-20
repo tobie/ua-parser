@@ -17,7 +17,6 @@ public class Family extends EvalFunc<String> {
     }
 
     public String exec(Tuple input) throws IOException {
-        
         if (input == null || input.size() == 0)
             return null;
         try {
