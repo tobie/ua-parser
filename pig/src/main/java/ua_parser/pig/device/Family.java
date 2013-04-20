@@ -17,21 +17,17 @@ public class Family extends EvalFunc<String> {
     }
 
     public String exec(Tuple input) throws IOException {
-        String agentString = null ;
         if (input == null || input.size() == 0)
             return null;
         try {
-            agentString = (String) input.get(0);
-            if (agentString == null || agentString.isEmpty()) {
-                return null;
-            }
+            String agentString = (String) input.get(0);
             Device device = parser.parseDevice(agentString);
             if (device == null) {
                 return null;
             }
             return device.family;
         } catch (Exception e) {
-            throw new IOException("Caught exception processing input row \""+agentString+"\"", e);
+            throw new IOException("Caught exception processing input row ", e);
         }
     }
 
