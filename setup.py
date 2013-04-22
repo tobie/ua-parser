@@ -15,6 +15,9 @@ class install(_install):
         import shutil
         cwd = os.path.abspath(os.path.dirname(__file__))
         yaml_src = os.path.join(cwd, 'regexes.yaml')
+        if not os.path.exists(yaml_src):
+            raise RuntimeError(
+                      'Unable to find regexes.yaml, should be at %s' % yaml_src)
         yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
         shutil.copy(yaml_src, yaml_dest)
 
