@@ -239,3 +239,9 @@ test_cases:
 
   - user_agent_string: 'Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)'
     family: 'WebTV'
+
+  - user_agent_string: 'AdsBot-Google-Mobile (+http://www.google.com/mobile/adsbot.html) Mozilla (iPhone; U; CPU iPhone OS 3 0 like Mac OS X) AppleWebKit (KHTML, like Gecko) Mobile Safari'
+    family: 'Spider'
+
+  - user_agent_string: 'magpie-crawler/1.1 (U; Linux amd64; en-GB; +http://www.brandwatch.net)'
+    family: 'Spider'
