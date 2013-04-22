@@ -348,6 +348,8 @@ The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [A
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
 
+The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
@@ -360,3 +362,4 @@ The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Per
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
+[13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
