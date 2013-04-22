@@ -71,7 +71,7 @@ class ParseTest(unittest.TestCase):
         user_agent_string = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)'
         expected = {
           'device': {
-            'family': None
+            'family': 'Other'
           },
           'os': {
             'family': 'Mac OS X',
@@ -196,15 +196,9 @@ class ParseTest(unittest.TestCase):
             if 'js_ua' in test_case:
                 kwds = eval(test_case['js_ua'])
 
-            # The python client has been returning None is the family doesn't match. This probably should be changed in the parser,
-            # but would break many existing clients. If we want to change the parser behavior, it's line 152 of the parser.
-            good_family = test_case['family']
-            if good_family == 'Other':
-                good_family = None
-
             # The expected results
             expected = {
-              'family': good_family
+              'family': test_case['family']
             }
 
             result = user_agent_parser.ParseDevice(user_agent_string, **kwds)

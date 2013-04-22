@@ -258,6 +258,9 @@ def ParseDevice(user_agent_string):
         if device:
             break
 
+    if device == None:
+        device = 'Other'
+
     return {
       'family': device
     }
