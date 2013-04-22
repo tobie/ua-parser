@@ -13,7 +13,7 @@ class install(_install):
         print 'Copying regexes.yaml to package directory...'
         import os
         import shutil
-        cwd = os.path.abspath('.')
+        cwd = os.path.abspath(os.path.dirname(__file__))
         yaml_src = os.path.join(cwd, 'regexes.yaml')
         yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
         shutil.copy(yaml_src, yaml_dest)
