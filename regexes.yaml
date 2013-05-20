@@ -137,9 +137,6 @@ user_agent_parsers:
   - regex: '(SLP Browser)/(\d+)\.(\d+)'
     family_replacement: 'Tizen Browser'
 
-  # Epiphany browser (identifies as Chromium)
-  - regex: '(Epiphany)/(\d+)\.(\d+).(\d+)'
-
   # Sogou Explorer 2.X
   - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
     family_replacement: 'Sogou Explorer'
@@ -177,19 +174,21 @@ user_agent_parsers:
   - regex: '(Chrome)/(\d+)\.(\d+)\.(\d+).* MRCHROME'
     family_replacement: 'Mail.ru Chromium Browser'
 
-  # Midori (Chromium-based)
-  - regex: '(Midori)/(\d+).(\d+)'
-    family_replacement: 'Midori'
-
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
 
   # Browser/major_version.minor_version.beta_version
-  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjalloo|Google Earth|Raven for Mac|Openwave)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(AdobeAIR|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjalloo|Google Earth|Raven for Mac|Openwave)/(\d+)\.(\d+)\.(\d+)'
+
+  # Chrome/Chromium/major_version.minor_version.beta_version
+  - regex: '(Chromium|Chrome)/(\d+)\.(\d+)\.(\d+)'
 
   # Browser/major_version.minor_version
   - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser|Planetweb|ICE Browser)/(\d+)\.(\d+)'
+
+  # Chrome/Chromium/major_version.minor_version
+  - regex: '(Chromium|Chrome)/(\d+)\.(\d+)'
 
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
