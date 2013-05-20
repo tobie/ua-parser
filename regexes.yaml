@@ -88,7 +88,7 @@ user_agent_parsers:
     family_replacement: 'Swiftfox'
 
   # Rekonq
-  - regex: '(rekonq)/(\d+)\.(\d+) Safari'
+  - regex: '(rekonq)/(\d+)\.(\d+)\.?(\d+)? Safari'
     family_replacement: 'Rekonq'
   - regex: 'rekonq'
     family_replacement: 'Rekonq'
@@ -176,6 +176,10 @@ user_agent_parsers:
   # Mail.ru Amigo/Internet Browser (Chromium-based)
   - regex: '(Chrome)/(\d+)\.(\d+)\.(\d+).* MRCHROME'
     family_replacement: 'Mail.ru Chromium Browser'
+
+  # Midori (Chromium-based)
+  - regex: '(Midori)/(\d+).(\d+)'
+    family_replacement: 'Midori'
 
   #### END SPECIAL CASES TOP ####
 
@@ -580,7 +584,7 @@ os_parsers:
   ##########
   - regex: '(GoogleTV) (\d+)\.(\d+)\.(\d+)'
   # Old style
-  - regex: '(GoogleTV)\/\d+'
+  - regex: '(GoogleTV)/\d+'
 
   - regex: '(WebTV)/(\d+).(\d+)'
   
