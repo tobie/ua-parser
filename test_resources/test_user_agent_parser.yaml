@@ -849,3 +849,10 @@ test_cases:
     major: '11'
     minor: '0'
     patch:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; AOL 9.7; AOLBuild 4343.19; Windows NT 6.1; WOW64; Trident/5.0; FunWebProducts)'
+    family: 'AOL'
+    major: '9'
+    minor: '7'
+    patch: '4343'
+
