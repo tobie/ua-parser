@@ -178,7 +178,7 @@ user_agent_parsers:
     family_replacement: 'Mail.ru Chromium Browser'
 
   # AOL Browser (IE-based)
-  - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+\.?\d*)'
+  - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+)'
 
   #### END SPECIAL CASES TOP ####
 
