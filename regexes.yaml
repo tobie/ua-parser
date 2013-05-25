@@ -524,7 +524,7 @@ os_parsers:
   ##########
   # Linux distros
   ##########
-  - regex: '(Debian)-(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Debian)'
   - regex: '(Linux Mint)(?:/(\d+))?'
   - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
 
