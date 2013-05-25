@@ -10,15 +10,14 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 Maintainers
 -----------
 
-* C#:         [Søren Enemærke ](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))  
-* D:          [Shripad K ](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))  
-* Haskell:    [Ozgun Ataman ](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))  
-* Java:       [Steve Jiang ](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))  
-* JavaScript: [Tobie Langel ](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))  
-* Perl:       [Mamod Mehyar ](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))  
-* PHP:        [Dave Olsen ](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))  
-* Python:     [Lindsey Simon ](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))  
-
+* C#: [Søren Enemærke](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))
+* D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
+* Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
+* Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
+* JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
+* Perl: [Mamod Mehyar](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))
+* PHP: [Dave Olsen](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))
+* Python: [Lindsey Simon](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))
 * `regexes.yaml`: Lindsey Simon & Tobie Langel
 
 irc channel
