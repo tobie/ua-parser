@@ -860,7 +860,7 @@ test_cases:
     family: 'Bon Echo'
     major: '2'
     minor: '0'
-    patch:
+    patch: 'b1'
 
   - user_agent_string: 'ELinks/0.11.7 (textmode; Linux 2.6.32-fw3 i686; 143x53-2)'
     family: 'ELinks'
