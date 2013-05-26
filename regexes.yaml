@@ -606,7 +606,7 @@ os_parsers:
   - regex: '(SUSE|Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
 
   # first.second.third bits
-  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS|CentOS)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)'
 
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
