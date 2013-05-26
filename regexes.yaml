@@ -527,7 +527,7 @@ os_parsers:
   - regex: '([Dd]ebian)'
     os_replacement: 'Debian'
   - regex: '(Linux Mint)(?:/(\d+))?'
-  - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Mandriva)(?: Linux)?/(?:[\d\.-]+mdv(\d+)\.(\d))?'
 
   ##########
   # Symbian + Symbian OS
