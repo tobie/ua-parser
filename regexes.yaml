@@ -296,9 +296,11 @@ user_agent_parsers:
   - regex: '(OneBrowser)/(\d+).(\d+)'
     family_replacement: 'ONE Browser'
 
-  - regex: '(Avant) Browser'
+  - regex: 'avantbrowser.com'
+    family_replacement: 'Avant Browser'
+  - regex: '(Avant Browser)'
   - regex: '(Avant)'
-    v1_replacement: '1'
+    family_replacement: 'Avant Browser'
 
   # This is the Tesla Model S (see similar entry in device parsers)
   - regex: '(QtCarBrowser)'
