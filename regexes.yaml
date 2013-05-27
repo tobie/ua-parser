@@ -350,7 +350,7 @@ user_agent_parsers:
 
   - regex: '(Links) \((\d+)\.(\d+)'
   # fork of Links
-  - regex: '(ELinks)/(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(ELinks)(?:/| \()(\d+)\.(\d+)(?:\.(\d+))?'
 
   - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
 
