@@ -275,7 +275,7 @@ user_agent_parsers:
   - regex: '(Embider)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
 
-  - regex: '(BonEcho)/(\d+)\.(\d+)(?:\.?[ab]?\d+[a-z]*)?'
+  - regex: '(BonEcho)/(\d+)\.(\d+)(?:\.?([ab]?\d+[a-z]*))?'
     family_replacement: 'Bon Echo'
 
   - regex: 'M?QQBrowser'
