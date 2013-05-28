@@ -866,4 +866,4 @@ test_cases:
     family: 'Bon Echo'
     major: '2'
     minor: '0'
-    patch:
+    patch: 'b1'
