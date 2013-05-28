@@ -850,3 +850,10 @@ test_cases:
     minor:
     patch:
     patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.8.1.13) Gecko/20080208 Mandriva/2.0.0.13-1mdv2008.1 (2008.1) Firefox/2.0.0.13'
+    family: 'Mandriva'
+    major: '2008'
+    minor: '1'
+    patch:
+    patch_minor:

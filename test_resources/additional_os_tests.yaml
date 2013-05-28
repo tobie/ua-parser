@@ -79,10 +79,10 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090807 Mandriva Linux/1.9.1.2-1.1mud2009.1 (2009.1) Firefox/3.5.2 FirePHP/0.3,gzip(gfe),gzip(gfe)'
     family: 'Mandriva'
-    major: '1'
-    minor: '9'
-    patch: '1'
-    patch_minor: '2'
+    major: '2009'
+    minor: '1'
+    patch: 
+    patch_minor: 
 
   - user_agent_string: ''
     family: 'Other'
