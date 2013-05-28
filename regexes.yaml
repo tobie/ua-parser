@@ -606,16 +606,17 @@ os_parsers:
   # since the majority of os cases are very specific, these go last
   ##########
   # first.second.third.fourth bits
-  - regex: '(SUSE|Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
 
   # first.second.third bits
-  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS|CentOS)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Red Hat|Puppy|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)'
 
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
 
   # just os
-  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Android|WeTab)'
+  - regex: '(Ubuntu|Kubuntu|Arch Linux|CentOS|Slackware|Gentoo|openSUSE|SUSE|Red Hat|Fedora|PCLinuxOS|Gentoo|Mageia)'
   - regex: '(Linux)/(\d+)\.(\d+)'
   - regex: '(Linux|BSD)'
   - regex: 'SunOS'
