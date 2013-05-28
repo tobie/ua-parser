@@ -205,9 +205,9 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.16) Gecko/20110302 Conkeror/0.9.2 (Debian-0.9.2+git100804-1)'
     family: 'Debian'
-    major: '0'
-    minor: '9'
-    patch: '2'
+    major: 
+    minor: 
+    patch: 
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0'
