@@ -65,6 +65,10 @@ user_agent_parsers:
   - regex: '(?:Mobile Safari).*(OPR)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Opera Mobile'
 
+  # Opera 15 for Desktop is similar to Chrome but includes an "OPR" Version string.
+  - regex: '(?:Chrome).*(OPR)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Opera'
+
   # Palm WebOS looks a lot like Safari.
   - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
     family_replacement: 'webOS Browser'
