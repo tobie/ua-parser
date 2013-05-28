@@ -863,7 +863,7 @@ test_cases:
     patch: '4343'
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; en-GB; rv:1.8.1b1) Gecko/20060601 BonEcho/2.0b1 (Ubuntu-edgy)'
-    family: 'BonEcho'
+    family: 'Bon Echo'
     major: '2'
     minor: '0'
     patch:
