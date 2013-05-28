@@ -356,7 +356,7 @@ user_agent_parsers:
   # fork of Links
   - regex: '(ELinks)/(\d+)\.(\d+)(?:\.(\d+))?'
 
-- regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
+  - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
 
   #- regex: '\(iPad;.+(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
   #  family_replacement: 'iPad'
