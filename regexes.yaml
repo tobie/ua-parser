@@ -530,7 +530,7 @@ os_parsers:
   ##########
   - regex: '(Debian)-(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
   - regex: '(Linux Mint)(?:/(\d+))?'
-  - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Mandriva)(?: Linux)?/(?:[\d.-]+m[a-z]{2}(\d+).(\d))?'
 
   ##########
   # Symbian + Symbian OS
