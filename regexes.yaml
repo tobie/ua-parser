@@ -271,7 +271,7 @@ user_agent_parsers:
   - regex: '(Embider)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
 
-  - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(BonEcho)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
     family_replacement: 'Bon Echo'
 
   - regex: 'M?QQBrowser'
@@ -299,8 +299,11 @@ user_agent_parsers:
   - regex: '(OneBrowser)/(\d+).(\d+)'
     family_replacement: 'ONE Browser'
 
+  - regex: 'avantbrowser.com'
+    family_replacement: 'Avant Browser'
+  - regex: '(Avant Browser)'
   - regex: '(Avant)'
-    v1_replacement: '1'
+    family_replacement: 'Avant Browser'
 
   # This is the Tesla Model S (see similar entry in device parsers)
   - regex: '(QtCarBrowser)'
@@ -349,6 +352,8 @@ user_agent_parsers:
     family_replacement: 'Palm Pre'
 
   - regex: '(Links) \((\d+)\.(\d+)'
+  # fork of Links
+  - regex: '(ELinks)(?:/| \()(\d+)\.(\d+)(?:\.(\d+))?'
 
   - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
 
@@ -524,9 +529,10 @@ os_parsers:
   ##########
   # Linux distros
   ##########
-  - regex: '(Debian)-(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '([Dd]ebian)'
+    os_replacement: 'Debian'
   - regex: '(Linux Mint)(?:/(\d+))?'
-  - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
+  - regex: '(Mandriva)(?: Linux)?/(?:[\d.-]+m\w{2}(\d+).(\d))?'
 
   ##########
   # Symbian + Symbian OS
@@ -598,6 +604,11 @@ os_parsers:
   - regex: '(VRE);'
 
   ##########
+  # Others
+  ##########
+  - regex: '(AmigaOS)(?: ?(\d+)\.(\d+))?'
+
+  ##########
   # Generic patterns
   # since the majority of os cases are very specific, these go last
   ##########
@@ -605,13 +616,14 @@ os_parsers:
   - regex: '(SUSE|Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
 
   # first.second.third bits
-  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS|CentOS)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(SUSE|Fedora|Red Hat|Puppy|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)'
 
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
 
   # just os
-  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Ubuntu|Kubuntu|Android|Arch Linux|CentOS|WeTab|Slackware)'
+  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Android|WeTab)'
+  - regex: '(Ubuntu|Kubuntu|Arch Linux|CentOS|Slackware|Gentoo|openSUSE|SUSE|Red Hat|Fedora|PCLinuxOS|Gentoo|Mageia)'
   - regex: '(Linux)/(\d+)\.(\d+)'
   - regex: '(Linux|BSD)'
   - regex: 'SunOS'

@@ -856,3 +856,20 @@ test_cases:
     minor: '7'
     patch: '4343'
 
+  - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; en-GB; rv:1.8.1b1) Gecko/20060601 BonEcho/2.0b1 (Ubuntu-edgy)'
+    family: 'Bon Echo'
+    major: '2'
+    minor: '0'
+    patch: 'b1'
+
+  - user_agent_string: 'ELinks/0.11.7 (textmode; Linux 2.6.32-fw3 i686; 143x53-2)'
+    family: 'ELinks'
+    major: '0'
+    minor: '11'
+    patch: '7'
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; Avant Browser; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; Avant Browser)'
+    family: 'Avant Browser'
+    major: 
+    minor: 
+    patch: 
