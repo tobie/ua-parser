@@ -529,6 +529,7 @@ os_parsers:
   # Linux distros
   ##########
   - regex: '([Dd]ebian)'
+    os_replacement: 'Debian'
   - regex: '(Linux Mint)(?:/(\d+))?'
   - regex: '(Mandriva)(?: Linux)?/(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?'
 
