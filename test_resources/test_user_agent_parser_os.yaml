@@ -857,3 +857,10 @@ test_cases:
     minor: '1'
     patch:
     patch_minor:
+
+  - user_agent_string: 'Arexx (compatible; MSIE 6.0; AmigaOS5.0)'
+    family: 'AmigaOS'
+    major: '5'
+    minor: '0'
+    patch:
+    patch_minor:
