@@ -857,3 +857,10 @@ test_cases:
     minor: '1'
     patch:
     patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows; U; Win 9x 4.90; PL; rv:1.7.5) Gecko/20041217'
+    family: 'Windows Me'
+    major: 
+    minor: 
+    patch:
+    patch_minor:
