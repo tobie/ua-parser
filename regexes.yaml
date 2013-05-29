@@ -601,6 +601,11 @@ os_parsers:
   - regex: '(VRE);'
 
   ##########
+  # Others
+  ##########
+  - regex: '(AmigaOS)(?: ?(\d+)\.(\d+))?'
+
+  ##########
   # Generic patterns
   # since the majority of os cases are very specific, these go last
   ##########
