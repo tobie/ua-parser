@@ -513,8 +513,6 @@ os_parsers:
 
   - regex: '(AppleTV)/(\d+)\.(\d+)'
     os_replacement: 'ATV OS X'
-    os_v1_replacement: '$1'
-    os_v2_replacement: '$2'
 
   ##########
   # Chrome OS
