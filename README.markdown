@@ -14,6 +14,7 @@ Maintainers
 * D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
 * Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
 * Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
+* Pig: [Niels Basjes](https://github.com/nielsbasjes) ([@nielsbasjes](https://twitter.com/nielsbasjes))
 * JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
 * Perl: [Mamod Mehyar](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))
 * PHP: [Dave Olsen](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))
@@ -127,6 +128,46 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
+```
+
+
+Usage :: Pig
+-------------
+```pig
+REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+ 
+DEFINE DeviceFamily     ua_parser.pig.device.Family;
+DEFINE OsFamily         ua_parser.pig.os.Family;
+DEFINE OsMajor          ua_parser.pig.os.Major;
+DEFINE OsMinor          ua_parser.pig.os.Minor;
+DEFINE OsPatch          ua_parser.pig.os.Patch;
+DEFINE OsPatchMinor     ua_parser.pig.os.PatchMinor;
+DEFINE UseragentFamily  ua_parser.pig.useragent.Family;
+DEFINE UseragentMajor   ua_parser.pig.useragent.Major;
+DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
+DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
+ 
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH  UserAgents
+    GENERATE DeviceFamily(useragent)    AS DeviceFamily:chararray,
+
+             OsFamily(useragent)        AS OsFamily:chararray,
+             OsMajor(useragent)         AS OsMajor:chararray,
+             OsMinor(useragent)         AS OsMinor:chararray,
+             OsPatch(useragent)         AS OsPatch:chararray,
+             OsPatchMinor(useragent)    AS OsPatchMinor:chararray,
+
+             UseragentFamily(useragent) AS UseragentFamily:chararray,
+             UseragentMajor(useragent)  AS UseragentMajor:chararray,
+             UseragentMinor(useragent)  AS UseragentMinor:chararray,
+             UseragentPatch(useragent)  AS UseragentPatch:chararray,
+
+             useragent                  AS Useragent;
+ 
+DUMP AgentSpecs;
 ```
 
 
@@ -307,6 +348,8 @@ The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [A
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
 
+The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
@@ -319,3 +362,4 @@ The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Per
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
+[13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
