@@ -12,12 +12,12 @@ DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
 DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
 
 
-UserAgents = 
+UserAgents =
     Load 'useragents.txt' AS (useragent:chararray);
 
 AgentSpecs =
     FOREACH UserAgents
-    GENERATE 
+    GENERATE
              DeviceFamily(useragent)    AS DeviceFamily:chararray,
              OsFamily(useragent)        AS OsFamily:chararray,
              OsMajor(useragent)         AS OsMajor:chararray,

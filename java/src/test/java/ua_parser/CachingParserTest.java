@@ -10,9 +10,9 @@ import org.junit.Test;
  * These tests really only redo the same tests as in ParserTest but with a
  * different Parser subclass Also the same tests will be run several times on
  * the same user agents to validate the caching works correctly.
- * 
+ *
  * @author niels
- * 
+ *
  */
 public class CachingParserTest extends ParserTest {
 
@@ -27,7 +27,7 @@ public class CachingParserTest extends ParserTest {
         configYamlAsString.getBytes("UTF8"));
     return new CachingParser(yamlInput);
   }
-  
+
   @Test
   public void testCachedParseUserAgent() {
     super.testParseUserAgent();

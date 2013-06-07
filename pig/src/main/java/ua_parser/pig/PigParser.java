@@ -9,9 +9,9 @@ import ua_parser.CachingParser;
  * data. One of the main patterns in clickstream data is that you will see the
  * same useragent over and over again. This class introduces an LRU cache to
  * reduce the number of times the parsing is actually done.
- * 
+ *
  * @author Niels Basjes
- * 
+ *
  */
 public class PigParser extends CachingParser {
 

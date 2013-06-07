@@ -47,7 +47,7 @@ public class UserAgentParser {
     if (agentString == null) {
       return null;
     }
-      
+
     UserAgent agent;
     for (UAPattern p : patterns) {
       if ((agent = p.match(agentString)) != null) {

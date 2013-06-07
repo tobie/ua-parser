@@ -7,14 +7,14 @@ The implementation uses the shared regex patterns and overrides from regexes.yam
 Build:
 ------
 
-    cd ../java ; mvn install    
+    cd ../java ; mvn install
     mvn package
 
 Usage:
 --------
 ```pig
 REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
- 
+
 DEFINE DeviceFamily     ua_parser.pig.device.Family;
 DEFINE OsFamily         ua_parser.pig.os.Family;
 DEFINE OsMajor          ua_parser.pig.os.Major;
@@ -25,7 +25,7 @@ DEFINE UseragentFamily  ua_parser.pig.useragent.Family;
 DEFINE UseragentMajor   ua_parser.pig.useragent.Major;
 DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
 DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
- 
+
 UserAgents =
     Load 'useragents.txt' AS (useragent:chararray);
 
@@ -45,7 +45,7 @@ AgentSpecs =
              UseragentPatch(useragent)  AS UseragentPatch:chararray,
 
              useragent                  AS Useragent;
- 
+
 DUMP AgentSpecs;
 ```
 

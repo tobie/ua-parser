@@ -14,10 +14,10 @@ Maintainers
 * D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
 * Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
 * Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
-* Pig: [Niels Basjes](https://github.com/nielsbasjes) ([@nielsbasjes](https://twitter.com/nielsbasjes))
 * JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
 * Perl: [Mamod Mehyar](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))
 * PHP: [Dave Olsen](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))
+* Pig: [Niels Basjes](https://github.com/nielsbasjes) ([@nielsbasjes](https://twitter.com/nielsbasjes))
 * Python: [Lindsey Simon](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))
 * `regexes.yaml`: Lindsey Simon & Tobie Langel
 
@@ -135,7 +135,7 @@ Usage :: Pig
 -------------
 ```pig
 REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
- 
+
 DEFINE DeviceFamily     ua_parser.pig.device.Family;
 DEFINE OsFamily         ua_parser.pig.os.Family;
 DEFINE OsMajor          ua_parser.pig.os.Major;
@@ -146,7 +146,7 @@ DEFINE UseragentFamily  ua_parser.pig.useragent.Family;
 DEFINE UseragentMajor   ua_parser.pig.useragent.Major;
 DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
 DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
- 
+
 UserAgents =
     Load 'useragents.txt' AS (useragent:chararray);
 
@@ -166,7 +166,7 @@ AgentSpecs =
              UseragentPatch(useragent)  AS UseragentPatch:chararray,
 
              useragent                  AS Useragent;
- 
+
 DUMP AgentSpecs;
 ```
 
