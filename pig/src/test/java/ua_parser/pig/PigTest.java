@@ -8,8 +8,7 @@ import org.apache.pig.data.Tuple;
 import org.apache.pig.data.TupleFactory;
 import org.junit.Test;
 
-public class PigTests extends TestCase {
-
+public class PigTest extends TestCase {
     @Test
     public void testPigFuncs() throws IOException {
         Tuple tuple = TupleFactory.getInstance().newTuple(1);
