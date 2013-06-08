@@ -37,9 +37,9 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.0.4) Gecko/2008111217 Fedora/3.0.4-1.fc9 Firefox/3.0.4'
     family: 'Fedora'
-    major: '3'
-    minor: '0'
-    patch: '4'
+    major: 
+    minor: 
+    patch: 
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.77 Large Screen Safari/534.24 GoogleTV/000000'
@@ -79,10 +79,10 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090807 Mandriva Linux/1.9.1.2-1.1mud2009.1 (2009.1) Firefox/3.5.2 FirePHP/0.3,gzip(gfe),gzip(gfe)'
     family: 'Mandriva'
-    major: '1'
-    minor: '9'
-    patch: '1'
-    patch_minor: '2'
+    major: '2009'
+    minor: '1'
+    patch: 
+    patch_minor: 
 
   - user_agent_string: ''
     family: 'Other'

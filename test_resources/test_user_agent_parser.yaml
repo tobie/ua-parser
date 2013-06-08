@@ -603,6 +603,12 @@ test_cases:
     major: '10'
     minor: '53'
     patch:
+    
+  - user_agent_string: 'User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.20 Safari/537.36 OPR/15.0.1147.18 (Edition Next)'
+    family: 'Opera'
+    major: '15'
+    minor: '0'
+    patch: '1147'
 
   - user_agent_string: 'Mozilla/5.0 (Linux; Android; 4.1.2; GT-I9100 Build/000000) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1234.12 Mobile Safari/537.22 OPR/14.0.123.123'
     family: 'Opera Mobile'
@@ -849,3 +855,10 @@ test_cases:
     major: '11'
     minor: '0'
     patch:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; AOL 9.7; AOLBuild 4343.19; Windows NT 6.1; WOW64; Trident/5.0; FunWebProducts)'
+    family: 'AOL'
+    major: '9'
+    minor: '7'
+    patch: '4343'
+

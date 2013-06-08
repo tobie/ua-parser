@@ -12,4 +12,9 @@ Revision history for Perl extension HTTP::UA::Parser.
 0.003 Sun Jan 20 2013
 	- Adding more tests using original ua-project tests yaml
 	- Fixing "Other" devices detection
-	
+
+0.004 Wed Jun 5 2013
+	- Check if port work with new regexes.yaml file
+	- Even more tests
+	- Fixing 0 and undef issue with UA parser
+	- Adding makeParser functions

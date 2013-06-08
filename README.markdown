@@ -10,15 +10,15 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 Maintainers
 -----------
 
-* C#:         [Søren Enemærke ](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))  
-* D:          [Shripad K ](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))  
-* Haskell:    [Ozgun Ataman ](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))  
-* Java:       [Steve Jiang ](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))  
-* JavaScript: [Tobie Langel ](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))  
-* Perl:       [Mamod Mehyar ](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))  
-* PHP:        [Dave Olsen ](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))  
-* Python:     [Lindsey Simon ](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))  
-
+* C#: [Søren Enemærke](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))
+* D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
+* Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
+* Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
+* JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
+* Perl: [Mamod Mehyar](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))
+* PHP: [Dave Olsen](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))
+* Pig: [Niels Basjes](https://github.com/nielsbasjes) ([@nielsbasjes](https://twitter.com/nielsbasjes))
+* Python: [Lindsey Simon](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))
 * `regexes.yaml`: Lindsey Simon & Tobie Langel
 
 irc channel
@@ -29,19 +29,7 @@ irc channel
 Contributing Changes to regexes.yaml
 ------------------------------------
 
-Contributing to the project, especially `regexes.yaml`, is both welcomed and encouraged. To do so just do the following:
-
-1. Fork the project
-2. Create a branch for your changes
-3. Modify `regexes.yaml` as appropriate
-4. Add tests to the following files and follow their format:
-    * `test_resources/test_device.yaml`
-    * `test_resources/test_user_agent_parser.yaml`
-    * `test_resources/test_user_agent_parser_os.yaml`
-5. Push your branch to GitHub and submit a pull request
-6. Monitor the pull request to make sure the Travis build succeeds. If it fails simply make the necessary changes to your branch and push it. Travis will re-test the changes.
-
-That's it. If you don't feel comfortable forking the project or modifying the YAML you can also [submit an issue](https://github.com/tobie/ua-parser/issues) that includes the appropriate user agent string and the expected results of parsing.
+Please read the [contributors' guide](https://github.com/tobie/ua-parser/blob/master/CONTRIBUTING.md)
 
 Other ua-parser Libraries
 -------------------------
@@ -140,8 +128,46 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
-  System.out.println(c.device.isMobile);  // => true
-  System.out.println(c.device.isSpider);  // => false
+```
+
+
+Usage :: Pig
+-------------
+```pig
+REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+
+DEFINE DeviceFamily     ua_parser.pig.device.Family;
+DEFINE OsFamily         ua_parser.pig.os.Family;
+DEFINE OsMajor          ua_parser.pig.os.Major;
+DEFINE OsMinor          ua_parser.pig.os.Minor;
+DEFINE OsPatch          ua_parser.pig.os.Patch;
+DEFINE OsPatchMinor     ua_parser.pig.os.PatchMinor;
+DEFINE UseragentFamily  ua_parser.pig.useragent.Family;
+DEFINE UseragentMajor   ua_parser.pig.useragent.Major;
+DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
+DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
+
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH  UserAgents
+    GENERATE DeviceFamily(useragent)    AS DeviceFamily:chararray,
+
+             OsFamily(useragent)        AS OsFamily:chararray,
+             OsMajor(useragent)         AS OsMajor:chararray,
+             OsMinor(useragent)         AS OsMinor:chararray,
+             OsPatch(useragent)         AS OsPatch:chararray,
+             OsPatchMinor(useragent)    AS OsPatchMinor:chararray,
+
+             UseragentFamily(useragent) AS UseragentFamily:chararray,
+             UseragentMajor(useragent)  AS UseragentMajor:chararray,
+             UseragentMinor(useragent)  AS UseragentMinor:chararray,
+             UseragentPatch(useragent)  AS UseragentPatch:chararray,
+
+             useragent                  AS Useragent;
+
+DUMP AgentSpecs;
 ```
 
 
@@ -322,6 +348,8 @@ The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [A
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
 
+The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
@@ -334,3 +362,4 @@ The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Per
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
+[13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
