@@ -5,14 +5,13 @@ import shutil
 from pkg_resources import resource_filename
 from setuptools import setup, find_packages
 from setuptools.command.install import install as _install
+from setuptools.command.build_py import build_py as _build_py
 
 
 class install(_install):
     def run(self):
         # copy regexes.yaml down into the package directory
         print 'Copying regexes.yaml to package directory...'
-        import os
-        import shutil
         cwd = os.path.abspath(os.path.dirname(__file__))
         yaml_src = os.path.join(cwd, 'regexes.yaml')
         if not os.path.exists(yaml_src):
@@ -30,6 +29,11 @@ class install(_install):
         json.dump(regexes, open(json_dest, 'w'))
         _install.run(self)
 
+class build_py(_build_py):
+    def run(self):
+        self.data_files.append(
+            ('ua_parser', '', 'build/lib/ua_parser', ['regexes.yaml', 'regexes.json']) )
+        _build_py.run(self)
 
 setup(
     name='ua-parser',
@@ -45,7 +49,7 @@ setup(
     include_package_data=True,
     package_data={'': ['regexes.yaml', 'regexes.json']},
     install_requires=['pyyaml'],
-    cmdclass={'install': install, 'develop': install},
+    cmdclass={'install': install, 'develop': install, 'build_py': build_py},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
