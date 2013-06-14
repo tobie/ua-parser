@@ -1,2 +1,2 @@
-include regexes.yaml
-include regexes.json
+include py/ua_parser/regexes.yaml
+include py/ua_parser/regexes.json
