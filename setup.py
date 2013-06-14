@@ -3,28 +3,25 @@ import os
 import shutil
 
 from setuptools import setup
-from setuptools.command.develop  import develop  as _develop
-from setuptools.command.install  import install  as _install
-from setuptools.command.sdist    import sdist    as _sdist   
+from setuptools.command.develop import develop as _develop
+from setuptools.command.install import install as _install
+from setuptools.command.sdist   import sdist   as _sdist
 
 def install_regexes():
-    # copy regexes.yaml down into the package directory
-    print 'Copying regexes.yaml to package directory...'
+    print('Copying regexes.yaml to package directory...')
     cwd = os.path.abspath(os.path.dirname(__file__))
     yaml_src = os.path.join(cwd, 'regexes.yaml')
     if not os.path.exists(yaml_src):
         raise RuntimeError(
-                  'Unable to find regexes.yaml, should be at %s' % yaml_src)
+                  'Unable to find regexes.yaml, should be at %r' % yaml_src)
     yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
-    shutil.copy(yaml_src, yaml_dest)
-    convert_regexes_yaml_to_json(yaml_dest)
+    shutil.copy2(yaml_src, yaml_dest)
 
-def convert_regexes_yaml_to_json(yaml_dest):
-    print 'Converting regexes.yaml to json...'
+    print('Converting regexes.yaml to json...')
     import json
     import yaml
-    regexes = yaml.load(open(yaml_dest))
     json_dest = yaml_dest.replace('.yaml', '.json')
+    regexes = yaml.load(open(yaml_dest))
     json.dump(regexes, open(json_dest, 'w'))
 
 class develop(_develop):
@@ -44,7 +41,7 @@ class sdist(_sdist):
 
 setup(
     name='ua-parser',
-    version='0.3.3.1',
+    version='0.3.3.2',
     description="Python port of Browserscope's user agent parser",
     author='PBS',
     author_email='no-reply@pbs.org',
