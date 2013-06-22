@@ -3,7 +3,7 @@ var UNDEF = void 0;
 exports.BackwardsCompatResults = BackwardsCompatResults;
 function BackwardsCompatResults(ua_str, ua, os, device) {
   this.string = ua_str;
-  this.userAgent = ua;
+  this.userAgent = this.ua = ua;
   this.os = os;
   this.device = device
 

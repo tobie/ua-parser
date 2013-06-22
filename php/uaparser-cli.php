@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php CLI v2.0.0
+ * ua-parser-php CLI v2.1.1
  *
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -14,9 +14,10 @@
  *   php uaparser-cli.php
  *       Provides the usage information.
  *
- *   php uaparser-cli.php [-j] "your user agent string"
+ *   php uaparser-cli.php [-p] [-j] "your user agent string"
  *       Parses a user agent string and dumps the results as a list.
  *       Use the -j flag to print the result as JSON.
+ *       Use the -p flag to pretty print the JSON result when using PHP 5.4+.
  *
  *   php uaparser-cli.php -g [-s] [-n]
  *       Fetches an updated YAML file for UAParser and overwrites the current JSON file.
@@ -66,24 +67,28 @@ if (!ini_get('date.timezone')) {
  * Gets the latest user agent. Back-ups the old version first. it will fail silently if something is wrong...
  */
 function get($file,$silent,$nobackup,$basePath) {
-    if ($data = @file_get_contents($file)) {
-        if (!$silent) { print "loading and converting YAML data...\n"; };
-        $data = Spyc::YAMLLoad($data);
-        $data = json_encode($data);
-        if (!$silent) { print "encoded as JSON...\n"; };
-        if (file_exists($basePath."resources/regexes.json")) {
-            if (!$nobackup) { 
-                if (!$silent) { print("backing up old JSON file...\n"); }
-                if (!copy($basePath."resources/regexes.json", $basePath."resources/regexes.".date("Ymdhis").".json")) {
-                    if (!$silent) { print("back-up failed...\n"); }
-                    exit;
+	if (ini_get('allow_url_fopen')) {
+       if ($data = @file_get_contents($file)) {
+            if (!$silent) { print "loading and converting YAML data...\n"; };
+            $data = Spyc::YAMLLoad($data);
+            $data = json_encode($data);
+            if (!$silent) { print "encoded as JSON...\n"; };
+            if (file_exists($basePath."resources/regexes.json")) {
+                if (!$nobackup) { 
+                    if (!$silent) { print("backing up old JSON file...\n"); }
+                    if (!copy($basePath."resources/regexes.json", $basePath."resources/regexes.".date("Ymdhis").".json")) {
+                        if (!$silent) { print("back-up failed...\n"); }
+                        exit;
+                    }
                 }
             }
+            file_put_contents($basePath."resources/regexes.json", $data);
+            if (!$silent) { print("saved JSON file...\n"); }
+        } else {
+            if (!$silent) { print("failed to get the file...\n"); }
         }
-        file_put_contents($basePath."resources/regexes.json", $data);
-        if (!$silent) { print("saved JSON file...\n"); }
     } else {
-        if (!$silent) { print("failed to get the file...\n"); }
+        if (!$silent) { print("ERROR: the allow_url_fopen option is not enabled in php.ini. it needs to be set to 'On' for this feature to work...\n"); }
     }
 }
 
@@ -93,7 +98,7 @@ function get($file,$silent,$nobackup,$basePath) {
 if (php_sapi_name() == 'cli') {
     
     // define the supported argument flags
-    $args = getopt("gsncyl:j:");
+    $args = getopt("gsncyl:pj:");
     
     // process the arguments
     if (isset($args["g"])) {
@@ -205,9 +210,14 @@ if (php_sapi_name() == 'cli') {
         $parser = new UAParser;
         
         // parse and encode the results
-        print json_encode($parser->parse($args["j"]));
+        if (version_compare(PHP_VERSION, '5.4.0', '>=') && isset($args["p"])) {
+            print json_encode($parser->parse($args["j"]), JSON_PRETTY_PRINT);
+        } else {
+            print json_encode($parser->parse($args["j"]));
+        }
+        print PHP_EOL;
         
-    } else if (isset($argv[1]) && (($argv[1] != "-j") && ($argv[1] != "-l") && ($argv[1] != "-s") && ($argv[1] != "-n"))) {
+    } else if (isset($argv[1]) && (($argv[1] != "-j") && ($argv[1] != "-p") && ($argv[1] != "-l") && ($argv[1] != "-s") && ($argv[1] != "-n"))) {
         
         /* Parse the supplied UA from the command line and kick it out as JSON */
         
@@ -234,9 +244,10 @@ if (php_sapi_name() == 'cli') {
         print "\n";
         print "Usage:\n";
         print "\n";
-        print "  php uaparser-cli.php [-j] \"your user agent string\"\n";
+        print "  php uaparser-cli.php [-p] [-j] \"your user agent string\"\n";
         print "    Parses a user agent string and dumps the results as a list.\n";
         print "    Use the -j flag to print the result as JSON.\n";
+        print "    Use the -p flag to pretty print the JSON result when using PHP 5.4+.\n";
         print "\n";
         print "  php uaparser-cli.php -g [-s] [-n]\n";
         print "    Fetches an updated YAML file for ua-parser and overwrites the current JSON file.\n";

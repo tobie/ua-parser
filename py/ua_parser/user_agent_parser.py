@@ -32,6 +32,8 @@ ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.abspath(os.path.join(ROOT_DIR, '..', 'data'))
 regex_dir = ROOT_DIR if os.path.exists(os.path.join(ROOT_DIR, 'regexes.yaml')) else DATA_DIR
 
+from pkg_resources import resource_filename
+
 
 class UserAgentParser(object):
     def __init__(self, pattern, family_replacement=None, v1_replacement=None):
@@ -165,10 +167,10 @@ def Parse(user_agent_string, **jsParseBits):
     """
     jsParseBits = jsParseBits or {}
     return {
-      'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
-      'os': ParseOS(user_agent_string, **jsParseBits),
-      'device': ParseDevice(user_agent_string, **jsParseBits),
-      'string': user_agent_string
+        'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
+        'os': ParseOS(user_agent_string, **jsParseBits),
+        'device': ParseDevice(user_agent_string, **jsParseBits),
+        'string': user_agent_string
     }
 
 
@@ -251,7 +253,7 @@ def ParseDevice(user_agent_string):
             break
 
     return {
-      'family': device
+        'family': device
     }
 
 
@@ -386,8 +388,8 @@ UA_PARSER_YAML = os.getenv("UA_PARSER_YAML")
 regexes = None
 
 if not UA_PARSER_YAML:
-    yamlPath = os.path.join(regex_dir, 'regexes.yaml')
-    json_path = os.path.join(regex_dir, 'regexes.json')
+    yamlPath = resource_filename(__name__, 'regexes.yaml')
+    json_path = resource_filename(__name__, 'regexes.json')
 else:
     yamlFile = open(UA_PARSER_YAML)
     regexes = yaml.load(yamlFile)

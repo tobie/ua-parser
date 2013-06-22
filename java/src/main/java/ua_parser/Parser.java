@@ -18,11 +18,8 @@ package ua_parser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -68,21 +65,22 @@ public class Parser {
 
   private void initialize(InputStream regexYaml) {
     Yaml yaml = new Yaml(new SafeConstructor());
-    Map<String,List> regexConfig = (Map<String,List>) yaml.load(regexYaml);
+    @SuppressWarnings("unchecked")
+    Map<String,List<Map<String,String>>> regexConfig = (Map<String,List<Map<String,String>>>) yaml.load(regexYaml);
 
-    List<Map> uaParserConfigs = regexConfig.get("user_agent_parsers");
+    List<Map<String,String>> uaParserConfigs = regexConfig.get("user_agent_parsers");
     if (uaParserConfigs == null) {
       throw new IllegalArgumentException("user_agent_parsers is missing from yaml");
     }
     uaParser = UserAgentParser.fromList(uaParserConfigs);
 
-    List<Map> osParserConfigs = regexConfig.get("os_parsers");
+    List<Map<String,String>> osParserConfigs = regexConfig.get("os_parsers");
     if (osParserConfigs == null) {
       throw new IllegalArgumentException("os_parsers is missing from yaml");
     }
     osParser = OSParser.fromList(osParserConfigs);
 
-    List<Map> deviceParserConfigs = regexConfig.get("device_parsers");
+    List<Map<String,String>> deviceParserConfigs = regexConfig.get("device_parsers");
     if (deviceParserConfigs == null) {
       throw new IllegalArgumentException("device_parsers is missing from yaml");
     }

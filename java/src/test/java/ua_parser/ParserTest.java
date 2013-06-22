@@ -81,7 +81,7 @@ public class ParserTest {
 
     Client expected1 = new Client(new UserAgent("Firefox", "3", "5", "5"),
                                   new OS("Mac OS X", "10", "4", null, null),
-                                  new Device(null));
+                                  new Device("Other"));
     Client expected2 = new Client(new UserAgent("Mobile Safari", "5", "1", null),
                                   new OS("iOS", "5", "1", "1", null),
                                   new Device("iPhone"));

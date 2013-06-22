@@ -3,5 +3,13 @@
 .*\.old$
 ^Makefile$
 ^\.git
-^.*Yaml\/Tiny.pm$
-lib/Yaml/Tiny.yaml
+\.*tar.gz$
+\.tmp$
+\.old$
+\.bak$
+\.git.+
+^regexes\.yaml$
+^\.travis\.yml
+README\.pod
+MYMETA\.json
+MYMETA\.yml

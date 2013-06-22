@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php v2.0.1
+ * ua-parser-php v2.1.1
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -23,7 +23,8 @@
  *   - @rjd22 (https://github.com/rjd22)
  *   - Timo Tijhof (https://github.com/Krinkle)
  *   - Marcus Bointon (https://github.com/Synchro)
- *
+ *   - Ryan Parman (https://github.com/skyzyx)
+ *   - Pravin Dahal (https://github.com/pravindahal)
  */
 
 // address 5.1 compatibility
@@ -33,21 +34,28 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 
 class UAParser {
     
-    private $regexes;
-    private $log = false;
+    protected $regexes;
+    protected $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
      */
-    public function __construct() {
-        
-        if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
-            $this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
+    public function __construct($customRegexesFile = null) {
+	
+        $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
+        if (file_exists($regexesFile)) {
+            $this->regexes = json_decode(file_get_contents($regexesFile));
         } else {
-            $title        = 'Error loading ua-parser';
-            $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
-            $instruction1 = '%: cd /path/to/UAParser/';
-            $instruction2 = '%: php uaparser-cli.php -g';
+            $title            = 'Error loading ua-parser';
+            if ($customRegexesFile !== null) {
+                $message      = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
+                $instruction1 = '';
+                $instruction2 = '';
+            } else {
+                $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
+                $instruction1 = '%: cd /path/to/UAParser/';
+                $instruction2 = '%: php uaparser-cli.php -g';
+            }
             
             if (php_sapi_name() == 'cli') {
                 print "\n".$title."\n";
@@ -63,7 +71,7 @@ class UAParser {
                 print '</blockquote>';
                 print '</body></html>';
             }
-            
+
             exit;
         }
     }
@@ -285,7 +293,7 @@ class UAParser {
     /**
     * Logs the user agent info
     */
-    private function log($data) {
+    protected function log($data) {
         $jsonData = json_encode($data);
         $fp = fopen(dirname(__FILE__).DIRECTORY_SEPARATOR.'log/user_agents.log', 'a');
         fwrite($fp, $jsonData."\r\n");
