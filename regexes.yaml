@@ -353,7 +353,8 @@ user_agent_parsers:
     family_replacement: 'Palm Pre'
 
   # fork of Links
-  - regex: '(ELinks)(?:/| \()(\d+)\.(\d+)'
+  - regex: '(ELinks)/(\d+)\.(\d+)'
+  - regex: '(ELinks) \((\d+)\.(\d+)'
   - regex: '(Links) \((\d+)\.(\d+)'
 
   - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
