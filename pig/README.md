@@ -10,7 +10,7 @@ Build:
     cd ../java ; mvn install
     mvn package
 
-Usage:
+Usage 1:
 --------
 ```pig
 REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
@@ -49,9 +49,31 @@ AgentSpecs =
 DUMP AgentSpecs;
 ```
 
+Usage 2:
+--------
+```pig
+REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar;
+
+DEFINE UAParser     ua_parser.pig.PigUserAgentParser();
+
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH UserAgents GENERATE UAParser(useragent) AS 
+    (DeviceFamily:chararray, OsFamily:chararray, OsMajor:chararray, OsMinor:chararray, 
+    OsPatch:chararray, OsPatchMinor:chararray, UseragentFamily:chararray, 
+    UseragentMajor:chararray, UseragentMinor:chararray, UseragentPatch:chararray);
+
+DUMP AgentSpecs;
+
+```
+
 Author:
 -------
 
   * Niels Basjes [@nielsbasjes](https://twitter.com/nielsbasjes)
+  * Rohit Rangnekar
 
   This is a trivial interface on top of the Java API created by Steve Jiang [@sjiang](https://twitter.com/sjiang)
+
