@@ -1,6 +1,10 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
+  # Add HbbTV browsers (Browser in TVs, standardized in Europe and Australia)
+  - regex: '(HbbTV)/[0-9.]+ \(.*;.+; ?(.+) ?; ?(.+) ?;.*;\)'
+
+
   # must go before Firefox to catch SeaMonkey/Camino
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
 
@@ -402,6 +406,8 @@ user_agent_parsers:
     family_replacement: 'Python Requests'
 
 os_parsers:
+  # HbbTV Televisions (Smart TV standard for EU and AU)
+  - regex: 'HbbTV/[0-9.]+ \(.*; ?(.+) ?;.*;.*;.*;\)'
 
   ##########
   # Android
