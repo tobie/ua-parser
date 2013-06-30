@@ -277,6 +277,8 @@ user_agent_parsers:
 
   - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Bon Echo'
+  - regex: '(BonEcho)/(\d+)\.(\d+)([ab]\d+)'
+    family_replacement: 'Bon Echo'
 
   - regex: 'M?QQBrowser'
     family_replacement: 'QQ Browser'
