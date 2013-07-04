@@ -17,7 +17,7 @@ type Parser struct {
 
 func GetExportedName(src string) string {
 	byteSrc := []byte(src)
-	chunks := camelingRegex.FindAll(byteSrc, -1)
+	chunks := exportedNameRegex.FindAll(byteSrc, -1)
 	for idx, val := range chunks {
 		chunks[idx] = bytes.Title(val)
 	}
@@ -37,7 +37,7 @@ func ToStruct(interfaceArr []map[string]string, typeInterface interface{}, retur
 	*returnVal = structArr
 }
 
-var camelingRegex = regexp.MustCompile("[0-9A-Za-z]+")
+var exportedNameRegex = regexp.MustCompile("[0-9A-Za-z]+")
 
 func New(regexFile string) *Parser {
 	parser := new(Parser)
