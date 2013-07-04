@@ -47,7 +47,7 @@ func dvcHelperTest(file string) bool {
 }
 
 func TestDevice(t *testing.T) {
-	if !dvcHelperTest("testing/test_device.yaml") {
+	if !dvcHelperTest("../../test_resources/test_device.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")

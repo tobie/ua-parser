@@ -49,7 +49,7 @@ func osTestHelper(file string) bool {
 }
 
 func TestOs(t *testing.T) {
-	if !osTestHelper("testing/test_user_agent_parser_os.yaml") {
+	if !osTestHelper("../../test_resources/test_user_agent_parser_os.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")
@@ -57,7 +57,7 @@ func TestOs(t *testing.T) {
 }
 
 func TestAdditionalOs(t *testing.T) {
-	if !osTestHelper("testing/additional_os_tests.yaml") {
+	if !osTestHelper("../../test_resources/additional_os_tests.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")

@@ -48,7 +48,7 @@ func uaHelperTest(file string) bool {
 }
 
 func TestUserAgent(t *testing.T) {
-	if !uaHelperTest("testing/test_user_agent_parser.yaml") {
+	if !uaHelperTest("../../test_resources/test_user_agent_parser.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")
@@ -56,7 +56,7 @@ func TestUserAgent(t *testing.T) {
 }
 
 func TestFirefoxUserAgents(t *testing.T) {
-	if !uaHelperTest("testing/firefox_user_agent_strings.yaml") {
+	if !uaHelperTest("../../test_resources/firefox_user_agent_strings.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")
@@ -64,7 +64,7 @@ func TestFirefoxUserAgents(t *testing.T) {
 }
 
 func TestPgtsBrowsersList(t *testing.T) {
-	if !uaHelperTest("testing/pgts_browsers_list.yaml") {
+	if !uaHelperTest("../../test_resources/pgts_browser_list.yaml") {
 		t.Fail()
 	} else {
 		fmt.Println("PASS")
