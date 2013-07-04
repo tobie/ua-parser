@@ -12,6 +12,7 @@ Maintainers
 
 * C#: [Søren Enemærke](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))
 * D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
+* Go: [Yihuan Zhou](https://github.com/yihuanz) ([@yihuanz](https://twitter.com/yihuanz))
 * Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
 * Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
 * JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
@@ -231,7 +232,7 @@ void main() {
     std.stdio.writeln(agent.toFullString); // Mobile Safari 5.1.0/iOS 5.1.1
 
     std.stdio.writeln(agent.device.family); // iPhone
-    
+
     std.stdio.writeln(agent.isMobile); // true
     std.stdio.writeln(agent.isSpider); // false
 }
@@ -276,14 +277,14 @@ print $r->ua->family;             # -> "Safari"
 print $r->ua->major;              # -> "5"
 print $r->ua->minor;              # -> "0"
 print $r->ua->patch;              # -> "1"
-    
+
 print $r->os->toString();         # -> "iOS 5.1"
 print $r->os->toVersionString();  # -> "5.1"
 print $r->os->family              # -> "iOS"
 print $r->os->major;              # -> "5"
 print $r->os->minor;              # -> "1"
 print $r->os->patch;              # -> undef
-    
+
 print $r->device->family;         # -> "iPhone"
 
 More information is available in the README in the perl directory
@@ -327,7 +328,44 @@ Just (UAResult {uarFamily = "Mobile Safari", uarV1 = Just "5", uarV2 = Just "1",
 Just (OSResult {osrFamily = "iOS", osrV1 = Just "5", osrV2 = Just "1", osrV3 = Nothing, osrV4 = Nothing})
 ```
 
-Plesae refer to Haddocks for more info; the API is pretty straightforward.
+Please refer to Haddocks for more info; the API is pretty straightforward.
+
+Usage :: Go
+------------
+
+Install the package:
+
+    go get "github.com/tobie/ua-parser/go/uaparser"
+
+Sample Usage
+
+```
+package main
+
+import (
+  "github.com/tobie/ua-parser/go/uaparser"
+  "fmt"
+)
+
+func main() {
+  testStr := "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
+  regexFile := "../../regexes.yaml"
+  parser := uaparser.New(regexFile)
+  client := parser.Parse(testStr)
+  fmt.Println(client.UserAgent.Family)  // "Amazon Silk"
+  fmt.Println(client.UserAgent.Major)   // "1"
+  fmt.Println(client.UserAgent.Minor)   // "1"
+  fmt.Println(client.UserAgent.Patch)   // "0-80"
+  fmt.Println(client.Os.Family)         // "Android"
+  fmt.Println(client.Os.Major)          // ""
+  fmt.Println(client.Os.Minor)          // ""
+  fmt.Println(client.Os.Patch)          // ""
+  fmt.Println(client.Os.PatchMinor)     // ""
+  fmt.Println(client.Device.Family)     // "Kindle Fire"
+}
+```
+
+[More information is available in the README](https://github.com/tobie/ua-parser/tree/master/go/uaparser) in the Go directory
 
 License
 -------
@@ -342,13 +380,15 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
-The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10]. 
+The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
 
 The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11].
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
 
 The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+
+The Go port is Copyright (c) 2013 Yihuan Zhou and is available under the [MIT License][14].
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
@@ -363,3 +403,4 @@ The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apac
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
 [13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
+[14]: https://raw.github.com/tobie/ua-parser/master/go/uaparser/LICENSE.md
