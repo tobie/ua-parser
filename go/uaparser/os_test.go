@@ -40,6 +40,7 @@ func osTestHelper(file string) bool {
 		if os.Family != test["family"] || os.Major != test["major"] ||
 			os.Minor != test["minor"] || os.Patch != test["patch"] ||
 			os.PatchMinor != test["patch_minor"] {
+			fmt.Println("FAIL")
 			fmt.Printf("Expected: %v\nActual: %v\n", test, os)
 			return false
 		}

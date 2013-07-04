@@ -13,20 +13,16 @@ Usage
       regexFile := "../../regexes.yaml"
       parser := uaparser.New(regexFile)
       client := parser.Parse(testStr)
-      fmt.Println(testStr)
-      fmt.Println("UserAgent")
-      fmt.Println("Family: " + client.UserAgent.Family)
-      fmt.Println("Major: " + client.UserAgent.Major)
-      fmt.Println("Minor: " + client.UserAgent.Minor)
-      fmt.Println("Patch: " + client.UserAgent.Patch)
-      fmt.Println("OS")
-      fmt.Println("Family: " + client.Os.Family)
-      fmt.Println("Major: " + client.Os.Major)
-      fmt.Println("Minor: " + client.Os.Minor)
-      fmt.Println("Patch: " + client.Os.Patch)
-      fmt.Println("PatchMinor: " + client.Os.PatchMinor)
-      fmt.Println("Device")
-      fmt.Println("Family: " + client.Device.Family)
+      fmt.Println(client.UserAgent.Family)  // "Amazon Silk"
+      fmt.Println(client.UserAgent.Major)   // "1"
+      fmt.Println(client.UserAgent.Minor)   // "1"
+      fmt.Println(client.UserAgent.Patch)   // "0-80"
+      fmt.Println(client.Os.Family)         // "Android"
+      fmt.Println(client.Os.Major)          // ""
+      fmt.Println(client.Os.Minor)          // ""
+      fmt.Println(client.Os.Patch)          // ""
+      fmt.Println(client.Os.PatchMinor)     // ""
+      fmt.Println(client.Device.Family)     // "Kindle Fire"
     }
 
 Author

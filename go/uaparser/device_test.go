@@ -38,6 +38,7 @@ func dvcHelperTest(file string) bool {
 		dvc := dvcParser.ParseDevice(testingString)
 
 		if dvc.Family != test["family"] {
+			fmt.Println("FAIL")
 			fmt.Printf("Expected: %v\nActual: %v\n", test, dvc)
 			return false
 		}

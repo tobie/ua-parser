@@ -39,6 +39,7 @@ func uaHelperTest(file string) bool {
 
 		if ua.Family != test["family"] || ua.Major != test["major"] ||
 			ua.Minor != test["minor"] || ua.Patch != test["patch"] {
+			fmt.Println("FAIL")
 			fmt.Printf("Expected: %v\nActual: %v\n", test, ua)
 			return false
 		}

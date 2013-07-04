@@ -21,7 +21,7 @@ func (dvcPattern *DevicePattern) Match(line string, dvc *Device) {
 		groupCount := dvcPattern.Regexp.NumSubexp()
 
 		if len(dvcPattern.DeviceReplacement) > 0 {
-			if strings.Contains(dvcPattern.DeviceReplacement, "$1") && groupCount >= 1 && len(bytes) > 2 {
+			if strings.Contains(dvcPattern.DeviceReplacement, "$1") && groupCount >= 1 && len(bytes) >= 2 {
 				dvc.Family = strings.Replace(dvcPattern.DeviceReplacement, "$1", bytes[1], 1)
 			} else {
 				dvc.Family = dvcPattern.DeviceReplacement
@@ -30,4 +30,8 @@ func (dvcPattern *DevicePattern) Match(line string, dvc *Device) {
 			dvc.Family = bytes[1]
 		}
 	}
+}
+
+func (dvc *Device) ToString() string {
+	return dvc.Family
 }

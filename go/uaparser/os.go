@@ -49,3 +49,32 @@ func (osPattern *OsPattern) Match(line string, os *Os) {
 		}
 	}
 }
+
+func (os *Os) ToString() string {
+	var str string
+	if os.Family != "" {
+		str += os.Family
+	}
+	version := os.ToVersionString()
+	if version != "" {
+		str += " " + version
+	}
+	return str
+}
+
+func (os *Os) ToVersionString() string {
+	var version string
+	if os.Major != "" {
+		version += os.Major
+	}
+	if os.Minor != "" {
+		version += "." + os.Minor
+	}
+	if os.Patch != "" {
+		version += "." + os.Patch
+	}
+	if os.PatchMinor != "" {
+		version += "." + os.PatchMinor
+	}
+	return version
+}
