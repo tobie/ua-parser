@@ -77,7 +77,7 @@ user_agent_parsers:
   # http://luakit.org/projects/luakit/
   - regex: '(luakit)'
     family_replacement: 'LuaKit'
-
+    
   # Snowshoe
   - regex: '(Snowshoe)/(\d+)\.(\d+).(\d+)'
 
@@ -201,10 +201,10 @@ user_agent_parsers:
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris) (\d+)\.(\d+)\.?(\d+)?'
-
+  
   # Kindle WebKit
   - regex: '(Kindle)/(\d+)\.(\d+)'
-
+  
   # weird android UAs
   - regex: '(Android) Donut'
     v1_replacement: '1'
@@ -258,7 +258,7 @@ user_agent_parsers:
     family_replacement: 'NetFront'
   - regex: '(PlayStation Vita)'
     family_replacement: 'NetFront NX'
-
+  
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'NetFront NX'
   - regex: '(Nintendo 3DS)'
@@ -299,7 +299,7 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
 
   - regex: '(AvantGo) (\d+).(\d+)'
-
+  
   - regex: '(OneBrowser)/(\d+).(\d+)'
     family_replacement: 'ONE Browser'
 
@@ -388,7 +388,7 @@ user_agent_parsers:
 
   - regex: '(Teleca)'
     family_replacement: 'Teleca Browser'
-
+    
   - regex: '(Phantom)/V(\d+)\.(\d+)'
     family_replacement: 'Phantom Browser'
 
@@ -440,7 +440,7 @@ os_parsers:
   # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
-
+  
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
     os_replacement: 'Windows XP'
 
@@ -492,7 +492,7 @@ os_parsers:
   # http://en.wikipedia.org/wiki/Mac_OS_X#Versions
   ##########
   - regex: '(Mac OS X) (\d+)[_.](\d+)(?:[_.](\d+))?'
-
+  
   # IE on Mac doesn't specify version number
   - regex: 'Mac_PowerPC'
     os_replacement: 'Mac OS'
@@ -598,7 +598,7 @@ os_parsers:
   - regex: '(GoogleTV)/[\da-z]+'
 
   - regex: '(WebTV)/(\d+).(\d+)'
-
+  
   ##########
   # Misc mobile
   ##########
@@ -702,7 +702,7 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
-
+      
   #########
   # Android General Device Matching (far from perfect)
   #########
@@ -781,10 +781,10 @@ device_parsers:
 
   - regex: 'AdsBot-Google-Mobile'
     device_replacement: 'Spider'
-
+   
   - regex: 'Googlebot-Mobile/(\d+).(\d+)'
     device_replacement: 'Spider'
-
+    
   ##########
   # complete but probably catches spoofs
   # iSTUFF
@@ -806,7 +806,7 @@ device_parsers:
   - regex: 'acer_([A-Za-z0-9]+)_'
     device_replacement: 'Acer $1'
 
-  ##########
+  ##########   
   # Alcatel
   ##########
   - regex: 'ALCATEL-([A-Za-z0-9]+)'
@@ -926,7 +926,7 @@ device_parsers:
     device_replacement: 'Motorola $1'
   - regex: 'MOT\-([A-Za-z0-9]+)'
     device_replacement: 'Motorola $1'
-
+    
   ##########
   # nintendo
   ##########
@@ -940,7 +940,7 @@ device_parsers:
   ##########
   - regex: 'Pantech([A-Za-z0-9]+)'
     device_replacement: 'Pantech $1'
-
+ 
   ##########
   # philips
   ##########
@@ -999,3 +999,4 @@ device_parsers:
   ##########
   - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler)'
     device_replacement: 'Spider'
+
