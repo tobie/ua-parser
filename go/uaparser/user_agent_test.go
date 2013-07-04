@@ -16,7 +16,7 @@ func uaInitTesting(file string) []map[string]string {
 	return testMap["test_cases"]
 }
 
-var uaDefaultRegexFile string = "regexes.yaml"
+var uaDefaultRegexFile string = "../../regexes.yaml"
 var uaParser *Parser = nil
 
 func uaInitParser(regexFile string) {

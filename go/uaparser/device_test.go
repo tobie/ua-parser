@@ -16,7 +16,7 @@ func dvcInitTesting(file string) []map[string]string {
 	return testMap["test_cases"]
 }
 
-var dvcDefaultRegexFile string = "regexes.yaml"
+var dvcDefaultRegexFile string = "../../regexes.yaml"
 var dvcParser *Parser = nil
 
 func dvcInitParser(regexFile string) {
