@@ -34,7 +34,7 @@ public class UserAgentParser {
     this.patterns = patterns;
   }
 
-  public static UserAgentParser fromList(List<Map> configList) {
+  public static UserAgentParser fromList(List<Map<String,String>> configList) {
     List<UAPattern> configPatterns = new ArrayList<UAPattern>();
 
     for (Map<String, String> configMap : configList) {
@@ -44,6 +44,10 @@ public class UserAgentParser {
   }
 
   public UserAgent parse(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
+
     UserAgent agent;
     for (UAPattern p : patterns) {
       if ((agent = p.match(agentString)) != null) {

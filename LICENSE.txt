@@ -13,3 +13,5 @@ The D port is Copyright (c) 2012 Shripad K and is available under the MIT licens
 The C# port is Copyright (c) 2012 Søren Enemærke and is available under the Apache License, Version 2.0.
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the Perl License, Version 5.10.1.
+
+The Pig port is Copyright (c) 2013 Niels Basjes and is available under the Apache License, Version 2.0.

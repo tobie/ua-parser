@@ -1,9 +1,21 @@
 Changes
-Makefile.PL
-MANIFEST
-MANIFEST.SKIP
-README.pod
-t/HTTP-UA-Parser.t
 lib/HTTP/UA/Parser.pm
 lib/HTTP/UA/Parser/regexes.yaml
+lib/YAML/Tiny.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
 script/ua_parser
+t/additional_os_tests.t
+t/device.t
+t/firefox_user_agent_strings.t
+t/HTTP-UA-Parser.t
+t/os.t
+t/pgts_browser_list.t
+t/test_device.t
+t/test_user_agent_parser.t
+t/test_user_agent_parser_os.t
+t/ua.t
+t/utils.pl
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
