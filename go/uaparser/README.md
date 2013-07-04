@@ -25,8 +25,15 @@ Usage
       fmt.Println(client.Device.Family)     // "Kindle Fire"
     }
 
+Testing
+========
+
+Includes all the tests in `test_resources`
+
+    go test
+
 Author
-=========
+========
 
 * Yihuan Zhou
 
