@@ -1,8 +1,37 @@
-The MIT License (MIT)
-Copyright (c) 2013 Yihuan Zhou
+Usage
+========
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    package main
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    import (
+      "../uaparser" // You could change this to a github repo as well
+      "fmt"
+    )
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    func main() {
+      testStr := "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
+      regexFile := "../../regexes.yaml"
+      parser := uaparser.New(regexFile)
+      client := parser.Parse(testStr)
+      fmt.Println(testStr)
+      fmt.Println("UserAgent")
+      fmt.Println("Family: " + client.UserAgent.Family)
+      fmt.Println("Major: " + client.UserAgent.Major)
+      fmt.Println("Minor: " + client.UserAgent.Minor)
+      fmt.Println("Patch: " + client.UserAgent.Patch)
+      fmt.Println("OS")
+      fmt.Println("Family: " + client.Os.Family)
+      fmt.Println("Major: " + client.Os.Major)
+      fmt.Println("Minor: " + client.Os.Minor)
+      fmt.Println("Patch: " + client.Os.Patch)
+      fmt.Println("PatchMinor: " + client.Os.PatchMinor)
+      fmt.Println("Device")
+      fmt.Println("Family: " + client.Device.Family)
+    }
+
+Author
+=========
+
+* Yihuan Zhou
+
+Based on the Java implementation by Steve Jiang and using agent data from BrowserScope

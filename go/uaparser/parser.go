@@ -15,6 +15,14 @@ type Parser struct {
 	DevicePatterns    []DevicePattern
 }
 
+type Client struct {
+	UserAgent *UserAgent
+	Os        *Os
+	Device    *Device
+}
+
+var exportedNameRegex = regexp.MustCompile("[0-9A-Za-z]+")
+
 func GetExportedName(src string) string {
 	byteSrc := []byte(src)
 	chunks := exportedNameRegex.FindAll(byteSrc, -1)
@@ -36,8 +44,6 @@ func ToStruct(interfaceArr []map[string]string, typeInterface interface{}, retur
 	}
 	*returnVal = structArr
 }
-
-var exportedNameRegex = regexp.MustCompile("[0-9A-Za-z]+")
 
 func New(regexFile string) *Parser {
 	parser := new(Parser)
@@ -61,7 +67,6 @@ func New(regexFile string) *Parser {
 
 	wg.Add(1)
 	go func() {
-		// Read the YAML map and coerce it into a struct
 		ToStruct(m["user_agent_parsers"], *uaPatternType, &uaInterfaces)
 		uaPatterns = make([]UserAgentPattern, len(uaInterfaces))
 		for i, inter := range uaInterfaces {
@@ -109,4 +114,60 @@ func New(regexFile string) *Parser {
 
 	return parser
 
+}
+
+func (parser *Parser) ParseUserAgent(line string) *UserAgent {
+	ua := new(UserAgent)
+	found := false
+	for _, uaPattern := range parser.UserAgentPatterns {
+		uaPattern.Match(line, ua)
+		if len(ua.Family) > 0 {
+			found = true
+			break
+		}
+	}
+	if !found {
+		ua.Family = "Other"
+	}
+	return ua
+}
+
+func (parser *Parser) ParseOs(line string) *Os {
+	os := new(Os)
+	found := false
+	for _, osPattern := range parser.OsPatterns {
+		osPattern.Match(line, os)
+		if len(os.Family) > 0 {
+			found = true
+			break
+		}
+	}
+	if !found {
+		os.Family = "Other"
+	}
+	return os
+}
+
+func (parser *Parser) ParseDevice(line string) *Device {
+	dvc := new(Device)
+	found := false
+	for _, dvcPattern := range parser.DevicePatterns {
+		dvcPattern.Match(line, dvc)
+		if len(dvc.Family) > 0 {
+			found = true
+			break
+		}
+	}
+	if !found {
+		dvc.Family = "Other"
+	}
+	return dvc
+}
+
+func (parser *Parser) Parse(line string) *Client {
+	cli := new(Client)
+	cli.UserAgent = parser.ParseUserAgent(line)
+	cli.Os = parser.ParseOs(line)
+	cli.Device = parser.ParseDevice(line)
+	return cli
 }

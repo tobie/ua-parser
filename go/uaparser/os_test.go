@@ -1,15 +1,14 @@
-package uaparser_test
+package uaparser
 
 import (
 	"fmt"
 	"io/ioutil"
 	"launchpad.net/goyaml"
 	"testing"
-	. "uaparser"
 )
 
 func osInitTesting(file string) []map[string]string {
-	fmt.Println("Testing " + file)
+	fmt.Print(file + ": ")
 	testFile, _ := ioutil.ReadFile(file)
 	testMap := make(map[string][]map[string]string)
 	_ = goyaml.Unmarshal(testFile, &testMap)
@@ -25,7 +24,7 @@ func osInitParser(regexFile string) {
 	}
 }
 
-func osHelperTest(file string) bool {
+func osTestHelper(file string) bool {
 	osInitParser(osDefaultRegexFile)
 	tests := osInitTesting(file)
 	for _, test := range tests {
@@ -35,31 +34,13 @@ func osHelperTest(file string) bool {
 			continue
 		}
 
-		os := new(Os)
-		os.Family = ""
-		os.Major = ""
-		os.Minor = ""
-		os.Patch = ""
-		os.PatchMinor = ""
-
-		found := false
 		testingString := test["user_agent_string"]
-		// Attempt to match on all patterns
-		for _, osPattern := range osParser.OsPatterns {
-			osPattern.Match(testingString, os)
-			if len(os.Family) > 0 {
-				found = true
-				break
-			}
-		}
-		if !found {
-			os.Family = "Other"
-		}
+		os := osParser.ParseOs(testingString)
 
 		if os.Family != test["family"] || os.Major != test["major"] ||
 			os.Minor != test["minor"] || os.Patch != test["patch"] ||
 			os.PatchMinor != test["patch_minor"] {
-			fmt.Errorf(testingString)
+			fmt.Printf("Expected: %v\nActual: %v\n", test, os)
 			return false
 		}
 	}
@@ -67,13 +48,17 @@ func osHelperTest(file string) bool {
 }
 
 func TestOs(t *testing.T) {
-	if !osHelperTest("testing/test_user_agent_parser_os.yaml") {
+	if !osTestHelper("testing/test_user_agent_parser_os.yaml") {
 		t.Fail()
+	} else {
+		fmt.Println("PASS")
 	}
 }
 
 func TestAdditionalOs(t *testing.T) {
-	if !osHelperTest("testing/additional_os_tests.yaml") {
+	if !osTestHelper("testing/additional_os_tests.yaml") {
 		t.Fail()
+	} else {
+		fmt.Println("PASS")
 	}
 }

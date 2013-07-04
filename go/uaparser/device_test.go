@@ -1,15 +1,14 @@
-package uaparser_test
+package uaparser
 
 import (
 	"fmt"
 	"io/ioutil"
 	"launchpad.net/goyaml"
 	"testing"
-	. "uaparser"
 )
 
 func dvcInitTesting(file string) []map[string]string {
-	fmt.Println("Testing " + file)
+	fmt.Print(file + ": ")
 	testFile, _ := ioutil.ReadFile(file)
 	testMap := make(map[string][]map[string]string)
 	_ = goyaml.Unmarshal(testFile, &testMap)
@@ -35,25 +34,11 @@ func dvcHelperTest(file string) bool {
 			continue
 		}
 
-		dvc := new(Device)
-		dvc.Family = ""
-
-		found := false
 		testingString := test["user_agent_string"]
-		// Attempt to match on all patterns
-		for _, dvcPattern := range dvcParser.DevicePatterns {
-			dvcPattern.Match(testingString, dvc)
-			if len(dvc.Family) > 0 {
-				found = true
-				break
-			}
-		}
-		if !found {
-			dvc.Family = "Other"
-		}
+		dvc := dvcParser.ParseDevice(testingString)
 
 		if dvc.Family != test["family"] {
-			fmt.Errorf(testingString)
+			fmt.Printf("Expected: %v\nActual: %v\n", test, dvc)
 			return false
 		}
 	}
@@ -63,5 +48,7 @@ func dvcHelperTest(file string) bool {
 func TestDevice(t *testing.T) {
 	if !dvcHelperTest("testing/test_device.yaml") {
 		t.Fail()
+	} else {
+		fmt.Println("PASS")
 	}
 }
