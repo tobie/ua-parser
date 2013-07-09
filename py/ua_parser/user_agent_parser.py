@@ -36,18 +36,20 @@ from pkg_resources import resource_filename
 
 
 class UserAgentParser(object):
-    def __init__(self, pattern, family_replacement=None, v1_replacement=None):
+    def __init__(self, pattern, family_replacement=None, v1_replacement=None, v2_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
           pattern: a regular expression string
           family_replacement: a string to override the matched family (optional)
           v1_replacement: a string to override the matched v1 (optional)
+          v2_replacement: a string to override the matched v2 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.family_replacement = family_replacement
         self.v1_replacement = v1_replacement
+        self.v2_replacement = v2_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -74,24 +76,32 @@ class UserAgentParser(object):
             elif match.lastindex and match.lastindex >= 2:
                 v1 = match.group(2)
 
-            if match.lastindex and match.lastindex >= 3:
+            if self.v2_replacement:
+                v2 = self.v2_replacement
+            elif match.lastindex and match.lastindex >= 3:
                 v2 = match.group(3)
-                if match.lastindex >= 4:
-                    v3 = match.group(4)
+
+            if match.lastindex and match.lastindex >= 4:
+                v3 = match.group(4)
+
         return family, v1, v2, v3
 
 
 class OSParser(object):
-    def __init__(self, pattern, os_replacement=None):
+    def __init__(self, pattern, os_replacement=None, os_v1_replacement=None, os_v2_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
           pattern: a regular expression string
           os_replacement: a string to override the matched os (optional)
+          os_v1_replacement: a string to override the matched v1 (optional)
+          os_v2_replacement: a string to override the matched v2 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.os_replacement = os_replacement
+        self.os_v1_replacement = os_v1_replacement
+        self.os_v2_replacement = os_v2_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -110,14 +120,20 @@ class OSParser(object):
             else:
                 os = match.group(1)
 
-            if match.lastindex >= 2:
+            if self.os_v1_replacement:
+                os_v1 = self.os_v1_replacement
+            elif match.lastindex >= 2:
                 os_v1 = match.group(2)
-                if match.lastindex >= 3:
-                    os_v2 = match.group(3)
-                    if match.lastindex >= 4:
-                        os_v3 = match.group(4)
-                        if match.lastindex >= 5:
-                            os_v4 = match.group(5)
+
+            if self.os_v2_replacement:
+                os_v2 = self.os_v2_replacement
+            elif match.lastindex >= 3:
+                os_v2 = match.group(3)
+
+            if match.lastindex >= 4:
+                os_v3 = match.group(4)
+                if match.lastindex >= 5:
+                    os_v4 = match.group(5)
 
         return os, os_v1, os_v2, os_v3, os_v4
 
@@ -251,6 +267,9 @@ def ParseDevice(user_agent_string):
         device = deviceParser.Parse(user_agent_string)
         if device:
             break
+
+    if device == None:
+        device = 'Other'
 
     return {
         'family': device
@@ -420,9 +439,14 @@ for _ua_parser in regexes['user_agent_parsers']:
     if 'v1_replacement' in _ua_parser:
         _v1_replacement = _ua_parser['v1_replacement']
 
+    _v2_replacement = None
+    if 'v2_replacement' in _ua_parser:
+        _v2_replacement = _ua_parser['v2_replacement']
+
     USER_AGENT_PARSERS.append(UserAgentParser(_regex,
                                               _family_replacement,
-                                              _v1_replacement))
+                                              _v1_replacement,
+                                              _v2_replacement))
 
 OS_PARSERS = []
 for _os_parser in regexes['os_parsers']:

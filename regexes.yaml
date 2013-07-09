@@ -352,6 +352,9 @@ user_agent_parsers:
   - regex: '(Pre)/(\d+)\.(\d+)'
     family_replacement: 'Palm Pre'
 
+  # fork of Links
+  - regex: '(ELinks)/(\d+)\.(\d+)'
+  - regex: '(ELinks) \((\d+)\.(\d+)'
   - regex: '(Links) \((\d+)\.(\d+)'
 
   - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
@@ -790,6 +793,7 @@ device_parsers:
   # cannot determine specific device type from ua string. (3g, 3gs, 4, etc)
   - regex: '(iPad) Simulator;'
   - regex: '(iPad);'
+  - regex: '(iPod) touch;'
   - regex: '(iPod);'
   - regex: '(iPhone) Simulator;'
   - regex: '(iPhone);'
