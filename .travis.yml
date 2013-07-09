@@ -5,7 +5,7 @@ node_js:
 before_install:
 - sudo apt-get update
 - sudo apt-get install python-yaml
-- ln -s regexes.yaml py/ua_parser/regexes.yaml
+- cp regexes.yaml py/ua_parser/regexes.yaml
 
 script:
   - "python py/ua_parser/user_agent_parser_test.py"
