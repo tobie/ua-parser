@@ -22,6 +22,16 @@ import json
 import os
 import re
 import yaml
+
+# pip may copy regexes.yaml to different places depending on the OS.
+# For example, on Mac pip copies regexes.yaml to the folder where
+# user_agent_parser.py lives where as Fedora leaves regexes.yaml to "data" dir
+# See https://github.com/tobie/ua-parser/issues/209 for the complete discussion
+
+ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
+DATA_DIR = os.path.abspath(os.path.join(ROOT_DIR, '..', 'data'))
+regex_dir = ROOT_DIR if os.path.exists(os.path.join(ROOT_DIR, 'regexes.yaml')) else DATA_DIR
+
 from pkg_resources import resource_filename
 
 
@@ -173,10 +183,10 @@ def Parse(user_agent_string, **jsParseBits):
     """
     jsParseBits = jsParseBits or {}
     return {
-      'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
-      'os': ParseOS(user_agent_string, **jsParseBits),
-      'device': ParseDevice(user_agent_string, **jsParseBits),
-      'string': user_agent_string
+        'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
+        'os': ParseOS(user_agent_string, **jsParseBits),
+        'device': ParseDevice(user_agent_string, **jsParseBits),
+        'string': user_agent_string
     }
 
 
@@ -262,7 +272,7 @@ def ParseDevice(user_agent_string):
         device = 'Other'
 
     return {
-      'family': device
+        'family': device
     }
 
 
@@ -405,7 +415,7 @@ else:
     yamlFile.close()
 
 # If UA_PARSER_YAML is not specified, load regexes from regexes.json before
-# falling back to with yaml
+# falling back to yaml format
 if regexes is None:
     try:
         json_file = open(json_path)

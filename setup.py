@@ -41,7 +41,7 @@ class sdist(_sdist):
 
 setup(
     name='ua-parser',
-    version='0.3.3.2',
+    version='0.3.3',
     description="Python port of Browserscope's user agent parser",
     author='PBS',
     author_email='no-reply@pbs.org',
