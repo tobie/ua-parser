@@ -395,6 +395,10 @@ user_agent_parsers:
   - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  # Internet Explorer on Windows 8
+  - regex: '(IE) (\d+)\.(\d+)'
+    family_replacement: 'IE'
+
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
 
@@ -466,6 +470,9 @@ os_parsers:
   # is this a spoof or is nt 6.2 out and about in some capacity?
   - regex: '(Windows NT 6\.2)'
     os_replacement: 'Windows 8'
+
+  - regex: '(Windows NT 6\.3)'
+    os_replacement: 'Windows Blue'
 
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
@@ -997,6 +1004,5 @@ device_parsers:
   ##########
   # Spiders (this is hack...)
   ##########
-  - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler)'
+  - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler|Netvibes)'
     device_replacement: 'Spider'
-
