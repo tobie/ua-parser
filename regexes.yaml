@@ -395,6 +395,9 @@ user_agent_parsers:
   - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
+    family_replacement: 'IE'
+
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
 
