@@ -21,7 +21,6 @@ __author__ = 'Lindsey Simon <elsigh@gmail.com>'
 import json
 import os
 import re
-import yaml
 
 # pip may copy regexes.yaml to different places depending on the OS.
 # For example, on Mac pip copies regexes.yaml to the folder where
@@ -410,6 +409,8 @@ if not UA_PARSER_YAML:
     yamlPath = resource_filename(__name__, 'regexes.yaml')
     json_path = resource_filename(__name__, 'regexes.json')
 else:
+    import yaml
+
     yamlFile = open(UA_PARSER_YAML)
     regexes = yaml.load(yamlFile)
     yamlFile.close()
@@ -422,6 +423,8 @@ if regexes is None:
         regexes = json.loads(json_file.read())
         json_file.close()
     except IOError:
+        import yaml
+
         yamlFile = open(yamlPath)
         regexes = yaml.load(yamlFile)
         yamlFile.close()
