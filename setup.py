@@ -1,14 +1,12 @@
 #!/usr/bin/env python
-import os
-import shutil
-
 from setuptools import setup
 from setuptools.command.develop import develop as _develop
-from setuptools.command.install import install as _install
 from setuptools.command.sdist   import sdist   as _sdist
 
 def install_regexes():
     print('Copying regexes.yaml to package directory...')
+    import os
+    import shutil
     cwd = os.path.abspath(os.path.dirname(__file__))
     yaml_src = os.path.join(cwd, 'regexes.yaml')
     if not os.path.exists(yaml_src):
@@ -17,7 +15,7 @@ def install_regexes():
     yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
     shutil.copy2(yaml_src, yaml_dest)
 
-    print('Converting regexes.yaml to json...')
+    print('Converting regexes.yaml to regexes.json...')
     import json
     import yaml
     json_dest = yaml_dest.replace('.yaml', '.json')
@@ -28,11 +26,6 @@ class develop(_develop):
     def run(self):
         install_regexes()
         _develop.run(self)
-
-class install(_install):
-    def run(self):
-        install_regexes()
-        _install.run(self)
 
 class sdist(_sdist):
     def run(self):
@@ -52,10 +45,9 @@ setup(
     url='https://github.com/tobie/ua-parser',
     include_package_data=True,
     package_data={'ua_parser': ['regexes.yaml', 'regexes.json']},
-    install_requires=['pyyaml'],
+#   install_requires=['pyyaml'],
     cmdclass={
         'develop': develop,
-        'install': install,
         'sdist':   sdist,
     },
     classifiers=[
