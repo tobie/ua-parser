@@ -638,6 +638,12 @@ device_parsers:
   ##########
 
   ##########
+  # Acer
+  ##########
+  - regex: '; (A\d{3}) Build'
+    device_replacement: 'Acer $1'
+
+  ##########
   # incomplete!
   # HTC
   # http://en.wikipedia.org/wiki/List_of_HTC_phones
@@ -665,19 +671,57 @@ device_parsers:
     device_replacement: 'HTC $1'
   - regex: '(HTC)'
 
+  # Huawei
+  - regex: '; (U8650-1) Build/Huawei'
+    device_replacement: 'Huawei $1'
+
+  # Motorola
+  - regex: '; (MB526|XT910|XT890) Build\/'
+    device_replacement: 'Motorola $1'
+
   # Tesla Model S
   - regex: '(QtCarBrowser)'
     device_replacement: 'Tesla Model S'
 
-  # Samsung
+  # Samsung Symbian Devices
   - regex: '(SamsungSGHi560)'
-    device_replacement: 'Samsung SGHi560'
+    device_replacement: 'Samsung SGH-i560'
+  - regex: 'SymbianOS\/9\.\d.* Samsung[\/\-]([^;\/]+)'
+    device_replacement: 'Samsung $1'
+    
+  #########
+  # Samsung Android Devices - regex need to before Android General Device Matching
+  #########
+  - regex: '; SAMSUNG ([^\/]*)\/[^ ]* Build'
+    device_replacement: 'Samsung $1'
+  - regex: '; (Galaxy(?: Ace| Nexus| S II)?) Build'
+    device_replacement: 'Samsung $1'
+  - regex: '; SAMSUNG (.+) Build'
+    device_replacement: 'Samsung $1'
+  - regex: '; (GT\-[BINPS]\d{4}[^\/]*)\/[^ ]* Build'
+    device_replacement: 'Samsung $1'
+  - regex: '; (GT\-[BINPS]\d{4}.*) Build'
+    device_replacement: 'Samsung $1'
 
   #########
-  # Ericsson - must come before nokia since they also use symbian
+  # SonyEricsson - must come before nokia since they also use symbian
   #########
   - regex: 'SonyEricsson([A-Za-z0-9]+)/'
-    device_replacement: 'Ericsson $1'
+    device_replacement: 'SonyEricsson $1'
+  - regex: '; SonyEricsson([A-Za-z0-9\-]+) Build'
+    device_replacement: 'SonyEricsson $1'
+  - regex: '; ((?:ST|E|X|LT)\d{2}(?:i|i2)?|C6603) Build'
+    device_replacement: 'SonyEricsson $1'
+  - regex: '; Sony([A-Za-z0-9\-]+) Build'
+    device_replacement: 'Sony $1'
+  - regex: '; (SGP321) Build\/'
+    device_replacement: 'Sony $1'
+
+  #########
+  # ZTE
+  #########
+  - regex: '; (Orange San Francisco) Build'
+    device_replacement: 'ZTE $1'
 
   ##########
   # PlayStation
@@ -705,17 +749,31 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
-      
+
+  #########
+  # Devices from chinese manufacturer(s)
+  # identified by x-wap-profile http://218.249.47.94/Xianghe/.*
+  #########
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2}; [A-Za-z]{2}[-_][A-Za-z]{2}; (Cynus F3|Cynus T[125]) Build'
+    device_replacement: 'Mobistel $1'
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2}; [A-Za-z]{2}[-_][A-Za-z]{2}; (SP\-100|SP\-140|SP\-140 DC|SP\-360|SPX\-12|SPX_8|SX7\-PEARL\.GmbH) Build'
+    device_replacement: 'Simvalley $1'
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2}; [A-Za-z]{2}[-_][A-Za-z]{2}; (H2000\+) Build'
+    device_replacement: 'Hero $1'
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2}; [A-Za-z]{2}[-_][A-Za-z]{2}; (A5000|A9|A9600|ALPS|AMOI N850|Android 3G |B1-710|B1\-A71|B92|GT\-H9500|GT\-i9300|H2000\+|I5|I7100|I9300|IdeaTab A2107A\-H|IdeaTab S6000\-H|JY\-G2|M7|ME173X|MID|Micromax A110|Micromax A116|N9500|N9550\/N7100 PAD|PAP4040_DUO|PAP4322DUO|PMP7280C3G|POV_TAB\-NAVI7\-3G\-M|SMP53\-210|SP\-100|SP\-140|SP\-140 DC|SP\-360|SPX\-12|SPX_8|SX7\-PEARL\.GmbH|V1277|X507S|ZP100|ZP300|ZP500\+|ZP900|ZP950|e1808_v7.+|e1809c_v7.+|e1901_v7.+|e1908_v7.+|e1909c_v7.+|e1911_v7.+|e2001_v8.+|i\-mobile i\-style Q3|iOCEAN X7|iphone|iPhone5|x806) Build'
+    device_replacement: 'Xianghe $1'
+  - regex: '^(.+) Linux\/3\.0\.13 Android\/4\.0\.4 Release'
+    device_replacement: 'Xianghe $1'
+
   #########
   # Android General Device Matching (far from perfect)
   #########
   - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; WOWMobile (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{2};(.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2};\s*[A-Za-z]{2}\-[A-Za-z]{2};\s*(.+) Build'
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2};\s*[A-Za-z]{2}\-;\s*(.+) Build' 
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2};\s*\-?[A-Za-z]{2};\s*(.+) Build' 
+  - regex: 'Android[\- ][\d]+(?:\.[\d]+){1,2}; (.+) Build'
 
   ##########
   # NOKIA
@@ -988,7 +1046,7 @@ device_parsers:
   ##########
   # Generic Feature Phone
   ##########
-  - regex: '^(1207|3gso|4thp|501i|502i|503i|504i|505i|506i|6310|6590|770s|802s|a wa|acer|acs\-|airn|alav|asus|attw|au\-m|aur |aus |abac|acoo|aiko|alco|alca|amoi|anex|anny|anyw|aptu|arch|argo|bell|bird|bw\-n|bw\-u|beck|benq|bilb|blac|c55/|cdm\-|chtm|capi|comp|cond|craw|dall|dbte|dc\-s|dica|ds\-d|ds12|dait|devi|dmob|doco|dopo|el49|erk0|esl8|ez40|ez60|ez70|ezos|ezze|elai|emul|eric|ezwa|fake|fly\-|fly_|g\-mo|g1 u|g560|gf\-5|grun|gene|go.w|good|grad|hcit|hd\-m|hd\-p|hd\-t|hei\-|hp i|hpip|hs\-c|htc |htc\-|htca|htcg)'
+  - regex: '^(1207|3gso|4thp|501i|502i|503i|504i|505i|506i|6310|6590|770s|802s|a wa|acer|acs\-|airn|alav|asus|attw|au\-m|aur |aus |abac|acoo|aiko|alco|alca|amoi|anex|anny|anyw|aptu|arch|argo|bell|bird|bw\-n|bw\-u|beck|benq|bilb|blac|c55/|cdm\-|chtm|capi|comp|cond|craw|dall|dbte|dc\-s|dica|ds\-d|ds12|dait|devi|dmob|doco|dopo|dorado|el49|erk0|esl8|ez40|ez60|ez70|ezos|ezze|elai|emul|eric|ezwa|fake|fly\-|fly_|g\-mo|g1 u|g560|gf\-5|grun|gene|go.w|good|grad|hcit|hd\-m|hd\-p|hd\-t|hei\-|hp i|hpip|hs\-c|htc |htc\-|htca|htcg)'
     device_replacement: 'Generic Feature Phone'
   - regex: '^(htcp|htcs|htct|htc_|haie|hita|huaw|hutc|i\-20|i\-go|i\-ma|i230|iac|iac\-|iac/|ig01|im1k|inno|iris|jata|java|kddi|kgt|kgt/|kpt |kwc\-|klon|lexi|lg g|lg\-a|lg\-b|lg\-c|lg\-d|lg\-f|lg\-g|lg\-k|lg\-l|lg\-m|lg\-o|lg\-p|lg\-s|lg\-t|lg\-u|lg\-w|lg/k|lg/l|lg/u|lg50|lg54|lge\-|lge/|lynx|leno|m1\-w|m3ga|m50/|maui|mc01|mc21|mcca|medi|meri|mio8|mioa|mo01|mo02|mode|modo|mot |mot\-|mt50|mtp1|mtv |mate|maxo|merc|mits|mobi|motv|mozz|n100|n101|n102|n202|n203|n300|n302|n500|n502|n505|n700|n701|n710|nec\-|nem\-|newg|neon)'
     device_replacement: 'Generic Feature Phone'
