@@ -898,6 +898,12 @@ device_parsers:
     device_replacement: 'Lenovo $1'
 
   ##########
+  # HbbTV (European and Australian standard)
+  # written before the LG regexes, as LG is making HbbTV too
+  ##########
+  - regex: '(HbbTV)/[0-9]+\.[0-9]+\.[0-9]+'
+
+  ##########
   # lg
   ##########
   - regex: 'LG/([A-Za-z0-9]+)'
