@@ -456,7 +456,7 @@ os_parsers:
     os_v1_replacement: '2011'
 
   # the HbbTV emulator developers use HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20
-  - regex: 'HbbTV/1.1.1 \(;;;;;\) (firetv)-firefox-plugin (\d+).(\d+).(\d+)'
+  - regex: 'HbbTV/\d+\.\d+\.\d+.*(firetv)-firefox-plugin (\d+).(\d+).(\d+)'
     os_replacement: 'FireHbbTV'
 
   # generic HbbTV, hoping to catch manufacturer name (always after 2nd comma) and the first string that looks like a 2010-2020 year
