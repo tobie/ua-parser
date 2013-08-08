@@ -462,8 +462,8 @@ os_parsers:
   - regex: 'HbbTV/\d+\.\d+\.\d+.*(firetv)-firefox-plugin (\d+).(\d+).(\d+)'
     os_replacement: 'FireHbbTV'
 
-  # generic HbbTV, hoping to catch manufacturer name (always after 2nd comma) and the first string that looks like a 2010-2020 year
-  - regex: 'HbbTV/\d+\.\d+\.\d+ \(.*; ?([a-zA-Z]+) ?;.*(201[0-9]).*\)'
+  # generic HbbTV, hoping to catch manufacturer name (always after 2nd comma) and the first string that looks like a 2011-2019 year
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \(.*; ?([a-zA-Z]+) ?;.*(201[1-9]).*\)'
 
   ##########
   # Android
