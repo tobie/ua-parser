@@ -452,6 +452,8 @@ os_parsers:
     os_v1_replacement: '2013'
   - regex: 'HbbTV/1.1.1 \(; (Philips);.*NETTV/3'
     os_v1_replacement: '2012'
+  - regex: 'HbbTV/1.1.1 \(; (Philips);.*NETTV/2'
+    os_v1_replacement: '2011'
 
   # the HbbTV emulator developers use HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20
   - regex: 'HbbTV/1.1.1 \(;;;;;\) (firetv)-firefox-plugin (\d+).(\d+).(\d+)'
