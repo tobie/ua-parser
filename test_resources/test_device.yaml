@@ -308,3 +308,6 @@ test_cases:
 
   - user_agent_string: 'HbbTV/1.1.1 (;Panasonic;VIERA 2011;f.532;0071-0802 2000-0000;)'
     family: 'HbbTV'
+
+  - user_agent_string: 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20'
+    family: 'HbbTV'
