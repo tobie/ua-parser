@@ -1,5 +1,12 @@
 test_cases:
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android Donut; de-de; HTC Tattoo 1.52.161.1 Build/Donut) AppleWebKit/528.5+ (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1'
+    family: 'Android'
+    major: '1'
+    minor: '2'
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.1-update1; en-us; Nexus One Build/ERE27) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17,gzip(gfe),gzip(gfe)'
     family: 'Android'
     major: '2'
@@ -37,9 +44,9 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.0.4) Gecko/2008111217 Fedora/3.0.4-1.fc9 Firefox/3.0.4'
     family: 'Fedora'
-    major: 
-    minor: 
-    patch: 
+    major:
+    minor:
+    patch:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.77 Large Screen Safari/534.24 GoogleTV/000000'
@@ -88,8 +95,8 @@ test_cases:
     family: 'Mandriva'
     major: '2009'
     minor: '1'
-    patch: 
-    patch_minor: 
+    patch:
+    patch_minor:
 
   - user_agent_string: ''
     family: 'Other'
