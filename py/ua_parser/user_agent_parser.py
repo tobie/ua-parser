@@ -459,7 +459,18 @@ for _os_parser in regexes['os_parsers']:
     if 'os_replacement' in _os_parser:
         _os_replacement = _os_parser['os_replacement']
 
-    OS_PARSERS.append(OSParser(_regex, _os_replacement))
+    _os_v1_replacement = None
+    if 'os_v1_replacement' in _os_parser:
+        _os_v1_replacement = _os_parser['os_v1_replacement']
+
+    _os_v2_replacement = None
+    if 'os_v2_replacement' in _os_parser:
+        _os_v2_replacement = _os_parser['os_v2_replacement']
+
+    OS_PARSERS.append(OSParser(_regex,
+                               _os_replacement,
+                               _os_v1_replacement,
+                               _os_v2_replacement))
 
 
 DEVICE_PARSERS = []
