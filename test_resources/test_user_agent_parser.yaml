@@ -867,3 +867,21 @@ test_cases:
     major: '11'
     minor: '0'
     patch:
+
+  - user_agent_string: 'HbbTV/1.1.1 (;Samsung;SmartTV2013;T-FXPDEUC-1102.2;;) WebKit'
+    family: 'HbbTV'
+    major: '1'
+    minor: '1'
+    patch: '1'
+
+  - user_agent_string: 'HbbTV/1.2.1 (;Panasonic;VIERA 2013;3.672;4101-0003 0002-0000;)'
+    family: 'HbbTV'
+    major: '1'
+    minor: '2'
+    patch: '1'
+
+  - user_agent_string: 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20'
+    family: 'HbbTV'
+    major: '1'
+    minor: '1'
+    patch: '1'
