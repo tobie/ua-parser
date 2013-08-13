@@ -3,7 +3,7 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android Donut; de-de; HTC Tattoo 1.52.161.1 Build/Donut) AppleWebKit/528.5+ (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1'
     family: 'Android'
     major: '1'
-    minor: '2'
+    minor:
     patch:
     patch_minor:
 
