@@ -122,7 +122,8 @@ public class ParserTest {
       // Skip tests with js_ua as those overrides are not yet supported in java
       if (testCase.containsKey("js_ua")) continue;
 
-      assertThat(parser.parseUserAgent(testCase.get("user_agent_string")), is(UserAgent.fromMap(testCase)));
+      String uaString = testCase.get("user_agent_string");
+      assertThat(uaString, parser.parseUserAgent(uaString), is(UserAgent.fromMap(testCase)));
     }
   }
 
@@ -134,7 +135,8 @@ public class ParserTest {
       // Skip tests with js_ua as those overrides are not yet supported in java
       if (testCase.containsKey("js_ua")) continue;
 
-      assertThat(parser.parseOS(testCase.get("user_agent_string")), is(OS.fromMap(testCase)));
+      String uaString = testCase.get("user_agent_string");
+      assertThat(uaString, parser.parseOS(uaString), is(OS.fromMap(testCase)));
     }
   }
 
@@ -142,8 +144,10 @@ public class ParserTest {
     InputStream yamlStream = this.getClass().getResourceAsStream(TEST_RESOURCE_PATH + filename);
 
     List<Map> testCases = (List<Map>) ((Map)yaml.load(yamlStream)).get("test_cases");
-    for(Map<String, Object> testCase : testCases) {
-      assertThat(parser.parseDevice((String)testCase.get("user_agent_string")), is(Device.fromMap(testCase)));
+    for(Map<String, String> testCase : testCases) {
+
+      String uaString = testCase.get("user_agent_string");
+      assertThat(uaString, parser.parseDevice(uaString), is(Device.fromMap(testCase)));
     }
   }
 

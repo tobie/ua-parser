@@ -30,7 +30,7 @@ public class Device {
     this.family = family;
   }
 
-  public static Device fromMap(Map<String, Object> m) {
+  public static Device fromMap(Map<String, String> m) {
     return new Device((String) m.get("family"));
   }
 
