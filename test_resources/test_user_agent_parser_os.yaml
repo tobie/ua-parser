@@ -707,6 +707,20 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
+    family: 'Windows 8'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.3; ARM; WOW64; Trident/7.0; rv:11.0) like Gecko'
+    family: 'Windows RT'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10 ThunderBrowse/3.3.5'
     family: 'Windows 7'
     major:
@@ -767,6 +781,13 @@ test_cases:
     family: 'Windows Phone'
     major: '8'
     minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)'
+    family: 'Windows 8'
+    major:
+    minor:
     patch:
     patch_minor:
 
