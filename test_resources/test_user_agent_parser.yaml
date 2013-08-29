@@ -885,3 +885,42 @@ test_cases:
     major: '1'
     minor: '1'
     patch: '1'
+
+  - user_agent_string: 'XBMC/9.04-beta1 r19639 (Windows; Windows XP Professional Service Pack 2 build 2600; http://www.xbmc.org)'
+    family: 'XBMC'
+    major: '9'
+    minor: '04'
+    patch: 'r19639'
+
+  - user_agent_string: 'XBMC/9.04 r19840 (Mac OS X; Darwin 9.6.0; http://www.xbmc.org)'
+    family: 'XBMC'
+    major: '9'
+    minor: '04'
+    patch: 'r19840'
+
+  - user_agent_string: 'XBMC/3.3-DEV-r31572 (Xbox; http://www.xbmc.org)'
+    family: 'XBMC'
+    major: '3'
+    minor: '3'
+    patch: 'r31572'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; Xbox)'
+    family: 'IE for Xbox'
+    major: '9'
+    minor: '0'
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/3.1; Xbox)'
+    family: 'IE for Xbox'
+    major: '7'
+    minor: '0'
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.5; Trident/3.1; IEMobile/7.0; Xbox)'
+    family: 'IE for Xbox'
+    major: '7'
+    minor: '0'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; Xbox)'
+    family: 'IE for Xbox'
+    major: '9'
+    minor: '0'
+
