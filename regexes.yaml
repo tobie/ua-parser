@@ -1,6 +1,11 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
+  # HbbTV standard defines what features the browser should understand.
+  # but it's like targeting "HTML5 browsers", effective browser support depends on the model
+  # See os_parsers if you want to target a specific TV
+  - regex: '(HbbTV)/(\d+)\.(\d+)\.(\d+) \('
+
   # must go before Firefox to catch SeaMonkey/Camino
   - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
 
@@ -352,6 +357,9 @@ user_agent_parsers:
   - regex: '(Pre)/(\d+)\.(\d+)'
     family_replacement: 'Palm Pre'
 
+  # fork of Links
+  - regex: '(ELinks)/(\d+)\.(\d+)'
+  - regex: '(ELinks) \((\d+)\.(\d+)'
   - regex: '(Links) \((\d+)\.(\d+)'
 
   - regex: '(QtWeb) Internet Browser/(\d+)\.(\d+)'
@@ -392,10 +400,70 @@ user_agent_parsers:
   - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
+    family_replacement: 'IE'
+
   - regex: '(python-requests)/(\d+)\.(\d+)'
     family_replacement: 'Python Requests'
 
 os_parsers:
+  ##########
+  # HbbTV vendors
+  ##########
+
+  # starts with the easy one : Panasonic seems consistent across years, hope it will continue
+  #HbbTV/1.1.1 (;Panasonic;VIERA 2011;f.532;0071-0802 2000-0000;)
+  #HbbTV/1.1.1 (;Panasonic;VIERA 2012;1.261;0071-3103 2000-0000;)
+  #HbbTV/1.2.1 (;Panasonic;VIERA 2013;3.672;4101-0003 0002-0000;)
+  #- regex: 'HbbTV/\d+\.\d+\.\d+ \(;(Panasonic);VIERA ([0-9]{4});'
+
+  # Sony is consistent too but do not place year like the other
+  # Opera/9.80 (Linux armv7l; HbbTV/1.1.1 (; Sony; KDL32W650A; PKG3.211EUA; 2013;); ) Presto/2.12.362 Version/12.11
+  # Opera/9.80 (Linux mips; U;  HbbTV/1.1.1 (; Sony; KDL40HX751; PKG1.902EUA; 2012;);; en) Presto/2.10.250 Version/11.60
+  # Opera/9.80 (Linux mips; U;  HbbTV/1.1.1 (; Sony; KDL22EX320; PKG4.017EUA; 2011;);; en) Presto/2.7.61 Version/11.00
+  #- regex: 'HbbTV/\d+\.\d+\.\d+ \(; (Sony);.*;.*; ([0-9]{4});\)'
+
+
+  # LG is consistent too, but we need to add manually the year model
+  #Mozilla/5.0 (Unknown; Linux armv7l) AppleWebKit/537.1+ (KHTML, like Gecko) Safari/537.1+ HbbTV/1.1.1 ( ;LGE ;NetCast 4.0 ;03.20.30 ;1.0M ;)
+  #Mozilla/5.0 (DirectFB; Linux armv7l) AppleWebKit/534.26+ (KHTML, like Gecko) Version/5.0 Safari/534.26+ HbbTV/1.1.1 ( ;LGE ;NetCast 3.0 ;1.0 ;1.0M ;)
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \( ;(LG)E ;NetCast 4.0'
+    os_v1_replacement: '2013'
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \( ;(LG)E ;NetCast 3.0'
+    os_v1_replacement: '2012'
+
+  # Samsung is on its way of normalizing their user-agent
+  # HbbTV/1.1.1 (;Samsung;SmartTV2013;T-FXPDEUC-1102.2;;) WebKit
+  # HbbTV/1.1.1 (;Samsung;SmartTV2013;T-MST12DEUC-1102.1;;) WebKit
+  # HbbTV/1.1.1 (;Samsung;SmartTV2012;;;) WebKit
+  # HbbTV/1.1.1 (;;;;;) Maple_2011
+  - regex: 'HbbTV/1.1.1 \(;;;;;\) Maple_2011'
+    os_replacement: 'Samsung'
+    os_v1_replacement: '2011'
+  # manage the two models of 2013
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \(;(Samsung);SmartTV([0-9]{4});.*FXPDEUC'
+    os_v2_replacement: 'UE40F7000'
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \(;(Samsung);SmartTV([0-9]{4});.*MST12DEUC'
+    os_v2_replacement: 'UE32F4500'
+  # generic Samsung (works starting in 2012)
+  #- regex: 'HbbTV/\d+\.\d+\.\d+ \(;(Samsung);SmartTV([0-9]{4});'
+
+  # Philips : not found any other way than a manual mapping
+  # Opera/9.80 (Linux mips; U; HbbTV/1.1.1 (; Philips; ; ; ; ) CE-HTML/1.0 NETTV/4.1.3 PHILIPSTV/1.1.1; en) Presto/2.10.250 Version/11.60
+  # Opera/9.80 (Linux mips ; U; HbbTV/1.1.1 (; Philips; ; ; ; ) CE-HTML/1.0 NETTV/3.2.1; en) Presto/2.6.33 Version/10.70
+  - regex: 'HbbTV/1.1.1 \(; (Philips);.*NETTV/4'
+    os_v1_replacement: '2013'
+  - regex: 'HbbTV/1.1.1 \(; (Philips);.*NETTV/3'
+    os_v1_replacement: '2012'
+  - regex: 'HbbTV/1.1.1 \(; (Philips);.*NETTV/2'
+    os_v1_replacement: '2011'
+
+  # the HbbTV emulator developers use HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20
+  - regex: 'HbbTV/\d+\.\d+\.\d+.*(firetv)-firefox-plugin (\d+).(\d+).(\d+)'
+    os_replacement: 'FireHbbTV'
+
+  # generic HbbTV, hoping to catch manufacturer name (always after 2nd comma) and the first string that looks like a 2011-2019 year
+  - regex: 'HbbTV/\d+\.\d+\.\d+ \(.*; ?([a-zA-Z]+) ?;.*(201[1-9]).*\)'
 
   ##########
   # Android
@@ -437,7 +505,7 @@ os_parsers:
   # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
-  
+
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
     os_replacement: 'Windows XP'
 
@@ -592,7 +660,7 @@ os_parsers:
   ##########
   - regex: '(GoogleTV) (\d+)\.(\d+)\.(\d+)'
   # Old style
-  - regex: '(GoogleTV)/\d+'
+  - regex: '(GoogleTV)/[\da-z]+'
 
   - regex: '(WebTV)/(\d+).(\d+)'
   
@@ -703,11 +771,11 @@ device_parsers:
   #########
   # Android General Device Matching (far from perfect)
   #########
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; WOWMobile (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{2};(.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; WOWMobile (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{0,2};(.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
   - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
 
@@ -790,6 +858,7 @@ device_parsers:
   # cannot determine specific device type from ua string. (3g, 3gs, 4, etc)
   - regex: '(iPad) Simulator;'
   - regex: '(iPad);'
+  - regex: '(iPod) touch;'
   - regex: '(iPod);'
   - regex: '(iPhone) Simulator;'
   - regex: '(iPhone);'
@@ -883,6 +952,12 @@ device_parsers:
     device_replacement: 'Lenovo $1'
   - regex: 'Lenovo_([A-Za-z0-9]+)'
     device_replacement: 'Lenovo $1'
+
+  ##########
+  # HbbTV (European and Australian standard)
+  # written before the LG regexes, as LG is making HbbTV too
+  ##########
+  - regex: '(HbbTV)/[0-9]+\.[0-9]+\.[0-9]+'
 
   ##########
   # lg

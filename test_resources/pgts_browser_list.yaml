@@ -1090,149 +1090,149 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "ELinks (0.10rc1; Linux 2.6.9-gentoo-r10 i686; 80x25)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '10'
       patch:
     - user_agent_string: "ELinks (0.4.2; cygwin; 700)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4.2; Linux; )"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre18; Linux 2.2.22 i686; 80x25)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre5; Linux 2.2.20-compact i586; 80x30)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre5; Linux 2.2.20 i586; 138x44)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre5; Linux 2.4.23 i686; 114x27)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre5; Linux 2.4.24 i686; 132x34)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.4pre5; Linux 2.6.0 i686; 176x66)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '4'
       patch:
     - user_agent_string: "ELinks (0.9.3)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '9'
       patch:
     - user_agent_string: "ELinks (0.9.CVS; Linux 2.6.5 i686; 169x55)"
-      family: "Links"
+      family: "ELinks"
       major: '0'
       minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.CVS (textmode; Linux 2.4.18-1-386 i686; 80x25-3)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; FreeBSD 4.10-PRERELEASE i386; 132x43)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; FreeBSD 4.10-STABLE i386; 132x43)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; Linux 2.4.26 i686; 128x48)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; Linux 2.6.3-7mdksmp i686; 80x25)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; Linux 2.6.6 i686; 128x54)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; Linux; 80x24)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.1 (textmode; Linux; 80x25)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.2rc2 (textmode; Linux 2.4.26-lck1 i486; 80x25)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.2rc4 (textmode; Linux 2.4.20-8 i686; 105x46)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.2rc7 (textmode; Linux 2.4.29-1 i686; 190x75)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.2 (textmode; Linux; 157x52)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3 (textmode; Linux 2.6.10 i686; 80x25)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3 (textmode; Linux 2.6.7-20050106 i686; 80x34)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3 (textmode; Linux 2.6.8-1-386 i686; 160x64)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3 (textmode; Linux 2.6.8.1 i686; 118x82)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "ELinks/0.9.3 (textmode; Linux 2.6.8-mdp04 i686; 80x25)"
-      family: "Other"
-      major:
-      minor:
+      family: "ELinks"
+      major: '0'
+      minor: '9'
       patch:
     - user_agent_string: "Enigma Browser"
       family: "Other"

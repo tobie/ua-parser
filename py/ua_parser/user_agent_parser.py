@@ -21,23 +21,34 @@ __author__ = 'Lindsey Simon <elsigh@gmail.com>'
 import json
 import os
 import re
-import yaml
+
+# pip may copy regexes.yaml to different places depending on the OS.
+# For example, on Mac pip copies regexes.yaml to the folder where
+# user_agent_parser.py lives where as Fedora leaves regexes.yaml to "data" dir
+# See https://github.com/tobie/ua-parser/issues/209 for the complete discussion
+
+ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
+DATA_DIR = os.path.abspath(os.path.join(ROOT_DIR, '..', 'data'))
+regex_dir = ROOT_DIR if os.path.exists(os.path.join(ROOT_DIR, 'regexes.yaml')) else DATA_DIR
+
 from pkg_resources import resource_filename
 
 
 class UserAgentParser(object):
-    def __init__(self, pattern, family_replacement=None, v1_replacement=None):
+    def __init__(self, pattern, family_replacement=None, v1_replacement=None, v2_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
           pattern: a regular expression string
           family_replacement: a string to override the matched family (optional)
           v1_replacement: a string to override the matched v1 (optional)
+          v2_replacement: a string to override the matched v2 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.family_replacement = family_replacement
         self.v1_replacement = v1_replacement
+        self.v2_replacement = v2_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -64,24 +75,32 @@ class UserAgentParser(object):
             elif match.lastindex and match.lastindex >= 2:
                 v1 = match.group(2)
 
-            if match.lastindex and match.lastindex >= 3:
+            if self.v2_replacement:
+                v2 = self.v2_replacement
+            elif match.lastindex and match.lastindex >= 3:
                 v2 = match.group(3)
-                if match.lastindex >= 4:
-                    v3 = match.group(4)
+
+            if match.lastindex and match.lastindex >= 4:
+                v3 = match.group(4)
+
         return family, v1, v2, v3
 
 
 class OSParser(object):
-    def __init__(self, pattern, os_replacement=None):
+    def __init__(self, pattern, os_replacement=None, os_v1_replacement=None, os_v2_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
           pattern: a regular expression string
           os_replacement: a string to override the matched os (optional)
+          os_v1_replacement: a string to override the matched v1 (optional)
+          os_v2_replacement: a string to override the matched v2 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.os_replacement = os_replacement
+        self.os_v1_replacement = os_v1_replacement
+        self.os_v2_replacement = os_v2_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -100,14 +119,20 @@ class OSParser(object):
             else:
                 os = match.group(1)
 
-            if match.lastindex >= 2:
+            if self.os_v1_replacement:
+                os_v1 = self.os_v1_replacement
+            elif match.lastindex >= 2:
                 os_v1 = match.group(2)
-                if match.lastindex >= 3:
-                    os_v2 = match.group(3)
-                    if match.lastindex >= 4:
-                        os_v3 = match.group(4)
-                        if match.lastindex >= 5:
-                            os_v4 = match.group(5)
+
+            if self.os_v2_replacement:
+                os_v2 = self.os_v2_replacement
+            elif match.lastindex >= 3:
+                os_v2 = match.group(3)
+
+            if match.lastindex >= 4:
+                os_v3 = match.group(4)
+                if match.lastindex >= 5:
+                    os_v4 = match.group(5)
 
         return os, os_v1, os_v2, os_v3, os_v4
 
@@ -157,10 +182,10 @@ def Parse(user_agent_string, **jsParseBits):
     """
     jsParseBits = jsParseBits or {}
     return {
-      'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
-      'os': ParseOS(user_agent_string, **jsParseBits),
-      'device': ParseDevice(user_agent_string, **jsParseBits),
-      'string': user_agent_string
+        'user_agent': ParseUserAgent(user_agent_string, **jsParseBits),
+        'os': ParseOS(user_agent_string, **jsParseBits),
+        'device': ParseDevice(user_agent_string, **jsParseBits),
+        'string': user_agent_string
     }
 
 
@@ -242,8 +267,11 @@ def ParseDevice(user_agent_string):
         if device:
             break
 
+    if device == None:
+        device = 'Other'
+
     return {
-      'family': device
+        'family': device
     }
 
 
@@ -381,18 +409,22 @@ if not UA_PARSER_YAML:
     yamlPath = resource_filename(__name__, 'regexes.yaml')
     json_path = resource_filename(__name__, 'regexes.json')
 else:
+    import yaml
+
     yamlFile = open(UA_PARSER_YAML)
     regexes = yaml.load(yamlFile)
     yamlFile.close()
 
 # If UA_PARSER_YAML is not specified, load regexes from regexes.json before
-# falling back to with yaml
+# falling back to yaml format
 if regexes is None:
     try:
         json_file = open(json_path)
         regexes = json.loads(json_file.read())
         json_file.close()
     except IOError:
+        import yaml
+
         yamlFile = open(yamlPath)
         regexes = yaml.load(yamlFile)
         yamlFile.close()
@@ -410,9 +442,14 @@ for _ua_parser in regexes['user_agent_parsers']:
     if 'v1_replacement' in _ua_parser:
         _v1_replacement = _ua_parser['v1_replacement']
 
+    _v2_replacement = None
+    if 'v2_replacement' in _ua_parser:
+        _v2_replacement = _ua_parser['v2_replacement']
+
     USER_AGENT_PARSERS.append(UserAgentParser(_regex,
                                               _family_replacement,
-                                              _v1_replacement))
+                                              _v1_replacement,
+                                              _v2_replacement))
 
 OS_PARSERS = []
 for _os_parser in regexes['os_parsers']:
@@ -422,7 +459,18 @@ for _os_parser in regexes['os_parsers']:
     if 'os_replacement' in _os_parser:
         _os_replacement = _os_parser['os_replacement']
 
-    OS_PARSERS.append(OSParser(_regex, _os_replacement))
+    _os_v1_replacement = None
+    if 'os_v1_replacement' in _os_parser:
+        _os_v1_replacement = _os_parser['os_v1_replacement']
+
+    _os_v2_replacement = None
+    if 'os_v2_replacement' in _os_parser:
+        _os_v2_replacement = _os_parser['os_v2_replacement']
+
+    OS_PARSERS.append(OSParser(_regex,
+                               _os_replacement,
+                               _os_v1_replacement,
+                               _os_v2_replacement))
 
 
 DEVICE_PARSERS = []
