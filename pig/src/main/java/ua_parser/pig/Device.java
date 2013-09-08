@@ -11,15 +11,17 @@ import org.apache.pig.impl.logicalLayer.schema.Schema.FieldSchema;
 
 public class Device extends EvalFunc<Tuple> {
 
-    PigParser parser;
+    private PigParser parser;
 
     public Device() throws IOException {
         parser = PigParser.getParser();
     }
 
     public Tuple exec(Tuple input) throws IOException {
-        if (input == null || input.size() == 0)
+        if (input == null || input.size() == 0) {
             return null;
+        }
+
         try {
             String agentString = (String) input.get(0);
             ua_parser.Device device = parser.parseDevice(agentString);

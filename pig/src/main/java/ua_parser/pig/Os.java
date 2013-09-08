@@ -10,19 +10,20 @@ import org.apache.pig.impl.logicalLayer.schema.Schema;
 import org.apache.pig.impl.logicalLayer.schema.Schema.FieldSchema;
 
 import ua_parser.OS;
-import ua_parser.pig.PigParser;
 
 public class Os extends EvalFunc<Tuple> {
 
-    PigParser parser;
+    private PigParser parser;
 
     public Os() throws IOException {
         parser = PigParser.getParser();
     }
 
     public Tuple exec(Tuple input) throws IOException {
-        if (input == null || input.size() == 0)
+        if (input == null || input.size() == 0) {
             return null;
+        }
+
         try {
             String agentString = (String) input.get(0);
             OS os = parser.parseOS(agentString);
@@ -48,10 +49,10 @@ public class Os extends EvalFunc<Tuple> {
         try {
             Schema tupleSchema = new Schema();
 
-            tupleSchema.add(new FieldSchema("osFamily", DataType.CHARARRAY));
-            tupleSchema.add(new FieldSchema("osMajor", DataType.CHARARRAY));
-            tupleSchema.add(new FieldSchema("osMinor", DataType.CHARARRAY));
-            tupleSchema.add(new FieldSchema("osPatch", DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("osFamily",     DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("osMajor",      DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("osMinor",      DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("osPatch",      DataType.CHARARRAY));
             tupleSchema.add(new FieldSchema("osPatchMinor", DataType.CHARARRAY));
             return tupleSchema;
         } catch (Exception e) {
