@@ -13,7 +13,7 @@ import ua_parser.CachingParser;
  * @author Niels Basjes
  *
  */
-public class PigParser extends CachingParser {
+public final class PigParser extends CachingParser {
 
     private PigParser() throws IOException {
         super();
@@ -24,8 +24,9 @@ public class PigParser extends CachingParser {
     // ------------------------------------------
 
     public static PigParser getParser() throws IOException {
-        if (instance == null)
+        if (instance == null) {
             instance = new PigParser();
+        }
         return instance;
     }
 
