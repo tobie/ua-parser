@@ -129,9 +129,18 @@ if (php_sapi_name() == 'cli') {
         if (!$silent) {
             print "getting the old YAML file...\n";
         }
+        $yamlPath = $basePath."resources/regexes.yaml";
+
+        // If we haven't previously ran this script to fetch a copy of the YAML file into the
+        // resources directory, then simply get it from the root.
+        // That way one can still use this library without network connection given just a plain
+        // clone of the repo (issue #200)
+        if ( !file_exists($yamlPath) && file_exists($basePath."../regexes.yaml") ) {
+             $yamlPath = $basePath."../regexes.yaml";
+        }
         
         // get the file
-        get($basePath."resources/regexes.yaml",$silent,$nobackup,$basePath);
+        get($yamlPath,$silent,$nobackup,$basePath);
 
     } else if (isset($args["y"])) {
 	
