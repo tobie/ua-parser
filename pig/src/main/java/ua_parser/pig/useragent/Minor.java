@@ -10,15 +10,17 @@ import ua_parser.pig.PigParser;
 
 public class Minor extends EvalFunc<String> {
 
-    PigParser parser;
+    private PigParser parser;
 
     public Minor() throws IOException {
         parser = PigParser.getParser();
     }
 
     public String exec(Tuple input) throws IOException {
-        if (input == null || input.size() == 0)
+        if (input == null || input.size() == 0) {
             return null;
+        }
+
         try {
             String agentString = (String) input.get(0);
             UserAgent userAgent = parser.parseUserAgent(agentString);
