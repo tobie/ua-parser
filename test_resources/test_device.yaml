@@ -279,6 +279,9 @@ test_cases:
   - user_agent_string: 'Opera/9.80 (Linux armv7l; HbbTV/1.1.1 (; Sony; KDL32W650A; PKG3.211EUA; 2013;); ) Presto/2.12.362 Version/12.11'
     family: 'HbbTV'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.1.2; en-gb; SAMSUNG GT-I9305/I9305XXBMG3Build/JZO54K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.0'
+    family: 'Samsung GT-I9305'
+
 # up market model
   - user_agent_string: 'HbbTV/1.1.1 (;Samsung;SmartTV2013;T-FXPDEUC-1102.2;;) WebKit'
     family: 'HbbTV'
