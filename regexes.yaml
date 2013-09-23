@@ -186,6 +186,10 @@ user_agent_parsers:
   # AOL Browser (IE-based)
   - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+)'
 
+  # Samsung S3 (GT-I9305)
+  - regex: '(Version)/(\d+)\.(\d+) Mobile Safari/(\d+)\.(\d+)'
+    family_replacement: 'Chrome Mobile'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
@@ -1026,6 +1030,8 @@ device_parsers:
   - regex: 'SAMSUNG-([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
   - regex: 'SAMSUNG\; ([A-Za-z0-9\-]+)'
+    device_replacement: 'Samsung $1'
+  - regex: 'SAMSUNG ([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
 
   ##########
