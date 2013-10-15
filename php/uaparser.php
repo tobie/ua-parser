@@ -48,31 +48,15 @@ class UAParser {
         } else {
             $title            = 'Error loading ua-parser';
             if ($customRegexesFile !== null) {
-                $message      = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
-                $instruction1 = '';
-                $instruction2 = '';
+                $message = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
             } else {
-                $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
-                $instruction1 = '%: cd /path/to/UAParser/';
-                $instruction2 = '%: php uaparser-cli.php -g';
+                $message = 'Please download the regexes.json file before using uaparser.php.';
+                if ( php_sapi_name() == 'cli' ) {
+                    $message .= ' (php uaparser-cli.php -g)';
+                }
             }
             
-            if (php_sapi_name() == 'cli') {
-                print "\n".$title."\n";
-                print $message."\n\n";
-                print "    ".$instruction2."\n\n";
-            } else {
-                print '<html><head><title>'.$title.'</title></head><body>';
-                print '<h1>'.$title.'</h1>';
-                print '<p>'.$message.'</p>';
-                print '<blockquote>';
-                print '<code>'.$instruction1.'</code><br>';
-                print '<code>'.$instruction2.'</code>';
-                print '</blockquote>';
-                print '</body></html>';
-            }
-
-            exit;
+            throw new FileNotFound_Exception($message);
         }
     }
     
@@ -301,3 +285,5 @@ class UAParser {
     }
     
 }
+
+class FileNotFound_Exception extends Exception {}
