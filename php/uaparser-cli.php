@@ -149,7 +149,11 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied Apache log file */
         
         // load the parser
-        $parser = new UAParser;
+        try {
+            $parser = new UAParser;
+        } catch (FileNotFound_Exception $e) {
+            exit($e->getMessage());
+        }
         
         // set-up some standard vars
         $i       = 0;
@@ -207,7 +211,11 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied UA from the command line and kick it out as JSON */
         
         // load the parser
-        $parser = new UAParser;
+        try {
+            $parser = new UAParser;
+        } catch (FileNotFound_Exception $e) {
+            exit($e->getMessage());
+        }
         
         // parse and encode the results
         if (version_compare(PHP_VERSION, '5.4.0', '>=') && isset($args["p"])) {
@@ -222,7 +230,11 @@ if (php_sapi_name() == 'cli') {
         /* Parse the supplied UA from the command line and kick it out as JSON */
         
         // load the parser
-        $parser = new UAParser;
+        try {
+            $parser = new UAParser;
+        } catch (FileNotFound_Exception $e) {
+            exit($e->getMessage());
+        }
         
         // parse and print the results
         $result = $parser->parse($argv[1]);
