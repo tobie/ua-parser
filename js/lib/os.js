@@ -1,12 +1,16 @@
+/*jshint eqnull:true*/
+
 var startsWithDigit = require('./helpers').startsWithDigit;
 
-exports.OS = OS
-function OS(family, major, minor, patch, patchMinor) {
+exports.OS = OS;
+
+function OS(family, major, minor, patch, patchMinor, debug) {
   this.family = family || 'Other';
   this.major = major || null;
   this.minor = minor || null;
   this.patch = patch || null;
   this.patchMinor = patchMinor || null;
+  if (debug) { this.debug = debug; }
 }
 
 OS.prototype.toVersionString = function() {
@@ -40,7 +44,8 @@ function _makeParsers(obj) {
       majorRep = obj.os_v1_replacement,
       minorRep = obj.os_v2_replacement,
       patchRep = obj.os_v3_replacement,
-      patchMinorRep = obj.os_v4_replacement;
+      patchMinorRep = obj.os_v4_replacement,
+      debug = obj.debug;
 
   function parser(str) {
     var m = str.match(regexp);
@@ -52,14 +57,14 @@ function _makeParsers(obj) {
         patch = patchRep || m[4],
         patchMinor = patchMinorRep || m[5];
 
-    return new OS(family, major, minor, patch, patchMinor);
+    return new OS(family, major, minor, patch, patchMinor, debug);
   }
 
   return parser;
 }
 
 exports.makeParser = function(regexes) {
-  var parsers = regexes.map(_makeParsers)
+  var parsers = regexes.map(_makeParsers);
 
   function parser(str) {
     var obj;
@@ -75,4 +80,4 @@ exports.makeParser = function(regexes) {
   }
 
   return parser;
-}
+};

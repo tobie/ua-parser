@@ -1,22 +1,25 @@
 var startsWithDigit = require('./helpers').startsWithDigit,
     OS = require('./os').OS;
 
-exports.UA = UA
-function UA(family, major, minor, patch) {
+exports.UA = UA;
+
+function UA(family, major, minor, patch, debug) {
   this.family = family || 'Other';
   this.major = major || null;
   this.minor = minor || null;
   this.patch = patch || null;
+  if (debug) { this.debug = debug; }
 }
 
-require('util').inherits(UA, OS)
+require('util').inherits(UA, OS);
 
 function _makeParsers(obj) {
   var regexp = new RegExp(obj.regex),
       famRep = obj.family_replacement,
       majorRep = obj.v1_replacement,
       minorRep = obj.v2_replacement,
-      patchRep = obj.v3_replacement;
+      patchRep = obj.v3_replacement,
+      debug = obj.debug;
 
   function parser(str) {
     var m = str.match(regexp);
@@ -26,15 +29,15 @@ function _makeParsers(obj) {
         major = majorRep || m[2],
         minor = minorRep || m[3],
         patch = patchRep || m[4];
-    
-    return new UA(family, major, minor, patch);
+
+    return new UA(family, major, minor, patch, debug);
   }
 
   return parser;
 }
 
 exports.makeParser = function(regexes) {
-  var parsers = regexes.map(_makeParsers)
+  var parsers = regexes.map(_makeParsers);
 
   function parser(str) {
     var obj;
@@ -50,4 +53,4 @@ exports.makeParser = function(regexes) {
   }
 
   return parser;
-}
+};
