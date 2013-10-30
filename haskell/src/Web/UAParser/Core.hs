@@ -84,10 +84,10 @@ parseUA UAConfig{..} bs = foldr mplus Nothing $ map go uaParsers
 -- | Results datatype for the parsed User-Agent
 data UAResult = UAResult {
       uarFamily :: Text
-    , uarV1 :: Maybe Text
-    , uarV2 :: Maybe Text
-    , uarV3 :: Maybe Text
-    } deriving (Show, Eq, Typeable, Data)
+    , uarV1     :: Maybe Text
+    , uarV2     :: Maybe Text
+    , uarV3     :: Maybe Text
+    } deriving (Show, Read, Eq, Typeable, Data)
 
 
 -------------------------------------------------------------------------------
@@ -137,11 +137,11 @@ parseOS UAConfig{..} bs = foldr mplus Nothing $ map go osParsers
 -- | Result type for 'parseOS'
 data OSResult = OSResult {
       osrFamily :: Text
-    , osrV1 :: Maybe Text
-    , osrV2 :: Maybe Text
-    , osrV3 :: Maybe Text
-    , osrV4 :: Maybe Text
-    } deriving (Show,Eq,Typeable,Data)
+    , osrV1     :: Maybe Text
+    , osrV2     :: Maybe Text
+    , osrV3     :: Maybe Text
+    , osrV4     :: Maybe Text
+    } deriving (Show,Read,Eq,Typeable,Data)
 
 instance Default OSResult where
     def = OSResult "" Nothing Nothing Nothing Nothing
@@ -171,32 +171,32 @@ decodeFile' fp = decodeEither `fmap` B.readFile fp
 -------------------------------------------------------------------------------
 -- | User-Agent string parser data
 data UAConfig = UAConfig {
-      uaParsers :: [UAParser]
-    , osParsers :: [OSParser]
+      uaParsers  :: [UAParser]
+    , osParsers  :: [OSParser]
     , devParsers :: [DevParser]
     } deriving (Eq,Show)
 
 
 -------------------------------------------------------------------------------
 data UAParser = UAParser {
-      uaRegex :: Regex
+      uaRegex  :: Regex
     , uaFamRep :: Maybe Text
-    , uaV1Rep :: Maybe Text
+    , uaV1Rep  :: Maybe Text
     } deriving (Eq,Show)
 
 
 -------------------------------------------------------------------------------
 data OSParser = OSParser {
-      osRegex :: Regex
+      osRegex  :: Regex
     , osFamRep :: Maybe Text
-    , osRep1 :: Maybe Text
-    , osRep2 :: Maybe Text
+    , osRep1   :: Maybe Text
+    , osRep2   :: Maybe Text
     } deriving (Eq,Show)
 
 
 data DevParser = DevParser {
       devRegex :: Regex
-    , devRep :: Maybe Text
+    , devRep   :: Maybe Text
     } deriving (Eq,Show)
 
 
