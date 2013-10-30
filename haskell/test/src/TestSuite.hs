@@ -142,7 +142,7 @@ testOSParser config OSTC{..} = testCase tn $ do
 loadTests :: FromJSON a => FilePath -> IO a
 loadTests fp = parseMonad p =<< either error id `fmap` decodeFile' fp'
   where
-    fp' = "../../test_resources" </> fp
+    fp' = "../test_resources" </> fp
     p (Object x) = x .: "test_cases"
 
 
@@ -150,9 +150,9 @@ loadTests fp = parseMonad p =<< either error id `fmap` decodeFile' fp'
 data UserAgentTestCase = UATC {
       uatcString :: ByteString
     , uatcFamily :: Text
-    , uatcV1 :: Maybe Text
-    , uatcV2 :: Maybe Text
-    , uatcV3 :: Maybe Text
+    , uatcV1     :: Maybe Text
+    , uatcV2     :: Maybe Text
+    , uatcV3     :: Maybe Text
     } deriving (Show)
 
 
@@ -170,10 +170,10 @@ instance FromJSON UserAgentTestCase where
 data OSTestCase = OSTC {
       ostcString :: ByteString
     , ostcFamily :: Text
-    , ostcV1 :: Maybe Text
-    , ostcV2 :: Maybe Text
-    , ostcV3 :: Maybe Text
-    , ostcV4 :: Maybe Text
+    , ostcV1     :: Maybe Text
+    , ostcV2     :: Maybe Text
+    , ostcV3     :: Maybe Text
+    , ostcV4     :: Maybe Text
     } deriving (Show)
 
 

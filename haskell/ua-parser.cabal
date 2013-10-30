@@ -1,6 +1,6 @@
 Name:                ua-parser
 Description:         Please refer to the git/github README on the project for example usage.
-Version:             0.2.1
+Version:             0.3
 Synopsis:            Port of ua-parser in Haskell
 License:             BSD3
 License-file:        LICENSE
@@ -38,3 +38,30 @@ Library
     , syb
 
   ghc-options: -O2 -Wall  
+
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: TestSuite.hs
+  hs-source-dirs: src test/src
+  ghc-options: -O2 -Wall -fwarn-tabs
+
+  Build-depends:       
+      base
+    , bytestring
+    , text
+    , criterion
+    , deepseq
+    , derive
+    , HUnit
+    , pcre-light
+    , yaml >= 0.7
+    , aeson
+    , test-framework
+    , test-framework-hunit
+    , test-framework-quickcheck2
+    , data-default
+    , syb
+    , filepath
+
+
