@@ -148,6 +148,8 @@ The list of regular-expressions `regex` shall be evaluated for a given user-agen
 In case that no replacement for a match is given, the first match defines the `family` and the `model`. 
 If a `*_replacement` string is specified it shall overwrite or replace the match. 
 
+Tailing whitespaces resulting from a match shall be stripped off.
+
 As placeholder for inserting matched characters $1 to $9 can be used to insert the matched characters from the regex into the replacement string.
 
 In case that no matching `regex` is found the value for `family` shall be "Other". `brand` and `model` shall not be defined.
