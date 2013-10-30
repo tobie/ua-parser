@@ -8,7 +8,7 @@ Author:              Ozgun Ataman
 Maintainer:          ozgun.ataman@soostone.com
 Category:            Web
 Build-type:          Simple
-Cabal-version:       >=1.6
+Cabal-version:       >=1.8
 
 data-files: ./*.yaml
 
