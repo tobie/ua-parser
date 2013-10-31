@@ -72,6 +72,21 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.2 Safari/535.19 Silk-Accelerated=true'
     family: 'Kindle Fire HD'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFSOWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.7 Safari/535.19 Silk-Accelerated=true'
+    family: 'Kindle Fire HD 7" WiFi'
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFTHWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.6 Safari/535.19 Silk-Accelerated=true'
+    family: 'Kindle Fire HDX 7" WiFi'
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFTHWA Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.6 Safari/535.19 Silk-Accelerated=true'
+    family: 'Kindle Fire HDX 7" 4G'
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFAPWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.6 Safari/535.19 Silk-Accelerated=true'
+    family: 'Kindle Fire HDX 8.9" WiFi'
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFAPWA Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.6 Safari/535.19 Silk-Accelerated=true'
+    family: 'Kindle Fire HDX 8.9" 4G'
+
   - user_agent_string: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true'
     family: 'Kindle Fire'
 
