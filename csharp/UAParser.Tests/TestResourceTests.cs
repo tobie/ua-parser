@@ -76,8 +76,9 @@ namespace UAParser.Tests
       Parser parser = Parser.GetDefault();
 
       StringBuilder sb = new StringBuilder();
-      foreach (var tc in testCases)
+      for (int i = 0; i < testCases.Count; i++)
       {
+        var tc = testCases[i];
         if (tc == null)
           continue;
 
@@ -88,10 +89,11 @@ namespace UAParser.Tests
         }
         catch (AssertException ex)
         {
-          sb.AppendLine(ex.Message);
+          sb.AppendLine("testcase "+(i+1)+": " +ex.Message);
         }
       }
 
+      Console.WriteLine("Ran {0} tests", testCases.Count);
       Assert.True(0 == sb.Length, "Failed tests: " + Environment.NewLine + sb.ToString());
     }
 

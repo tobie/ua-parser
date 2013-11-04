@@ -49,23 +49,25 @@ namespace UAParser
             else if (groupCount >= 2)
             {
                 v1 = match.Groups[2].Value;
-                if (m_v2Replacement != null)
+            }
+
+            if (m_v2Replacement != null)
+            {
+                v2 = m_v2Replacement;
+            }
+            else if (groupCount >= 3)
+            {
+                v2 = match.Groups[3].Value;
+                if (groupCount >= 4)
                 {
-                    v2 = m_v2Replacement;
-                }
-                else if (groupCount >= 3)
-                {
-                    v2 = match.Groups[3].Value;
-                    if (groupCount >= 4)
+                    v3 = match.Groups[4].Value;
+                    if (groupCount >= 5)
                     {
-                        v3 = match.Groups[4].Value;
-                        if (groupCount >= 5)
-                        {
-                            v4 = match.Groups[5].Value;
-                        }
+                        v4 = match.Groups[5].Value;
                     }
                 }
             }
+
             return family == null ? null : new OS(family, v1, v2, v3, v4);
         }
     }
