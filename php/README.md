@@ -9,7 +9,7 @@ v2.0 of the PHP library, released in December 2012, marked a huge transition fro
 * the `UAParser` class is now dynamic
 * properties are nested _(e.g. $result->family is now $result->ua->family)_
 * a user agent string is now required when using `parse()`. the auto-magical "use the server provided UA" is no longer supported.
-* `uaParser()`, `osParser()`, and `deviceParser()` are public and can be used to just return those select bits for a given user agent string.
+* `uaParse()`, `osParse()`, and `deviceParse()` are public and can be used to just return those select bits for a given user agent string.
 * the `is*` boolean properties _(e.g. isMobile)_ have been dropped. they now exist as part of the `ua-classifier` project.
 
 Please refer to the `CHANGELOG` for the full list of changes.
@@ -49,6 +49,16 @@ print $result->device->family;            // Other
 
 print $result->toFullString;              // Safari 6.0.2/Mac OS X 10.7.5
 print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
+```
+
+## Using Your Own Custom regexes.json File ##
+
+You can use your own `regexes.json` file if you've customized the official file. I *strongly* encourage you to push back any changes you may have so others can benefit. That said, to use your own do the following:
+
+```php
+require("uaparser.php");
+
+$parser = new UAParser("path/to/custom/regexes.json");
 ```
 
 ## Using ua-parser PHP Library from the Command Line ##
@@ -96,9 +106,9 @@ Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file
 
 Parses a user agent string and dumps the results as a list.
 
-    php uaparser-cli.php [-j] "your user agent string"
+    php uaparser-cli.php [-p] [-j] "your user agent string"
            
-Use the `-j` flag to print the result as JSON.
+Use the `-j` flag to print the result as JSON. Use the `-p` flag to pretty print the JSON result when using PHP 5.4+.
 
 ## Credits ##
 
@@ -111,3 +121,5 @@ Also, many thanks to the following major contributors to the PHP library:
 * @rjd22
 * Timo Tijhof 
 * Marcus Bointon
+* Ryan Parman
+* Pravin Dahal

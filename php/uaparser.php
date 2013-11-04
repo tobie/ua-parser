@@ -1,7 +1,7 @@
 <?php
 
 /*!
- * ua-parser-php v2.0.0
+ * ua-parser-php v2.1.1
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
  * Licensed under the MIT license
@@ -23,7 +23,8 @@
  *   - @rjd22 (https://github.com/rjd22)
  *   - Timo Tijhof (https://github.com/Krinkle)
  *   - Marcus Bointon (https://github.com/Synchro)
- *
+ *   - Ryan Parman (https://github.com/skyzyx)
+ *   - Pravin Dahal (https://github.com/pravindahal)
  */
 
 // address 5.1 compatibility
@@ -33,38 +34,29 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 
 class UAParser {
     
-    private $regexes;
-    private $log = false;
+    protected $regexes;
+    protected $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
      */
-    public function __construct() {
-        
-        if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json')) {
-            $this->regexes = json_decode(file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json'));
+    public function __construct($customRegexesFile = null) {
+	
+        $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
+        if (file_exists($regexesFile)) {
+            $this->regexes = json_decode(file_get_contents($regexesFile));
         } else {
-            $title        = 'Error loading ua-parser';
-            $message      = 'Please download the regexes.json file before using uaparser.php. You can type the following at the command line to download the latest version: ';
-            $instruction1 = '%: cd /path/to/UAParser/';
-            $instruction2 = '%: php uaparser-cli.php -g';
-            
-            if (php_sapi_name() == 'cli') {
-                print "\n".$title."\n";
-                print $message."\n\n";
-                print "    ".$instruction2."\n\n";
+            $title            = 'Error loading ua-parser';
+            if ($customRegexesFile !== null) {
+                $message = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
             } else {
-                print '<html><head><title>'.$title.'</title></head><body>';
-                print '<h1>'.$title.'</h1>';
-                print '<p>'.$message.'</p>';
-                print '<blockquote>';
-                print '<code>'.$instruction1.'</code><br>';
-                print '<code>'.$instruction2.'</code>';
-                print '</blockquote>';
-                print '</body></html>';
+                $message = 'Please download the regexes.json file before using uaparser.php.';
+                if ( php_sapi_name() == 'cli' ) {
+                    $message .= ' (php uaparser-cli.php -g)';
+                }
             }
             
-            exit;
+            throw new FileNotFound_Exception($message);
         }
     }
     
@@ -85,9 +77,9 @@ class UAParser {
         );
 
         // figure out the ua, os, and device properties if possible
-        $result->ua           = $this->uaParser($ua);
-        $result->os           = $this->osParser($ua);
-        $result->device       = $this->deviceParser($ua);
+        $result->ua           = $this->uaParse($ua);
+        $result->os           = $this->osParse($ua);
+        $result->device       = $this->deviceParse($ua);
         
         // create a full string version based on the ua and os objects
         $result->toFullString = $this->toFullString($result->ua, $result->os);
@@ -106,7 +98,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the user agent parsing
      */
-    public function uaParser($uaString = '') {
+    public function uaParse($uaString = '') {
 
         // build the default obj that will be returned
         $ua = (object) array(
@@ -157,7 +149,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the os parsing
      */
-    public function osParser($uaString = '') {
+    public function osParse($uaString = '') {
         
         // build the default obj that will be returned
         $os = (object) array(
@@ -210,7 +202,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the device parsing
      */
-    public function deviceParser($uaString = '') {
+    public function deviceParse($uaString = '') {
         
         // build the default obj that will be returned
         $device = (object) array(
@@ -285,7 +277,7 @@ class UAParser {
     /**
     * Logs the user agent info
     */
-    private function log($data) {
+    protected function log($data) {
         $jsonData = json_encode($data);
         $fp = fopen(dirname(__FILE__).DIRECTORY_SEPARATOR.'log/user_agents.log', 'a');
         fwrite($fp, $jsonData."\r\n");
@@ -293,3 +285,5 @@ class UAParser {
     }
     
 }
+
+class FileNotFound_Exception extends Exception {}

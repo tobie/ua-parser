@@ -7,6 +7,37 @@ The crux of the original parser--the data collected by [Steve Souders][4] over t
 
 `ua-parser` is just a small wrapper around this data.
 
+Maintainers
+-----------
+
+* C#: [Søren Enemærke](https://github.com/enemaerke) ([@sorenenemaerke](https://twitter.com/sorenenemaerke))
+* D: [Shripad K](https://github.com/shripadk) ([@24shri](https://twitter.com/24shri))
+* Go: [Yihuan Zhou](https://github.com/yihuanz) ([@yihuanz](https://twitter.com/yihuanz))
+* Haskell: [Ozgun Ataman](https://github.com/ozataman) ([@ozataman](https://twitter.com/ozataman))
+* Java: [Steve Jiang](https://github.com/sjiang) ([@sjiang](https://twitter.com/sjiang))
+* JavaScript: [Tobie Langel](https://github.com/tobie) ([@tobie](https://twitter.com/tobie))
+* Perl: [Mamod Mehyar](https://github.com/mamod) ([@mamod](https://twitter.com/mamod))
+* PHP: [Dave Olsen](https://github.com/dmolsen) ([@dmolsen](https://twitter.com/dmolsen))
+* Pig: [Niels Basjes](https://github.com/nielsbasjes) ([@nielsbasjes](https://twitter.com/nielsbasjes))
+* Python: [Lindsey Simon](https://github.com/elsigh) ([@elsigh](https://twitter.com/elsigh))
+* `regexes.yaml`: Lindsey Simon & Tobie Langel
+
+irc channel
+-----------
+
+[#ua-parser on freenode](irc://chat.freenode.net#ua-parse).
+
+Contributing Changes to regexes.yaml
+------------------------------------
+
+Please read the [contributors' guide](https://github.com/tobie/ua-parser/blob/master/CONTRIBUTING.md)
+
+Other ua-parser Libraries
+-------------------------
+
+There are a few other libraries which make use of ua-parser's patterns. These include:
+
+* Ruby - [user_agent_parser](https://github.com/toolmantim/user_agent_parser)
 
 Usage :: [node.js][1]
 ---------------------
@@ -48,7 +79,7 @@ Usage :: python
 You can install `ua-parser` by running:
 
 ```python
-pip install ua-parser
+pip install pyyaml ua-parser
 ```
 
 And here's how to use it:
@@ -72,7 +103,7 @@ print result_dict['os']
 # {'major': '5', 'patch_minor': None, 'minor': '1', 'family': 'iOS', 'patch': None}
 
 print result_dict['device']
-# {'is_spider': False, 'is_mobile': True, 'family': 'iPhone'}
+# {'family': 'iPhone'}
 ```
 
 
@@ -98,8 +129,74 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
-  System.out.println(c.device.isMobile);  // => true
-  System.out.println(c.device.isSpider);  // => false
+```
+
+
+Usage :: Pig
+-------------
+For Pig there are UDFs for getting a single value and UDFs for getting a tuple with all values for either Device, Os of UserAgent.
+For most usecases the tuple UDFs will be the most useful.
+
+```pig
+REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+
+DEFINE Device           ua_parser.pig.Device;
+DEFINE Os               ua_parser.pig.Os;
+DEFINE UserAgent        ua_parser.pig.UserAgent;
+
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH UserAgents
+    GENERATE
+             Device(useragent)              AS Device,
+             Os(useragent)                  AS Os,
+             UserAgent(useragent)           AS UserAgent,
+
+             useragent                      AS Useragent;
+
+DESCRIBE AgentSpecs;
+DUMP AgentSpecs;
+```
+
+The versions that return only a single value:
+
+```pig
+REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+
+DEFINE DeviceFamily     ua_parser.pig.device.Family;
+DEFINE OsFamily         ua_parser.pig.os.Family;
+DEFINE OsMajor          ua_parser.pig.os.Major;
+DEFINE OsMinor          ua_parser.pig.os.Minor;
+DEFINE OsPatch          ua_parser.pig.os.Patch;
+DEFINE OsPatchMinor     ua_parser.pig.os.PatchMinor;
+DEFINE UseragentFamily  ua_parser.pig.useragent.Family;
+DEFINE UseragentMajor   ua_parser.pig.useragent.Major;
+DEFINE UseragentMinor   ua_parser.pig.useragent.Minor;
+DEFINE UseragentPatch   ua_parser.pig.useragent.Patch;
+
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH  UserAgents
+    GENERATE DeviceFamily(useragent)    AS DeviceFamily:chararray,
+
+             OsFamily(useragent)        AS OsFamily:chararray,
+             OsMajor(useragent)         AS OsMajor:chararray,
+             OsMinor(useragent)         AS OsMinor:chararray,
+             OsPatch(useragent)         AS OsPatch:chararray,
+             OsPatchMinor(useragent)    AS OsPatchMinor:chararray,
+
+             UseragentFamily(useragent) AS UseragentFamily:chararray,
+             UseragentMajor(useragent)  AS UseragentMajor:chararray,
+             UseragentMinor(useragent)  AS UseragentMinor:chararray,
+             UseragentPatch(useragent)  AS UseragentPatch:chararray,
+
+             useragent                  AS Useragent;
+
+DUMP AgentSpecs;
 ```
 
 
@@ -163,7 +260,7 @@ void main() {
     std.stdio.writeln(agent.toFullString); // Mobile Safari 5.1.0/iOS 5.1.1
 
     std.stdio.writeln(agent.device.family); // iPhone
-    
+
     std.stdio.writeln(agent.isMobile); // true
     std.stdio.writeln(agent.isSpider); // false
 }
@@ -171,8 +268,6 @@ void main() {
 
 Usage :: C#
 -------------
-You can access the package via [NuGet][13]
-
 ```csharp
 using System;
 
@@ -210,14 +305,14 @@ print $r->ua->family;             # -> "Safari"
 print $r->ua->major;              # -> "5"
 print $r->ua->minor;              # -> "0"
 print $r->ua->patch;              # -> "1"
-    
+
 print $r->os->toString();         # -> "iOS 5.1"
 print $r->os->toVersionString();  # -> "5.1"
 print $r->os->family              # -> "iOS"
 print $r->os->major;              # -> "5"
 print $r->os->minor;              # -> "1"
 print $r->os->patch;              # -> undef
-    
+
 print $r->device->family;         # -> "iPhone"
 
 More information is available in the README in the perl directory
@@ -261,22 +356,44 @@ Just (UAResult {uarFamily = "Mobile Safari", uarV1 = Just "5", uarV2 = Just "1",
 Just (OSResult {osrFamily = "iOS", osrV1 = Just "5", osrV2 = Just "1", osrV3 = Nothing, osrV4 = Nothing})
 ```
 
-Plesae refer to Haddocks for more info; the API is pretty straightforward.
+Please refer to Haddocks for more info; the API is pretty straightforward.
 
-Maintainers
------------
+Usage :: Go
+------------
 
-* C#:         Søren Enemærke ([enemaerke](https://github.com/enemaerke))  
-* D:          Shripad K ([shripadk](https://github.com/shripadk))  
-* Haskell:    Ozgun Ataman ([ozataman](https://github.com/ozataman))  
-* Java:       Steve Jiang ([sjiang](https://github.com/sjiang))  
-* JavaScript: Tobie Langel ([tobie](https://github.com/tobie))  
-* Perl:       Mamod Mehyar ([mamod](https://github.com/mamod))  
-* PHP:        Dave Olsen ([dmolsen](https://github.com/dmolsen))  
-* Python:     Lindsey Simon ([elsigh](https://github.com/elsigh))  
+Install the package:
 
-* `regexes.yaml`: Lindsey Simon & Tobie Langel
+    go get "github.com/tobie/ua-parser/go/uaparser"
 
+Sample Usage
+
+```
+package main
+
+import (
+  "github.com/tobie/ua-parser/go/uaparser"
+  "fmt"
+)
+
+func main() {
+  testStr := "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
+  regexFile := "../../regexes.yaml"
+  parser := uaparser.New(regexFile)
+  client := parser.Parse(testStr)
+  fmt.Println(client.UserAgent.Family)  // "Amazon Silk"
+  fmt.Println(client.UserAgent.Major)   // "1"
+  fmt.Println(client.UserAgent.Minor)   // "1"
+  fmt.Println(client.UserAgent.Patch)   // "0-80"
+  fmt.Println(client.Os.Family)         // "Android"
+  fmt.Println(client.Os.Major)          // ""
+  fmt.Println(client.Os.Minor)          // ""
+  fmt.Println(client.Os.Patch)          // ""
+  fmt.Println(client.Os.PatchMinor)     // ""
+  fmt.Println(client.Device.Family)     // "Kindle Fire"
+}
+```
+
+[More information is available in the README](https://github.com/tobie/ua-parser/tree/master/go/uaparser) in the Go directory
 
 License
 -------
@@ -291,11 +408,15 @@ The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [M
 
 The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
 
-The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10]. 
+The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
 
 The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11].
 
 The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
+
+The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+
+The Go port is Copyright (c) 2013 Yihuan Zhou and is available under the [MIT License][14].
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
@@ -309,4 +430,5 @@ The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Per
 [10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
 [11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
 [12]: http://dev.perl.org/licenses
-[13]: https://nuget.org/packages/uaparser
+[13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
+[14]: https://raw.github.com/tobie/ua-parser/master/go/uaparser/LICENSE.md

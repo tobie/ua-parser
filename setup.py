@@ -1,52 +1,55 @@
 #!/usr/bin/env python
-import os
-import shutil
-import sys
+from setuptools import setup
+from setuptools.command.develop import develop as _develop
+from setuptools.command.sdist   import sdist   as _sdist
 
-from setuptools import setup, find_packages
-from setuptools.command.install import install as _install
+def install_regexes():
+    print('Copying regexes.yaml to package directory...')
+    import os
+    import shutil
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    yaml_src = os.path.join(cwd, 'regexes.yaml')
+    if not os.path.exists(yaml_src):
+        raise RuntimeError(
+                  'Unable to find regexes.yaml, should be at %r' % yaml_src)
+    yaml_dest = os.path.join(cwd, 'py', 'ua_parser', 'regexes.yaml')
+    shutil.copy2(yaml_src, yaml_dest)
 
+    print('Converting regexes.yaml to regexes.json...')
+    import json
+    import yaml
+    json_dest = yaml_dest.replace('.yaml', '.json')
+    regexes = yaml.load(open(yaml_dest))
+    json.dump(regexes, open(json_dest, 'w'))
 
-class install(_install):
+class develop(_develop):
     def run(self):
-        # After installation:
-        # 1. Move regexes.yaml to directory where ua_parser is installed
-        # 2. Convert regexes.yaml to regexes.json
-        _install.run(self)
-        import json
-        import yaml
-        import ua_parser
-        INSTALLATION_DIR = os.path.dirname(ua_parser.__file__)
-        source_path = os.path.join(sys.prefix, 'data', 'regexes.yaml')
-        destination_path = os.path.join(INSTALLATION_DIR,
-                                        'regexes.yaml')
-        shutil.move(source_path, destination_path)
+        install_regexes()
+        _develop.run(self)
 
-        print 'Converting regexes.yaml to json...'
-        yaml_file = open(destination_path)
-        yaml = yaml.load(yaml_file)
-        yaml_file.close()
-        json_file = open(os.path.join(INSTALLATION_DIR, 'regexes.json'), 'w')
-        json_file.write(json.dumps(yaml))
-        json_file.close()
-
+class sdist(_sdist):
+    def run(self):
+        install_regexes()
+        _sdist.run(self)
 
 setup(
     name='ua-parser',
-    version='0.3.1',
+    version='0.3.4',
     description="Python port of Browserscope's user agent parser",
     author='PBS',
     author_email='no-reply@pbs.org',
-    packages=find_packages('py'),
+    packages=['ua_parser'],
     package_dir={'': 'py'},
     license='LICENSE.txt',
     zip_safe=False,
     url='https://github.com/tobie/ua-parser',
     include_package_data=True,
-    package_data={'': ['README.markdown']},
-    data_files=[('data', ['regexes.yaml'])],
-    install_requires=['pyyaml'],
-    cmdclass={'install': install, 'develop': install},
+    package_data={'ua_parser': ['regexes.yaml', 'regexes.json']},
+#   install_requires=['pyyaml'],
+    cmdclass={
+        'develop': develop,
+        'sdist':   sdist,
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

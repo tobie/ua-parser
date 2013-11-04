@@ -34,7 +34,7 @@ public class OSParser {
     this.patterns = patterns;
   }
 
-  public static OSParser fromList(List<Map> configList) {
+  public static OSParser fromList(List<Map<String,String>> configList) {
     List<OSPattern> configPatterns = new ArrayList<OSPattern>();
 
     for (Map<String,String> configMap : configList) {
@@ -44,6 +44,10 @@ public class OSParser {
   }
 
   public OS parse(String agentString) {
+    if (agentString == null) {
+      return null;
+    }
+
     OS os;
     for (OSPattern p : patterns) {
       if ((os = p.match(agentString)) != null) {
@@ -96,18 +100,19 @@ public class OSParser {
         v1 = v1Replacement;
       } else if (groupCount >= 2) {
         v1 = matcher.group(2);
-        if (v2Replacement != null) {
-          v2 = v2Replacement;
-        } else if (groupCount >= 3) {
-          v2 = matcher.group(3);
-          if (groupCount >= 4) {
-            v3 = matcher.group(4);
-            if (groupCount >= 5) {
-              v4 = matcher.group(5);
-            }
-          }
+      }
+      if (v2Replacement != null) {
+        v2 = v2Replacement;
+      } else if (groupCount >= 3) {
+        v2 = matcher.group(3);
+      }
+      if (groupCount >= 4) {
+        v3 = matcher.group(4);
+        if (groupCount >= 5) {
+          v4 = matcher.group(5);
         }
       }
+
       return family == null ? null : new OS(family, v1, v2, v3, v4);
     }
   }
