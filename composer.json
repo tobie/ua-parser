@@ -11,8 +11,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Lars Strojny",
-            "email": "lars@strojny.net"
+            "name": "Dave Olsen",
+            "email": "dmolsen@gmail.com"
         }
     ],
     "autoload": {
