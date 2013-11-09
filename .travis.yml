@@ -5,8 +5,11 @@ node_js:
 before_install:
 - sudo apt-get update
 - sudo apt-get install python-yaml
+- sudo apt-get install php5-cli
 - cp regexes.yaml py/ua_parser/regexes.yaml
+- cp regexes.yaml php/resources/regexes.yaml
 
 script:
   - "npm test"
   - "python py/ua_parser/user_agent_parser_test.py"
+  - "cd php ; phpunit"
