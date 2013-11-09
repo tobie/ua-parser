@@ -27,6 +27,7 @@
  */
 namespace UAParser;
 
+use stdClass;
 use UAParser\Exception\FileNotFoundException;
 use UAParser\Result\Device;
 use UAParser\Result\OperatingSystem;
@@ -62,6 +63,7 @@ class Parser
 
     /**
      * Sets up some standard variables as well as starts the user agent parsing process
+     *
      * @param  string $ua a user agent string to test, defaults to an empty string
      * @param  array $jsParseBits
      * @return object the result of the user agent parsing
@@ -85,8 +87,9 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.json
-     * @param  string $uaString a user agent string to test
-     * @param  array $jsParseBits
+     *
+     * @param string $uaString a user agent string to test
+     * @param array $jsParseBits
      * @return object the result of the user agent parsing
      */
     private function parseUserAgent($uaString, array $jsParseBits = array())
@@ -102,38 +105,22 @@ class Parser
 
         } else {
 
-            // run the regexes to match things up
-            $uaRegexes = $this->regexes->user_agent_parsers;
-            foreach ($uaRegexes as $uaRegex) {
+            list($regex, $matches) = $this->matchRegexes(
+                $this->regexes->user_agent_parsers,
+                $uaString,
+                array(
+                    1 => 'Other',
+                    2 => null,
+                    3 => null,
+                    4 => null,
+                )
+            );
 
-                // tests the supplied regex against the user agent
-                if (preg_match('/' . str_replace('/', '\/', str_replace('\/', '/', $uaRegex->regex)) . '/', $uaString, $matches)) {
-
-                    // Make sure matches are at least set to null or Other
-                    if (!isset($matches[1])) {
-                        $matches[1] = 'Other';
-                    }
-                    if (!isset($matches[2])) {
-                        $matches[2] = null;
-                    }
-                    if (!isset($matches[3])) {
-                        $matches[3] = null;
-                    }
-                    if (!isset($matches[4])) {
-                        $matches[4] = null;
-                    }
-
-                    // ua name
-                    $ua->family = isset($uaRegex->family_replacement) ? str_replace('$1', $matches[1], $uaRegex->family_replacement) : $matches[1];
-
-                    // version properties
-                    $ua->major = isset($uaRegex->v1_replacement) ? $uaRegex->v1_replacement : $matches[2];
-                    $ua->minor = isset($uaRegex->v2_replacement) ? $uaRegex->v2_replacement : $matches[3];
-                    $ua->patch = isset($uaRegex->v3_replacement) ? $uaRegex->v3_replacement : $matches[4];
-
-                    break;
-                }
-
+            if ($matches) {
+                $ua->family = $this->replaceString($regex, 'family_replacement', $matches[1]);
+                $ua->major = isset($regex->v1_replacement) ? $regex->v1_replacement : $matches[2];
+                $ua->minor = isset($regex->v2_replacement) ? $regex->v2_replacement : $matches[3];
+                $ua->patch = isset($regex->v3_replacement) ? $regex->v3_replacement : $matches[4];
             }
         }
 
@@ -142,11 +129,11 @@ class Parser
             $jsUserAgentString = $jsParseBits['js_user_agent_string'];
             if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($uaString, 'chromeframe') !== false) {
 
-                $override   = $this->parseUserAgent($jsUserAgentString);
+                $override = $this->parseUserAgent($jsUserAgentString);
                 $ua->family = sprintf('Chrome Frame (%s %s)', $ua->family, $ua->major);
-                $ua->major  = $override->major;
-                $ua->minor  = $override->minor;
-                $ua->patch  = $override->patch;
+                $ua->major = $override->major;
+                $ua->minor = $override->minor;
+                $ua->patch = $override->patch;
             }
         }
 
@@ -155,82 +142,49 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches an os_parsers regex from regexes.json
-     * @param  string $uaString a user agent string to test
+     *
+     * @param string $uaString a user agent string to test
      * @return object the result of the os parsing
      */
     private function parseOperatingSystem($uaString)
     {
         $os = new OperatingSystem();
 
-        // run the regexes to match things up
-        $osRegexes = $this->regexes->os_parsers;
-        foreach ($osRegexes as $osRegex) {
+        list($regex, $matches) = $this->matchRegexes(
+            $this->regexes->os_parsers,
+            $uaString,
+            array(
+                1 => 'Other',
+                2 => null,
+                3 => null,
+                4 => null,
+                5 => null,
+            )
+        );
 
-            if (preg_match('/' . str_replace('/', '\/', str_replace('\/', '/', $osRegex->regex)) . '/', $uaString, $matches)) {
-
-                // Make sure matches are at least set to null or Other
-                if (!isset($matches[1])) {
-                    $matches[1] = 'Other';
-                }
-                if (!isset($matches[2])) {
-                    $matches[2] = null;
-                }
-                if (!isset($matches[3])) {
-                    $matches[3] = null;
-                }
-                if (!isset($matches[4])) {
-                    $matches[4] = null;
-                }
-                if (!isset($matches[5])) {
-                    $matches[5] = null;
-                }
-
-                // os name
-                $os->family = isset($osRegex->os_replacement) ? $osRegex->os_replacement : $matches[1];
-
-                // version properties
-                $os->major = isset($osRegex->os_v1_replacement) ? $osRegex->os_v1_replacement : $matches[2];
-                $os->minor = isset($osRegex->os_v2_replacement) ? $osRegex->os_v2_replacement : $matches[3];
-                $os->patch = isset($osRegex->os_v3_replacement) ? $osRegex->os_v3_replacement : $matches[4];
-                $os->patchMinor = isset($osRegex->os_v4_replacement) ? $osRegex->os_v4_replacement : $matches[5];
-
-                return $os;
-            }
-
+        if ($matches) {
+            $os->family = isset($regex->os_replacement) ? $regex->os_replacement : $matches[1];
+            $os->major = isset($regex->os_v1_replacement) ? $regex->os_v1_replacement : $matches[2];
+            $os->minor = isset($regex->os_v2_replacement) ? $regex->os_v2_replacement : $matches[3];
+            $os->patch = isset($regex->os_v3_replacement) ? $regex->os_v3_replacement : $matches[4];
+            $os->patchMinor = isset($regex->os_v4_replacement) ? $regex->os_v4_replacement : $matches[5];
         }
 
         return $os;
-
     }
 
     /**
      * Attempts to see if the user agent matches a device_parsers regex from regexes.json
-     * @param  string $uaString a user agent string to test
+     * @param string $uaString a user agent string to test
      * @return object the result of the device parsing
      */
     private function parseDevice($uaString)
     {
-        // build the default obj that will be returned
         $device = new Device();
 
-        // run the regexes to match things up
-        $deviceRegexes = $this->regexes->device_parsers;
-        foreach ($deviceRegexes as $deviceRegex) {
-
-            if (preg_match('/' . str_replace('/', '\/', str_replace('\/', '/', $deviceRegex->regex)) . '/', $uaString, $matches)) {
-
-                // Make sure matches are at least set to null or Other
-                if (!isset($matches[1])) {
-                    $matches[1] = 'Other';
-                }
-
-                // device name
-                $device->family = isset($deviceRegex->device_replacement) ? str_replace('$1', $matches[1], $deviceRegex->device_replacement) : $matches[1];
-
-                break;
-
-            }
-
+        list($regex, $matches) = $this->matchRegexes($this->regexes->device_parsers, $uaString, array(1 => 'Other'));
+        if ($matches) {
+            $device->family = $this->replaceString($regex, 'device_replacement', $matches[1]);
         }
 
         return $device;
@@ -245,5 +199,51 @@ class Parser
         $fp       = fopen(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'log/user_agents.log', 'a');
         fwrite($fp, $jsonData . "\r\n");
         fclose($fp);
+    }
+
+    /**
+     * @param stdClass $regex
+     * @param string $subject
+     * @param array $matches
+     * @return int
+     */
+    private function match(stdClass $regex, $subject, &$matches)
+    {
+        return preg_match('@' . $regex->regex . '@', $subject, $matches);
+    }
+
+    /**
+     * @param array $regexes
+     * @param string $subject
+     * @param array $defaults
+     * @return array
+     */
+    private function matchRegexes(array $regexes, $subject, array $defaults = array())
+    {
+        foreach ($regexes as $regex) {
+            if ($this->match($regex, $subject, $matches)) {
+                return array(
+                    $regex,
+                    $matches + $defaults
+                );
+            }
+        }
+
+        return array(null, null);
+    }
+
+    /**
+     * @param stdClass $regex
+     * @param string $key
+     * @param string $string
+     * @return string
+     */
+    private function replaceString(stdClass $regex, $key, $string)
+    {
+        if (!isset($regex->{$key})) {
+            return $string;
+        }
+
+        return str_replace('$1', $string, $regex->{$key});
     }
 }
