@@ -1,6 +1,5 @@
 <?php
-
-/*!
+/**
  * ua-parser-php CLI v2.1.1
  *
  * Copyright (c) 2012 Dave Olsen, http://dmolsen.com
@@ -43,20 +42,15 @@
  * and adding the initial JSON parser for a UA string.
  *
  */
+use UAParser\Parser;
+
 
 // define the base path for the file
-$basePath = dirname(__FILE__).DIRECTORY_SEPARATOR;
+$basePath = __DIR__ . '/';
 
-// address 5.1 compatibility
-if (!function_exists('json_decode') || !function_exists('json_encode')) {
-    require_once($basePath."lib/json/jsonwrapper.php");
-}
-
-// include the YAML library
-require_once($basePath."lib/spyc-0.5/spyc.php");
 
 // include UAParser.php and make sure to turn off the CLI error
-require_once($basePath."uaparser.php");
+require_once $basePath . '../vendor/autoload.php';
 
 // deal with timezone issues & logging
 if (!ini_get('date.timezone')) {
@@ -151,7 +145,7 @@ if (php_sapi_name() == 'cli') {
 
         // load the parser
         try {
-            $parser = new UAParser;
+            $parser = new Parser;
         } catch (FileNotFound_Exception $e) {
             exit($e->getMessage());
         }
@@ -213,7 +207,7 @@ if (php_sapi_name() == 'cli') {
 
         // load the parser
         try {
-            $parser = new UAParser;
+            $parser = new Parser;
         } catch (FileNotFound_Exception $e) {
             exit($e->getMessage());
         }
@@ -232,7 +226,7 @@ if (php_sapi_name() == 'cli') {
 
         // load the parser
         try {
-            $parser = new UAParser;
+            $parser = new Parser;
         } catch (FileNotFound_Exception $e) {
             exit($e->getMessage());
         }
@@ -278,7 +272,7 @@ if (php_sapi_name() == 'cli') {
         print "    existing regexes.yaml file.\n";
         print "\n";
         print "  php uaparser-cli.php -l \"/path/to/apache/logfile\"\n";
-        print "    Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file\n";
+        print "    Parses the supplied Apache log file to test Parser.php. Saves the UA to a file\n";
         print "    when the UA or OS family aren't found or when the UA is listed as a generic\n";
         print "    smartphone or as a generic feature phone.\n";
         print "\n";
