@@ -77,8 +77,9 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($patch, $result->os->patch);
         $this->assertSame($patchMinor, $result->os->patch_minor);
     }
+
     /** @dataProvider getUserAgentTestData */
-    public function testUserAgentParsing($userAgent, array $jsUserAgent, $family, $major, $minor, $patch, $patchMinor)
+    public function testUserAgentParsing($userAgent, array $jsUserAgent, $family, $major, $minor, $patch)
     {
         $result = $this->parser->parse($userAgent, $jsUserAgent);
 
@@ -86,12 +87,6 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($major, $result->ua->major);
         $this->assertSame($minor, $result->ua->minor);
         $this->assertSame($patch, $result->ua->patch);
-
-        if ($patchMinor) {
-
-            $this->assertSame($patchMinor, $result->ua->patch_minor);
-
-        }
     }
 
     public function testExceptionOnFileNotFound()
