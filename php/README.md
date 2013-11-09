@@ -23,32 +23,33 @@ You can [test the PHP library](http://uaparser.dmolsen.com/) with your browser.
 Straightforward:
 
 ```php
-require("uaparser.php");
+require_once 'vendor/autoload.php';
+use UAParser\Parser;
 
 $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-$parser = new UAParser;
+$parser = new Parser();
 $result = $parser->parse($ua);
 
-print $result->ua->family;                // Safari
-print $result->ua->major;                 // 6
-print $result->ua->minor;                 // 0
-print $result->ua->patch;                 // 2
-print $result->ua->toString;              // Safari 6.0.2
-print $result->ua->toVersionString;       // 6.0.2
+print $result->ua->family;            // Safari
+print $result->ua->major;             // 6
+print $result->ua->minor;             // 0
+print $result->ua->patch;             // 2
+print $result->ua->toString();        // Safari 6.0.2
+print $result->ua->toVersion();       // 6.0.2
 
-print $result->os->family;                // Mac OS X
-print $result->os->major;                 // 10
-print $result->os->minor;                 // 7
-print $result->os->patch;                 // 5
-print $result->os->patch_minor;           // [null]
-print $result->os->toString;              // Mac OS X 10.7.5
-print $result->os->toVersionString;       // 10.7.5
+print $result->os->family;            // Mac OS X
+print $result->os->major;             // 10
+print $result->os->minor;             // 7
+print $result->os->patch;             // 5
+print $result->os->patchMinor;        // [null]
+print $result->os->toString();        // Mac OS X 10.7.5
+print $result->os->toVersion();       // 10.7.5
 
-print $result->device->family;            // Other
+print $result->device->family;        // Other
 
-print $result->toFullString;              // Safari 6.0.2/Mac OS X 10.7.5
-print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
+print $result->toString();            // Safari 6.0.2/Mac OS X 10.7.5
+print $result->uaOriginal;            // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
 
 ## Using Your Own Custom regexes.json File ##
@@ -56,9 +57,10 @@ print $result->uaOriginal;                // Mozilla/5.0 (Macintosh; Intel Ma...
 You can use your own `regexes.json` file if you've customized the official file. I *strongly* encourage you to push back any changes you may have so others can benefit. That said, to use your own do the following:
 
 ```php
-require("uaparser.php");
+require_once 'vendor/autoload.php';
+use UAParser\Parser;
 
-$parser = new UAParser("path/to/custom/regexes.json");
+$parser = new Parser("path/to/custom/regexes.json");
 ```
 
 ## Using ua-parser PHP Library from the Command Line ##
@@ -73,10 +75,10 @@ Provides simple usage information:
 
 ### Update the regexes.json File
 
-Fetches an updated YAML file for `ua-parser` and overwrites the current JSON file. You can use the following as part of a cron job that runs nightly. 
+Fetches an updated YAML file for `ua-parser` and overwrites the current JSON file. You can use the following as part of a cron job that runs nightly.
 
     php uaparser-cli.php -g [-s] [-n]
-        
+
 By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
 
 ### Convert an Existing regexes.yaml File to regexes.json
@@ -100,14 +102,14 @@ Fetches an updated YAML file. *Warning:* This method overwrites any existing `re
 Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
 
     php uaparser-cli.php -l "/path/to/apache/logfile"
-        
+
 
 ### Parse a Single User Agent String
 
 Parses a user agent string and dumps the results as a list.
 
     php uaparser-cli.php [-p] [-j] "your user agent string"
-           
+
 Use the `-j` flag to print the result as JSON. Use the `-p` flag to pretty print the JSON result when using PHP 5.4+.
 
 ## Credits ##
@@ -119,7 +121,7 @@ Also, many thanks to the following major contributors to the PHP library:
 * Bryan Shelton
 * Michael Bond
 * @rjd22
-* Timo Tijhof 
+* Timo Tijhof
 * Marcus Bointon
 * Ryan Parman
 * Pravin Dahal
