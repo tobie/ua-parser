@@ -3,6 +3,7 @@
     "description": "A multi-language port of Browserscope's user agent parser.",
     "require": {
         "symfony/yaml": "~2",
+        "symfony/filesystem": "~2",
         "symfony/console": "~2"
     },
     "require-dev": {
