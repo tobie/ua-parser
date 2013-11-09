@@ -75,7 +75,7 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($major, $result->os->major);
         $this->assertSame($minor, $result->os->minor);
         $this->assertSame($patch, $result->os->patch);
-        $this->assertSame($patchMinor, $result->os->patch_minor);
+        $this->assertSame($patchMinor, $result->os->patchMinor);
     }
 
     /** @dataProvider getUserAgentTestData */
@@ -97,6 +97,25 @@ class ParserTest extends AbstractTestCase
         );
 
         new Parser('invalidFile');
+    }
+
+    public function testToString()
+    {
+        $userAgentString = 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20';
+        $result = $this->parser->parse($userAgentString);
+
+        $this->assertSame('HbbTV 1.1.1/FireHbbTV 1.1.20', $result->toString());
+        $this->assertSame('HbbTV 1.1.1/FireHbbTV 1.1.20', (string) $result);
+
+        $this->assertSame('HbbTV 1.1.1', $result->ua->toString());
+        $this->assertSame('HbbTV 1.1.1', (string) $result->ua);
+        $this->assertSame('1.1.1', $result->ua->toVersion());
+
+        $this->assertSame('FireHbbTV 1.1.20', $result->os->toString());
+        $this->assertSame('FireHbbTV 1.1.20', (string) $result->os);
+        $this->assertSame('1.1.20', $result->os->toVersion());
+
+        $this->assertSame($userAgentString, $result->uaOriginal);
     }
 
     private static function createTestData(Finder $resources)
