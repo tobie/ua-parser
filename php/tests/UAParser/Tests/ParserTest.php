@@ -58,7 +58,6 @@ class ParserTest extends AbstractTestCase
         return static::createTestData($resources);
     }
 
-
     /** @dataProvider getDeviceTestData */
     public function testDeviceParsing($userAgent, array $jsUserAgent, $family)
     {

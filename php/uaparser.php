@@ -32,16 +32,16 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
     require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'lib/json/jsonwrapper.php');
 }
 
-class UAParser {
-
+class uaparser
+{
     protected $regexes;
     protected $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
      */
-    public function __construct($customRegexesFile = null) {
-
+    public function __construct($customRegexesFile = null)
+    {
         $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
         if (file_exists($regexesFile)) {
             $this->regexes = json_decode(file_get_contents($regexesFile));
@@ -64,8 +64,8 @@ class UAParser {
      * @param  string a user agent string to test, defaults to an empty string
      * @return object the result of the user agent parsing
      */
-    public function parse($ua = '', array $jsParseBits = array()) {
-
+    public function parse($ua = '', array $jsParseBits = array())
+    {
         // build the default obj that will be returned
         $result = (object) array(
             'ua'           => (object) array(),
@@ -95,10 +95,10 @@ class UAParser {
     /**
      * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.json
      * @param  string  a user agent string to test
-     * @return object  the result of the user agent parsing
+     * @return object the result of the user agent parsing
      */
-    public function uaParse($uaString = '', array $jsParseBits = array()) {
-
+    public function uaParse($uaString = '', array $jsParseBits = array())
+    {
         // build the default obj that will be returned
         $ua = (object) array(
                 'family'          => 'Other',
@@ -150,7 +150,6 @@ class UAParser {
 
         }
 
-
         if (isset($jsParseBits['js_user_agent_string'])) {
 
             $jsUserAgentString = $jsParseBits['js_user_agent_string'];
@@ -171,10 +170,10 @@ class UAParser {
     /**
      * Attempts to see if the user agent matches an os_parsers regex from regexes.json
      * @param  string  a user agent string to test
-     * @return object  the result of the os parsing
+     * @return object the result of the os parsing
      */
-    public function osParse($uaString = '') {
-
+    public function osParse($uaString = '')
+    {
         // build the default obj that will be returned
         $os = (object) array(
                 'family'          => 'Other',
@@ -224,10 +223,10 @@ class UAParser {
     /**
      * Attempts to see if the user agent matches a device_parsers regex from regexes.json
      * @param  string  a user agent string to test
-     * @return object  the result of the device parsing
+     * @return object the result of the device parsing
      */
-    public function deviceParse($uaString = '') {
-
+    public function deviceParse($uaString = '')
+    {
         // build the default obj that will be returned
         $device = (object) array(
                     'family' => 'Other'
@@ -258,10 +257,10 @@ class UAParser {
     /**
      * Returns a string consisting of the family and full version number based on the provided type
      * @param  object  the object (ua or os) to be used
-     * @return string  the result of combining family and version
+     * @return string the result of combining family and version
      */
-    public function toString($obj) {
-
+    public function toString($obj)
+    {
         $versionString = $this->toVersionString($obj);
         $string        = !empty($versionString) ? $obj->family.' '.$versionString : $obj->family;
 
@@ -271,10 +270,10 @@ class UAParser {
     /**
      * Returns a string consisting of just the full version number based on the provided type
      * @param  object  the obj that contains version number bits
-     * @return string  the result of combining the version number bits together
+     * @return string the result of combining the version number bits together
      */
-    public function toVersionString($obj) {
-
+    public function toVersionString($obj)
+    {
         $versionString = isset($obj->major) ? $obj->major : '';
         $versionString = isset($obj->minor) ? $versionString.'.'.$obj->minor : $versionString;
         $versionString = isset($obj->patch) ? $versionString.'.'.$obj->patch : $versionString;
@@ -288,10 +287,10 @@ class UAParser {
      * Returns a string consistig of the family and full version number for both the browser and os
      * @param  object  the ua object
      * @param  object  the os object
-     * @return string  the result of combining family and version
+     * @return string the result of combining family and version
      */
-    public function toFullString($ua,$os) {
-
+    public function toFullString($ua,$os)
+    {
         $fullString = $this->toString($ua).'/'.$this->toString($os);
 
         return $fullString;
@@ -301,13 +300,13 @@ class UAParser {
     /**
     * Logs the user agent info
     */
-    protected function log($data) {
+    protected function log($data)
+    {
         $jsonData = json_encode($data);
         $fp = fopen(dirname(__FILE__).DIRECTORY_SEPARATOR.'log/user_agents.log', 'a');
         fwrite($fp, $jsonData."\r\n");
         fclose($fp);
     }
-
 }
 
 class FileNotFound_Exception extends Exception {}

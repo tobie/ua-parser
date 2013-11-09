@@ -1,6 +1,6 @@
 <?php
 namespace UAParser;
 
-class Parser extends \UAParser
+class Parser extends \uaparser
 {
 }
