@@ -15,11 +15,6 @@ class OperatingSystem extends AbstractArtifact
     /** @var string */
     public $patchMinor;
 
-    public function toString()
-    {
-        return $this->family . ' ' . $this->toVersion();
-    }
-
     public function toVersion()
     {
         return $this->formatVersion($this->major, $this->minor, $this->patch, $this->patchMinor);

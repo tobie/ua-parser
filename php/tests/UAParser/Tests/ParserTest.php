@@ -125,14 +125,10 @@ class ParserTest extends AbstractTestCase
 
         /** @var $resource SplFileInfo */
         foreach ($resources->in($resourcesDirectory) as $resource) {
-
             $data = Yaml::parse($resource->getContents());
             foreach ($data['test_cases'] as $testCase) {
-
                 $testData[] = static::createArguments($testCase, $resource);
-
             }
-
         }
 
         return $testData;
