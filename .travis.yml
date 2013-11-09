@@ -6,6 +6,7 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install python-yaml
 - sudo apt-get install php5-cli
+- wget https://getcomposer.org/composer.phar && php composer.phar update
 - cp regexes.yaml py/ua_parser/regexes.yaml
 - cp regexes.yaml php/resources/regexes.yaml
 
