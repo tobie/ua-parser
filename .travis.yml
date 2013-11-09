@@ -8,7 +8,7 @@ before_install:
 - cp regexes.yaml py/ua_parser/regexes.yaml
 - sudo apt-get install php5-cli
 - wget https://getcomposer.org/composer.phar && php composer.phar update
-- "cd php && php uaparser-cli.php -g"
+- "cd php && php uaparser-cli.php -g && cd .."
 
 script:
   - "npm test"
