@@ -16,7 +16,6 @@
         }
     ],
     "autoload": {
-        "files": ["php/uaparser.php"],
         "psr-0": {
             "UAParser": "php/src"
         }
