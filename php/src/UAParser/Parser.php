@@ -37,7 +37,6 @@ use UAParser\Result\UserAgent;
 class Parser
 {
     protected $regexes;
-    protected $log = false;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
@@ -64,23 +63,17 @@ class Parser
     /**
      * Sets up some standard variables as well as starts the user agent parsing process
      *
-     * @param  string $ua a user agent string to test, defaults to an empty string
-     * @param  array $jsParseBits
+     * @param string $ua a user agent string to test, defaults to an empty string
+     * @param array $jsParseBits
      * @return object the result of the user agent parsing
      */
     public function parse($ua, array $jsParseBits = array())
     {
         $result = new Result($ua);
 
-        // figure out the ua, os, and device properties if possible
         $result->ua = $this->parseUserAgent($ua, $jsParseBits);
         $result->os = $this->parseOperatingSystem($ua);
         $result->device = $this->parseDevice($ua);
-
-        // log the results when testing
-        if ($this->log) {
-            $this->log($result);
-        }
 
         return $result;
     }
@@ -97,14 +90,11 @@ class Parser
         $ua = new UserAgent();
 
         if (isset($jsParseBits['js_user_agent_family']) && $jsParseBits['js_user_agent_family']) {
-
             $ua->family = $jsParseBits['js_user_agent_family'];
             $ua->major  = $jsParseBits['js_user_agent_v1'];
             $ua->minor  = $jsParseBits['js_user_agent_v2'];
             $ua->patch  = $jsParseBits['js_user_agent_v3'];
-
         } else {
-
             list($regex, $matches) = $this->matchRegexes(
                 $this->regexes->user_agent_parsers,
                 $uaString,
@@ -125,10 +115,8 @@ class Parser
         }
 
         if (isset($jsParseBits['js_user_agent_string'])) {
-
             $jsUserAgentString = $jsParseBits['js_user_agent_string'];
             if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($uaString, 'chromeframe') !== false) {
-
                 $override = $this->parseUserAgent($jsUserAgentString);
                 $ua->family = sprintf('Chrome Frame (%s %s)', $ua->family, $ua->major);
                 $ua->major = $override->major;
@@ -191,28 +179,6 @@ class Parser
     }
 
     /**
-     * Logs the user agent info
-     */
-    protected function log($data)
-    {
-        $jsonData = json_encode($data);
-        $fp       = fopen(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'log/user_agents.log', 'a');
-        fwrite($fp, $jsonData . "\r\n");
-        fclose($fp);
-    }
-
-    /**
-     * @param stdClass $regex
-     * @param string $subject
-     * @param array $matches
-     * @return int
-     */
-    private function match(stdClass $regex, $subject, &$matches)
-    {
-        return preg_match('@' . $regex->regex . '@', $subject, $matches);
-    }
-
-    /**
      * @param array $regexes
      * @param string $subject
      * @param array $defaults
@@ -221,7 +187,7 @@ class Parser
     private function matchRegexes(array $regexes, $subject, array $defaults = array())
     {
         foreach ($regexes as $regex) {
-            if ($this->match($regex, $subject, $matches)) {
+            if (preg_match('@' . $regex->regex . '@', $subject, $matches)) {
                 return array(
                     $regex,
                     $matches + $defaults
