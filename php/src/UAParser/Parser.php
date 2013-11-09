@@ -27,6 +27,8 @@
  */
 namespace UAParser;
 
+use UAParser\Exception\FileNotFoundException;
+
 class Parser
 {
     protected $regexes;
@@ -50,16 +52,17 @@ class Parser
                 }
             }
 
-            throw new FileNotFound_Exception($message);
+            throw new FileNotFoundException($message);
         }
     }
 
     /**
      * Sets up some standard variables as well as starts the user agent parsing process
-     * @param  string a user agent string to test, defaults to an empty string
+     * @param string $ua a user agent string to test, defaults to an empty string
+     * @param array $jsParseBits
      * @return object the result of the user agent parsing
      */
-    public function parse($ua = '', array $jsParseBits = array())
+    public function parse($ua, array $jsParseBits = array())
     {
         // build the default obj that will be returned
         $result = (object) array(
@@ -71,9 +74,9 @@ class Parser
         );
 
         // figure out the ua, os, and device properties if possible
-        $result->ua           = $this->uaParse($ua, $jsParseBits);
-        $result->os           = $this->osParse($ua);
-        $result->device       = $this->deviceParse($ua);
+        $result->ua           = $this->parseUserAgent($ua, $jsParseBits);
+        $result->os           = $this->parseOperatingSystem($ua);
+        $result->device       = $this->parseDevice($ua);
 
         // create a full string version based on the ua and os objects
         $result->toFullString = $this->toFullString($result->ua, $result->os);
@@ -89,10 +92,11 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.json
-     * @param  string  a user agent string to test
+     * @param string $uaString a user agent string to test
+     * @param array $jsParseBits
      * @return object the result of the user agent parsing
      */
-    public function uaParse($uaString = '', array $jsParseBits = array())
+    private function parseUserAgent($uaString, array $jsParseBits = array())
     {
         // build the default obj that will be returned
         $ua = (object) array(
@@ -150,7 +154,7 @@ class Parser
             $jsUserAgentString = $jsParseBits['js_user_agent_string'];
             if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($uaString, 'chromeframe') !== false) {
 
-                $override = $this->uaParse($jsUserAgentString);
+                $override = $this->parseUserAgent($jsUserAgentString);
                 $ua->family = sprintf('Chrome Frame (%s %s)', $ua->family, $ua->major);
                 $ua->major = $override->major;
                 $ua->minor = $override->minor;
@@ -164,10 +168,10 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches an os_parsers regex from regexes.json
-     * @param  string  a user agent string to test
+     * @param string $uaString a user agent string to test
      * @return object the result of the os parsing
      */
-    public function osParse($uaString = '')
+    private function parseOperatingSystem($uaString)
     {
         // build the default obj that will be returned
         $os = (object) array(
@@ -217,10 +221,10 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches a device_parsers regex from regexes.json
-     * @param  string  a user agent string to test
+     * @param string $uaString a user agent string to test
      * @return object the result of the device parsing
      */
-    public function deviceParse($uaString = '')
+    private function parseDevice($uaString)
     {
         // build the default obj that will be returned
         $device = (object) array(
@@ -254,7 +258,7 @@ class Parser
      * @param  object  the object (ua or os) to be used
      * @return string the result of combining family and version
      */
-    public function toString($obj)
+    private function toString($obj)
     {
         $versionString = $this->toVersionString($obj);
         $string        = !empty($versionString) ? $obj->family.' '.$versionString : $obj->family;
@@ -267,7 +271,7 @@ class Parser
      * @param  object  the obj that contains version number bits
      * @return string the result of combining the version number bits together
      */
-    public function toVersionString($obj)
+    private function toVersionString($obj)
     {
         $versionString = isset($obj->major) ? $obj->major : '';
         $versionString = isset($obj->minor) ? $versionString.'.'.$obj->minor : $versionString;
@@ -284,7 +288,7 @@ class Parser
      * @param  object  the os object
      * @return string the result of combining family and version
      */
-    public function toFullString($ua,$os)
+    private function toFullString($ua,$os)
     {
         $fullString = $this->toString($ua).'/'.$this->toString($os);
 
@@ -303,5 +307,3 @@ class Parser
         fclose($fp);
     }
 }
-
-class FileNotFound_Exception extends \Exception {}
