@@ -43,6 +43,7 @@
  *
  */
 use UAParser\Parser;
+use Symfony\Component\Yaml\Yaml;
 
 
 // define the base path for the file
@@ -65,7 +66,7 @@ function get($file,$silent,$nobackup,$basePath)
     if (ini_get('allow_url_fopen')) {
        if ($data = @file_get_contents($file)) {
             if (!$silent) { print "loading and converting YAML data...\n"; };
-            $data = Spyc::YAMLLoad($data);
+            $data = Yaml::parse($data);
             $data = json_encode($data);
             if (!$silent) { print "encoded as JSON...\n"; };
             if (file_exists($basePath."resources/regexes.json")) {

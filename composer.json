@@ -2,10 +2,10 @@
     "name": "tobie/ua-parser",
     "description": "A multi-language port of Browserscope's user agent parser.",
     "require": {
+        "symfony/yaml": "~2",
         "symfony/console": "~2"
     },
     "require-dev": {
-        "symfony/yaml": "~2",
         "symfony/finder": "~2",
         "phpunit/phpunit": "~3"
     },
