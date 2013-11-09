@@ -91,9 +91,9 @@ class Parser
 
         if (isset($jsParseBits['js_user_agent_family']) && $jsParseBits['js_user_agent_family']) {
             $ua->family = $jsParseBits['js_user_agent_family'];
-            $ua->major  = $jsParseBits['js_user_agent_v1'];
-            $ua->minor  = $jsParseBits['js_user_agent_v2'];
-            $ua->patch  = $jsParseBits['js_user_agent_v3'];
+            $ua->major = $jsParseBits['js_user_agent_v1'];
+            $ua->minor = $jsParseBits['js_user_agent_v2'];
+            $ua->patch = $jsParseBits['js_user_agent_v3'];
         } else {
             list($regex, $matches) = $this->matchRegexes(
                 $this->regexes->user_agent_parsers,
