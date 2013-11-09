@@ -1,0 +1,24 @@
+{
+    "name": "tobie/ua-parser",
+    "description": "A multi-language port of Browserscope's user agent parser.",
+    "require": {
+        "symfony/yaml": "~2"
+    },
+    "require-dev": {
+        "symfony/finder": "~2",
+        "phpunit/phpunit": "~3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lars Strojny",
+            "email": "lars@strojny.net"
+        }
+    ],
+    "autoload": {
+        "files": ["php/uaparser.php"],
+        "psr-0": {
+            "UAParser": "php/src"
+        }
+    }
+}

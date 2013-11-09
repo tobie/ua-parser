@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         convertNoticesToExceptions="true"
+         mapTestClassNameToCoveredClassName="true"
+         bootstrap="../vendor/autoload.php"
+         verbose="true"
+         colors="true"
+         strict="true">
+
+    <testsuites>
+        <testsuite name="ua-parser">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="memory_limit" value="3G"/>
+    </php>
+</phpunit>

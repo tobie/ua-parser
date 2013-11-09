@@ -7,7 +7,7 @@
  * Licensed under the MIT license
  *
  * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
- * 
+ *
  *   https://github.com/tobie/ua-parser
  *
  * The user agents data from the ua-parser project is licensed under the Apache license.
@@ -33,7 +33,7 @@ if (!function_exists('json_decode') || !function_exists('json_encode')) {
 }
 
 class UAParser {
-    
+
     protected $regexes;
     protected $log = false;
 
@@ -41,12 +41,11 @@ class UAParser {
      * Start up the parser by importing the json file to $this->regexes
      */
     public function __construct($customRegexesFile = null) {
-	
+
         $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : dirname(__FILE__).DIRECTORY_SEPARATOR.'resources/regexes.json';
         if (file_exists($regexesFile)) {
             $this->regexes = json_decode(file_get_contents($regexesFile));
         } else {
-            $title            = 'Error loading ua-parser';
             if ($customRegexesFile !== null) {
                 $message = 'ua-parser can\'t find the custom regexes file you supplied ('.$customRegexesFile.'). Please make sure you have the correct path.';
             } else {
@@ -55,17 +54,17 @@ class UAParser {
                     $message .= ' (php uaparser-cli.php -g)';
                 }
             }
-            
+
             throw new FileNotFound_Exception($message);
         }
     }
-    
+
     /**
      * Sets up some standard variables as well as starts the user agent parsing process
      * @param  string a user agent string to test, defaults to an empty string
      * @return object the result of the user agent parsing
      */
-    public function parse($ua = '') {
+    public function parse($ua = '', array $jsParseBits = array()) {
 
         // build the default obj that will be returned
         $result = (object) array(
@@ -77,20 +76,20 @@ class UAParser {
         );
 
         // figure out the ua, os, and device properties if possible
-        $result->ua           = $this->uaParse($ua);
+        $result->ua           = $this->uaParse($ua, $jsParseBits);
         $result->os           = $this->osParse($ua);
         $result->device       = $this->deviceParse($ua);
-        
+
         // create a full string version based on the ua and os objects
         $result->toFullString = $this->toFullString($result->ua, $result->os);
-        
+
         // log the results when testing
         if ($this->log) {
             $this->log($result);
         }
-        
+
         return $result;
-        
+
     }
 
     /**
@@ -98,7 +97,7 @@ class UAParser {
      * @param  string  a user agent string to test
      * @return object  the result of the user agent parsing
      */
-    public function uaParse($uaString = '') {
+    public function uaParse($uaString = '', array $jsParseBits = array()) {
 
         // build the default obj that will be returned
         $ua = (object) array(
@@ -109,39 +108,64 @@ class UAParser {
                 'toString'        => '',
                 'toVersionString' => ''
               );
-        
-        // run the regexes to match things up
-        $uaRegexes = $this->regexes->user_agent_parsers;
-        foreach ($uaRegexes as $uaRegex) {
-            
-            // tests the supplied regex against the user agent
-            if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$uaRegex->regex)).'/i',$uaString,$matches)) {
-                
-                // Make sure matches are at least set to null or Other
-                if (!isset($matches[1])) { $matches[1] = 'Other'; }
-                if (!isset($matches[2])) { $matches[2] = null; }
-                if (!isset($matches[3])) { $matches[3] = null; }
-                if (!isset($matches[4])) { $matches[4] = null; }
-                
-                // ua name
-                $ua->family          = isset($uaRegex->family_replacement) ? str_replace('$1',$matches[1],$uaRegex->family_replacement) : $matches[1];
 
-                // version properties
-                $ua->major           = isset($uaRegex->v1_replacement) ? $uaRegex->v1_replacement : $matches[2];
-                $ua->minor           = isset($uaRegex->v2_replacement) ? $uaRegex->v2_replacement : $matches[3];
-                $ua->patch           = isset($uaRegex->v3_replacement) ? $uaRegex->v3_replacement : $matches[4];
+        if (isset($jsParseBits['js_user_agent_family']) && $jsParseBits['js_user_agent_family']) {
 
-                // extra strings
-                $ua->toString        = $this->toString($ua);
-                $ua->toVersionString = $this->toVersionString($ua);
-                
-                return $ua;
+            $ua->family = $jsParseBits['js_user_agent_family'];
+            $ua->major = $jsParseBits['js_user_agent_v1'];
+            $ua->minor = $jsParseBits['js_user_agent_v2'];
+            $ua->patch = $jsParseBits['js_user_agent_v3'];
+
+        } else {
+
+            // run the regexes to match things up
+            $uaRegexes = $this->regexes->user_agent_parsers;
+            foreach ($uaRegexes as $uaRegex) {
+
+                // tests the supplied regex against the user agent
+                if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$uaRegex->regex)).'/',$uaString,$matches)) {
+
+                    // Make sure matches are at least set to null or Other
+                    if (!isset($matches[1])) { $matches[1] = 'Other'; }
+                    if (!isset($matches[2])) { $matches[2] = null; }
+                    if (!isset($matches[3])) { $matches[3] = null; }
+                    if (!isset($matches[4])) { $matches[4] = null; }
+
+                    // ua name
+                    $ua->family          = isset($uaRegex->family_replacement) ? str_replace('$1',$matches[1],$uaRegex->family_replacement) : $matches[1];
+
+                    // version properties
+                    $ua->major           = isset($uaRegex->v1_replacement) ? $uaRegex->v1_replacement : $matches[2];
+                    $ua->minor           = isset($uaRegex->v2_replacement) ? $uaRegex->v2_replacement : $matches[3];
+                    $ua->patch           = isset($uaRegex->v3_replacement) ? $uaRegex->v3_replacement : $matches[4];
+
+                    // extra strings
+                    $ua->toString        = $this->toString($ua);
+                    $ua->toVersionString = $this->toVersionString($ua);
+
+                    break;
+                }
+
             }
-            
+
+        }
+
+
+        if (isset($jsParseBits['js_user_agent_string'])) {
+
+            $jsUserAgentString = $jsParseBits['js_user_agent_string'];
+            if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($uaString, 'chromeframe') !== false) {
+
+                $override = $this->uaParse($jsUserAgentString);
+                $ua->family = sprintf('Chrome Frame (%s %s)', $ua->family, $ua->major);
+                $ua->major = $override->major;
+                $ua->minor = $override->minor;
+                $ua->patch = $override->patch;
+            }
         }
 
         return $ua;
-        
+
     }
 
     /**
@@ -150,7 +174,7 @@ class UAParser {
      * @return object  the result of the os parsing
      */
     public function osParse($uaString = '') {
-        
+
         // build the default obj that will be returned
         $os = (object) array(
                 'family'          => 'Other',
@@ -161,12 +185,12 @@ class UAParser {
                 'toString'        => '',
                 'toVersionString' => ''
               );
-        
+
         // run the regexes to match things up
         $osRegexes = $this->regexes->os_parsers;
         foreach ($osRegexes as $osRegex) {
-            
-            if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$osRegex->regex)).'/i',$uaString,$matches)) {
+
+            if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$osRegex->regex)).'/',$uaString,$matches)) {
 
                 // Make sure matches are at least set to null or Other
                 if (!isset($matches[1])) { $matches[1] = 'Other'; }
@@ -174,27 +198,27 @@ class UAParser {
                 if (!isset($matches[3])) { $matches[3] = null; }
                 if (!isset($matches[4])) { $matches[4] = null; }
                 if (!isset($matches[5])) { $matches[5] = null; }
-                
+
                 // os name
                 $os->family          = isset($osRegex->os_replacement)    ? $osRegex->os_replacement    : $matches[1];
-                
+
                 // version properties
                 $os->major           = isset($osRegex->os_v1_replacement) ? $osRegex->os_v1_replacement : $matches[2];
                 $os->minor           = isset($osRegex->os_v2_replacement) ? $osRegex->os_v2_replacement : $matches[3];
                 $os->patch           = isset($osRegex->os_v3_replacement) ? $osRegex->os_v3_replacement : $matches[4];
                 $os->patch_minor     = isset($osRegex->os_v4_replacement) ? $osRegex->os_v4_replacement : $matches[5];
-                
+
                 // extra strings
                 $os->toString        = $this->toString($os);
                 $os->toVersionString = $this->toVersionString($os);
 
                 return $os;
             }
-            
+
         }
 
         return $os;
-        
+
     }
 
     /**
@@ -203,63 +227,63 @@ class UAParser {
      * @return object  the result of the device parsing
      */
     public function deviceParse($uaString = '') {
-        
+
         // build the default obj that will be returned
         $device = (object) array(
                     'family' => 'Other'
                   );
-        
+
         // run the regexes to match things up
         $deviceRegexes = $this->regexes->device_parsers;
         foreach ($deviceRegexes as $deviceRegex) {
-            
-            if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$deviceRegex->regex)).'/i',$uaString,$matches)) {
+
+            if (preg_match('/'.str_replace('/','\/',str_replace('\/','/',$deviceRegex->regex)).'/',$uaString,$matches)) {
 
                 // Make sure matches are at least set to null or Other
                 if (!isset($matches[1])) { $matches[1] = 'Other'; }
-                
+
                 // device name
-                $device->family = isset($deviceRegex->device_replacement) ? str_replace('$1',str_replace("_"," ",$matches[1]),$deviceRegex->device_replacement) : str_replace("_"," ",$matches[1]);
-                
-                return $device;
-                
+                $device->family = isset($deviceRegex->device_replacement) ? str_replace('$1',$matches[1],$deviceRegex->device_replacement) : $matches[1];
+
+                break;
+
             }
-            
+
         }
-        
+
         return $device;
-        
+
     }
-    
+
     /**
      * Returns a string consisting of the family and full version number based on the provided type
      * @param  object  the object (ua or os) to be used
      * @return string  the result of combining family and version
      */
     public function toString($obj) {
-        
+
         $versionString = $this->toVersionString($obj);
         $string        = !empty($versionString) ? $obj->family.' '.$versionString : $obj->family;
-        
+
         return $string;
     }
-    
+
     /**
      * Returns a string consisting of just the full version number based on the provided type
      * @param  object  the obj that contains version number bits
      * @return string  the result of combining the version number bits together
      */
     public function toVersionString($obj) {
-                
+
         $versionString = isset($obj->major) ? $obj->major : '';
         $versionString = isset($obj->minor) ? $versionString.'.'.$obj->minor : $versionString;
         $versionString = isset($obj->patch) ? $versionString.'.'.$obj->patch : $versionString;
         $versionString = isset($obj->patch_minor) ? $versionString.'.'.$obj->patch_minor : $versionString;
-        
+
         return $versionString;
-        
+
     }
-    
+
     /**
      * Returns a string consistig of the family and full version number for both the browser and os
      * @param  object  the ua object
@@ -267,13 +291,13 @@ class UAParser {
      * @return string  the result of combining family and version
      */
     public function toFullString($ua,$os) {
-        
+
         $fullString = $this->toString($ua).'/'.$this->toString($os);
-        
+
         return $fullString;
-        
+
     }
-    
+
     /**
     * Logs the user agent info
     */
@@ -283,7 +307,7 @@ class UAParser {
         fwrite($fp, $jsonData."\r\n");
         fclose($fp);
     }
-    
+
 }
 
 class FileNotFound_Exception extends Exception {}
