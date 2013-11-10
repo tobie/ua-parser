@@ -36,8 +36,10 @@ use UAParser\Result\UserAgent;
 
 class Parser
 {
+    /** @var string */
     public static $defaultFile;
 
+    /** @var stdClass */
     protected $regexes;
 
     /**
