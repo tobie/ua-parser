@@ -1,4 +1,11 @@
 <?php
+/**
+ * ua-parser
+ *
+ * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ *
+ * Released under the MIT license
+ */
 namespace UAParser\Util;
 
 use Symfony\Component\Filesystem\Filesystem;
@@ -13,12 +20,21 @@ class Converter
     /** @var Filesystem */
     private $fs;
 
+    /**
+     * @param strin $destination
+     * @param Filesystem $fs
+     */
     public function __construct($destination, Filesystem $fs = null)
     {
         $this->destination = $destination;
         $this->fs = $fs ? $fs : new Filesystem();
     }
 
+    /**
+     * @param string $yamlFile
+     * @param bool $backupBeforeOverride
+     * @throws FileNotFoundException
+     */
     public function convertFile($yamlFile, $backupBeforeOverride = true)
     {
         if (!$this->fs->exists($yamlFile)) {
@@ -28,11 +44,19 @@ class Converter
         $this->doConvert(Yaml::parse(file_get_contents($yamlFile)), $backupBeforeOverride);
     }
 
+    /**
+     * @param string $yamlString
+     * @param bool $backupBeforeOverride
+     */
     public function convertString($yamlString, $backupBeforeOverride = true)
     {
         $this->doConvert(Yaml::parse($yamlString), $backupBeforeOverride);
     }
 
+    /**
+     * @param array $regexes
+     * @param bool $backupBeforeOverride
+     */
     protected function doConvert(array $regexes, $backupBeforeOverride = true)
     {
         $data = json_encode($regexes);

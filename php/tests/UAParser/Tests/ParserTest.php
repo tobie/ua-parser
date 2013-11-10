@@ -1,4 +1,11 @@
 <?php
+/**
+ * ua-parser
+ *
+ * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ *
+ * Released under the MIT license
+ */
 namespace UAParser\Tests;
 
 use PHPUnit_Framework_TestCase as AbstractTestCase;
@@ -125,6 +132,26 @@ class ParserTest extends AbstractTestCase
         $this->assertSame('FireHbbTV 1.1.20', $result->os->toString());
         $this->assertSame('FireHbbTV 1.1.20', (string) $result->os);
         $this->assertSame('1.1.20', $result->os->toVersion());
+
+        $this->assertSame($userAgentString, $result->uaOriginal);
+    }
+
+    public function testToString_2()
+    {
+        $userAgentString = 'PingdomBot 1.4/Other Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)';
+
+        $result = $this->parser->parse($userAgentString);
+
+        $this->assertSame('PingdomBot 1.4/Other', $result->toString());
+        $this->assertSame('PingdomBot 1.4/Other', (string) $result);
+
+        $this->assertSame('PingdomBot 1.4', $result->ua->toString());
+        $this->assertSame('PingdomBot 1.4', (string) $result->ua);
+        $this->assertSame('1.4', $result->ua->toVersion());
+
+        $this->assertSame('Other', $result->os->toString());
+        $this->assertSame('Other', (string) $result->os);
+        $this->assertSame('', $result->os->toVersion());
 
         $this->assertSame($userAgentString, $result->uaOriginal);
     }

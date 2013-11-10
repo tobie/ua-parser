@@ -1,4 +1,11 @@
 <?php
+/**
+ * ua-parser
+ *
+ * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ *
+ * Released under the MIT license
+ */
 namespace UAParser\Tests\Util;
 
 use PHPUnit_Framework_TestCase as AbstractTestCase;

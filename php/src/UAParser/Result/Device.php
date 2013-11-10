@@ -1,6 +1,13 @@
 <?php
+/**
+ * ua-parser
+ *
+ * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ *
+ * Released under the MIT license
+ */
 namespace UAParser\Result;
 
-class Device extends AbstractDevice
+class Device extends AbstractSoftware
 {
 }

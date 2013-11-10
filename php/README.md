@@ -71,46 +71,41 @@ A command line utility is now included with the PHP library. The following comma
 
 Provides simple usage information:
 
-    php uaparser-cli.php
+    php bin/uaparser.php
 
 ### Update the regexes.json File
 
 Fetches an updated YAML file for `ua-parser` and overwrites the current JSON file. You can use the following as part of a cron job that runs nightly.
 
-    php uaparser-cli.php -g [-s] [-n]
+    php bin/uaparser.php ua-parser:update [--no-backup]
 
-By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
+By default creates a backup file. Use `--no-backup` to turn that feature off.
 
 ### Convert an Existing regexes.yaml File to regexes.json
 
 With the change to v2.0 you may have an existing and customized YAML file for `ua-parser`. Use the following to convert it to JSON.
 
-    php uaparser-cli.php -c [-s] [-n]
-
-By default is verbose. Use `-s` to turn that feature off. By default creates a back-up. Use `-n` to turn that feature off.
+    php bin/uaparser.php ua-parser:convert [file]
 
 ### Grab Just the Latest regexes.yaml File From the Repository
 
 If you need to add a new UA it's easier to edit the original YAML and then convert it to JSON.
 
-    php uaparser-cli.php -y
+    php bin/uaparser.php ua-parser:convert [regexes.yaml]
 
 Fetches an updated YAML file. *Warning:* This method overwrites any existing `regexes.yaml` file.
-
-### Parse an Apache Log File
-
-Parses the supplied Apache log file to test UAParser.php. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
-
-    php uaparser-cli.php -l "/path/to/apache/logfile"
-
 
 ### Parse a Single User Agent String
 
 Parses a user agent string and dumps the results as a list.
 
-    php uaparser-cli.php [-p] [-j] "your user agent string"
+    php bin/uaparser.php ua-parser:parse "your user agent string"
 
-Use the `-j` flag to print the result as JSON. Use the `-p` flag to pretty print the JSON result when using PHP 5.4+.
+### Parse an Apache Log File
+
+Parses the supplied log file to test ua-parser. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
+
+    php bin/uaparser.php ua-parser:logfile /path/to/apache/logfile
 
 ## Credits ##
 
@@ -125,3 +120,9 @@ Also, many thanks to the following major contributors to the PHP library:
 * Marcus Bointon
 * Ryan Parman
 * Pravin Dahal
+
+## Licensing ##
+* The library is licensed under the MIT license
+* The user agents data from the ua-parser project is licensed under the Apache license
+* The initial list of generic feature phones & smartphones came from Mobile Web OSP under the MIT license
+* The initial list of spiders was taken from Yiibu's profile project under the MIT license.

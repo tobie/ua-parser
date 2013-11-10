@@ -1,29 +1,10 @@
 <?php
 /**
- * ua-parser-php v2.1.1
+ * ua-parser
  *
  * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
- * Licensed under the MIT license
  *
- * ua-parser-php is the PHP library for the ua-parser project. Learn more about the ua-parser project at:
- *
- *   https://github.com/tobie/ua-parser
- *
- * The user agents data from the ua-parser project is licensed under the Apache license.
- * spyc-0.5, for loading the YAML, is licensed under the MIT license.
- * Services_JSON, for loading the JSON in sub-PHP 5.2 installs, is licensed under the MIT license
- * The initial list of generic feature phones & smartphones came from Mobile Web OSP under the MIT license
- * The initial list of spiders was taken from Yiibu's profile project under the MIT license.
- *
- * Many thanks to the following major contributors:
- *
- *   - Bryan Shelton
- *   - Michael Bond
- *   - @rjd22 (https://github.com/rjd22)
- *   - Timo Tijhof (https://github.com/Krinkle)
- *   - Marcus Bointon (https://github.com/Synchro)
- *   - Ryan Parman (https://github.com/skyzyx)
- *   - Pravin Dahal (https://github.com/pravindahal)
+ * Released under the MIT license
  */
 namespace UAParser;
 
@@ -31,7 +12,7 @@ use stdClass;
 use UAParser\Exception\FileNotFoundException;
 use UAParser\Result\Device;
 use UAParser\Result\OperatingSystem;
-use UAParser\Result\Result;
+use UAParser\Result\Client;
 use UAParser\Result\UserAgent;
 
 class Parser
@@ -67,11 +48,11 @@ class Parser
      *
      * @param string $ua a user agent string to test, defaults to an empty string
      * @param array $jsParseBits
-     * @return object the result of the user agent parsing
+     * @return Client
      */
     public function parse($ua, array $jsParseBits = array())
     {
-        $result = new Result($ua);
+        $result = new Client($ua);
 
         $result->ua = $this->parseUserAgent($ua, $jsParseBits);
         $result->os = $this->parseOperatingSystem($ua);
@@ -85,7 +66,7 @@ class Parser
      *
      * @param string $uaString a user agent string to test
      * @param array $jsParseBits
-     * @return object the result of the user agent parsing
+     * @return UserAgent
      */
     private function parseUserAgent($uaString, array $jsParseBits = array())
     {
@@ -134,7 +115,7 @@ class Parser
      * Attempts to see if the user agent matches an os_parsers regex from regexes.json
      *
      * @param string $uaString a user agent string to test
-     * @return object the result of the os parsing
+     * @return OperatingSystem
      */
     private function parseOperatingSystem($uaString)
     {
@@ -166,7 +147,7 @@ class Parser
     /**
      * Attempts to see if the user agent matches a device_parsers regex from regexes.json
      * @param string $uaString a user agent string to test
-     * @return object the result of the device parsing
+     * @return Device
      */
     private function parseDevice($uaString)
     {

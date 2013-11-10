@@ -1,4 +1,11 @@
 <?php
+/**
+ * ua-parser
+ *
+ * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ *
+ * Released under the MIT license
+ */
 namespace UAParser\Tests\Util;
 
 use PHPUnit_Framework_TestCase as AbstractTestCase;
@@ -6,6 +13,9 @@ use UAParser\Util\Converter;
 use UAParser\Util\Updater;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
+/**
+ * @group online
+ */
 class UpdaterTest extends AbstractTestCase
 {
     /** @var Converter|MockObject */
