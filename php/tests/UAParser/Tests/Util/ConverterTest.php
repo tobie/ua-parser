@@ -17,6 +17,7 @@ class ConverterTest extends AbstractTestCase
     /** @var string */
     private $yamlFile;
 
+    /** @var string */
     private $jsonFile;
 
     public function setUp()

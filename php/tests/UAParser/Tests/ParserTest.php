@@ -93,10 +93,21 @@ class ParserTest extends AbstractTestCase
     {
         $this->setExpectedException(
             'UAParser\Exception\FileNotFoundException',
-            'ua-parser can\'t find the custom regexes file you supplied (invalidFile). Please make sure you have the correct path.'
+            'ua-parser cannot find the custom regexes file you supplied ("invalidFile"). Please make sure you have the correct path.'
         );
 
         new Parser('invalidFile');
+    }
+
+    public function testExceptionOnFileNotFoundInvalidDefault()
+    {
+        $this->setExpectedException(
+            'UAParser\Exception\FileNotFoundException',
+            'Please download the "invalidFile" file before using ua-parser by running "php bin/uaparser.php uaparser:update"'
+        );
+
+        Parser::$defaultFile = 'invalidFile';
+        new Parser();
     }
 
     public function testToString()

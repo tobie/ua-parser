@@ -5,8 +5,28 @@ use Exception;
 
 class FileNotFoundException extends Exception
 {
-    public static function create($file)
+    public static function fileNotFound($file)
     {
         return new static(sprintf('File "%s" does not exist', $file));
+    }
+
+    public static function customRegexFileNotFound($file)
+    {
+        return new static(
+            sprintf(
+                'ua-parser cannot find the custom regexes file you supplied ("%s"). Please make sure you have the correct path.',
+                $file
+            )
+        );
+    }
+
+    public static function defaultFileNotFound($file)
+    {
+        return new static(
+            sprintf(
+                'Please download the "%s" file before using ua-parser by running "php bin/uaparser.php uaparser:update"',
+                $file
+            )
+        );
     }
 }

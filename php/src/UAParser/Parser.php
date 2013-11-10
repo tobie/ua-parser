@@ -36,27 +36,27 @@ use UAParser\Result\UserAgent;
 
 class Parser
 {
+    public static $defaultFile;
+
     protected $regexes;
 
     /**
      * Start up the parser by importing the json file to $this->regexes
+     *
+     * @param string $customRegexesFile
+     * @throws FileNotFoundException
      */
     public function __construct($customRegexesFile = null)
     {
-        $regexesFile = ($customRegexesFile !== null) ? $customRegexesFile : __DIR__ . '/../../resources/regexes.json';
+        $regexesFile = $customRegexesFile !== null ? $customRegexesFile : static::getDefaultFile();
         if (file_exists($regexesFile)) {
             $this->regexes = json_decode(file_get_contents($regexesFile));
         } else {
             if ($customRegexesFile !== null) {
-                $message = 'ua-parser can\'t find the custom regexes file you supplied (' . $customRegexesFile . '). Please make sure you have the correct path.';
+                throw FileNotFoundException::customRegexFileNotFound($regexesFile);
             } else {
-                $message = 'Please download the regexes.json file before using uaparser.php.';
-                if (php_sapi_name() == 'cli') {
-                    $message .= ' (php uaparser-cli.php -g)';
-                }
+                throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
             }
-
-            throw new FileNotFoundException($message);
         }
     }
 
@@ -211,5 +211,10 @@ class Parser
         }
 
         return str_replace('$1', $string, $regex->{$key});
+    }
+
+    private static function getDefaultFile()
+    {
+        return static::$defaultFile ? static::$defaultFile : __DIR__ . '/../../resources/regexes.json';
     }
 }

@@ -22,7 +22,7 @@ class Converter
     public function convertFile($yamlFile, $backupBeforeOverride = true)
     {
         if (!$this->fs->exists($yamlFile)) {
-            throw FileNotFoundException::create($yamlFile);
+            throw FileNotFoundException::fileNotFound($yamlFile);
         }
 
         $this->doConvert(Yaml::parse(file_get_contents($yamlFile)), $backupBeforeOverride);
