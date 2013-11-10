@@ -65,7 +65,7 @@ class LogfileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->hasOption('log-file') && !$input->hasOption('log-dir')) {
+        if (!$input->getOption('log-file') && !$input->getOption('log-dir')) {
             throw InvalidArgumentException::oneOfCommandArguments('log-file', 'log-dir');
         }
 
