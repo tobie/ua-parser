@@ -19,19 +19,38 @@ class Converter
         $this->fs = $fs ? $fs : new Filesystem();
     }
 
-    public function convert($yamlFile, $backupIfExists = true)
+    public function convertFile($yamlFile, $backupBeforeOverride = true)
     {
         if (!$this->fs->exists($yamlFile)) {
             throw FileNotFoundException::create($yamlFile);
         }
 
+        $this->doConvert(Yaml::parse(file_get_contents($yamlFile)), $backupBeforeOverride);
+    }
+
+    public function convertString($yamlString, $backupBeforeOverride = true)
+    {
+        $this->doConvert(Yaml::parse($yamlString), $backupBeforeOverride);
+    }
+
+    protected function doConvert(array $regexes, $backupBeforeOverride = true)
+    {
+        $data = json_encode($regexes);
+
         $regexesFile = $this->destination . '/regexes.json';
-        if ($backupIfExists && $this->fs->exists($regexesFile)) {
-            $backupFile = $this->destination . '/regexes.' . time() . '.json';
+        if ($backupBeforeOverride && $this->fs->exists($regexesFile)) {
+
+            $currentHash = hash('sha512', file_get_contents($regexesFile));
+            $futureHash = hash('sha512', $data);
+
+            if ($futureHash === $currentHash) {
+                return;
+            }
+
+            $backupFile = $this->destination . '/regexes-' . $currentHash . '.json';
             $this->fs->copy($regexesFile, $backupFile);
         }
 
-        $data = Yaml::parse(file_get_contents($yamlFile));
-        $this->fs->dumpFile($regexesFile, json_encode($data));
+        $this->fs->dumpFile($regexesFile, $data);
     }
 }

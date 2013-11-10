@@ -17,6 +17,8 @@ class ConverterTest extends AbstractTestCase
     /** @var string */
     private $yamlFile;
 
+    private $jsonFile;
+
     public function setUp()
     {
         $this->fs = $this
@@ -24,18 +26,21 @@ class ConverterTest extends AbstractTestCase
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->getMock();
-        $this->converter = new Converter('path/to/destination', $this->fs);
+        $this->converter = new Converter(sys_get_temp_dir(), $this->fs);
         $yaml = <<<EOS
 foo:
     bar
 EOS;
-        $this->yamlFile = sys_get_temp_dir() . '/uaparser-' . time();
+        $this->yamlFile = sys_get_temp_dir() . '/uaparser-' . time() . '.yaml';
+        $this->jsonFile = sys_get_temp_dir() . '/regexes.json';
+        touch($this->jsonFile);
         file_put_contents($this->yamlFile, $yaml);
     }
 
     public function tearDown()
     {
         @unlink($this->yamlFile);
+        @unlink($this->jsonFile);
     }
 
     public function testExceptionIsThrownIfFileDoesNotExist()
@@ -50,7 +55,7 @@ EOS;
             'UAParser\Exception\FileNotFoundException',
             'File "path/to/file" does not exist'
         );
-        $this->converter->convert('path/to/file');
+        $this->converter->convertFile('path/to/file');
     }
 
     public function testFileIsBackedUpIfExists()
@@ -64,24 +69,51 @@ EOS;
         $this->fs
             ->expects($this->at(1))
             ->method('exists')
-            ->with('path/to/destination/regexes.json')
+            ->with($this->jsonFile)
             ->will($this->returnValue(true));
 
         $this->fs
             ->expects($this->once())
             ->method('copy')
             ->with(
-                'path/to/destination/regexes.json',
-                $this->matchesRegularExpression('@path/to/destination/regexes.\d+.json@')
+                $this->jsonFile,
+                $this->matchesRegularExpression('@/regexes-.{128}\.json@')
             )
             ->will($this->returnValue(true));
 
         $this->fs
             ->expects($this->once())
             ->method('dumpFile')
-            ->with('path/to/destination/regexes.json', '{"foo":"bar"}');
+            ->with($this->jsonFile, '{"foo":"bar"}');
 
-        $this->converter->convert($this->yamlFile);
+        $this->converter->convertFile($this->yamlFile);
+    }
+
+    public function testFileIsNotBackedUpIfHashesDoNotMatch()
+    {
+        file_put_contents($this->jsonFile, '{"foo":"bar"}');
+
+        $this->fs
+            ->expects($this->at(0))
+            ->method('exists')
+            ->with($this->yamlFile)
+            ->will($this->returnValue(true));
+
+        $this->fs
+            ->expects($this->at(1))
+            ->method('exists')
+            ->with($this->jsonFile)
+            ->will($this->returnValue(true));
+
+        $this->fs
+            ->expects($this->never())
+            ->method('copy');
+
+        $this->fs
+            ->expects($this->never())
+            ->method('dumpFile');
+
+        $this->converter->convertFile($this->yamlFile);
     }
 
     public function testFileIsNotBackedUp()
@@ -99,8 +131,8 @@ EOS;
         $this->fs
             ->expects($this->once())
             ->method('dumpFile')
-            ->with('path/to/destination/regexes.json', '{"foo":"bar"}');
+            ->with($this->jsonFile, '{"foo":"bar"}');
 
-        $this->converter->convert($this->yamlFile, false);
+        $this->converter->convertFile($this->yamlFile, false);
     }
 }
