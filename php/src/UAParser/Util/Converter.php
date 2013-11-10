@@ -21,7 +21,7 @@ class Converter
     private $fs;
 
     /**
-     * @param strin $destination
+     * @param string $destination
      * @param Filesystem $fs
      */
     public function __construct($destination, Filesystem $fs = null)

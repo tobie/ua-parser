@@ -8,17 +8,9 @@
  */
 namespace UAParser\Util;
 
-class Updater
+class Fetcher
 {
-    /** @var Converter */
-    private $converter;
-
-    public function __construct(Converter $converter)
-    {
-        $this->converter = $converter;
-    }
-
-    public function update($backupBeforeOverride = true)
+    public function fetch()
     {
         $context = stream_context_create(
             array(
@@ -32,9 +24,6 @@ class Updater
             )
         );
 
-        $this->converter->convertString(
-            file_get_contents('https://raw.github.com/tobie/ua-parser/master/regexes.yaml', null, $context),
-            $backupBeforeOverride
-        );
+        return file_get_contents('https://raw.github.com/tobie/ua-parser/master/regexes.yaml', null, $context);
     }
 }
