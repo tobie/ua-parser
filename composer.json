@@ -4,10 +4,10 @@
     "require": {
         "symfony/yaml": "~2",
         "symfony/filesystem": "~2",
+        "symfony/finder": "~2",
         "symfony/console": "~2"
     },
     "require-dev": {
-        "symfony/finder": "~2",
         "phpunit/phpunit": "~3"
     },
     "license": "MIT",

@@ -8,27 +8,35 @@
  */
 namespace UAParser\Util\Logfile;
 
-use UAParser\Exception\ParserException;
+use UAParser\Exception\ReaderException;
 
 abstract class AbstractReader implements ReaderInterface
 {
+    /** @var ReaderInterface[] */
+    private static $readers = array();
+
     /**
      * @param string $line
      * @return ReaderInterface
      */
     public static function factory($line)
     {
-        $classes = array(
-            'UAParser\Util\Logfile\ApacheCommonLogFormatReader'
-        );
-
-        foreach ($classes as $class) {
-            /** @var ReaderInterface $reader */
-            $reader = new $class();
+        foreach (static::getReaders() as $reader) {
             if ($reader->test($line)) {
                 return $reader;
             }
         }
+    }
+
+    private static function getReaders()
+    {
+        if (static::$readers) {
+            return static::$readers;
+        }
+
+        static::$readers[] = new ApacheCommonLogFormatReader();
+
+        return static::$readers;
     }
 
     public function test($line)
@@ -43,7 +51,7 @@ abstract class AbstractReader implements ReaderInterface
         $matches = $this->match($line);
 
         if (!isset($matches['userAgentString'])) {
-            throw ParserException::userAgentParserError($line);
+            throw ReaderException::userAgentParserError($line);
         }
 
         return $matches['userAgentString'];

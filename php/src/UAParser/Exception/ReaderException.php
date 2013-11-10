@@ -8,7 +8,7 @@
  */
 namespace UAParser\Exception;
 
-class ParserException extends DomainException
+class ReaderException extends DomainException
 {
     public static function userAgentParserError($line)
     {
