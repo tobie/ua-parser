@@ -16,17 +16,30 @@ use UAParser\Util\Fetcher;
  */
 class FetcherTest extends AbstractTestCase
 {
-
-    /** @var Fetcher */
-    private $fetcher;
-
-    public function setUp()
+    public function testFetchSuccess()
     {
-        $this->fetcher = new Fetcher();
+        $fetcher = new Fetcher();
+        $this->assertInternalType('string', $fetcher->fetch());
     }
 
-    public function testFetch()
+    public function testFetchError()
     {
-        $this->assertInternalType('string', $this->fetcher->fetch());
+        $fetcher = new Fetcher(
+            stream_context_create(
+                array(
+                    'ssl' => array(
+                        'verify_peer' => true,
+                        'CN_match'    => 'invalid.com',
+                    )
+                )
+            )
+        );
+
+        $this->setExpectedException(
+            'UAParser\Exception\FetcherException',
+            'Could not fetch HTTP resource "https://raw.github.com/tobie/ua-parser/master/regexes.yaml": file_get_contents(https://raw.github.com/tobie/ua-parser/master/regexes.yaml): failed to open stream: operation failed'
+        );
+
+        $fetcher->fetch();
     }
 }

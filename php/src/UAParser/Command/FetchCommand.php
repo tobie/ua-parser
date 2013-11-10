@@ -17,15 +17,25 @@ use UAParser\Util\Fetcher;
 
 class FetchCommand extends Command
 {
+    /** @var string */
+    private $defaultYamlFile;
+
+    public function __construct($defaultYamlFile)
+    {
+        $this->defaultYamlFile = $defaultYamlFile;
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
-            ->setName('ua-parser:update')
-            ->setDescription('Fetches an updated YAML file for ua-parser and overwrites the current JSON file.')
+            ->setName('ua-parser:fetch')
+            ->setDescription('Fetches an updated YAML file for ua-parser.')
             ->addArgument(
                 'file',
-                InputArgument::REQUIRED,
-                'regexes.yaml output file'
+                InputArgument::OPTIONAL,
+                'regexes.yaml output file',
+                $this->defaultYamlFile
             )
         ;
     }

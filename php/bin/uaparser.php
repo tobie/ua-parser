@@ -10,6 +10,6 @@ $application->add(new ConvertCommand(realpath(__DIR__ . '/../resources'), realpa
 $application->add(new UpdateCommand(realpath(__DIR__ . '/../resources')));
 $application->add(new ParserCommand());
 $application->add(new LogfileCommand());
-$application->add(new FetchCommand());
+$application->add(new FetchCommand(realpath(__DIR__ . '/../../regexes.yaml')));
 
 $application->run();
