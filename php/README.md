@@ -91,7 +91,7 @@ With the change to v2.0 you may have an existing and customized YAML file for `u
 
 If you need to add a new UA it's easier to edit the original YAML and then convert it to JSON.
 
-    php bin/uaparser.php ua-parser:convert [regexes.yaml]
+    php bin/uaparser.php ua-parser:fetch [regexes.yaml]
 
 Fetches an updated YAML file. *Warning:* This method overwrites any existing `regexes.yaml` file.
 
@@ -101,11 +101,11 @@ Parses a user agent string and dumps the results as a list.
 
     php bin/uaparser.php ua-parser:parse "your user agent string"
 
-### Parse an Apache Log File
+### Parse a Webserver Log File
 
-Parses the supplied log file to test ua-parser. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
+Parses the supplied log file or log directory to test ua-parser. Saves the UA to a file when the UA or OS family aren't recognized or when the UA is listed as a generic smartphone or as a generic feature phone.
 
-    php bin/uaparser.php ua-parser:logfile /path/to/apache/logfile
+    php bin/uaparser.php ua-parser:logfile [-f /path/to/logfile] [-d /path/to/logdir] [--include "*.gz"] [--exclude "*.gz"] errors.log
 
 ## Credits ##
 
