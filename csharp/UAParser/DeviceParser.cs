@@ -32,10 +32,11 @@ namespace UAParser
                 }
             }
 
-            string osFamily = device == null ? "Other" : device;
-            userAgentFamily = userAgentFamily == null ? "Other" : userAgentFamily;
+            if (device == null)
+                device = "Other";
 
-            return new Device(device, (device != null && device.Equals("Spider")));
+
+            return new Device(device, device.Equals("Spider"));
         }
     }
 }

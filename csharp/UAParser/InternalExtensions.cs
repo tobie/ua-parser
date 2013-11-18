@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using YamlDotNet.RepresentationModel;
 
 namespace UAParser
@@ -10,7 +9,7 @@ namespace UAParser
     {
         internal static string ReplaceFirstOccurence(this string inputstring, string searchText, string replacementText)
         {
-            int index = inputstring.IndexOf(searchText);
+            int index = inputstring.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
             if (index == -1)
                 return inputstring;
 

@@ -268,6 +268,12 @@ void main() {
 
 Usage :: C#
 -------------
+Install the NuGet package
+
+	Install-Package UAParser
+
+Sample Usage:
+
 ```csharp
 using System;
 
