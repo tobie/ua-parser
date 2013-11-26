@@ -1,0 +1,28 @@
+{
+	"name": "tobie/ua-parser",
+	"type": "library",
+	"description": "A multi-language port of Browserscope's user agent parser.",
+	"keywords": [
+		"user agent",
+		"useragent",
+		"ua"
+	],
+	"homepage": "https://github.com/tobie/ua-parser",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Community",
+			"homepage": "https://github.com/tobie/ua-parser/contributors"
+		}
+	],
+	"require": {
+		"php": ">=5.2.0",
+	},
+	"autoload": {
+		"psr-0": {
+			"Services_JSON": "php/lib/json/JSON.php",
+			"Spyc": "php/lib/spyc-0.5/spyc.php",
+			"UAParser": "php/uaparser.php"
+		}
+	}
+}
