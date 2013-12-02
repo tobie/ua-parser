@@ -6,7 +6,11 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install python-yaml
 - cp regexes.yaml py/ua_parser/regexes.yaml
+- sudo apt-get install php5-cli
+- wget https://getcomposer.org/composer.phar && php composer.phar update
+- php php/bin/uaparser.php ua-parser:update
 
 script:
   - "npm test"
   - "python py/ua_parser/user_agent_parser_test.py"
+  - "cd php && ../vendor/bin/phpunit"

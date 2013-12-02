@@ -9,3 +9,4 @@ regexes.json
 py/ua_parser.egg-info/
 py/ua_parser/regexes.yaml
 py/ua_parser/regexes.json
+/vendor/
