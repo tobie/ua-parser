@@ -72,7 +72,47 @@ class Parser extends AbstractParser
      */
     public function parse($userAgent, array $jsParseBits = array())
     {
-        $client = new Client($userAgent);
+        $result = new Client($userAgent);
+
+        $result->ua = $this->parseUserAgent($userAgent, $jsParseBits);
+        $result->os = $this->parseOperatingSystem($userAgent);
+        $result->device = $this->parseDevice($userAgent);
+
+        return $result;
+    }
+
+    /**
+     * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.php
+     *
+     * @param string $userAgent a user agent string to test
+     * @param array $jsParseBits
+     * @return UserAgent
+     */
+    private function parseUserAgent($userAgent, array $jsParseBits = array())
+    {
+        $ua = new UserAgent();
+
+        list($regex, $matches) = $this->tryMatch($this->regexes['user_agent_parsers'], $userAgent);
+
+        if ($matches) {
+            $ua->family = $this->replaceString($regex, 'family_replacement', $matches[1]);
+            $ua->major = $this->replaceString($regex, 'v1_replacement', $matches[2]);
+            $ua->minor = $this->replaceString($regex, 'v2_replacement', $matches[3]);
+            $ua->patch = $this->replaceString($regex, 'v3_replacement', $matches[4]);
+        }
+
+        return $ua;
+    }
+
+    /**
+     * Attempts to see if the user agent matches an os_parsers regex from regexes.php
+     *
+     * @param string $userAgent a user agent string to test
+     * @return OperatingSystem
+     */
+    private function parseOperatingSystem($userAgent)
+    {
+        $os = new OperatingSystem();
 
         $client->ua = $this->userAgentParser->parseUserAgent($userAgent, $jsParseBits);
         $client->os = $this->operatingSystemParser->parseOperatingSystem($userAgent);
@@ -119,7 +159,8 @@ class Parser extends AbstractParser
     {
 
         foreach ($regexes as $regex) {
-            if (preg_match('@' . $regex['regex'] . '@', $userAgent, $matches)) {
+            $flag = isset($regex['regex_flag']) ? $regex['regex_flag'] : '';
+            if (preg_match('@' . $regex['regex'] . '@' . $flag, $userAgent, $matches)) {
 
                 $defaults = array(
                     1 => 'Other',
@@ -171,7 +212,8 @@ class Parser extends AbstractParser
             },
             $regex[$key]
         );
-        
+        // remove tailing spaces
+        $replacement = preg_replace("|\s*$|", "", $replacement);
         return empty($replacement) ? null : $replacement;
     }
 
