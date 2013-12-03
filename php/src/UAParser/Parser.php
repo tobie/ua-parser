@@ -138,7 +138,10 @@ class Parser
         list($regex, $matches) = $this->tryMatch($this->regexes['device_parsers'], $userAgent);
 
         if ($matches) {
-            $device->family = $this->replaceString($regex, 'device_replacement', $matches[1]);
+            $device->family = $this->multiReplace($regex, 'device_replacement', $matches[1], $matches);            
+            $device->brand  = $this->multiReplace($regex, 'brand_replacement' , null, $matches);
+            $mr_default = ($matches[1] != 'Other' ? $matches[1] : null);
+            $device->model  = $this->multiReplace($regex, 'model_replacement' , $mr_default, $matches);
         }
 
         return $device;
@@ -183,6 +186,29 @@ class Parser
         }
 
         return str_replace('$1', $string, $regex[$key]);
+    }
+    
+    /**
+     * @param array $regex
+     * @param string $key
+     * @param string $default
+     * @param array $matches
+     * @return string
+     */
+    private function multiReplace($regex, $key, $default, $matches)
+    {
+        if (!isset($regex[$key])) {
+            return $default;
+        }
+        $replacement = preg_replace_callback(
+            "|\\$(\d)|",
+            function ($m) use ($matches){
+                return isset($matches[$m[1]]) ? $matches[$m[1]] : "";
+            },
+            $regex[$key]
+        );
+        $replacement = ($replacement == '' ? null : $replacement);
+        return $replacement;
     }
 
     private static function getDefaultFile()
