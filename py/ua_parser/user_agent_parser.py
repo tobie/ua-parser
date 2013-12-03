@@ -115,7 +115,10 @@ class OSParser(object):
         match = self.user_agent_re.search(user_agent_string)
         if match:
             if self.os_replacement:
-                os = self.os_replacement
+                if re.search(r'\$1', self.os_replacement):
+                    os = re.sub(r'\$1', match.group(1), self.os_replacement)
+                else:
+                    os = self.os_replacement
             else:
                 os = match.group(1)
 
@@ -138,7 +141,7 @@ class OSParser(object):
 
 
 class DeviceParser(object):
-    def __init__(self, pattern, device_replacement=None, brand_replacement=None, model_replacement=None):
+    def __init__(self, pattern, regex_flag=None, device_replacement=None, brand_replacement=None, model_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
@@ -146,7 +149,10 @@ class DeviceParser(object):
           device_replacement: a string to override the matched device (optional)
         """
         self.pattern = pattern
-        self.user_agent_re = re.compile(self.pattern)
+        if regex_flag == 'i':
+          self.user_agent_re = re.compile(self.pattern, re.IGNORECASE)
+        else:
+          self.user_agent_re = re.compile(self.pattern)
         self.device_replacement = device_replacement
         self.brand_replacement = brand_replacement
         self.model_replacement = model_replacement
@@ -168,10 +174,10 @@ class DeviceParser(object):
           return ''
           
         _string = re.sub(r'\$(\d)', _repl, string)
+        _string = re.sub(r'\s*$', '', _string)
         if _string == '':
             return None
         return _string
-
 
     def Parse(self, user_agent_string):
         device, brand, model = None, None, None
@@ -500,6 +506,10 @@ DEVICE_PARSERS = []
 for _device_parser in regexes['device_parsers']:
     _regex = _device_parser['regex']
 
+    _regex_flag = None
+    if 'regex_flag' in _device_parser:
+        _regex_flag = _device_parser['regex_flag']
+
     _device_replacement = None
     if 'device_replacement' in _device_parser:
         _device_replacement = _device_parser['device_replacement']
@@ -512,7 +522,8 @@ for _device_parser in regexes['device_parsers']:
     if 'model_replacement' in _device_parser:
         _model_replacement = _device_parser['model_replacement']
 
-    DEVICE_PARSERS.append(DeviceParser(_regex, 
+    DEVICE_PARSERS.append(DeviceParser(_regex,
+                                       _regex_flag,
                                        _device_replacement,
                                        _brand_replacement,
                                        _model_replacement))
