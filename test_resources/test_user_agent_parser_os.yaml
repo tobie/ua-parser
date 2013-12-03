@@ -972,3 +972,45 @@ test_cases:
     minor: '1'
     patch: '20'
     patch_minor: 
+
+  - user_agent_string: 'XBMC/3.3-DEV-r31572 (Xbox; http://www.xbmc.org)'
+    family: 'Xbox'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'XBMC/9.04 r19840 (Mac OS X; Darwin 9.6.0; http://www.xbmc.org)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '5'
+    patch: '6'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; Xbox)'
+    family: 'Xbox'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/3.1; Xbox)'
+    family: 'Xbox'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.5; Trident/3.1; IEMobile/7.0; Xbox)'
+    family: 'Xbox'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; Xbox)'
+    family: 'Xbox'
+    major:
+    minor:
+    patch:
+    patch_minor:
