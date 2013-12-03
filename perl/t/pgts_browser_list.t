@@ -4,7 +4,10 @@ use Test::More;
 use FindBin qw($Bin);
 
 my $source = 'pgts_browser_list.yaml';
+##this is a big file to test
+##make tests available for developer only
 
+if ($ENV{TRAVIS} || $ENV{DEV_TESTS}){
 eval {
     require($Bin . '/utils.pl');
     my $yaml = get_test_yaml($source);
@@ -23,6 +26,9 @@ eval {
 if ($@){
     diag $@;
     plan skip_all => 'Couldn\'t fetch tests file ' . $source;
+    }
+} else {
+    plan skip_all => 'Set environment DEV_TESTS To run this test';
 }
 
 done_testing();
