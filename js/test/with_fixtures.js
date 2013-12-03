@@ -7,7 +7,7 @@ var assert = require('assert'),
 function readYAML(fileName) {
   var file = path.join(__dirname, '..', '..', 'test_resources', fileName);
   var fixtures = fs.readFileSync(file, 'utf8');
-  fixtures = yaml.eval(fixtures);
+  fixtures = yaml.eval(fixtures); // jshint ignore:line
   return fixtures;
 }
 
@@ -73,6 +73,6 @@ function fixFixture(f, props) {
     if (typeof f[p] === 'object') {
       f[p] = null;
     }
-  })
+  });
   return f;
 }

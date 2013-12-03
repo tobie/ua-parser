@@ -1,4 +1,5 @@
-exports.Device = Device
+exports.Device = Device;
+
 function Device(family, brand, model) {
   this.family = family || 'Other';
   this.brand = brand || null;
@@ -12,15 +13,22 @@ Device.prototype.toString = function() {
 function multiReplace(str, m) {
   return str.replace(/\$(\d)/g, function(tmp, i) {
     return m[i] || '';
-  });
+  }).replace(/\s*$/, '');
 }
 
 exports.makeParser = function(regexes) {
   var parsers = regexes.map(function (obj) {
-    var regexp = new RegExp(obj.regex),
+    var regexp,
         deviceRep = obj.device_replacement,
         brandRep = obj.brand_replacement,
-        modelRep = obj.model_replacement;
+        modelRep  = obj.model_replacement;
+        
+    if (obj.regex_flag) {
+      regexp = new RegExp(obj.regex, obj.regex_flag);
+    }
+    else {
+      regexp = new RegExp(obj.regex);
+    }
 
     function parser(str) {
       var m = str.match(regexp);
@@ -35,12 +43,12 @@ exports.makeParser = function(regexes) {
     return parser;
   });
 
-  function parser(str, ua_family, os_family) {
+  function parser(str) {
     var obj;
 
     if (typeof str === 'string') {
       for (var i = 0, length = parsers.length; i < length; i++) {
-        obj = parsers[i](str, ua_family, os_family);
+        obj = parsers[i](str);
         if (obj) { return obj; }
       }
     }

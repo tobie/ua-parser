@@ -1,6 +1,9 @@
+/*jshint eqnull:true*/
+
 var startsWithDigit = require('./helpers').startsWithDigit;
 
-exports.OS = OS
+exports.OS = OS;
+
 function OS(family, major, minor, patch, patchMinor) {
   this.family = family || 'Other';
   this.major = major || null;
@@ -59,7 +62,7 @@ function _makeParsers(obj) {
 }
 
 exports.makeParser = function(regexes) {
-  var parsers = regexes.map(_makeParsers)
+  var parsers = regexes.map(_makeParsers);
 
   function parser(str) {
     var obj;
@@ -75,4 +78,4 @@ exports.makeParser = function(regexes) {
   }
 
   return parser;
-}
+};

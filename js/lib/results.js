@@ -1,11 +1,14 @@
+/*jshint eqnull:true*/
+
 var UNDEF = void 0;
 
 exports.BackwardsCompatResults = BackwardsCompatResults;
+
 function BackwardsCompatResults(ua_str, ua, os, device) {
   this.string = ua_str;
   this.userAgent = this.ua = ua;
   this.os = os;
-  this.device = device
+  this.device = device;
 
   // Backwards compat
   var major = ua.major,
