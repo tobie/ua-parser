@@ -164,9 +164,9 @@ class Parser extends AbstractParser
             return $default;
         }
         $replacement = preg_replace_callback(
-            "|\\$(\d)|",
+            "|\\$(?<key>\d)|",
             function ($m) use ($matches){
-                return isset($matches[$m[1]]) ? $matches[$m[1]] : "";
+                return isset($matches[$m['key']]) ? $matches[$m['key']] : "";
             },
             $regex[$key]
         );
