@@ -212,8 +212,10 @@ class Parser extends AbstractParser
             },
             $regex[$key]
         );
-        // remove tailing spaces
-        $replacement = preg_replace("|\s*$|", "", $replacement);
+
+        // remove heading and tailing spaces
+        $replacement = ltrim(rtrim($replacement));
+
         return empty($replacement) ? null : $replacement;
     }
 

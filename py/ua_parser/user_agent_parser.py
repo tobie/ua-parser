@@ -174,7 +174,7 @@ class DeviceParser(object):
           return ''
           
         _string = re.sub(r'\$(\d)', _repl, string)
-        _string = re.sub(r'\s*$', '', _string)
+        _string = re.sub(r'^\s+|\s+$', '', _string)
         if _string == '':
             return None
         return _string

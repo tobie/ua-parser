@@ -348,7 +348,7 @@ sub multiReplace {
         }{
             @{$matches}[$1-1] || '';
         }egx;
-        s{\s*$}{};
+        s{^\s+|\s+$}{};
     }
     if ($stringToReplace eq '') {
         undef $stringToReplace;

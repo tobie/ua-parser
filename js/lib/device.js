@@ -13,7 +13,7 @@ Device.prototype.toString = function() {
 function multiReplace(str, m) {
   return str.replace(/\$(\d)/g, function(tmp, i) {
     return m[i] || '';
-  }).replace(/\s*$/, '');
+  }).replace(/^\s+|\s+$/gm, '');
 }
 
 exports.makeParser = function(regexes) {
