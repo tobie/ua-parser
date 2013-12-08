@@ -62,7 +62,7 @@ class Parser
     }
 
     /**
-     * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.json
+     * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.php
      *
      * @param string $uaString a user agent string to test
      * @param array $jsParseBits
@@ -112,7 +112,7 @@ class Parser
     }
 
     /**
-     * Attempts to see if the user agent matches an os_parsers regex from regexes.json
+     * Attempts to see if the user agent matches an os_parsers regex from regexes.php
      *
      * @param string $uaString a user agent string to test
      * @return OperatingSystem
@@ -145,7 +145,7 @@ class Parser
     }
 
     /**
-     * Attempts to see if the user agent matches a device_parsers regex from regexes.json
+     * Attempts to see if the user agent matches a device_parsers regex from regexes.php
      * @param string $uaString a user agent string to test
      * @return Device
      */
