@@ -59,9 +59,9 @@ class Converter
      */
     protected function doConvert(array $regexes, $backupBeforeOverride = true)
     {
-        $data = json_encode($regexes);
+        $data = "<?php\nreturn " . var_export($regexes, true) . ';';
 
-        $regexesFile = $this->destination . '/regexes.json';
+        $regexesFile = $this->destination . '/regexes.php';
         if ($backupBeforeOverride && $this->fs->exists($regexesFile)) {
 
             $currentHash = hash('sha512', file_get_contents($regexesFile));
@@ -71,7 +71,7 @@ class Converter
                 return;
             }
 
-            $backupFile = $this->destination . '/regexes-' . $currentHash . '.json';
+            $backupFile = $this->destination . '/regexes-' . $currentHash . '.php';
             $this->fs->copy($regexesFile, $backupFile);
         }
 

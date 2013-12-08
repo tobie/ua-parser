@@ -33,7 +33,7 @@ class Parser
     {
         $regexesFile = $customRegexesFile !== null ? $customRegexesFile : static::getDefaultFile();
         if (file_exists($regexesFile)) {
-            $this->regexes = json_decode(file_get_contents($regexesFile));
+            $this->regexes = include $regexesFile;
         } else {
             if ($customRegexesFile !== null) {
                 throw FileNotFoundException::customRegexFileNotFound($regexesFile);
@@ -79,7 +79,7 @@ class Parser
             $ua->patch = $jsParseBits['js_user_agent_v3'];
         } else {
             list($regex, $matches) = $this->matchRegexes(
-                $this->regexes->user_agent_parsers,
+                $this->regexes['user_agent_parsers'],
                 $uaString,
                 array(
                     1 => 'Other',
@@ -91,9 +91,9 @@ class Parser
 
             if ($matches) {
                 $ua->family = $this->replaceString($regex, 'family_replacement', $matches[1]);
-                $ua->major = isset($regex->v1_replacement) ? $regex->v1_replacement : $matches[2];
-                $ua->minor = isset($regex->v2_replacement) ? $regex->v2_replacement : $matches[3];
-                $ua->patch = isset($regex->v3_replacement) ? $regex->v3_replacement : $matches[4];
+                $ua->major = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
+                $ua->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
+                $ua->patch = isset($regex['v3_replacement']) ? $regex['v3_replacement'] : $matches[4];
             }
         }
 
@@ -122,7 +122,7 @@ class Parser
         $os = new OperatingSystem();
 
         list($regex, $matches) = $this->matchRegexes(
-            $this->regexes->os_parsers,
+            $this->regexes['os_parsers'],
             $uaString,
             array(
                 1 => 'Other',
@@ -134,11 +134,11 @@ class Parser
         );
 
         if ($matches) {
-            $os->family = isset($regex->os_replacement) ? $regex->os_replacement : $matches[1];
-            $os->major = isset($regex->os_v1_replacement) ? $regex->os_v1_replacement : $matches[2];
-            $os->minor = isset($regex->os_v2_replacement) ? $regex->os_v2_replacement : $matches[3];
-            $os->patch = isset($regex->os_v3_replacement) ? $regex->os_v3_replacement : $matches[4];
-            $os->patchMinor = isset($regex->os_v4_replacement) ? $regex->os_v4_replacement : $matches[5];
+            $os->family = isset($regex['os_replacement']) ? $regex['os_replacement'] : $matches[1];
+            $os->major = isset($regex['os_v1_replacement']) ? $regex['os_v1_replacement'] : $matches[2];
+            $os->minor = isset($regex['os_v2_replacement']) ? $regex['os_v2_replacement'] : $matches[3];
+            $os->patch = isset($regex['os_v3_replacement']) ? $regex['os_v3_replacement'] : $matches[4];
+            $os->patchMinor = isset($regex['os_v4_replacement']) ? $regex['os_v4_replacement'] : $matches[5];
         }
 
         return $os;
@@ -153,7 +153,7 @@ class Parser
     {
         $device = new Device();
 
-        list($regex, $matches) = $this->matchRegexes($this->regexes->device_parsers, $uaString, array(1 => 'Other'));
+        list($regex, $matches) = $this->matchRegexes($this->regexes['device_parsers'], $uaString, array(1 => 'Other'));
         if ($matches) {
             $device->family = $this->replaceString($regex, 'device_replacement', $matches[1]);
         }
@@ -170,7 +170,7 @@ class Parser
     private function matchRegexes(array $regexes, $subject, array $defaults = array())
     {
         foreach ($regexes as $regex) {
-            if (preg_match('@' . $regex->regex . '@', $subject, $matches)) {
+            if (preg_match('@' . $regex['regex'] . '@', $subject, $matches)) {
                 return array(
                     $regex,
                     $matches + $defaults
@@ -187,17 +187,17 @@ class Parser
      * @param string $string
      * @return string
      */
-    private function replaceString(stdClass $regex, $key, $string)
+    private function replaceString($regex, $key, $string)
     {
-        if (!isset($regex->{$key})) {
+        if (!isset($regex[$key])) {
             return $string;
         }
 
-        return str_replace('$1', $string, $regex->{$key});
+        return str_replace('$1', $string, $regex[$key]);
     }
 
     private static function getDefaultFile()
     {
-        return static::$defaultFile ? static::$defaultFile : __DIR__ . '/../../resources/regexes.json';
+        return static::$defaultFile ? static::$defaultFile : __DIR__ . '/../../resources/regexes.php';
     }
 }

@@ -34,7 +34,7 @@ class ConvertCommand extends Command
     {
         $this
             ->setName('ua-parser:convert')
-            ->setDescription('Converts an existing regexes.yaml file to a regexes.json file.')
+            ->setDescription('Converts an existing regexes.yaml file to a regexes.php file.')
             ->addArgument(
                 'file',
                 InputArgument::OPTIONAL,

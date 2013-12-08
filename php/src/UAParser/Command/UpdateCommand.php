@@ -30,7 +30,7 @@ class UpdateCommand extends Command
     {
         $this
             ->setName('ua-parser:update')
-            ->setDescription('Fetches an updated YAML file for ua-parser and overwrites the current JSON file.')
+            ->setDescription('Fetches an updated YAML file for ua-parser and overwrites the current PHP file.')
             ->addOption(
                 'no-backup',
                 null,
