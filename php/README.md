@@ -52,15 +52,15 @@ print $result->toString();            // Safari 6.0.2/Mac OS X 10.7.5
 print $result->uaOriginal;            // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
 
-## Using Your Own Custom regexes.json File ##
+## Using Your Own Custom regexes.php File ##
 
-You can use your own `regexes.json` file if you've customized the official file. I *strongly* encourage you to push back any changes you may have so others can benefit. That said, to use your own do the following:
+You can use your own `regexes.php` file if you've customized the official file. I *strongly* encourage you to push back any changes you may have so others can benefit. That said, to use your own do the following:
 
 ```php
 require_once 'vendor/autoload.php';
 use UAParser\Parser;
 
-$parser = new Parser("path/to/custom/regexes.json");
+$parser = new Parser("path/to/custom/regexes.php");
 ```
 
 ## Using ua-parser PHP Library from the Command Line ##
@@ -73,7 +73,7 @@ Provides simple usage information:
 
     php bin/uaparser.php
 
-### Update the regexes.json File
+### Update the regexes.php File
 
 Fetches an updated YAML file for `ua-parser` and overwrites the current JSON file. You can use the following as part of a cron job that runs nightly.
 
@@ -81,7 +81,7 @@ Fetches an updated YAML file for `ua-parser` and overwrites the current JSON fil
 
 By default creates a backup file. Use `--no-backup` to turn that feature off.
 
-### Convert an Existing regexes.yaml File to regexes.json
+### Convert an Existing regexes.yaml File to regexes.php
 
 With the change to v2.0 you may have an existing and customized YAML file for `ua-parser`. Use the following to convert it to JSON.
 

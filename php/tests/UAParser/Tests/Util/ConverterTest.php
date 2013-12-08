@@ -25,7 +25,10 @@ class ConverterTest extends AbstractTestCase
     private $yamlFile;
 
     /** @var string */
-    private $jsonFile;
+    private $phpFile;
+
+    /** @var string */
+    private $php;
 
     public function setUp()
     {
@@ -40,15 +43,22 @@ foo:
     bar
 EOS;
         $this->yamlFile = sys_get_temp_dir() . '/uaparser-' . time() . '.yaml';
-        $this->jsonFile = sys_get_temp_dir() . '/regexes.json';
-        touch($this->jsonFile);
         file_put_contents($this->yamlFile, $yaml);
+
+        $this->php = <<<EOS
+<?php
+return array (
+  'foo' => 'bar',
+);
+EOS;
+        $this->phpFile = sys_get_temp_dir() . '/regexes.php';
+        touch($this->phpFile);
     }
 
     public function tearDown()
     {
         @unlink($this->yamlFile);
-        @unlink($this->jsonFile);
+        @unlink($this->phpFile);
     }
 
     public function testExceptionIsThrownIfFileDoesNotExist()
@@ -77,29 +87,29 @@ EOS;
         $this->fs
             ->expects($this->at(1))
             ->method('exists')
-            ->with($this->jsonFile)
+            ->with($this->phpFile)
             ->will($this->returnValue(true));
 
         $this->fs
             ->expects($this->once())
             ->method('copy')
             ->with(
-                $this->jsonFile,
-                $this->matchesRegularExpression('@/regexes-.{128}\.json@')
+                $this->phpFile,
+                $this->matchesRegularExpression('@/regexes-.{128}\.php@')
             )
             ->will($this->returnValue(true));
 
         $this->fs
             ->expects($this->once())
             ->method('dumpFile')
-            ->with($this->jsonFile, '{"foo":"bar"}');
+            ->with($this->phpFile, $this->php);
 
         $this->converter->convertFile($this->yamlFile);
     }
 
     public function testFileIsNotBackedUpIfHashesDoNotMatch()
     {
-        file_put_contents($this->jsonFile, '{"foo":"bar"}');
+        file_put_contents($this->phpFile, $this->php);
 
         $this->fs
             ->expects($this->at(0))
@@ -110,7 +120,7 @@ EOS;
         $this->fs
             ->expects($this->at(1))
             ->method('exists')
-            ->with($this->jsonFile)
+            ->with($this->phpFile)
             ->will($this->returnValue(true));
 
         $this->fs
@@ -139,7 +149,7 @@ EOS;
         $this->fs
             ->expects($this->once())
             ->method('dumpFile')
-            ->with($this->jsonFile, '{"foo":"bar"}');
+            ->with($this->phpFile, $this->php);
 
         $this->converter->convertFile($this->yamlFile, false);
     }

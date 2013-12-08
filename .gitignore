@@ -6,6 +6,7 @@ cabal-dev
 *.pyc
 build/
 regexes.json
+regexes*.php
 py/ua_parser.egg-info/
 py/ua_parser/regexes.yaml
 py/ua_parser/regexes.json
