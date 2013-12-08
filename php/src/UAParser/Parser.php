@@ -34,29 +34,27 @@ class Parser
         $regexesFile = $customRegexesFile !== null ? $customRegexesFile : static::getDefaultFile();
         if (file_exists($regexesFile)) {
             $this->regexes = include $regexesFile;
+        } elseif ($customRegexesFile !== null) {
+            throw FileNotFoundException::customRegexFileNotFound($regexesFile);
         } else {
-            if ($customRegexesFile !== null) {
-                throw FileNotFoundException::customRegexFileNotFound($regexesFile);
-            } else {
-                throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
-            }
+            throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
         }
     }
 
     /**
      * Sets up some standard variables as well as starts the user agent parsing process
      *
-     * @param string $ua a user agent string to test, defaults to an empty string
+     * @param string $userAgent a user agent string to test, defaults to an empty string
      * @param array $jsParseBits
      * @return Client
      */
-    public function parse($ua, array $jsParseBits = array())
+    public function parse($userAgent, array $jsParseBits = array())
     {
-        $result = new Client($ua);
+        $result = new Client($userAgent);
 
-        $result->ua = $this->parseUserAgent($ua, $jsParseBits);
-        $result->os = $this->parseOperatingSystem($ua);
-        $result->device = $this->parseDevice($ua);
+        $result->ua = $this->parseUserAgent($userAgent, $jsParseBits);
+        $result->os = $this->parseOperatingSystem($userAgent);
+        $result->device = $this->parseDevice($userAgent);
 
         return $result;
     }
@@ -64,11 +62,11 @@ class Parser
     /**
      * Attempts to see if the user agent matches a user_agents_parsers regex from regexes.php
      *
-     * @param string $uaString a user agent string to test
+     * @param string $userAgent a user agent string to test
      * @param array $jsParseBits
      * @return UserAgent
      */
-    private function parseUserAgent($uaString, array $jsParseBits = array())
+    private function parseUserAgent($userAgent, array $jsParseBits = array())
     {
         $ua = new UserAgent();
 
@@ -80,7 +78,7 @@ class Parser
         } else {
             list($regex, $matches) = $this->matchRegexes(
                 $this->regexes['user_agent_parsers'],
-                $uaString,
+                $userAgent,
                 array(
                     1 => 'Other',
                     2 => null,
@@ -91,15 +89,15 @@ class Parser
 
             if ($matches) {
                 $ua->family = $this->replaceString($regex, 'family_replacement', $matches[1]);
-                $ua->major = isset($regex['v1_replacement']) ? $regex['v1_replacement'] : $matches[2];
-                $ua->minor = isset($regex['v2_replacement']) ? $regex['v2_replacement'] : $matches[3];
-                $ua->patch = isset($regex['v3_replacement']) ? $regex['v3_replacement'] : $matches[4];
+                $ua->major = $this->replaceString($regex, 'v1_replacement', $matches[2]);
+                $ua->minor = $this->replaceString($regex, 'v2_replacement', $matches[3]);
+                $ua->patch = $this->replaceString($regex, 'v3_replacement', $matches[4]);
             }
         }
 
         if (isset($jsParseBits['js_user_agent_string'])) {
             $jsUserAgentString = $jsParseBits['js_user_agent_string'];
-            if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($uaString, 'chromeframe') !== false) {
+            if (strpos($jsUserAgentString, 'Chrome/') !== false && strpos($userAgent, 'chromeframe') !== false) {
                 $override = $this->parseUserAgent($jsUserAgentString);
                 $ua->family = sprintf('Chrome Frame (%s %s)', $ua->family, $ua->major);
                 $ua->major = $override->major;
@@ -114,16 +112,16 @@ class Parser
     /**
      * Attempts to see if the user agent matches an os_parsers regex from regexes.php
      *
-     * @param string $uaString a user agent string to test
+     * @param string $userAgent a user agent string to test
      * @return OperatingSystem
      */
-    private function parseOperatingSystem($uaString)
+    private function parseOperatingSystem($userAgent)
     {
         $os = new OperatingSystem();
 
         list($regex, $matches) = $this->matchRegexes(
             $this->regexes['os_parsers'],
-            $uaString,
+            $userAgent,
             array(
                 1 => 'Other',
                 2 => null,
@@ -134,11 +132,11 @@ class Parser
         );
 
         if ($matches) {
-            $os->family = isset($regex['os_replacement']) ? $regex['os_replacement'] : $matches[1];
-            $os->major = isset($regex['os_v1_replacement']) ? $regex['os_v1_replacement'] : $matches[2];
-            $os->minor = isset($regex['os_v2_replacement']) ? $regex['os_v2_replacement'] : $matches[3];
-            $os->patch = isset($regex['os_v3_replacement']) ? $regex['os_v3_replacement'] : $matches[4];
-            $os->patchMinor = isset($regex['os_v4_replacement']) ? $regex['os_v4_replacement'] : $matches[5];
+            $os->family = $this->replaceString($regex, 'os_replacement', $matches[1]);
+            $os->major = $this->replaceString($regex, 'os_v1_replacement', $matches[2]);
+            $os->minor = $this->replaceString($regex, 'os_v2_replacement', $matches[3]);
+            $os->patch = $this->replaceString($regex, 'os_v3_replacement', $matches[4]);
+            $os->patchMinor = $this->replaceString($regex, 'os_v4_replacement', $matches[5]);
         }
 
         return $os;
@@ -146,14 +144,15 @@ class Parser
 
     /**
      * Attempts to see if the user agent matches a device_parsers regex from regexes.php
-     * @param string $uaString a user agent string to test
+     * @param string $userAgent a user agent string to test
      * @return Device
      */
-    private function parseDevice($uaString)
+    private function parseDevice($userAgent)
     {
         $device = new Device();
 
-        list($regex, $matches) = $this->matchRegexes($this->regexes['device_parsers'], $uaString, array(1 => 'Other'));
+        list($regex, $matches) = $this->matchRegexes($this->regexes['device_parsers'], $userAgent, array(1 => 'Other'));
+
         if ($matches) {
             $device->family = $this->replaceString($regex, 'device_replacement', $matches[1]);
         }
@@ -171,10 +170,7 @@ class Parser
     {
         foreach ($regexes as $regex) {
             if (preg_match('@' . $regex['regex'] . '@', $subject, $matches)) {
-                return array(
-                    $regex,
-                    $matches + $defaults
-                );
+                return array($regex, $matches + $defaults);
             }
         }
 
@@ -182,7 +178,7 @@ class Parser
     }
 
     /**
-     * @param stdClass $regex
+     * @param array $regex
      * @param string $key
      * @param string $string
      * @return string
