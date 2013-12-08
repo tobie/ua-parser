@@ -37,7 +37,7 @@ class Parser
         } elseif ($customRegexesFile !== null) {
             throw FileNotFoundException::customRegexFileNotFound($regexesFile);
         } else {
-            throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
+            throw FileNotFoundException::defaultFileNotFound($regexesFile);
         }
     }
 
