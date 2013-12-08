@@ -2,6 +2,15 @@
 
 This is the PHP library for the [ua-parser](https://github.com/tobie/ua-parser) project.
 
+# v3.3 Changes
+
+v3.3 of the PHP library is no longer compatible with the previous version. It now supports composer, requires PHP 5.3
+and has a slightly different API (see below).
+* `UAParser` class is now `UAParser\Parser`
+* Typed result objects: `Parser::parse()` returns `UAParser\Result\Client`, `Client::$os` is a  `UAParser\Result\OperatingSystem` and `Client::$device` is a `UAParser\Result\Device`
+* `toString()` and `toVersion()` are now methods
+* Properties now use camelCase, not underscore_case.
+
 ## v2.0 Changes ##
 
 v2.0 of the PHP library, released in December 2012, marked a huge transition from the previous pseudo-port of `ua-parser` to a true port that matches up well with the other libraries in the `ua-parser` repo. The primary changes:

@@ -133,7 +133,7 @@ class ParserTest extends AbstractTestCase
         $this->assertSame('FireHbbTV 1.1.20', (string) $result->os);
         $this->assertSame('1.1.20', $result->os->toVersion());
 
-        $this->assertSame($userAgentString, $result->uaOriginal);
+        $this->assertSame($userAgentString, $result->originalUserAgent);
     }
 
     public function testToString_2()
@@ -153,7 +153,7 @@ class ParserTest extends AbstractTestCase
         $this->assertSame('Other', (string) $result->os);
         $this->assertSame('', $result->os->toVersion());
 
-        $this->assertSame($userAgentString, $result->uaOriginal);
+        $this->assertSame($userAgentString, $result->originalUserAgent);
     }
 
     private static function createTestData(Finder $resources)

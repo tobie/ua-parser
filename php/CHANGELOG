@@ -2,6 +2,20 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
+UAP-3.3.0
+ - Use composer for dependency management
+ - Introduce namespaces
+ - Removing legacy library dependencies
+ - Use PHPUnit for testing
+ - Make all tests pass, fix all the remaining bugs
+ - Introduce specific result objects
+ - Comply with PSR-X coding standards
+ - Use Travis for CI
+ - Update README
+ - Port command line tool to Symfony CLI
+ - Secure updating: SSL certificate verification, hashing, try to do atomic updates
+ - Restore fetching YAML file only (without generating JSON)
+
 UAP-2.1.1
  - FIX: making sure patch minor is being populated correctly when showing a mismatch
 
