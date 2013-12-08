@@ -2,7 +2,8 @@
 /**
  * ua-parser
  *
- * Copyright (c) 2011-2012 Dave Olsen, http://dmolsen.com
+ * Copyright (c) 2011-2013 Dave Olsen, http://dmolsen.com
+ * Copyright (c) 2013-2014 Lars Strojny, http://usrportage.de
  *
  * Released under the MIT license
  */
