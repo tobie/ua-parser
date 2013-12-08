@@ -71,21 +71,15 @@ class Parser
         $ua = new UserAgent();
 
         if (isset($jsParseBits['js_user_agent_family']) && $jsParseBits['js_user_agent_family']) {
+
             $ua->family = $jsParseBits['js_user_agent_family'];
             $ua->major = $jsParseBits['js_user_agent_v1'];
             $ua->minor = $jsParseBits['js_user_agent_v2'];
             $ua->patch = $jsParseBits['js_user_agent_v3'];
+
         } else {
-            list($regex, $matches) = $this->matchRegexes(
-                $this->regexes['user_agent_parsers'],
-                $userAgent,
-                array(
-                    1 => 'Other',
-                    2 => null,
-                    3 => null,
-                    4 => null,
-                )
-            );
+
+            list($regex, $matches) = $this->tryMatch($this->regexes['user_agent_parsers'], $userAgent);
 
             if ($matches) {
                 $ua->family = $this->replaceString($regex, 'family_replacement', $matches[1]);
@@ -119,17 +113,7 @@ class Parser
     {
         $os = new OperatingSystem();
 
-        list($regex, $matches) = $this->matchRegexes(
-            $this->regexes['os_parsers'],
-            $userAgent,
-            array(
-                1 => 'Other',
-                2 => null,
-                3 => null,
-                4 => null,
-                5 => null,
-            )
-        );
+        list($regex, $matches) = $this->tryMatch($this->regexes['os_parsers'], $userAgent);
 
         if ($matches) {
             $os->family = $this->replaceString($regex, 'os_replacement', $matches[1]);
@@ -151,7 +135,7 @@ class Parser
     {
         $device = new Device();
 
-        list($regex, $matches) = $this->matchRegexes($this->regexes['device_parsers'], $userAgent, array(1 => 'Other'));
+        list($regex, $matches) = $this->tryMatch($this->regexes['device_parsers'], $userAgent);
 
         if ($matches) {
             $device->family = $this->replaceString($regex, 'device_replacement', $matches[1]);
@@ -162,14 +146,23 @@ class Parser
 
     /**
      * @param array $regexes
-     * @param string $subject
-     * @param array $defaults
+     * @param string $userAgent
      * @return array
      */
-    private function matchRegexes(array $regexes, $subject, array $defaults = array())
+    private function tryMatch(array $regexes, $userAgent)
     {
+
         foreach ($regexes as $regex) {
-            if (preg_match('@' . $regex['regex'] . '@', $subject, $matches)) {
+            if (preg_match('@' . $regex['regex'] . '@', $userAgent, $matches)) {
+
+                $defaults = array(
+                    1 => 'Other',
+                    2 => null,
+                    3 => null,
+                    4 => null,
+                    5 => null,
+                );
+
                 return array($regex, $matches + $defaults);
             }
         }
