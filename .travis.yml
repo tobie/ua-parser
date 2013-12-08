@@ -13,4 +13,4 @@ before_install:
 script:
   - "npm test"
   - "python py/ua_parser/user_agent_parser_test.py"
-  - "cd php && ../vendor/bin/phpunit"
+  - "cd php && ../vendor/bin/phpunit --exclude-group performance"

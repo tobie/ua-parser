@@ -96,7 +96,7 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($patch, $result->ua->patch);
     }
 
-
+    /** @group performance */
     public function testPerformance()
     {
         $userAgents = array(
@@ -165,6 +165,7 @@ class ParserTest extends AbstractTestCase
 
         $this->assertSame($userAgentString, $result->originalUserAgent);
     }
+
     public function testToString_2()
     {
         $userAgentString = 'PingdomBot 1.4/Other Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)';
