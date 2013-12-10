@@ -15,5 +15,4 @@ class Device extends AbstractSoftware
 
     /** @var string */
     public $model;
-    
 }

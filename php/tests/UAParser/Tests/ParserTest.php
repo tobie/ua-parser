@@ -66,9 +66,9 @@ class ParserTest extends AbstractTestCase
     public function testDeviceParsing($userAgent, array $jsUserAgent, $family, $major, $minor, $patch, $patchMinor, $brand, $model)
     {
         $result = $this->parser->parse($userAgent, $jsUserAgent);
-        $this->assertSame($family, $result->device->family, "family: $family !== ".$result->device->family);
-        $this->assertSame($brand,  $result->device->brand,  "brand: $brand !== ".$result->device->brand);
-        $this->assertSame($model,  $result->device->model,  "model: $model !== ".$result->device->model);
+        $this->assertSame($family, $result->device->family);
+        $this->assertSame($brand,  $result->device->brand);
+        $this->assertSame($model,  $result->device->model);
     }
 
     /** @dataProvider getOsTestData */
