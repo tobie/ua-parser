@@ -1413,9 +1413,13 @@ device_parsers:
   ##########
   # Generic Smart Phone
   ##########
-  - regex: '(hiptop|avantgo|plucker|xiino|blazer|elaine|up.browser|up.link|mmp|smartphone|midp|wap|vodafone|o2|pocket|mobile|pda)'
+  - regex: '(Symbian|\bS60\b|Windows CE|Opera Mobi|BREW|Brew|Mobile; .+Firefox/|iPhone OS|Android|MobileSafari|^N97\-[14]|\(webOS/|PalmOS)'
+    device_replacement: 'Generic Smartphone'
+    brand_replacement: 'Generic'
+    model_replacement: 'Smartphone'
+  - regex: '(hiptop|avantgo|plucker|xiino|blazer|elaine)'
     regex_flag: 'i'
-    device_replacement: "Generic Smartphone"
+    device_replacement: 'Generic Smartphone'
     brand_replacement: 'Generic'
     model_replacement: 'Smartphone'
 
@@ -1450,4 +1454,3 @@ device_parsers:
     regex_flag: 'i'
     device_replacement: 'Spider'
     model_replacement: 'Spider'
- 
