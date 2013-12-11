@@ -238,10 +238,6 @@ user_agent_parsers:
   - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
     family_replacement: 'IE Large Screen'
 
-  # AFTER THE EDGE CASES ABOVE!
-  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
-  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
-
   #### END MAIN CASES ####
 
   #### SPECIAL CASES ####
@@ -397,10 +393,16 @@ user_agent_parsers:
   - regex: '(Phantom)/V(\d+)\.(\d+)'
     family_replacement: 'Phantom Browser'
 
-  - regex: '([MS]?IE) (\d+)\.(\d+)'
+  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
     family_replacement: 'IE'
 
-  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
+  # AFTER THE EDGE CASES ABOVE!
+  # AFTER IE11
+  # BEFORE all other IE
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
+
+  - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
   - regex: '(python-requests)/(\d+)\.(\d+)'
