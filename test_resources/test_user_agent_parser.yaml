@@ -885,3 +885,9 @@ test_cases:
     major: '1'
     minor: '1'
     patch: '1'
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko/20100101 Firefox/12.0'
+    family: 'IE'
+    major: '11'
+    minor: '0'
+    patch:
