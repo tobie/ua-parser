@@ -164,6 +164,10 @@ user_agent_parsers:
   - regex: '(facebookexternalhit)/(\d+)\.(\d+)'
     family_replacement: 'FacebookBot'
 
+  # LinkedIn
+  - regex: '(LinkedInBot)/(\d+)\.(\d+)'
+    family_replacement: 'LinkedInBot'
+
   # Twitterbot
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'

@@ -116,10 +116,10 @@ test_cases:
 
   - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
     family: 'Nintendo DS'
-    
+
   - user_agent_string: 'Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)'
     family: 'Nintendo DSi'
-      
+
   - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
     family: 'Nintendo 3DS'
 
@@ -188,7 +188,7 @@ test_cases:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)'
     family: 'Other'
-  
+
   - user_agent_string: 'NCSA_Mosaic/2.0 (Windows 3.1)'
     family: 'Other'
 
@@ -203,7 +203,7 @@ test_cases:
 
   - user_agent_string: 'ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)'
     family: 'Other'
-    
+
   - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
     family: 'Other'
 
