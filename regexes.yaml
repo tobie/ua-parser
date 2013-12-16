@@ -1257,8 +1257,10 @@ device_parsers:
   - regex: '(HbbTV)/1\.1\.1 \(;;;;;\) Maple_2011'  
     device_replacement: '$1'
     brand_replacement: 'Samsung'
+    model_replacement: '$1'
   - regex: '(HbbTV)/[0-9]+\.[0-9]+\.[0-9]+'
     device_replacement: '$1'
+    model_replacement: '$1'
 
   ##########
   # lg
