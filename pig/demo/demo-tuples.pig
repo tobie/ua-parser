@@ -1,4 +1,4 @@
-REGISTER ../target/ua-parser-pig-0.1-SNAPSHOT-job.jar
+REGISTER ../target/ua-parser-pig-*-job.jar
 
 DEFINE Device           ua_parser.pig.Device;
 DEFINE Os               ua_parser.pig.Os;

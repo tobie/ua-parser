@@ -28,8 +28,10 @@ public class Device extends EvalFunc<Tuple> {
             if (device == null) {
                 return null;
             }
-            Tuple output = TupleFactory.getInstance().newTuple(1);
+            Tuple output = TupleFactory.getInstance().newTuple(3);
             output.set(0, device.family);
+            output.set(1, device.brand);
+            output.set(2, device.model);
             return output;
         } catch (Exception e) {
             throw new IOException("Caught exception processing input row ", e);
@@ -41,6 +43,8 @@ public class Device extends EvalFunc<Tuple> {
         try {
             Schema tupleSchema = new Schema();
             tupleSchema.add(new FieldSchema("deviceFamily", DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("deviceBrand", DataType.CHARARRAY));
+            tupleSchema.add(new FieldSchema("deviceModel", DataType.CHARARRAY));
             return tupleSchema;
         } catch (Exception e) {
             return null;

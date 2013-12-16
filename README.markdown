@@ -129,6 +129,8 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
+  System.out.println(c.device.brand);     // => "Apple"
+  System.out.println(c.device.model);     // => "iPhone"
 ```
 
 
@@ -138,7 +140,7 @@ For Pig there are UDFs for getting a single value and UDFs for getting a tuple w
 For most usecases the tuple UDFs will be the most useful.
 
 ```pig
-REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+REGISTER ua-parser-pig-*-job.jar
 
 DEFINE Device           ua_parser.pig.Device;
 DEFINE Os               ua_parser.pig.Os;
@@ -163,9 +165,11 @@ DUMP AgentSpecs;
 The versions that return only a single value:
 
 ```pig
-REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+REGISTER ua-parser-pig-*-job.jar
 
 DEFINE DeviceFamily     ua_parser.pig.device.Family;
+DEFINE DeviceBrand      ua_parser.pig.device.Brand;
+DEFINE DeviceModel      ua_parser.pig.device.Model;
 DEFINE OsFamily         ua_parser.pig.os.Family;
 DEFINE OsMajor          ua_parser.pig.os.Major;
 DEFINE OsMinor          ua_parser.pig.os.Minor;
@@ -182,6 +186,8 @@ UserAgents =
 AgentSpecs =
     FOREACH  UserAgents
     GENERATE DeviceFamily(useragent)    AS DeviceFamily:chararray,
+             DeviceFamily(useragent)    AS DeviceFamily:chararray,
+             DeviceFamily(useragent)    AS DeviceFamily:chararray,
 
              OsFamily(useragent)        AS OsFamily:chararray,
              OsMajor(useragent)         AS OsMajor:chararray,

@@ -113,7 +113,6 @@ public class CachingParser extends Parser {
     if (agentString == null) {
       return null;
     }
-
     if (cacheOS == null) {
       cacheOS = new LRUMap(CACHE_SIZE);
     }

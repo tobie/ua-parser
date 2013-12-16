@@ -25,13 +25,17 @@ import java.util.Map;
  */
 public class Device {
   public final String family;
+  public final String brand;
+  public final String model;
 
-  public Device(String family) {
+  public Device(String family, String brand, String model) {
     this.family = family;
+    this.brand  = brand;
+    this.model  = model;
   }
 
   public static Device fromMap(Map<String, String> m) {
-    return new Device((String) m.get("family"));
+    return new Device(m.get("family"), m.get("brand"), m.get("model"));
   }
 
   @Override
@@ -40,17 +44,24 @@ public class Device {
     if (!(other instanceof Device)) return false;
 
     Device o = (Device) other;
-    return (this.family != null && this.family.equals(o.family)) || this.family == o.family;
+    return (((this.family != null && this.family.equals(o.family)) || this.family == o.family) &&
+            ((this.brand  != null && this.brand.equals(o.brand))   || this.brand  == o.brand ) &&
+            ((this.model  != null && this.model.equals(o.model))   || this.model  == o.model ));
   }
 
   @Override
   public int hashCode() {
-    return family == null ? 0 : family.hashCode();
+    int h = family == null ? 0 : family.hashCode();
+    h += brand == null ? 0 : brand.hashCode();
+    h += model == null ? 0 : model.hashCode();
+    return h;
   }
 
   @Override
   public String toString() {
-    return String.format("{family: %s}",
-                         family == null ? null : '"' + family + '"');
+    return String.format("{family: %s, brand: %s, model: %s}",
+                         family == null ? null : '"' + family + '"',
+                         brand  == null ? null : '"' + brand  + '"',
+                         model  == null ? null : '"' + model  + '"');
   }
 }
