@@ -68,8 +68,9 @@ public class PigTest extends TestCase {
     
     @Test
     public void testNullInput() throws IOException {
-
         assertEquals(null, (new ua_parser.pig.device.Family()).exec(null));
+        assertEquals(null, (new ua_parser.pig.device.Brand()).exec(null));
+        assertEquals(null, (new ua_parser.pig.device.Model()).exec(null));
 
         assertEquals(null, (new ua_parser.pig.os.Family()).exec(null));
         assertEquals(null, (new ua_parser.pig.os.Major()).exec(null));
