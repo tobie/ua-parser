@@ -27,7 +27,7 @@ class Parser extends AbstractParser
     /**
      * Start up the parser by importing the json file to $this->regexes
      *
-     * @param string $customRegexesFileOrArray
+     * @param string|array $customRegexesFileOrArray
      * @throws FileNotFoundException
      */
     public function __construct($customRegexesFileOrArray = null)
