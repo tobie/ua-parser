@@ -109,7 +109,7 @@ class ParserTest extends AbstractParserTest
         $rounds = 0;
         for ($a = 0; $a < 1000; $a++) {
             foreach ($userAgents as $userAgent) {
-                $parser = new Parser();
+                $parser = Parser::create();
                 $this->assertNotSame('Other', $parser->parse($userAgent)->ua->family);
                 $rounds++;
             }
@@ -193,7 +193,7 @@ class ParserTest extends AbstractParserTest
 
         $this->setExpectedException(
             'PHPUnit_Framework_Error_Deprecated',
-            'Passing the include file to the constructor is deprecated. Use Parser::create(string $file = null) instead'
+            'Using the constructor is deprecated. Use Parser::create(string $file = null) instead'
         );
         new $parserClassName(__DIR__ . '/../../../resources/regexes.php');
     }

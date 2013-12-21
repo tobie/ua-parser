@@ -42,12 +42,10 @@ class Parser extends AbstractParser
                 throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
             }
 
-            if ($customRegexesFileOrArray !== null) {
-                trigger_error(
-                    'Passing the include file to the constructor is deprecated. Use Parser::create(string $file = null) instead',
-                    E_USER_DEPRECATED
-                );
-            }
+            trigger_error(
+                'Using the constructor is deprecated. Use Parser::create(string $file = null) instead',
+                E_USER_DEPRECATED
+            );
 
         } elseif (is_array($customRegexesFileOrArray)) {
             $this->regexes = $customRegexesFileOrArray;
