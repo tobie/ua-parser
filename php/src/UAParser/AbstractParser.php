@@ -15,11 +15,58 @@ abstract class AbstractParser
     public static $defaultFile;
 
     /** @var array */
-    protected $regexes;
+    protected $regexes = array();
 
     public function __construct(array $regexes)
     {
         $this->regexes = $regexes;
+    }
+
+    /**
+     * Create parser instance
+     *
+     * Either pass a custom regexes.php file or leave the argument empty and use the default file.
+     *
+     * @param string $file
+     * @throws FileNotFoundException
+     * @return static
+     */
+    public static function create($file = null)
+    {
+        return $file ? static::createCustom($file) : static::createDefault();
+    }
+
+    /**
+     * @return static
+     * @throws FileNotFoundException
+     */
+    protected static function createDefault()
+    {
+        return static::createInstance(
+            static::getDefaultFile(),
+            array('UAParser\Exception\FileNotFoundException', 'defaultFileNotFound')
+        );
+    }
+
+    /**
+     * @return static
+     * @throws FileNotFoundException
+     */
+    protected static function createCustom($file)
+    {
+        return static::createInstance(
+            $file,
+            array('UAParser\Exception\FileNotFoundException', 'customRegexFileNotFound')
+        );
+    }
+
+    private static function createInstance($file, $exceptionFactory)
+    {
+        if (!file_exists($file)) {
+            throw call_user_func($exceptionFactory, $file);
+        }
+
+        return new static(include $file);
     }
 
     /**
@@ -62,6 +109,9 @@ abstract class AbstractParser
         return str_replace('$1', $string, $regex[$key]);
     }
 
+    /**
+     * @return string
+     */
     protected static function getDefaultFile()
     {
         return static::$defaultFile ? static::$defaultFile : __DIR__ . '/../../resources/regexes.php';

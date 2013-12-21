@@ -8,13 +8,12 @@
  */
 namespace UAParser\Tests;
 
-use PHPUnit_Framework_TestCase as AbstractTestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 use UAParser\Parser;
 
-class ParserTest extends AbstractTestCase
+class ParserTest extends AbstractParserTest
 {
     /** @var Parser */
     private $parser;
@@ -24,7 +23,7 @@ class ParserTest extends AbstractTestCase
 
     public static function setUpBeforeClass()
     {
-        static::$staticParser = new Parser();
+        static::$staticParser = Parser::create();
     }
 
     public function setUp()
@@ -96,6 +95,7 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($patch, $result->ua->patch);
     }
 
+    /** @deprecated */
     public function testExceptionOnFileNotFound()
     {
         $this->setExpectedException(
@@ -106,6 +106,7 @@ class ParserTest extends AbstractTestCase
         new Parser('invalidFile');
     }
 
+    /** @deprecated */
     public function testExceptionOnFileNotFoundInvalidDefault()
     {
         $this->setExpectedException(
@@ -156,6 +157,18 @@ class ParserTest extends AbstractTestCase
         $this->assertSame($userAgentString, $result->originalUserAgent);
     }
 
+    /** @deprecated */
+    public function testCreateWithDeprecatedConstructorCustom()
+    {
+        $parserClassName = $this->getParserClassName();
+
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error_Deprecated',
+            'Passing the include file to the constructor is deprecated. Use Parser::create(string $file = null) instead'
+        );
+        new $parserClassName(__DIR__ . '/../../../resources/regexes.php');
+    }
+
     private static function createTestData(Finder $resources)
     {
         $resourcesDirectory = __DIR__ . '/../../../../test_resources';
@@ -184,5 +197,10 @@ class ParserTest extends AbstractTestCase
             isset($testCase['patch_minor']) ? $testCase['patch_minor'] : null,
             $resource->getFilename()
         );
+    }
+
+    protected function getParserClassName()
+    {
+        return 'UAParser\Parser';
     }
 }

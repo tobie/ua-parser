@@ -18,4 +18,17 @@ class InvalidArgumentException extends BaseInvalidArgumentException
             sprintf('One of the command arguments "%s" is required', join('", "', func_get_args()))
         );
     }
+
+    public static function unexpectedArgument($expectedType, $actualType, $position, $symbol)
+    {
+        return new static(
+            sprintf(
+                'Argument %d of %s() is expected to be of type "%s", got "%s"',
+                $position,
+                $symbol,
+                $expectedType,
+                $actualType
+            )
+        );
+    }
 }

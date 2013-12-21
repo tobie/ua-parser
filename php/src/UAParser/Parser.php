@@ -10,6 +10,7 @@
 namespace UAParser;
 
 use UAParser\Exception\FileNotFoundException;
+use UAParser\Exception\InvalidArgumentException;
 use UAParser\Result\Client;
 
 class Parser extends AbstractParser
@@ -26,18 +27,32 @@ class Parser extends AbstractParser
     /**
      * Start up the parser by importing the json file to $this->regexes
      *
-     * @param string $customRegexesFile
+     * @param string $customRegexesFileOrArray
      * @throws FileNotFoundException
      */
-    public function __construct($customRegexesFile = null)
+    public function __construct($customRegexesFileOrArray = null)
     {
-        $regexesFile = $customRegexesFile !== null ? $customRegexesFile : static::getDefaultFile();
-        if (file_exists($regexesFile)) {
-            $this->regexes = include $regexesFile;
-        } elseif ($customRegexesFile !== null) {
-            throw FileNotFoundException::customRegexFileNotFound($regexesFile);
+        if (is_string($customRegexesFileOrArray) || $customRegexesFileOrArray === null) {
+            $regexesFile = $customRegexesFileOrArray !== null ? $customRegexesFileOrArray : static::getDefaultFile();
+            if (file_exists($regexesFile)) {
+                $this->regexes = include $regexesFile;
+            } elseif ($customRegexesFileOrArray !== null) {
+                throw FileNotFoundException::customRegexFileNotFound($regexesFile);
+            } else {
+                throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
+            }
+
+            if ($customRegexesFileOrArray !== null) {
+                trigger_error(
+                    'Passing the include file to the constructor is deprecated. Use Parser::create(string $file = null) instead',
+                    E_USER_DEPRECATED
+                );
+            }
+
+        } elseif (is_array($customRegexesFileOrArray)) {
+            $this->regexes = $customRegexesFileOrArray;
         } else {
-            throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
+            InvalidArgumentException::unexpectedArgument('array', gettype($customRegexesFileOrArray), 0, __METHOD__);
         }
 
         $this->deviceParser = new DeviceParser($this->regexes);
