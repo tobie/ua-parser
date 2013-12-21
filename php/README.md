@@ -37,7 +37,7 @@ use UAParser\Parser;
 
 $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-$parser = new Parser();
+$parser = Parser::create();
 $result = $parser->parse($ua);
 
 print $result->ua->family;            // Safari
@@ -69,7 +69,7 @@ You can use your own `regexes.php` file if you've customized the official file. 
 require_once 'vendor/autoload.php';
 use UAParser\Parser;
 
-$parser = new Parser("path/to/custom/regexes.php");
+$parser = Parser::create("path/to/custom/regexes.php");
 ```
 
 ## Using ua-parser PHP Library from the Command Line ##
