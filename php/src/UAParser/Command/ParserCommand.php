@@ -32,13 +32,8 @@ class ParserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $result = $this->getParser()->parse($input->getArgument('user-agent'));
+        $result = Parser::create()->parse($input->getArgument('user-agent'));
 
         $output->writeln(json_encode($result, JSON_PRETTY_PRINT));
-    }
-
-    private function getParser()
-    {
-        return new Parser();
     }
 }

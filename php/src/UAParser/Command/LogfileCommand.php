@@ -69,7 +69,7 @@ class LogfileCommand extends Command
             throw InvalidArgumentException::oneOfCommandArguments('log-file', 'log-dir');
         }
 
-        $parser = new Parser();
+        $parser = Parser::create();
         $undefinedClients = array();
         /** @var $file SplFileInfo */
         foreach ($this->getFiles($input) as $file) {

@@ -209,7 +209,7 @@ use UAParser\Parser;
 
 $ua = "Mozilla/5.0 (Macintosh; Intel Ma...";
 
-$parser = new Parser();
+$parser = Parser::create();
 $result = $parser->parse($ua);
 
 print $result->ua->family;            // Safari
