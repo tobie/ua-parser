@@ -52,7 +52,12 @@ class Parser extends AbstractParser
         } elseif (is_array($customRegexesFileOrArray)) {
             $this->regexes = $customRegexesFileOrArray;
         } else {
-            InvalidArgumentException::unexpectedArgument('array', gettype($customRegexesFileOrArray), 0, __METHOD__);
+            throw InvalidArgumentException::unexpectedArgument(
+                'array',
+                gettype($customRegexesFileOrArray),
+                0,
+                __METHOD__
+            );
         }
 
         $this->deviceParser = new DeviceParser($this->regexes);

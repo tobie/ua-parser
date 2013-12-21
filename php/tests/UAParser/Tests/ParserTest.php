@@ -95,7 +95,36 @@ class ParserTest extends AbstractParserTest
         $this->assertSame($patch, $result->ua->patch);
     }
 
-    /** @deprecated */
+    /** @group performance */
+    public function testPerformance()
+    {
+        $userAgents = array(
+            'Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en; rv:1.8.1.6) Gecko/20070809 Camino/1.5.1',
+            'Mozilla/5.0 (IE 11.0; Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko',
+            'Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5',
+            'Mozilla/5.0 (X11; CrOS i686 13.587.80) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.99 Safari/535.1'
+        );
+
+        $start = microtime(true) * 1000;
+        $rounds = 0;
+        for ($a = 0; $a < 1000; $a++) {
+            foreach ($userAgents as $userAgent) {
+                $parser = new Parser();
+                $this->assertNotSame('Other', $parser->parse($userAgent)->ua->family);
+                $rounds++;
+            }
+        }
+        $end = microtime(true) * 1000;
+
+        $duration = $end - $start;
+        $expected = 1.5;
+        $this->assertLessThan(
+            $expected,
+            $duration/ $rounds,
+            sprintf('Should not take longer on average than %dms (%d rounds, %Fms)', $expected, $rounds, $duration)
+        );
+    }
+
     public function testExceptionOnFileNotFound()
     {
         $this->setExpectedException(

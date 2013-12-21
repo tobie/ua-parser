@@ -164,6 +164,10 @@ user_agent_parsers:
   - regex: '(facebookexternalhit)/(\d+)\.(\d+)'
     family_replacement: 'FacebookBot'
 
+  # LinkedIn
+  - regex: '(LinkedInBot)/(\d+)\.(\d+)'
+    family_replacement: 'LinkedInBot'
+
   # Twitterbot
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
@@ -237,10 +241,6 @@ user_agent_parsers:
   # http://www.anandtech.com/show/3982/windows-phone-7-review
   - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
     family_replacement: 'IE Large Screen'
-
-  # AFTER THE EDGE CASES ABOVE!
-  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
-  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
 
   #### END MAIN CASES ####
 
@@ -397,10 +397,16 @@ user_agent_parsers:
   - regex: '(Phantom)/V(\d+)\.(\d+)'
     family_replacement: 'Phantom Browser'
 
-  - regex: '([MS]?IE) (\d+)\.(\d+)'
+  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
     family_replacement: 'IE'
 
-  - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
+  # AFTER THE EDGE CASES ABOVE!
+  # AFTER IE11
+  # BEFORE all other IE
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
+
+  - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
   - regex: '(python-requests)/(\d+)\.(\d+)'
@@ -763,6 +769,16 @@ device_parsers:
     device_replacement: 'Kindle Fire HD 8.9" WiFi'
   - regex: '(KFJWA Build)'
     device_replacement: 'Kindle Fire HD 8.9" 4G'
+  - regex: '(KFSOWI Build)'
+    device_replacement: 'Kindle Fire HD 7" WiFi'
+  - regex: '(KFTHWI Build)'
+    device_replacement: 'Kindle Fire HDX 7" WiFi'
+  - regex: '(KFTHWA Build)'
+    device_replacement: 'Kindle Fire HDX 7" 4G'
+  - regex: '(KFAPWI Build)'
+    device_replacement: 'Kindle Fire HDX 8.9" WiFi'
+  - regex: '(KFAPWA Build)'
+    device_replacement: 'Kindle Fire HDX 8.9" 4G'
   - regex: '(Kindle Fire)'
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'

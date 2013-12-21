@@ -206,6 +206,12 @@ test_cases:
     minor: '1'
     patch:
 
+  - user_agent_string: 'LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)'
+    family: 'LinkedInBot'
+    major: '1'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.1pre) Gecko/20090717 Ubuntu/9.04 (jaunty) Shiretoko/3.5.1pre'
     family: 'Firefox (Shiretoko)'
     major: '3'
@@ -603,7 +609,7 @@ test_cases:
     major: '10'
     minor: '53'
     patch:
-    
+
   - user_agent_string: 'User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.20 Safari/537.36 OPR/15.0.1147.18 (Edition Next)'
     family: 'Opera'
     major: '15'
@@ -885,3 +891,9 @@ test_cases:
     major: '1'
     minor: '1'
     patch: '1'
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko/20100101 Firefox/12.0'
+    family: 'IE'
+    major: '11'
+    minor: '0'
+    patch:
