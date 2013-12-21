@@ -125,28 +125,6 @@ class ParserTest extends AbstractParserTest
         );
     }
 
-    public function testExceptionOnFileNotFound()
-    {
-        $this->setExpectedException(
-            'UAParser\Exception\FileNotFoundException',
-            'ua-parser cannot find the custom regexes file you supplied ("invalidFile"). Please make sure you have the correct path.'
-        );
-
-        new Parser('invalidFile');
-    }
-
-    /** @deprecated */
-    public function testExceptionOnFileNotFoundInvalidDefault()
-    {
-        $this->setExpectedException(
-            'UAParser\Exception\FileNotFoundException',
-            'Please download the "invalidFile" file before using ua-parser by running "php bin/uaparser.php uaparser:update"'
-        );
-
-        Parser::$defaultFile = 'invalidFile';
-        new Parser();
-    }
-
     public function testToString()
     {
         $userAgentString = 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20';
@@ -184,18 +162,6 @@ class ParserTest extends AbstractParserTest
         $this->assertSame('', $result->os->toVersion());
 
         $this->assertSame($userAgentString, $result->originalUserAgent);
-    }
-
-    /** @deprecated */
-    public function testCreateWithDeprecatedConstructorCustom()
-    {
-        $parserClassName = $this->getParserClassName();
-
-        $this->setExpectedException(
-            'PHPUnit_Framework_Error_Deprecated',
-            'Using the constructor is deprecated. Use Parser::create(string $file = null) instead'
-        );
-        new $parserClassName(__DIR__ . '/../../../resources/regexes.php');
     }
 
     private static function createTestData(Finder $resources)

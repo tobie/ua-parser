@@ -14,7 +14,8 @@ use UAParser\Result\Device;
 class DeviceParser extends AbstractParser
 {
     /**
-     * Attempts to see if the user agent matches a device_parsers regex from regexes.php
+     * Attempts to see if the user agent matches a device regex from regexes.php
+     *
      * @param string $userAgent a user agent string to test
      * @return Device
      */

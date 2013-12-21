@@ -9,6 +9,8 @@
  */
 namespace UAParser;
 
+use UAParser\Exception\FileNotFoundException;
+
 abstract class AbstractParser
 {
     /** @var string */

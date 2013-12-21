@@ -14,7 +14,7 @@ use UAParser\Result\OperatingSystem;
 class OperatingSystemParser extends AbstractParser
 {
     /**
-     * Attempts to see if the user agent matches an os_parsers regex from regexes.php
+     * Attempts to see if the user agent matches an operating system regex from regexes.php
      *
      * @param string $userAgent a user agent string to test
      * @return OperatingSystem
