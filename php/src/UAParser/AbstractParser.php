@@ -76,8 +76,10 @@ abstract class AbstractParser
      */
     protected function tryMatch(array $regexes, $userAgent)
     {
+
         foreach ($regexes as $regex) {
-            if (preg_match('@' . $regex['regex'] . '@', $userAgent, $matches)) {
+            $flag = isset($regex['regex_flag']) ? $regex['regex_flag'] : '';
+            if (preg_match('@' . $regex['regex'] . '@' . $flag, $userAgent, $matches)) {
 
                 $defaults = array(
                     1 => 'Other',
@@ -130,6 +132,8 @@ abstract class AbstractParser
             $regex[$key]
         );
         
+        $replacement = trim($replacement);
+
         return empty($replacement) ? null : $replacement;
     }
 

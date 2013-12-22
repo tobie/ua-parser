@@ -7,7 +7,7 @@ before_install:
 - sudo apt-get install python-yaml
 - cp regexes.yaml py/ua_parser/regexes.yaml
 - sudo apt-get install php5-cli
-- wget https://getcomposer.org/composer.phar && php composer.phar update
+- wget https://getcomposer.org/composer.phar && php composer.phar install
 - php php/bin/uaparser.php ua-parser:convert
 
 script:
