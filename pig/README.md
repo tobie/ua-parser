@@ -12,10 +12,40 @@ Build:
 
 Usage:
 --------
+For Pig there are UDFs for getting a single value and UDFs for getting a tuple with all values for either Device, Os of UserAgent.
+For most usecases the tuple UDFs will be the most useful.
+
 ```pig
-REGISTER ua-parser-pig-0.1-SNAPSHOT-job.jar
+REGISTER ua-parser-pig-*-job.jar
+
+DEFINE Device           ua_parser.pig.Device;
+DEFINE Os               ua_parser.pig.Os;
+DEFINE UserAgent        ua_parser.pig.UserAgent;
+
+UserAgents =
+    Load 'useragents.txt' AS (useragent:chararray);
+
+AgentSpecs =
+    FOREACH UserAgents
+    GENERATE
+             Device(useragent)              AS Device,
+             Os(useragent)                  AS Os,
+             UserAgent(useragent)           AS UserAgent,
+
+             useragent                      AS Useragent;
+
+DESCRIBE AgentSpecs;
+DUMP AgentSpecs;
+```
+
+The versions that return only a single value:
+
+```pig
+REGISTER ua-parser-pig-*-job.jar
 
 DEFINE DeviceFamily     ua_parser.pig.device.Family;
+DEFINE DeviceBrand      ua_parser.pig.device.Brand;
+DEFINE DeviceModel      ua_parser.pig.device.Model;
 DEFINE OsFamily         ua_parser.pig.os.Family;
 DEFINE OsMajor          ua_parser.pig.os.Major;
 DEFINE OsMinor          ua_parser.pig.os.Minor;
@@ -32,6 +62,8 @@ UserAgents =
 AgentSpecs =
     FOREACH  UserAgents
     GENERATE DeviceFamily(useragent)    AS DeviceFamily:chararray,
+             DeviceFamily(useragent)    AS DeviceFamily:chararray,
+             DeviceFamily(useragent)    AS DeviceFamily:chararray,
 
              OsFamily(useragent)        AS OsFamily:chararray,
              OsMajor(useragent)         AS OsMajor:chararray,
