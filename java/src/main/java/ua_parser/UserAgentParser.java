@@ -100,10 +100,15 @@ public class UserAgentParser {
         family = matcher.group(1);
       }
 
+      // for chinese browser, can not get browser version, so get the core of the browser
       if (v1Replacement != null) {
-        v1 = v1Replacement;
+    	  if (v1Replacement.contains("$1") && groupCount >= 2 && matcher.group(2) != null) {
+    		  v1 = v1Replacement.replaceFirst("\\$1", Matcher.quoteReplacement(matcher.group(2)));
+          } else {
+        	  v1 = v1Replacement;
+          }
       } else if (groupCount >= 2) {
-        v1 = matcher.group(2);
+          v1 = matcher.group(2);
       }
 
       if (v2Replacement != null) {

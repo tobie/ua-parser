@@ -75,8 +75,11 @@ user_agent_parsers:
     family_replacement: 'Opera'
 
   # Palm WebOS looks a lot like Safari.
-  - regex: '(hpw|web)OS/(\d+)\.(\d+)(?:\.(\d+))?'
-    family_replacement: 'webOS Browser'
+  - regex: '(webOSBrowser)/(\d+)\.(\d+)'
+  - regex: '(webOS)/(\d+)\.(\d+)'
+    family_replacement: 'webOSBrowser'
+  - regex: '(wOSBrowser).+TouchPad/(\d+)\.(\d+)'
+    family_replacement: 'webOS TouchPad'
 
   # LuaKit has no version info.
   # http://luakit.org/projects/luakit/
@@ -119,6 +122,8 @@ user_agent_parsers:
   # Bots
   - regex: '(YottaaMonitor|BrowserMob|HttpMonitor|YandexBot|Slurp|BingPreview|PagePeeker|ThumbShotsBot|WebThumb|URL2PNG|ZooShot|GomezA|Catchpoint bot|Willow Internet Crawler|Google SketchUp|Read%20Later)'
 
+  # must go before NetFront below
+  - regex: '(Kindle)/(\d+)\.(\d+)'
   - regex: '(Symphony) (\d+).(\d+)'
 
   - regex: '(Minimo)'
@@ -145,16 +150,57 @@ user_agent_parsers:
   # Tizen Browser (second case included in browser/major.minor regex)
   - regex: '(SLP Browser)/(\d+)\.(\d+)'
     family_replacement: 'Tizen Browser'
+  
+  ## Chinese Browsers
+  # TaoBao
+  - regex: '(TaoBrowser)/(\d+)\.(\d+)'
+    family_replacement: 'TaoBao Browser'
 
+  # LieBao Browser
+  - regex: '(Chrome/(\d+)\.(\d+).*LBBROWSER)'
+    family_replacement: 'LieBao Browser'
+    v1_replacement: 'Chrome $1'
+    
+  # CooNovo Browser
+  - regex: 'CooNovo/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'CooNovo Browser'
+    
+  # 360 Browser
+  - regex: '(Chrome/(\d+)\.(\d+).*QIHU[/\s]360SE)'
+    family_replacement: '360 SE Browser'
+    v1_replacement: 'Chrome $1'
+  - regex: '(Chrome/(\d+)\.(\d+).*QIHU[/\s]360EE)'
+    family_replacement: '360 EE Browser'
+    v1_replacement: 'Chrome $1'
+  - regex: '(MSIE[/\s](\d+)\.(\d+).*QIHU[/\s]360SE)'
+    family_replacement: '360 SE Browser'
+    v1_replacement: 'IE $1'
+  - regex: '(MSIE[/\s](\d+)\.(\d+).*QIHU[/\s]360EE)'
+    family_replacement: '360 EE Browser'
+    v1_replacement: 'IE $1'
+
+  # TheWorld
+  - regex: '(TheWorld[/\s](\d+))'
+    family_replacement: 'TheWorld'
+  
   # Sogou Explorer 2.X
-  - regex: '(SE 2\.X) MetaSr (\d+)\.(\d+)'
+  - regex: '(Chrome/(\d+)\.(\d+).*SE 2\.[Xx])'
     family_replacement: 'Sogou Explorer'
+    v1_replacement: 'Chrome $1'
+  - regex: '(MSIE[/\s](\d+)\.(\d+).*SE 2\.[Xx]) MetaSr (\d+)\.(\d+)'
+    family_replacement: 'Sogou Explorer'
+    v1_replacement: 'IE $1'
 
   # Baidu Browsers (desktop spoofs chrome & IE, explorer is mobile)
+  - regex: '(BIDUBrowser)[/\s](\d+)'
+    family_replacement: 'Baidu Browser'
+  - regex: '(BIDUBrowser)/2.[Xx]'
+    family_replacement: 'Baidu Browser'
+    v1_replacement: 'Chrome $1'
   - regex: '(baidubrowser)[/\s](\d+)'
     family_replacement: 'Baidu Browser'
   - regex: '(FlyFlow)/(\d+)\.(\d+)'
-    family_replacement: 'Baidu Explorer'
+    family_replacement: 'Baidu Mobile Browser'
 
   # Pingdom
   - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
@@ -241,6 +287,10 @@ user_agent_parsers:
   # http://www.anandtech.com/show/3982/windows-phone-7-review
   - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
     family_replacement: 'IE Large Screen'
+
+  # AFTER THE EDGE CASES ABOVE!
+  - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
 
   #### END MAIN CASES ####
 
@@ -406,6 +456,7 @@ user_agent_parsers:
   - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+)'
   - regex: '(Firefox)/(\d+)\.(\d+)(pre|[ab]\d+[a-z]*)?'
 
+  # MSIE
   - regex: '([MS]?IE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
@@ -496,6 +547,16 @@ os_parsers:
 
   - regex: '(Android) Honeycomb'
     os_v1_replacement: '3'
+    
+  ##########
+  # Chinese Android
+  ##########
+  - regex: '(Linux; U; Adr (\d+)\.(\d+)\.(\d+))'
+    os_replacement: 'Android'
+  - regex: '(Linux; U; (\d+)\.(\d+)\.(\d+))'
+    os_replacement: 'Android'
+  - regex: '(Android/(\d+)\.(\d+))'
+    os_replacement: 'Android'
 
   ##########
   # Kindle Android
@@ -503,7 +564,6 @@ os_parsers:
   - regex: '(Silk-Accelerated=[a-z]{4,5})'
     os_replacement: 'Android'
 
-  ##########
   # Windows
   # http://en.wikipedia.org/wiki/Windows_NT#Releases
   # possibility of false positive when different marketing names share same NT kernel
@@ -511,46 +571,88 @@ os_parsers:
   # lots of ua strings have Windows NT 4.1 !?!?!?!? !?!? !? !????!?! !!! ??? !?!?! ?
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
+  - regex: '(Windows Phone 6\.5)'
+    os_replacement: 'Windows Phone OS'
+    os_v1_replacement: '6'
+    os_v2_replacement: '5'
 
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
-    os_replacement: 'Windows XP'
+    os_replacement: 'Windows'
+    os_v1_replacement: 'XP'
 
   # ie mobile des ktop mode
   # spoofs nt 6.1. must come before windows 7
   - regex: '(XBLWP7)'
-    os_replacement: 'Windows Phone'
+    os_replacement: 'Windows Phone OS'
+    os_v1_replacement: '7'
+ 
+  - regex: '(Windows) NT 6\.1'
+    os_v1_replacement: '7'
 
-  - regex: '(Windows NT 6\.1)'
-    os_replacement: 'Windows 7'
+  - regex: '(Windows) NT 6\.0'
+    os_v1_replacement: 'Vista'
 
-  - regex: '(Windows NT 6\.0)'
-    os_replacement: 'Windows Vista'
+  - regex: '(Windows) 98'
+    os_v1_replacement: '98'
 
-  - regex: '(Win 9x 4\.90)'
-    os_replacement: 'Windows Me'
+  - regex: '(Windows) XP'
+    os_v1_replacement: 'XP'
 
-  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000|Windows 3.1)'
+  - regex: '(Windows) ME'
+    os_v1_replacement: 'ME'
+
+  - regex: '(Windows) 95'
+    os_v1_replacement: '95'
+
+  - regex: '(Windows CE)'
+
+  - regex: '(Windows) 7'
+    os_v1_replacement: '7'
+
+  - regex: '(Windows) NT 4\.0'
+    os_v1_replacement: 'NT 4.0'
+
+  - regex: '(Windows) Vista'
+    os_v1_replacement: 'Vista'
+
+  - regex: '(Windows) 2000'
+    os_v1_replacement: '2000'
 
   - regex: '(Windows NT 6\.2; ARM;)'
-    os_replacement: 'Windows RT'
+    os_replacement: 'Windows'
+    os_v1_replacement: 'NT'
 
   # is this a spoof or is nt 6.2 out and about in some capacity?
-  - regex: '(Windows NT 6\.2)'
-    os_replacement: 'Windows 8'
+  - regex: '(Windows) NT 6\.2'
+    os_v1_replacement: '8'
 
-  - regex: '(Windows NT 5\.0)'
-    os_replacement: 'Windows 2000'
+  # I assume that windows 6.3 ARM codename windows 8.1 ARM is windows RT in release name
+  - regex: '(Windows NT 6\.3; ARM;)'
+    os_replacement: 'Windows'
+    os_v1_replacement: 'NT'
 
+  # I assume that windows 6.3 codename windows 8.1 is windows 8 in release name
+  - regex: '(Windows NT 6\.3)'
+    os_replacement: 'Windows'
+    os_v1_replacement: '8.1'
+
+  - regex: '(Windows) NT 5\.0'
+    os_v1_replacement: '2000'
+
+  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
   - regex: '(Windows Phone) (\d+)\.(\d+)'
-  - regex: '(Windows Phone) OS (\d+)\.(\d+)'
+
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
   - regex: '(WinNT4.0)'
-    os_replacement: 'Windows NT 4.0'
+    os_replacement: 'Windows'
+    os_v1_replacement: 'NT 4.0'
 
   - regex: '(Win98)'
-    os_replacement: 'Windows 98'
+    os_replacement: 'Windows'
+    os_v1_replacement: '98'
+
 
   ##########
   # Tizen OS from Samsung
@@ -579,6 +681,10 @@ os_parsers:
   ##########
   - regex: '(CPU OS|iPhone OS) (\d+)_(\d+)(?:_(\d+))?'
     os_replacement: 'iOS'
+  - regex: '(iOS; U; iPh OS) (\d+)_(\d+)(?:_(\d+))?'
+    os_replacement: 'iOS'
+  - regex: '(CPU OS|iPhone OS (\d+)\.(\d+)\.(\d+))'
+    os_replacement: 'iOS'
 
   # remaining cases are mostly only opera uas, so catch opera as to not catch iphone spoofs
   - regex: '(iPhone|iPad|iPod); Opera'
@@ -590,6 +696,8 @@ os_parsers:
 
   - regex: '(AppleTV)/(\d+)\.(\d+)'
     os_replacement: 'ATV OS X'
+    os_v1_replacement: '$1'
+    os_v2_replacement: '$2'
 
   ##########
   # Chrome OS
@@ -849,6 +957,20 @@ device_parsers:
     device_replacement: 'HP Veer'
 
   ##########
+  # PlayStation
+  ##########
+  - regex: '(PlayStation Portable)'
+  - regex: '(PlayStation Vita)'
+
+  ##########
+  # incomplete!
+  # Kindle
+  ##########
+  - regex: '(Kindle Fire)'
+  - regex: '(Kindle)'
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    device_replacement: 'Kindle Fire'
+
   # AppleTV
   # No built in browser that I can tell
   # Stack Overflow indicated iTunes-AppleTV/4.1 as a known UA for app available and I'm seeing it in live traffic
@@ -1087,3 +1209,42 @@ device_parsers:
   - regex: '(bingbot|bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler)'
     device_replacement: 'Spider'
 
+mobile_user_agent_families:
+  - 'Firefox Mobile'
+  - 'Opera Mobile'
+  - 'Opera Mini'
+  - 'Mobile Safari'
+  - 'webOS'
+  - 'IE Mobile'
+  - 'Playstation Portable'
+  - 'Nokia'
+  - 'Blackberry'
+  - 'Palm'
+  - 'Silk'
+  - 'Android'
+  - 'Maemo'
+  - 'Obigo'
+  - 'Netfront'
+  - 'AvantGo'
+  - 'Teleca'
+  - 'SEMC-Browser'
+  - 'Bolt'
+  - 'Iris'
+  - 'UP.Browser'
+  - 'Symphony'
+  - 'Minimo'
+  - 'Bunjaloo'
+  - 'Jasmine'
+  - 'Dolfin'
+  - 'Polaris'
+  - 'BREW'
+  - 'Chrome Mobile'
+  - 'UC Browser'
+  - 'Tizen Browser'
+
+# Some select mobile OSs report a desktop browser.
+# make sure we note they're mobile
+mobile_os_families:
+  - 'Windows Phone 6.5'
+  - 'Windows CE'
+  - 'Symbian OS'
