@@ -1,4 +1,12 @@
 user_agent_parsers:
+  ### START OF VIASAT MODS ###
+  - regex: 'Mozilla/\d+\.\d+.*(Genieo)/(\d+)\.(\d+)'
+    family_replacement: 'Genieo'
+  - regex: '\[Mozilla/\d+\.\d+.*(Firefox)/(\d+)\]'
+    family_replacement: 'Firefox'
+  ### END OF VIASAT MODS ###
+
+
   #### SPECIAL CASES TOP ####
 
   # HbbTV standard defines what features the browser should understand.
@@ -82,7 +90,7 @@ user_agent_parsers:
   # http://luakit.org/projects/luakit/
   - regex: '(luakit)'
     family_replacement: 'LuaKit'
-    
+
   # Snowshoe
   - regex: '(Snowshoe)/(\d+)\.(\d+).(\d+)'
 
@@ -206,10 +214,10 @@ user_agent_parsers:
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris) (\d+)\.(\d+)\.?(\d+)?'
-  
+
   # Kindle WebKit
   - regex: '(Kindle)/(\d+)\.(\d+)'
-  
+
   # weird android UAs
   - regex: '(Android) Donut'
     v1_replacement: '1'
@@ -268,7 +276,7 @@ user_agent_parsers:
     family_replacement: 'NetFront NX'
 
   - regex: '(XBMC)/(\d+)\.(\d+)[-\w\s]+(r\d+)'
-  
+
   - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'NetFront NX'
   - regex: '(Nintendo 3DS)'
@@ -309,7 +317,7 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
 
   - regex: '(AvantGo) (\d+).(\d+)'
-  
+
   - regex: '(OneBrowser)/(\d+).(\d+)'
     family_replacement: 'ONE Browser'
 
@@ -398,7 +406,7 @@ user_agent_parsers:
 
   - regex: '(Teleca)'
     family_replacement: 'Teleca Browser'
-    
+
   - regex: '(Phantom)/V(\d+)\.(\d+)'
     family_replacement: 'Phantom Browser'
 
@@ -587,7 +595,7 @@ os_parsers:
   - regex: '(Mac OS X); (Darwin) (12).(\d+)'
     os_v1_replacement: '10'
     os_v2_replacement: '8'
-  
+
   # IE on Mac doesn't specify version number
   - regex: 'Mac_PowerPC'
     os_replacement: 'Mac OS'
@@ -693,7 +701,7 @@ os_parsers:
   - regex: '(GoogleTV)/[\da-z]+'
 
   - regex: '(WebTV)/(\d+).(\d+)'
-  
+
   ##########
   # Misc mobile
   ##########
@@ -797,7 +805,7 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
-      
+
   #########
   # Android General Device Matching (far from perfect)
   #########
@@ -876,10 +884,10 @@ device_parsers:
 
   - regex: 'AdsBot-Google-Mobile'
     device_replacement: 'Spider'
-   
+
   - regex: 'Googlebot-Mobile/(\d+).(\d+)'
     device_replacement: 'Spider'
-    
+
   ##########
   # complete but probably catches spoofs
   # iSTUFF
@@ -1027,7 +1035,7 @@ device_parsers:
     device_replacement: 'Motorola $1'
   - regex: 'MOT\-([A-Za-z0-9]+)'
     device_replacement: 'Motorola $1'
-    
+
   ##########
   # nintendo
   ##########
@@ -1041,7 +1049,7 @@ device_parsers:
   ##########
   - regex: 'Pantech([A-Za-z0-9]+)'
     device_replacement: 'Pantech $1'
- 
+
   ##########
   # philips
   ##########
@@ -1106,4 +1114,9 @@ device_parsers:
   ##########
   - regex: '\bXbox\b'
     device_replacement: 'Xbox'
+
+  ### START OF VIASAT MODS ###
+  - regex: '(((?c)NT)|((?i)mac os)|((?i)linux))'
+    device_replacement: 'PC'
+  ### END OF VIASAT MODS ###
 
