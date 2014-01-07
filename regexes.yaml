@@ -4,6 +4,12 @@ user_agent_parsers:
     family_replacement: 'Genieo'
   - regex: '\[Mozilla/\d+\.\d+.*(Firefox)/(\d+)\]'
     family_replacement: 'Firefox'
+  - regex: 'Mozilla/\d+\.\d+.*(paessler)'
+    family_replacement: 'Paessler'
+  - regex: 'Mozilla/\d+\.\d+.*(AdobeAIR)/(\d+)\.(\d+)'
+    family_replacement: 'AdobeAIR'
+  - regex: 'Mozilla/\d+\.\d+.*(Konfabulator)/(\d+)\.(\d+).(\d+)'
+    family_replacement: 'Konfabulator'
   ### END OF VIASAT MODS ###
 
 
@@ -730,6 +736,21 @@ os_parsers:
   - regex: 'SunOS'
     os_replacement: 'Solaris'
 
+
+  ### START OF VIASAT MODS ###
+  - regex: 'Mozilla/\d+\.\d+.*(iOS)'
+    os_replacement: 'iOS'
+  - regex: 'Mozilla/\d+\.\d+.*(Android)'
+    os_replacement: 'Android'
+  - regex: 'Mozilla/\d+\.\d+.*(Win32)'
+    os_replacement: 'Windows'
+  - regex: 'Mozilla/\d+\.\d+.*(Win64)'
+    os_replacement: 'Windows'
+  - regex: 'Mozilla/\d+\.\d+.*(Windows)'
+    os_replacement: 'Windows'
+  ### END OF VIASAT MODS ###  
+
+
 device_parsers:
   ##########
   # incomplete!
@@ -1109,14 +1130,13 @@ device_parsers:
   - regex: '(bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler)'
     device_replacement: 'Spider'
 
-  ##########
-  # Xbox
-  ##########
-  - regex: '\bXbox\b'
-    device_replacement: 'Xbox'
 
   ### START OF VIASAT MODS ###
-  - regex: '(((?c)NT)|((?i)mac os)|((?i)linux))'
+  - regex: '\bXbox\b'
+    device_replacement: 'Xbox'
+  - regex: 'Mozilla/\d+\.\d+.*(Vizio)'
+    family_replacement: 'Vizio'
+  - regex: '(((?c)NT)|((?i)mac os)|((?i)linux)|((?c)CrOS)|((?i)Win32)|((?i)Win64)|((?i)Windows))'
     device_replacement: 'PC'
   ### END OF VIASAT MODS ###
-
+  
