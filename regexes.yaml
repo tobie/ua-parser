@@ -88,7 +88,7 @@ user_agent_parsers:
 
   # Lightning (for Thunderbird)
   # http://www.mozilla.org/projects/calendar/lightning/
-  - regex: '(Lightning)/(\d+)\.(\d+)([ab]?\d+[a-z]*)'
+  - regex: '(Lightning)/(\d+)\.(\d+)\.?((?:[ab]?\d+[a-z]*)|(?:\d*))'
 
   # Swiftfox
   - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+(?:pre)?) \(Swiftfox\)'
@@ -190,12 +190,37 @@ user_agent_parsers:
   # AOL Browser (IE-based)
   - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+)'
 
+
+
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
 
   # Browser/major_version.minor_version.beta_version
   - regex: '(AdobeAIR|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Epiphany|Shiira|Sunrise|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjalloo|Google Earth|Raven for Mac|Openwave)/(\d+)\.(\d+)\.(\d+)'
+
+  # Outlook 2007
+  - regex: 'MSOffice 12'
+    family_replacement: 'Outlook'
+    v1_replacement: '2007'
+
+  # Outlook 2010
+  - regex: 'MSOffice 14'
+    family_replacement: 'Outlook'
+    v1_replacement: '2010'
+
+  # Outlook 2013
+  - regex: 'Microsoft Outlook 15\.\d+\.\d+'
+    family_replacement: 'Outlook'
+    v1_replacement: '2013'
+
+  # Apple Air Mail
+  - regex: '(Airmail) (\d+)\.(\d+)(?:\.(\d+))?'
+
+  # Thunderbird
+  - regex: '(Thunderbird)/(\d+)\.(\d+)\.(\d+(?:pre)?)'
+    family_replacement: 'Thunderbird'
 
   # Chrome/Chromium/major_version.minor_version.beta_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)\.(\d+)'
@@ -399,6 +424,12 @@ user_agent_parsers:
 
   - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
     family_replacement: 'IE'
+
+ # Apple Mail
+
+  # apple mail - not directly detectable, have it after Safari stuff
+  - regex: '(AppleWebKit)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'AppleMail'
 
   # AFTER THE EDGE CASES ABOVE!
   # AFTER IE11
