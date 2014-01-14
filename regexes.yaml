@@ -1135,7 +1135,7 @@ device_parsers:
   - regex: '\bXbox\b'
     device_replacement: 'Xbox'
   - regex: 'Mozilla/\d+\.\d+.*(Vizio)'
-    family_replacement: 'Vizio'
+    device_replacement: 'Vizio'
   - regex: '(((?c)NT)|((?i)mac os)|((?i)linux)|((?c)CrOS)|((?i)Win32)|((?i)Win64)|((?i)Windows))'
     device_replacement: 'PC'
   ### END OF VIASAT MODS ###
