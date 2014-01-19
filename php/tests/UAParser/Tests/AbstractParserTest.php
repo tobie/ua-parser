@@ -51,7 +51,7 @@ abstract class AbstractParserTest extends AbstractTestCase
 
         $this->setExpectedException(
             'UAParser\Exception\FileNotFoundException',
-            'Please download the "invalidFile" file before using ua-parser by running "php bin/uaparser.php uaparser:update"'
+            'Please download the "invalidFile" file before using ua-parser by running "php bin/uaparser.php ua-parser:update"'
         );
 
         $parserClassName::$defaultFile = 'invalidFile';
