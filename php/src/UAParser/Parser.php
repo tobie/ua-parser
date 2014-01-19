@@ -9,8 +9,6 @@
  */
 namespace UAParser;
 
-use UAParser\Exception\FileNotFoundException;
-use UAParser\Exception\InvalidArgumentException;
 use UAParser\Result\Client;
 
 class Parser extends AbstractParser
@@ -27,37 +25,11 @@ class Parser extends AbstractParser
     /**
      * Start up the parser by importing the json file to $this->regexes
      *
-     * @param string|array $customRegexesFileOrArray
-     * @throws FileNotFoundException
+     * @param array $regexes
      */
-    public function __construct($customRegexesFileOrArray = null)
+    public function __construct(array $regexes)
     {
-        if (is_string($customRegexesFileOrArray) || $customRegexesFileOrArray === null) {
-            $regexesFile = $customRegexesFileOrArray !== null ? $customRegexesFileOrArray : static::getDefaultFile();
-            if (file_exists($regexesFile)) {
-                $this->regexes = include $regexesFile;
-            } elseif ($customRegexesFileOrArray !== null) {
-                throw FileNotFoundException::customRegexFileNotFound($regexesFile);
-            } else {
-                throw FileNotFoundException::defaultFileNotFound(static::getDefaultFile());
-            }
-
-            trigger_error(
-                'Using the constructor is deprecated. Use Parser::create(string $file = null) instead',
-                E_USER_DEPRECATED
-            );
-
-        } elseif (is_array($customRegexesFileOrArray)) {
-            $this->regexes = $customRegexesFileOrArray;
-        } else {
-            throw InvalidArgumentException::unexpectedArgument(
-                'array',
-                gettype($customRegexesFileOrArray),
-                0,
-                __METHOD__
-            );
-        }
-
+        parent::__construct($regexes);
         $this->deviceParser = new DeviceParser($this->regexes);
         $this->operatingSystemParser = new OperatingSystemParser($this->regexes);
         $this->userAgentParser = new UserAgentParser($this->regexes);

@@ -45,7 +45,6 @@ abstract class AbstractParserTest extends AbstractTestCase
         $parserClassName::create('foo.php');
     }
 
-    /** @deprecated */
     public function testExceptionOnFileNotFoundInvalidDefault()
     {
         $parserClassName = $this->getParserClassName();
