@@ -3,7 +3,13 @@ namespace UAParser\Command;
 
 use Symfony\Component\Console\Application;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+$packageAutoloader = __DIR__ . '/../../vendor/autoload.php';
+$standaloneAutoloader = __DIR__ . '/../../../../autoload.php';
+if (file_exists($packageAutoloader)) {
+    require_once $packageAutoloader;
+} else {
+    require_once $standaloneAutoloader;
+}
 
 $resourceDirectory = realpath(__DIR__ . '/../resources');
 $defaultYamlFile = realpath(__DIR__ . '/../../regexes.yaml');
