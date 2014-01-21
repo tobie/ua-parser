@@ -678,7 +678,7 @@ os_parsers:
   ##########
   # Firefox OS
   ##########
-  - regex: '\(Mobile;.+Firefox/\d+\.\d+'
+  - regex: '\((?:Mobile|Tablet);.+Firefox/\d+\.\d+'
     os_replacement: 'Firefox OS'
 
   ##########
