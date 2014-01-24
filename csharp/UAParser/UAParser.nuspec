@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>enemaerke</authors>
     <owners>enemaerke</owners>
-    <projectUrl>http://github.com/enemaerke/uaparser</projectUrl>
+    <projectUrl>https://github.com/tobie/ua-parser</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A .net wrapper for the ua-parser library</description>
     <copyright>Copyright 2013</copyright>

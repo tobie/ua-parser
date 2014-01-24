@@ -45,11 +45,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet.Core">
-      <HintPath>..\packages\YamlDotNet.Core.1.1.17\lib\YamlDotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="YamlDotNet.RepresentationModel">
-      <HintPath>..\packages\YamlDotNet.RepresentationModel.1.1.17\lib\YamlDotNet.RepresentationModel.dll</HintPath>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\packages\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
