@@ -1,6 +1,9 @@
 Usage
 ========
 
+**NOTE: This parser does not yet support brand-model parsing of `regexes.yaml` and therefore relies on `regexes_outdated.yaml` file**
+
+
     package main
 
     import (
@@ -10,7 +13,7 @@ Usage
 
     func main() {
       testStr := "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true"
-      regexFile := "../../regexes.yaml"
+      regexFile := "../../regexes_outdated.yaml"
       parser := uaparser.New(regexFile)
       client := parser.Parse(testStr)
       fmt.Println(client.UserAgent.Family)  // "Amazon Silk"
@@ -24,6 +27,7 @@ Usage
       fmt.Println(client.Os.PatchMinor)     // ""
       fmt.Println(client.Device.Family)     // "Kindle Fire"
     }
+
 
 Testing
 ========

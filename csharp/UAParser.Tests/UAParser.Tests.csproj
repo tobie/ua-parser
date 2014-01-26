@@ -76,7 +76,7 @@
     <EmbeddedResource Include="..\..\test_resources\pgts_browser_list.yaml">
       <Link>TestResources\pgts_browser_list.yaml</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\test_device.yaml">
+    <EmbeddedResource Include="..\..\test_resources\test_device_outdated.yaml">
       <Link>TestResources\test_device.yaml</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser.yaml">

@@ -1,6 +1,8 @@
 ua-parser
 =========
 
+**NOTE: This parser does not yet support brand-model parsing of `regexes.yaml` and therefore relies on `regexes_outdated.yaml` file**
+
 `ua-parser` is a multi-language port of [BrowserScope][1]'s [user agent string parser][2].
 
 The crux of the original parser--the data collected by [Steve Souders][3] over the years--has been extracted into a separate [YAML file][4] so as to be reusable _as is_ by implementations in other programming languages.
