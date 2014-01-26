@@ -102,13 +102,37 @@ abstract class AbstractParser
      * @param string $string
      * @return string
      */
-    protected function replaceString($regex, $key, $string)
+    protected function replaceString(array $regex, $key, $string)
     {
         if (!isset($regex[$key])) {
             return $string;
         }
 
         return str_replace('$1', $string, $regex[$key]);
+    }
+
+    /**
+     * @param array $regex
+     * @param string $key
+     * @param string $default
+     * @param array $matches
+     * @return string
+     */
+    protected function multiReplace(array $regex, $key, $default, array $matches)
+    {
+        if (!isset($regex[$key])) {
+            return $default;
+        }
+        
+        $replacement = preg_replace_callback(
+            "|\\$(?<key>\d)|",
+            function ($m) use ($matches){
+                return isset($matches[$m['key']]) ? $matches[$m['key']] : "";
+            },
+            $regex[$key]
+        );
+        
+        return empty($replacement) ? null : $replacement;
     }
 
     /**
