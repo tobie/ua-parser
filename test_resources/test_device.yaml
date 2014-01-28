@@ -213,6 +213,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0'
     family: 'Other'
 
+  - user_agent_string: 'Mozilla/5.0 (Tablet; rv:29.0) Gecko/29.0 Firefox/29.0'
+    family: 'Other'
+
   - user_agent_string: 'PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1'
     family: 'Pantech P6010'
 
