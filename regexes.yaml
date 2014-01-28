@@ -1063,6 +1063,8 @@ device_parsers:
     device_replacement: 'Samsung $1'
   - regex: 'SAMSUNG\; ([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
+  - regex: 'SAMSUNG ([A-Za-z0-9\-]+)'
+    device_replacement: 'Samsung $1'
 
   ##########
   # Sega
