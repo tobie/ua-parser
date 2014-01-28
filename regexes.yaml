@@ -814,17 +814,6 @@ device_parsers:
   - regex: '(Kindle)'
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
-      
-  #########
-  # Android General Device Matching (far from perfect)
-  #########
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; WOWMobile (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{0,2};(.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
 
   ##########
   # NOKIA
@@ -1074,6 +1063,8 @@ device_parsers:
     device_replacement: 'Samsung $1'
   - regex: 'SAMSUNG\; ([A-Za-z0-9\-]+)'
     device_replacement: 'Samsung $1'
+  - regex: 'SAMSUNG ([A-Za-z0-9\-]+)'
+    device_replacement: 'Samsung $1'
 
   ##########
   # Sega
@@ -1094,6 +1085,17 @@ device_parsers:
   ##########
   - regex: '(WebTV)/(\d+).(\d+)'
 
+  #########
+  # Android General Device Matching (far from perfect)
+  #########
+  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; WOWMobile (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{0,2};(.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
+  
   ##########
   # Generic Smart Phone
   ##########
