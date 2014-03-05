@@ -172,6 +172,10 @@ user_agent_parsers:
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
 
+  # Google Plus
+  - regex: 'Google.*/\+/web/snippet'
+    family_replacement: 'GooglePlusBot'
+
   # Rackspace Monitoring
   - regex: '(Rackspace Monitoring)/(\d+)\.(\d+)'
     family_replacement: 'RackspaceBot'
