@@ -163,7 +163,7 @@ test_cases:
     major: '18'
     minor: '0'
     patch: '1025'
-    
+
   - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.1.1; SPH-L710 Build/JRO03L) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19'
     family: 'Chrome Mobile'
     major: '18'
@@ -210,6 +210,12 @@ test_cases:
     family: 'LinkedInBot'
     major: '1'
     minor: '0'
+    patch:
+
+  - user_agent_string: 'Google (+https://developers.google.com/+/web/snippet/)'
+    family: 'GooglePlusBot'
+    major:
+    minor:
     patch:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.1pre) Gecko/20090717 Ubuntu/9.04 (jaunty) Shiretoko/3.5.1pre'
@@ -435,7 +441,7 @@ test_cases:
     major: '3'
     minor: '3'
     patch:
-        
+
   - user_agent_string: 'Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US'
     family: 'NetFront NX'
     major:
@@ -483,7 +489,7 @@ test_cases:
     major: '4'
     minor: '1'
     patch:
-    
+
   - user_agent_string: 'NetFront/4.2 (BMP 1.0.4; U; en-us; LG; NetFront/4.2/AMB) Boost LG272 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1'
     family: 'NetFront'
     major: '4'
@@ -525,7 +531,7 @@ test_cases:
     major:
     minor:
     patch:
- 
+
   - user_agent_string: 'Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2'
     family: 'Obigo'
     major:
@@ -567,7 +573,7 @@ test_cases:
     major: '5'
     minor: '1'
     patch:
-         
+
   - user_agent_string: 'Opera/9.80 (Series 60; Opera Mini/6.24455/25.677; U; fr) Presto/2.5.25 Version/10.54'
     family: 'Opera Mini'
     major: '6'
@@ -579,7 +585,7 @@ test_cases:
     major: '7'
     minor: '0'
     patch:
-              
+
   - user_agent_string: 'Opera/9.80 (S60; SymbOS; Opera Mobi/275; U; es-ES) Presto/2.4.13 Version/10.00'
     family: 'Opera Mobile'
     major: '10'
@@ -837,7 +843,7 @@ test_cases:
     major: '6'
     minor: '1'
     patch: '0'
-    
+
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'
     major: '534'
@@ -873,7 +879,7 @@ test_cases:
     major: '1'
     minor: '2'
     patch:
-        
+
   - user_agent_string: 'Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0'
     family: 'webOS Browser'
     major: '3'
