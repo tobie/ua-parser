@@ -7,7 +7,7 @@ var assert = require('assert'),
 function readYAML(fileName) {
   var file = path.join(__dirname, '..', '..', 'test_resources', fileName);
   var fixtures = fs.readFileSync(file, 'utf8');
-  fixtures = yaml.eval(fixtures);
+  fixtures = yaml.eval(fixtures); // jshint ignore:line
   return fixtures;
 }
 
@@ -55,7 +55,12 @@ function msg(name, actual, expected) {
     fixtures.forEach(function(f) {
       test(f.user_agent_string, function() {
         var device = uaParser.parse(f.user_agent_string).device;
+        fixFixture(f, ['family', 'brand', 'model']);
+        
         assert.strictEqual(device.family, f.family, msg('device.family', device.family, f.family));
+        assert.strictEqual(device.brand, f.brand, msg('device.brand', device.brand, f.brand));
+        assert.strictEqual(device.model, f.model, msg('device.model', device.model, f.model));
+        
       });
     });
   });
@@ -68,6 +73,6 @@ function fixFixture(f, props) {
     if (typeof f[p] === 'object') {
       f[p] = null;
     }
-  })
+  });
   return f;
 }

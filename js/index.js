@@ -6,7 +6,7 @@ var path = require('path'),
 var file = path.join(__dirname, '..', 'regexes.yaml'),
     regexes = fs.readFileSync(file, 'utf8');
 
-regexes = yaml.eval(regexes);
+regexes = yaml.eval(regexes); // jshint ignore:line
 
 var parseUA = require('./lib/ua').makeParser(regexes.user_agent_parsers);
 exports.parseUA = parseUA;
