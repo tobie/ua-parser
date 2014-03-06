@@ -35,4 +35,4 @@ import           Web.UAParser.Core
 loadUAParser :: IO UAConfig
 loadUAParser = do
   dir <- getDataDir
-  loadConfig $ dir </> "regexes.yaml"
+  loadConfig $ dir </> "../regexes_outdated.yaml"

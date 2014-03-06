@@ -45,7 +45,7 @@ main = do
 
 -------------------------------------------------------------------------------
 benchMain = do
-  conf <- loadConfig "../regexes.yaml"
+  conf <- loadConfig "../regexes_outdated.yaml"
   cases <- loadTests "test_user_agent_parser.yaml"
   cases2 <- loadTests "firefox_user_agent_strings.yaml"
   let allC = cases ++ cases2
@@ -74,7 +74,7 @@ testMain = T.defaultMain tests
 
 -------------------------------------------------------------------------------
 uaTests = buildTest $ do
-  conf <- loadConfig "../regexes.yaml"
+  conf <- loadConfig "../regexes_outdated.yaml"
   cases <- loadTests "test_user_agent_parser.yaml"
   cases2 <- loadTests "firefox_user_agent_strings.yaml"
   let allC = cases ++ cases2
@@ -106,7 +106,7 @@ testUAParser config UATC{..} = testCase tn $ do
 
 -------------------------------------------------------------------------------
 osTests = buildTest $ do
-  conf <- loadConfig "../regexes.yaml"
+  conf <- loadConfig "../regexes_outdated.yaml"
   cases <- loadTests "test_user_agent_parser_os.yaml"
   return $ testGroup "OS Parsing Tests" $ map (testOSParser conf) cases
 

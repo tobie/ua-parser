@@ -15,7 +15,7 @@ func osInitTesting(file string) []map[string]string {
 	return testMap["test_cases"]
 }
 
-var osDefaultRegexFile string = "../../regexes.yaml"
+var osDefaultRegexFile string = "../../regexes_outdated.yaml"
 var osParser *Parser = nil
 
 func osInitParser(regexFile string) {
