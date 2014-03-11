@@ -28,7 +28,7 @@ class Fetcher
                         'verify_peer'         => true,
                         'verify_depth'        => 5,
                         'cafile'              => __DIR__ . '/../../../resources/ca-bundle.crt',
-                        'CN_match'            => 'raw.github.com',
+                        'CN_match'            => 'www.github.com',
                         'disable_compression' => true,
                     )
                 )
