@@ -156,6 +156,18 @@ user_agent_parsers:
   - regex: '(FlyFlow)/(\d+)\.(\d+)'
     family_replacement: 'Baidu Explorer'
 
+  # QQ Browsers
+  - regex: '(MQQBrowser)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'QQ Browser Mobile'
+  - regex: '(MQQBrowser)/(\d+)\.(\d+)'
+    family_replacement: 'QQ Browser Mobile'
+  - regex: '(QQBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'QQ Browser'
+  - regex: 'MQQBrowser'
+    family_replacement: 'QQ Browser Mobile'
+  - regex: 'QQBrowser'
+    family_replacement: 'QQ Browser'
+
   # Pingdom
   - regex: '(Pingdom.com_bot_version_)(\d+)\.(\d+)'
     family_replacement: 'PingdomBot'
@@ -311,9 +323,6 @@ user_agent_parsers:
 
   - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Bon Echo'
-
-  - regex: 'M?QQBrowser'
-    family_replacement: 'QQ Browser'
 
   - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
