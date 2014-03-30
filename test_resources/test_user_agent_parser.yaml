@@ -128,7 +128,7 @@ test_cases:
 
   - user_agent_string: 'MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
     family: 'QQ Browser Mobile'
-    major:
+    major: '371'
     minor:
     patch:
 
@@ -1098,5 +1098,47 @@ test_cases:
     family: 'Opera Mini'
     major: '4'
     minor: '2'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/39 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3'
+    family: 'QQ Browser Mobile'
+    major: '39'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/391 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9A334 Safari/7534.48.3'
+    family: 'QQ Browser Mobile'
+    major: '391'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/20 (Linux; U; 2.3.3; en-us; HTC Desire S Build/GRI40;480*800)'
+    family: 'QQ Browser Mobile'
+    major: '20'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/Mini2.8 (ZTE-X990/X990_V2_Z12_ESFR_D18F100)'
+    family: 'QQ Browser Mini'
+    major: '2'
+    minor: '8'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/Mini3.1 (SonyEricssonJ105i/R1HA035)'
+    family: 'QQ Browser Mini'
+    major: '3'
+    minor: '1'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'QQBrowser/14 (Linux; U; 2.2.2; en-us; Motorola XT316 BUILD/FRG83G) Mobile/0050'
+    family: 'QQ Browser'
+    major: '14'
+    minor:
     patch:
     patch_minor:
