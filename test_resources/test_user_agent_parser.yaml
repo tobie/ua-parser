@@ -1021,6 +1021,32 @@ test_cases:
     family: 'Obigo'
     major:
     minor:
+
+  - user_agent_string: 'Opera/9.80 (Android 1.6; Linux; Opera Mobi/ADR-1107051709; U; en) Presto/2.8.149 Version/11.10'
+    family: 'Opera Mobile'
+    major: '11'
+    minor: '10'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Opera/9.80 (Windows Mobile; WCE; Opera Mobi/WMD-50430; U; en) Presto/2.4.13 Version/10.00'
+    family: 'Opera Mobile'
+    major: '10'
+    minor: '00'
+    patch:
+    patch_minor:
+
+  - user_agent_string: '(Opera) Vodafone/1.0/HPiPAQDataMessenger/1.00.00 Browser/Opera/9.5 Profile/MIDP-2.0 Configuration/CLDC-1.1 Opera/9.5 (Microsoft Windows; PPC; Opera Mobi/15142; U; en)'
+    family: 'Opera Mobile'
+    major: '9'
+    minor: '5'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'HTC MAX 4G Opera/9.5 (Microsoft Windows; PPC; Opera Mobi/1409; U; ru)'
+    family: 'Opera Mobile'
+    major: '9'
+    minor: '5'
     patch:
     patch_minor:
 
