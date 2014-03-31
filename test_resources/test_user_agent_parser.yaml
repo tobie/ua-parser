@@ -1058,3 +1058,17 @@ test_cases:
     minor: '5'
     patch:
     patch_minor:
+
+  - user_agent_string: 'LG-GD710/V10f; Mozilla/5.0 (Profile/MIDP-2.0 Configuration/CLDC-1.1; Opera Mini/att/4.2.14812; U; en) Opera 9.50'
+    family: 'Opera Mini'
+    major: '4'
+    minor: '2'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'SAMSUNG-SGH-A897/A897UCJC1; Mozilla/5.0 (Profile/MIDP-2.0 Configuration/CLDC-1.1; Opera Mini/att/4.2.15304; U; fr-US) Opera 9.50'
+    family: 'Opera Mini'
+    major: '4'
+    minor: '2'
+    patch:
+    patch_minor:
