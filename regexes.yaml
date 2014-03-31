@@ -564,13 +564,18 @@ os_parsers:
   # (very) roughly ordered in terms of frequency of occurence of regex (win xp currently most frequent, etc)
   ##########
 
-  - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
-    os_replacement: 'Windows XP'
-
-  # ie mobile des ktop mode
+  # ie mobile desktop mode
   # spoofs nt 6.1. must come before windows 7
   - regex: '(XBLWP7)'
     os_replacement: 'Windows Phone'
+
+  # @note: These need to come before Windows NT 6.1
+  - regex: '(Windows Phone) (?:OS[ /])?(\d+)\.(\d+)'
+  - regex: '(Windows ?Mobile)'
+    os_replacement: 'Windows Mobile'
+
+  - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
+    os_replacement: 'Windows XP'
 
   - regex: '(Windows NT 6\.1)'
     os_replacement: 'Windows 7'
@@ -579,7 +584,7 @@ os_parsers:
     os_replacement: 'Windows Vista'
 
   - regex: '(Win 9x 4\.90)'
-    os_replacement: 'Windows Me'
+    os_replacement: 'Windows ME'
 
   - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000|Windows 3.1)'
 
@@ -596,16 +601,20 @@ os_parsers:
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
 
-  - regex: '(Windows Phone) (\d+)\.(\d+)'
-  - regex: '(Windows Phone) OS (\d+)\.(\d+)'
-  - regex: '(Windows ?Mobile)'
-    os_replacement: 'Windows Mobile'
-
   - regex: '(WinNT4.0)'
     os_replacement: 'Windows NT 4.0'
 
-  - regex: '(Win98)'
-    os_replacement: 'Windows 98'
+  - regex: '(Windows ?CE)'
+    os_replacement: 'Windows CE'
+
+  - regex: 'Win ?(95|98|3.1|NT|ME|2000)'
+    os_replacement: 'Windows $1'
+
+  - regex: 'Win16'
+    os_replacement: 'Windows 3.1'
+
+  - regex: 'Win32'
+    os_replacement: 'Windows 95'
 
   ##########
   # Tizen OS from Samsung
