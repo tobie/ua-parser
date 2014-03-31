@@ -1092,3 +1092,23 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/5.0 (iPhone; U; CPU iPhone 6_1_4 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Mobile/7E18 Grindr/1.8.8 (iPhone5,2/6.1.4)'
+    family: 'iOS'
+    major: '6'
+    minor: '1'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; U; CPU iPhone 7_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Mobile/7E18 Grindr/1.8.8 (iPhone3,1/7.0)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'iTube 2.15 (iPhone; iPhone OS 7.0; en_US)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
