@@ -1112,3 +1112,11 @@ test_cases:
     minor: '0'
     patch:
     patch_minor:
+
+  - user_agent_string: 'Opera/9.80 (Bada; Opera Mini/6.5/32.855; U; en) Presto/2.8.119 Version/11.10'
+    family: 'Bada'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
