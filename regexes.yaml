@@ -542,6 +542,17 @@ os_parsers:
   - regex: '(Android) Honeycomb'
     os_v1_replacement: '3'
 
+  # UCWEB
+  - regex: '^UCWEB.*; (Adr) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?;'
+    os_replacement: 'Android'
+  - regex: '^UCWEB.*; (iPad OS|iPh OS) (\d+)_(\d+)(?:_(\d+))?;'
+    os_replacement: 'iOS'
+  - regex: '^UCWEB.*; (wds) (\d+)\.(\d+)(?:\.(\d+))?;'
+    os_replacement: 'Windows Phone'
+  # JUC
+  - regex: '^(JUC).*; ?U; ?(?:Android)?(\d+)\.(\d+)(?:[\.\-]([a-z0-9]+))?'
+    os_replacement: 'Android'
+
   ##########
   # Kindle Android
   ##########
