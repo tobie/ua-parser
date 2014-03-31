@@ -719,12 +719,10 @@ os_parsers:
   ##########
   # Google TV
   ##########
-  - regex: '(GoogleTV) (\d+)\.(\d+)\.(\d+)'
-  # Old style
-  - regex: '(GoogleTV)/[\da-z]+'
+  - regex: '(GoogleTV)(?: (\d+)\.(\d+)(?:\.(\d+))?|/[\da-z]+)'
 
   - regex: '(WebTV)/(\d+).(\d+)'
-  
+
   ##########
   # Misc mobile
   ##########
