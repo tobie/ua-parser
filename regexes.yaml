@@ -623,7 +623,7 @@ os_parsers:
   # iOS
   # http://en.wikipedia.org/wiki/IOS_version_history
   ##########
-  - regex: '(CPU OS|iPhone OS) (\d+)_(\d+)(?:_(\d+))?'
+  - regex: '(CPU OS|iPhone OS|CPU iPhone) (\d+)[_\.](\d+)(?:[_\.](\d+))?'
     os_replacement: 'iOS'
 
   # remaining cases are mostly only opera uas, so catch opera as to not catch iphone spoofs
