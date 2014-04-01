@@ -1024,3 +1024,37 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'iBrowser/3.0/Mozilla/5.0 (Linux; U; Android 2.3.6; yy-yy; Karbonn A2 Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '6'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Series40; NokiaC3-01/05.60; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.31'
+    family: 'Ovi Browser'
+    major: '2'
+    minor: '2'
+    patch: '0'
+    patch_minor:
+
+  - user_agent_string: 'iRAPP/1.16.0 NokiaN95_8GB/31.0.015; Series60/3.1 Profile/MIDP-2.0 Configuration/CLDC-1.'
+    family: 'iRAPP'
+    major: '1'
+    minor: '16'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'iRAPP/1.3.0 Nokia5230/50.0.101 Series60/5.0 Profile/MIDP-2.1 Configuration/CLDC-1.1 3gpp-gba'
+    family: 'iRAPP'
+    major: '1'
+    minor: '3'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'iRAPP/3.5.0 NokiaN8-00/111.040.1511 Series60/5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1 3gpp-gba'
+    family: 'iRAPP'
+    major: '3'
+    minor: '5'
+    patch:
+    patch_minor:
