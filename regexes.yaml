@@ -661,7 +661,7 @@ os_parsers:
   # Symbian + Symbian OS
   # http://en.wikipedia.org/wiki/History_of_Symbian
   ##########
-  - regex: '(Symbian[Oo][Ss])/(\d+)\.(\d+)'
+  - regex: '(Symbian[Oo][Ss])[/ ](\d+)\.(\d+)'
     os_replacement: 'Symbian OS'
   - regex: '(Symbian/3).+NokiaBrowser/7\.3'
     os_replacement: 'Symbian^3 Anna'
@@ -669,7 +669,7 @@ os_parsers:
     os_replacement: 'Symbian^3 Belle'
   - regex: '(Symbian/3)'
     os_replacement: 'Symbian^3'
-  - regex: '(Series 60|SymbOS|S60)'
+  - regex: '\b(Series 60|SymbOS|S60Version|S60V\d|S60\b)'
     os_replacement: 'Symbian OS'
   - regex: '(MeeGo)'
   - regex: 'Symbian [Oo][Ss]'

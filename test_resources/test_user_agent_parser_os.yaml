@@ -999,4 +999,96 @@ test_cases:
     major: '1'
     minor: '1'
     patch: '20'
-    patch_minor: 
+    patch_minor:
+
+  - user_agent_string: 'JUC(Linux;U;Android4.0.4;Zh_cn;GT-S6012;240*320;)UCWEB7.8.0.95/139/351'
+    family: 'Android'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (SymbianOS 9.4; Series60/5.0 NokiaN97-1/10.0.012; Profile/MIDP-2.1 Configuration/CLDC-1.1; en-us) AppleWebKit/525 (KHTML, like Gecko) WicKed/7.1.12344'
+    family: 'Symbian OS'
+    major: '9'
+    minor: '4'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'SendoS600/04 UP.Link/6.3.0.0.0'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'SonyEricssonS600i/R4AB Browser/NetFront/3.3 Profile/MIDP-2.0 Configuration/CLDC-1.1'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Spice S6005/WAP2.0 IAC/M6226 Profile/MIDP-2.0 Configuration/CLDC-1.1'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Toshiba TS608_TS30/v1.0 UP.Browser/6.2.3.9.d.1 (GUI) MMP/2.0'
+    family: 'Other'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0(Symbian; U; S60 V5; en-US; Nokia808 PureView) U2/1.0.0 UCBrowser/8.8.0.245 U2/1.0.0 Mobile'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Opera/9.80 (S60; SymbOS; Opera Mobi/SYB-1204232256; U; en-GB) Presto/2.10.254 Version/12.00'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Nokia5228/40.1.003/sw_platform=S60;sw_platform_version=5.0;java_build_version=1.4.48'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (S60V5; U; ru; NokiaN97 mini)/UC Browser8.5.0.183/50/352/UCWEB Mobile'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (S60V3; U; ru; Nokia N96)/UC Browser8.5.0.183/28/444/UCWEB Mobile'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/Mini2.2 (Nokia5230/50.0.001/sw_platform=S60;sw_platform_version=5.0;java_build_version=1.4.43)'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 5.0; S60/3.0 NOKIAN73/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1)'
+    family: 'Symbian OS'
+    major:
+    minor:
+    patch:
+    patch_minor:
+
