@@ -1021,6 +1021,8 @@ test_cases:
     family: 'Obigo'
     major:
     minor:
+    patch:
+    patch_minor:
 
   - user_agent_string: 'Opera/9.80 (Android 1.6; Linux; Opera Mobi/ADR-1107051709; U; en) Presto/2.8.149 Version/11.10'
     family: 'Opera Mobile'
