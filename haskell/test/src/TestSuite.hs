@@ -159,7 +159,7 @@ data UserAgentTestCase = UATC {
 -------------------------------------------------------------------------------
 instance FromJSON UserAgentTestCase where
     parseJSON (Object v) =
-      UATC <$> v .: "user_agent_string"
+      UATC <$> T.encodeUtf8 <$> v .: "user_agent_string"
            <*> (v .: "family" <|> return "")
            <*> (v .:? "v1" <|> return Nothing)
            <*> (v .:? "v2" <|> return Nothing)
@@ -180,7 +180,7 @@ data OSTestCase = OSTC {
 -------------------------------------------------------------------------------
 instance FromJSON OSTestCase where
     parseJSON (Object v) =
-      OSTC <$> (v .: "user_agent_string" <|> return "")
+      OSTC <$> (T.encodeUtf8 <$> v .: "user_agent_string" <|> return "")
            <*> (v .: "family" <|> return "")
            <*> nonBlank (v .:? "major" <|> return Nothing)
            <*> nonBlank (v .:? "minor" <|> return Nothing)

@@ -1,6 +1,6 @@
 Name:                ua-parser
 Description:         Please refer to the git/github README on the project for example usage.
-Version:             0.3
+Version:             0.4
 Synopsis:            Port of ua-parser in Haskell
 License:             BSD3
 License-file:        LICENSE
@@ -31,8 +31,8 @@ Library
     , bytestring
     , text
     , pcre-light
-    , yaml >= 0.7
-    , aeson
+    , yaml >= 0.7 && < 0.9
+    , aeson >= 0.7 && < 0.8
     , filepath
     , data-default
     , syb
