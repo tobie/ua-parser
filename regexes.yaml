@@ -62,8 +62,7 @@ user_agent_parsers:
     family_replacement: 'Opera Mobile'
   - regex: 'Opera Mobi'
     family_replacement: 'Opera Mobile'
-  - regex: '(Opera Mini)/(\d+)\.(\d+)'
-  - regex: '(Opera Mini)/att/(\d+)\.(\d+)'
+  - regex: '(Opera Mini)(?:/att)?/(\d+)\.(\d+)'
   - regex: '(Opera)/9.80.*Version/(\d+)\.(\d+)(?:\.(\d+))?'
 
   # Opera 14 for Android uses a WebKit render engine.
