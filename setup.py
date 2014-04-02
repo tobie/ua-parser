@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 from setuptools import setup
 from setuptools.command.develop import develop as _develop
-from setuptools.command.sdist   import sdist   as _sdist
+from setuptools.command.sdist import sdist as _sdist
+
 
 def install_regexes():
     print('Copying regexes.yaml to package directory...')
@@ -20,17 +21,21 @@ def install_regexes():
     import yaml
     json_dest = yaml_dest.replace('.yaml', '.json')
     regexes = yaml.load(open(yaml_dest))
-    json.dump(regexes, open(json_dest, 'w'))
+    with open(json_dest, "w") as f:
+        json.dump(regexes, f)
+
 
 class develop(_develop):
     def run(self):
         install_regexes()
         _develop.run(self)
 
+
 class sdist(_sdist):
     def run(self):
         install_regexes()
         _sdist.run(self)
+
 
 setup(
     name='ua-parser',
