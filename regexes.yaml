@@ -736,6 +736,9 @@ os_parsers:
   # first.second bits
   - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
 
+  # Opera Mini Bada
+  - regex: '\((Bada);'
+
   # just os
   - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Android|WeTab)'
   - regex: '(Ubuntu|Kubuntu|Arch Linux|CentOS|Slackware|Gentoo|openSUSE|SUSE|Red Hat|Fedora|PCLinuxOS|Gentoo|Mageia)'
