@@ -729,23 +729,20 @@ os_parsers:
   # Generic patterns
   # since the majority of os cases are very specific, these go last
   ##########
-  # first.second.third.fourth bits
-  - regex: '(Fedora|Red Hat|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Fedora|Red Hat|PCLinuxOS|Puppy|Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Slackware|(?:Free|Open|Net|\b)BSD)[/ ](\d+)\.(\d+)(?:\.(\d+)(?:\.(\d+))?)?'
 
-  # first.second.third bits
-  - regex: '(Red Hat|Puppy|PCLinuxOS)/(\d+)\.(\d+)\.(\d+)'
-
-  # first.second bits
-  - regex: '(Ubuntu|Kindle|Bada|Lubuntu|BackTrack|Red Hat|Slackware)/(\d+)\.(\d+)'
+  # Gentoo Linux + Kernel Version
+  - regex: '(Linux)[ /](\d+)\.(\d+)(?:\.(\d+))?.*gentoo'
+    os_replacement: 'Gentoo'
 
   # Opera Mini Bada
   - regex: '\((Bada);'
 
   # just os
-  - regex: '(Windows|OpenBSD|FreeBSD|NetBSD|Android|WeTab)'
-  - regex: '(Ubuntu|Kubuntu|Arch Linux|CentOS|Slackware|Gentoo|openSUSE|SUSE|Red Hat|Fedora|PCLinuxOS|Gentoo|Mageia)'
-  - regex: '(Linux)/(\d+)\.(\d+)'
-  - regex: '(Linux|BSD)'
+  - regex: '(Windows|Android|WeTab|Maemo)'
+  - regex: '(Ubuntu|Kubuntu|Arch Linux|CentOS|Slackware|Gentoo|openSUSE|SUSE|Red Hat|Fedora|PCLinuxOS|Gentoo|Mageia|(?:Free|Open|Net|\b)BSD)'
+  # Linux + Kernel Version
+  - regex: '(Linux)(?:[ /](\d+)\.(\d+)(?:\.(\d+))?)?'
   - regex: 'SunOS'
     os_replacement: 'Solaris'
 

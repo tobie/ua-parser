@@ -44,9 +44,9 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; cs-CZ; rv:1.9.0.4) Gecko/2008111217 Fedora/3.0.4-1.fc9 Firefox/3.0.4'
     family: 'Fedora'
-    major:
-    minor:
-    patch:
+    major: '3'
+    minor: '0'
+    patch: '4'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.77 Large Screen Safari/534.24 GoogleTV/000000'
