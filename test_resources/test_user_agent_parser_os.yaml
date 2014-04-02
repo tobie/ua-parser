@@ -1120,3 +1120,94 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'HuaweiT8100_TD/1.0 Android/2.2 Release/12.25.2010 Browser/WAP2.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 AppleWebKit/533.1'
+    family: 'Android'
+    major: '2'
+    minor: '2'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'iBrowser/2.7 Lenovo-A288t_TD/S100 Linux/2.6.35 Android/2.3.5 Release/02.29.2012 Browser/AppleWebkit533.1 Mobile Safari/533.1'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '5'
+    patch_minor:
+
+  - user_agent_string: 'Layar/3.1 Android/2.1-update1 (Samsung GT-I5500)'
+    family: 'Android'
+    major: '2'
+    minor: '1'
+    patch: 'update1'
+    patch_minor:
+
+  - user_agent_string: 'Lenovo-A288t_TD/S100 Linux/2.6.35 Android/2.3.5 Release/02.29.2012 Browser/AppleWebkit533.1 Mobile Safari/533.1 FlyFlow/1.4'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '5'
+    patch_minor:
+
+  - user_agent_string: 'MOT-MT870_TD/1.0 Android/2.3 (Linux; Android) Release/5.31.2011 Browser/WAP 2.0 (AppleWebKit 533.1) Profile/MIDP-2.0 Configuration/CLDC-1.1'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/21 Mozilla/5.0 (HW-HUAWEI_C8500/C8500V100R001C92B234;U;Android/2.1;240*320;CTC/2.0) AppleWebKit/530.17 Mobile Safari/530.17'
+    family: 'Android'
+    major: '2'
+    minor: '1'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/2.7/ZTE-TU880_TD/1.0 Linux/2.6.32 Android/2.2 Release/5.25.2011 Browser/AppleWebKit533.1'
+    family: 'Android'
+    major: '2'
+    minor: '2'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/3.1/Mozilla/5.0 (HW-C8600/C8600V100R001C92B225;U;Android/2.1;320*480;CTC/2.0) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17'
+    family: 'Android'
+    major: '2'
+    minor: '1'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MQQBrowser/3.7/ZTEU795_TD/1.0 Linux/2.6.39 Android/4.0 Release/6.10.2012 Browser/AppleWebKit534.30'
+    family: 'Android'
+    major: '4'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'SAMSUNG-GT-I8250_TD/1.0 Android/2.3.6 Release/11.11.2011 Browser/AppleWebKit533.1'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '6'
+    patch_minor:
+
+  - user_agent_string: 'Samsung-mini7100/1.0 Linux/2.6.35.7 Android/4.0.4 Release/05.18.2013 Browser/AppleWebKit533.1 (KHTML, Like Gecko) Mozilla/5.0 Mobile'
+    family: 'Android'
+    major: '4'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'ZTE-TU802_TD/1.0 Linux/2.6.32 Android/2.2 Release/1.1.2011 Browser/AppleWebKit530.17 Profile/MIDP-2.0 Configuration/CLDC-1.1'
+    family: 'Android'
+    major: '2'
+    minor: '2'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'ZTEU880E_TD/1.0 Linux/2.6.35 Android/2.3 Release/12.15.2011 Browser/AppleWebKit533.1 baiduboxapp/4.8 (Baidu; P1 2.3.7)'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch:
+    patch_minor:
+

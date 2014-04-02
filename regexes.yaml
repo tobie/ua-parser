@@ -521,8 +521,7 @@ os_parsers:
   # Android
   # can actually detect rooted android os. do we care?
   ##########
-  - regex: '(Android) (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
-  - regex: '(Android)\-(\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+  - regex: '(Android)[ \-/](\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
 
   - regex: '(Android) Donut'
     os_v1_replacement: '1'
