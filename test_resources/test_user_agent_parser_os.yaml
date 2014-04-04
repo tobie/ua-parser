@@ -1003,9 +1003,9 @@ test_cases:
 
   - user_agent_string: 'JUC(Linux;U;Android4.0.4;Zh_cn;GT-S6012;240*320;)UCWEB7.8.0.95/139/351'
     family: 'Android'
-    major:
-    minor:
-    patch:
+    major: '4'
+    minor: '0'
+    patch: '4'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (SymbianOS 9.4; Series60/5.0 NokiaN97-1/10.0.012; Profile/MIDP-2.1 Configuration/CLDC-1.1; en-us) AppleWebKit/525 (KHTML, like Gecko) WicKed/7.1.12344'
@@ -1399,3 +1399,95 @@ test_cases:
     minor: '5'
     patch: '0'
     patch_minor:
+
+  - user_agent_string: 'JUC (Linux; U; 2.3.6; zh-cn; GT-S7500; 320*480) UCWEB7.9.0.94/139/352'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '6'
+    patch_minor:
+
+  - user_agent_string: 'JUC (Linux; U; 4.0.3; zh-cn; NOVO7_Mars; 1024*552) UCWEB1.0.1.113/147/800'
+    family: 'Android'
+    major: '4'
+    minor: '0'
+    patch: '3'
+    patch_minor:
+
+  - user_agent_string: 'JUC(Linux;U;4.0.4;Zh_cn;GT-I9308;720*1280;)UCWEB7.7.0.85/139/999'
+    family: 'Android'
+    major: '4'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'JUC(Linux;U;Android2.2.1;Zh_cn;GT-S5570;240*320;)UCWEB7.8.0.95/140/350'
+    family: 'Android'
+    major: '2'
+    minor: '2'
+    patch: '1'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (Linux; U; Adr 2.2.1; en-US; Dell Streak) U2/1.0.0 UCBrowser/9.3.1.344 U2/1.0.0 Mobile'
+    family: 'Android'
+    major: '2'
+    minor: '2'
+    patch: '1'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (Linux; U; Adr 2.3.6; en-US; HUAWEI_Y210-0251) U2/1.0.0 UCBrowser/8.6.0.318 U2/1.0.0 Mobile'
+    family: 'Android'
+    major: '2'
+    minor: '3'
+    patch: '6'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (Linux; U; Adr 4.2.2; zh-CN; ZTE V818) U2/1.0.0 UCBrowser/9.3.2.349 U2/1.0.0 Mobile'
+    family: 'Android'
+    major: '4'
+    minor: '2'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (Windows; U; wds 7.10; en-US; DELL; Venue Pro) U2/1.0.0 UCBrowser/3.0.0.285 U2/1.0.0 Mobile'
+    family: 'Windows Phone'
+    major: '7'
+    minor: '10'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (Windows; U; wds 8.0; zh-CN; NOKIA; RM-910_apac_prc_200) U2/1.0.0 UCBrowser/3.0.1.302 U2/1.0.0 Mobile'
+    family: 'Windows Phone'
+    major: '8'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (iOS; U; iPad OS 6_1_3; en-US; iPad2,5) U2/1.0.0 UCBrowser/9.0.0.260 U2/1.0.0 Mobile'
+    family: 'iOS'
+    major: '6'
+    minor: '1'
+    patch: '3'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (iOS; U; iPh OS 5_0_1; zh-CN; iPh4,1) U2/1.0.0 UCBrowser/9.0.1.284 U2/1.0.0 Mobile'
+    family: 'iOS'
+    major: '5'
+    minor: '0'
+    patch: '1'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (iOS; U; iPh OS 7_0_4; ru; iPh3,1) U2/1.0.0 UCBrowser/9.0.0.260 U2/1.0.0 Mobile'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'UCWEB/2.0 (iOS; U; iPh OS 7_0_4; zh-CN; iPh4,1) U2/1.0.0 UCBrowser/9.0.1.284 U2/1.0.0 Mobile'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
