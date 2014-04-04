@@ -115,7 +115,10 @@ class OSParser(object):
         match = self.user_agent_re.search(user_agent_string)
         if match:
             if self.os_replacement:
-                os = self.os_replacement
+                if re.search(r'\$1', self.os_replacement):
+                    os = re.sub(r'\$1', match.group(1), self.os_replacement)
+                else:
+                    os = self.os_replacement
             else:
                 os = match.group(1)
 
