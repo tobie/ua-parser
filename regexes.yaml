@@ -85,7 +85,7 @@ user_agent_parsers:
   # http://luakit.org/projects/luakit/
   - regex: '(luakit)'
     family_replacement: 'LuaKit'
-    
+
   # Snowshoe
   - regex: '(Snowshoe)/(\d+)\.(\d+).(\d+)'
 
@@ -160,15 +160,11 @@ user_agent_parsers:
     family_replacement: 'Baidu Explorer'
 
   # QQ Browsers
-  - regex: '(MQQBrowser)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(MQQBrowser/Mini)(?:(\d+)(?:\.(\d+)(?:\.(\d+))?)?)?'
+    family_replacement: 'QQ Browser Mini'
+  - regex: '(MQQBrowser)(?:/(\d+)(?:\.(\d+)(?:\.(\d+))?)?)?'
     family_replacement: 'QQ Browser Mobile'
-  - regex: '(MQQBrowser)/(\d+)\.(\d+)'
-    family_replacement: 'QQ Browser Mobile'
-  - regex: '(QQBrowser)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'QQ Browser'
-  - regex: 'MQQBrowser'
-    family_replacement: 'QQ Browser Mobile'
-  - regex: 'QQBrowser'
+  - regex: '(QQBrowser)(?:/(\d+)(?:\.(\d+)\.(\d+)(?:\.(\d+))?)?)?'
     family_replacement: 'QQ Browser'
 
   # Pingdom
