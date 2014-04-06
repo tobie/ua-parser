@@ -12,12 +12,6 @@ test_cases:
     minor: '1'
     patch: '0-80'
 
-  - user_agent_string: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true'
-    family: 'Amazon Silk'
-    major: '1'
-    minor: '1'
-    patch: '0-80'
-
   - user_agent_string: 'Mozilla/5.0 (Linux; U; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.0 Safari/535.19 Silk-Accelerated=false'
     family: 'Amazon Silk'
     major: '2'
@@ -344,12 +338,6 @@ test_cases:
     minor: '0'
     patch:
 
-  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; SAMSUNG; SGH-i917)'
-    family: 'IE Mobile'
-    major: '9'
-    minor: '0'
-    patch:
-
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)'
     family: 'IE Mobile'
     major: '9'
@@ -500,12 +488,6 @@ test_cases:
     family: 'NetFront'
     major: '3'
     minor: '2'
-    patch:
-
-  - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
-    family: 'NetFront'
-    major: '3'
-    minor: '3'
     patch:
 
   - user_agent_string: 'Mozilla/4.0 (BREW 3.1.5; U; en-us; Sanyo; NetFront/3.5.1/AMB) Boost SCP3810'
@@ -873,12 +855,6 @@ test_cases:
     major: '6'
     minor: '1'
     patch: '0'
-
-  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
-    family: 'WebKit Nightly'
-    major: '534'
-    minor:
-    patch:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22'
     family: 'WebKit Nightly'
