@@ -695,6 +695,8 @@ os_parsers:
     os_replacement: 'Symbian OS'
   - regex: 'Series40;'
     os_replacement: 'Nokia Series 40'
+  - regex: 'Series30Plus;'
+    os_replacement: 'Nokia Series 30 Plus'
 
   ##########
   # BlackBerry devices
