@@ -237,8 +237,12 @@ user_agent_parsers:
   # Chrome/Chromium/major_version.minor_version.beta_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)\.(\d+)'
 
+  # Dolphin Browser 
+  # @ref: http://www.dolphin.com
+  - regex: '\b(Dolphin)(?: |HDCN/|/INT\-)(\d+)\.(\d+)\.?(\d+)?'
+
   # Browser/major_version.minor_version
-  - regex: '(bingbot|Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser|Planetweb|ICE Browser)/(\d+)\.(\d+)'
+  - regex: '(bingbot|Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser|Planetweb|ICE Browser|mDolphin)/(\d+)\.(\d+)\.?(\d+)?'
 
   # Chrome/Chromium/major_version.minor_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)'
@@ -247,10 +251,10 @@ user_agent_parsers:
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris) (\d+)\.(\d+)\.?(\d+)?'
-  
+
   # Kindle WebKit
   - regex: '(Kindle)/(\d+)\.(\d+)'
-  
+
   # weird android UAs
   - regex: '(Android) Donut'
     v1_replacement: '1'
