@@ -930,7 +930,7 @@ device_parsers:
 
   - regex: 'AdsBot-Google-Mobile'
     device_replacement: 'Spider'
-
+   
   - regex: 'Googlebot-Mobile/(\d+).(\d+)'
     device_replacement: 'Spider'
 
