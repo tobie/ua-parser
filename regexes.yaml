@@ -930,10 +930,13 @@ device_parsers:
 
   - regex: 'AdsBot-Google-Mobile'
     device_replacement: 'Spider'
-   
+
   - regex: 'Googlebot-Mobile/(\d+).(\d+)'
     device_replacement: 'Spider'
-    
+
+  - regex: 'Googlebot/2.1'
+    device_replacement: 'Spider'
+
   ##########
   # complete but probably catches spoofs
   # iSTUFF
