@@ -14,6 +14,6 @@ install:
   - pip install -q pyaml
 
 script:
-  - "npm --version && node --version && npm test"
+  - "npm --version && node --version && npm install && npm test"
   - "python py/ua_parser/user_agent_parser_test.py"
   - "cd php && ../vendor/bin/phpunit --exclude-group performance"
