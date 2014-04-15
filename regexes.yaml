@@ -934,7 +934,7 @@ device_parsers:
   - regex: 'Googlebot-Mobile/(\d+).(\d+)'
     device_replacement: 'Spider'
 
-  - regex: 'Googlebot/(\d+).(\d+)'
+  - regex: 'Googlebot/\d+.\d+'
     device_replacement: 'Spider'
 
   ##########
