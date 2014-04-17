@@ -332,3 +332,6 @@ test_cases:
 
   - user_agent_string: 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20'
     family: 'HbbTV'
+
+  - user_agent_string: 'Netvibes (http://www.netvibes.com)'
+    family: 'Spider'
