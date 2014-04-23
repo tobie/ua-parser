@@ -456,10 +456,10 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'IUC(U;iOS 5.1.1;Zh-cn;320*480;)/UCWEB7.9.0.94/41/997'
-    family: 'Other'
-    major:
-    minor:
-    patch:
+    family: 'iOS'
+    major: '5'
+    minor: '1'
+    patch: '1'
     patch_minor:
 
   - user_agent_string: 'J2ME/UCWEB7.0.3.45/139/7682'
@@ -1699,5 +1699,236 @@ test_cases:
     major:
     minor:
     patch:
+    patch_minor:
+
+  - user_agent_string: 'Safari5530.17 CFNetwork/438.12 Darwin/9.7.0 (i386) (Macmini2,1)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '5'
+    patch: '7'
+    patch_minor:
+
+  - user_agent_string: 'Safari/6533.18.5 CFNetwork/454.9.8 Darwin/10.4.0 (i386) (MacBookPro7,1)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '6'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'Safari/7536.30.1 CFNetwork/520.5.1 Darwin/11.4.2 (i386) (MacBook3,1)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '7'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'Reader Notifier/5 CFNetwork/596.3.3 Darwin/12.3.0 (x86_64) (MacBookPro7,1)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '8'
+    patch: '3'
+    patch_minor:
+
+  - user_agent_string: 'Safari/9537.71 CFNetwork/673.0.2 Darwin/13.0.1 (x86_64) (MacBookPro11,1)'
+    family: 'Mac OS X'
+    major: '10'
+    minor: '9'
+    patch: '0'
+    patch_minor:
+
+  - user_agent_string: 'DEPoker-iPad/1.0.2 CFNetwork/548.1.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'JDSports-iPad/1.1 CFNetwork/672.0.8 Darwin/14.0.0'
+    family: 'iOS'
+    major: '7'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'AngryBirdsBlack-iPhone/1.1.0 CFNetwork/548.1.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Bing for iPad/1.1.2 CFNetwork/485.13.9 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'NightstandPaid-iPad/1.3.1 CFNetwork/548.1.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Glo-De-iPad/1.4.7 CFNetwork/672.0.2 Darwin/14.0.0'
+    family: 'iOS'
+    major: '7'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Island for iPhone/1.95 CFNetwork/672.0.2 Darwin/14.0.0'
+    family: 'iOS'
+    major: '7'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'WormsiPhone-iPad/2.3 CFNetwork/548.1.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Rummy LITE iPad/2.3.0 CFNetwork/609.1.4 Darwin/13.0.0'
+    family: 'iOS'
+    major: '6'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MobileRSSFree-iPad/3.1 CFNetwork/467.12 Darwin/10.3.1'
+    family: 'iOS'
+    major: '4'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'MobileRSSFree-iPad/3.1.4 CFNetwork/485.13.9 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'babbelIndonesian-iPad/4.0.1 CFNetwork/672.0.8 Darwin/14.0.0'
+    family: 'iOS'
+    major: '7'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'WeltMobile-iPad/4.2 CFNetwork/609.1.4 Darwin/13.0.0'
+    family: 'iOS'
+    major: '6'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'IMPlusFull-iPad/7.9.1 CFNetwork/548.0.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Cooliris/1.3 CFNetwork/342.1 Darwin/9.4.1'
+    family: 'iOS'
+    major: '1'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Poof/1.0 CFNetwork/485.12.7 Darwin/10.4.0'
+    family: 'iOS'
+    major: '4'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Parking Mania Free/1.9.5.0 CFNetwork/548.0.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Planet Boing!/1.4.8 CFNetwork/609.1.4 Darwin/13.0.0'
+    family: 'iOS'
+    major: '6'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'PlayTube/1.7 CFNetwork/672.0.2 Darwin/14.0.0'
+    family: 'iOS'
+    major: '7'
+    minor:
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Appcelerator Titanium/2.1.2.GA (iPhone/6.1.2; iPhone OS; de_DE;)'
+    family: 'iOS'
+    major: '6'
+    minor: '1'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: '4 Pics 1 Word/3.9 (iPad; iOS 7.0.2; Scale/2.00)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: '4 Pics 1 Word/3.9 (iPhone; iOS 7.0.2; Scale/2.00)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: 'server-bag [iPhone OS,6.1,10B144,iPhone3,2]'
+    family: 'iOS'
+    major: '6'
+    minor: '1'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'IUC(U;iOS 6.1.2;Zh-cn;320*480;)/UCWEB8.2.1.132/42/997'
+    family: 'iOS'
+    major: '6'
+    minor: '1'
+    patch: '2'
+    patch_minor:
+
+  - user_agent_string: 'StoreKitUIService/1.0 iOS/7.0 model/iPhone3,1 (4; dt:27)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Yahoo!/9184 (iPhone; iOS 7.0.4; Scale/2.00)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '4'
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS  7_0 like Mac OS X; tr_TR)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS  7_0_2 like Mac OS X; de_DE)'
+    family: 'iOS'
+    major: '7'
+    minor: '0'
+    patch: '2'
     patch_minor:
 

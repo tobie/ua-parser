@@ -324,6 +324,10 @@ user_agent_parsers:
   - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Bon Echo'
 
+  # @note: iOS / OSX Applications
+  - regex: '(CFNetwork)(?:/(\d+)\.(\d+)\.?(\d+)?)?'
+    family_replacement: 'CFNetwork'
+
   - regex: '(iPod).+Version/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
   - regex: '(iPod).*Version/(\d+)\.(\d+)'
@@ -628,10 +632,36 @@ os_parsers:
 
   ##########
   # Mac OS
-  # http://en.wikipedia.org/wiki/Mac_OS_X#Versions
+  # @ref: http://en.wikipedia.org/wiki/Mac_OS_X#Versions
+  # @ref: http://www.puredarwin.org/curious/versions
   ##########
   - regex: '(Mac OS X) (\d+)[_.](\d+)(?:[_.](\d+))?'
-  
+  # Leopard
+  - regex: ' (Dar)(win)/(9).(\d+).*\((?:i386|x86_64|Power Macintosh)\)'
+    os_replacement: 'Mac OS X'
+    os_v1_replacement: '10'
+    os_v2_replacement: '5'
+  # Snow Leopard
+  - regex: ' (Dar)(win)/(10).(\d+).*\((?:i386|x86_64)\)'
+    os_replacement: 'Mac OS X'
+    os_v1_replacement: '10'
+    os_v2_replacement: '6'
+  # Lion
+  - regex: ' (Dar)(win)/(11).(\d+).*\((?:i386|x86_64)\)'
+    os_replacement: 'Mac OS X'
+    os_v1_replacement: '10'
+    os_v2_replacement: '7'
+  # Mountain Lion
+  - regex: ' (Dar)(win)/(12).(\d+).*\((?:i386|x86_64)\)'
+    os_replacement: 'Mac OS X'
+    os_v1_replacement: '10'
+    os_v2_replacement: '8'
+  # Mavericks
+  - regex: ' (Dar)(win)/(13).(\d+).*\((?:i386|x86_64)\)'
+    os_replacement: 'Mac OS X'
+    os_v1_replacement: '10'
+    os_v2_replacement: '9'
+
   # IE on Mac doesn't specify version number
   - regex: 'Mac_PowerPC'
     os_replacement: 'Mac OS'
@@ -645,7 +675,7 @@ os_parsers:
   # iOS
   # http://en.wikipedia.org/wiki/IOS_version_history
   ##########
-  - regex: '(CPU OS|iPhone OS|CPU iPhone) (\d+)[_\.](\d+)(?:[_\.](\d+))?'
+  - regex: '(CPU OS|iPhone OS|CPU iPhone) +(\d+)[_\.](\d+)(?:[_\.](\d+))?'
     os_replacement: 'iOS'
 
   # remaining cases are mostly only opera uas, so catch opera as to not catch iphone spoofs
@@ -658,6 +688,29 @@ os_parsers:
 
   - regex: '(AppleTV)/(\d+)\.(\d+)'
     os_replacement: 'ATV OS X'
+
+  ##########
+  # CFNetwork iOS Apps
+  # @ref: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
+  ##########
+  - regex: 'CFNetwork/.* Darwin/(9)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '1'
+  - regex: 'CFNetwork/.* Darwin/(10)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '4'
+  - regex: 'CFNetwork/.* Darwin/(11)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '5'
+  - regex: 'CFNetwork/.* Darwin/(13)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '6'
+  - regex: 'CFNetwork/.* Darwin/(14)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '7'
+  # iOS Apps
+  - regex: '\b(iOS[ /]|iPhone(?:/| v|[ _]OS[/,]|; | OS : |\d,\d/|\d,\d; )|iPad/)(\d{1,2})[_\.](\d{1,2})(?:[_\.](\d+))?'
+    os_replacement: 'iOS'
 
   ##########
   # Chrome OS

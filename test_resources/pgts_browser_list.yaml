@@ -425,9 +425,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "CFNetwork/1.1"
-      family: "Other"
-      major:
-      minor:
+      family: "CFNetwork"
+      major: '1'
+      minor: '1'
       patch:
     - user_agent_string: "SonyEricssonP900/R101 Profile/MIDP-2.0 Configuration/CLDC-1.0"
       family: "Other"
