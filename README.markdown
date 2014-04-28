@@ -405,37 +405,48 @@ func main() {
 License
 -------
 
-The data contained in `regexes.yaml` is Copyright 2009 Google Inc. and available under the [Apache License, Version 2.0][6].
+The data contained in `regexes.yaml` is Copyright (c) 2009 Google Inc. and [other contributors][6], and available under the [Apache License, Version 2.0][7].
 
-The original python code is Copyright 2008 Google Inc. and is available under the [Apache License, Version 2.0][7].
+The original python code is Copyright (c) 2008 Google Inc. and [other contributors][8],and is available under the [Apache License, Version 2.0][9].
 
-The JS port is Copyright 2010 Tobie Langel and is available under [your choice of MIT or Apache Version 2.0 license][8].
+The JS port is Copyright (c) 2010 Tobie Langel and [other contributors][10], and is available under [your choice of MIT or Apache Version 2.0 license][11].
 
-The PHP port is Copyright (c) 2011-2012 Dave Olsen and is available under the [MIT license][9].
+The PHP port is Copyright (c) 2011-2012 Dave Olsen and [other contributors][12], and is available under the [MIT license][13].
 
-The Java port is Copyright (c) 2012 Twitter, Inc and is available under the [Apache License, Version 2.0][6].
+The Java port is Copyright (c) 2012 Twitter, Inc and [other contributors][14], and is available under the [Apache License, Version 2.0][7].
 
-The D port is Copyright (c) 2012 Shripad K and is available under the [MIT license][10].
+The D port is Copyright (c) 2012 Shripad K and [other contributors][15], and is available under the [MIT license][16].
 
-The C# port is Copyright (c) 2012 Søren Enemærke and is available under the [Apache License, Version 2.0][11].
+The C# port is Copyright (c) 2012 Søren Enemærke and [other contributors][17], and is available under the [Apache License, Version 2.0][18].
 
-The Perl port is Copyright (c) 2012 Mamod Mehyar and is available under the [Perl License, Version 5.10.1][12].
+The Perl port is Copyright (c) 2012 Mamod Mehyar and [other contributors][19], and is available under the [Perl License, Version 5.10.1][20].
 
-The Pig port is Copyright (c) 2013 Niels Basjes and is available under the [Apache License, Version 2.0][13].
+The Pig port is Copyright (c) 2013 Niels Basjes and [other contributors][21], and is available under the [Apache License, Version 2.0][22].
 
-The Go port is Copyright (c) 2013 Yihuan Zhou and is available under the [MIT License][14].
+The Go port is Copyright (c) 2013 Yihuan Zhou and [other contributors][23], and is available under the [MIT License][24].
+
 
 [1]: http://nodejs.org
 [2]: http://www.browserscope.org
 [3]: http://code.google.com/p/ua-parser/
 [4]: http://stevesouders.com/
 [5]: https://raw.github.com/tobie/ua-parser/master/regexes.yaml
-[6]: http://www.apache.org/licenses/LICENSE-2.0
-[7]: https://raw.github.com/tobie/ua-parser/master/py/LICENSE
-[8]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
-[9]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
-[10]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
-[11]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
-[12]: http://dev.perl.org/licenses
-[13]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
-[14]: https://raw.github.com/tobie/ua-parser/master/go/uaparser/LICENSE.md
+[6]: https://github.com/tobie/ua-parser/commits/master/regexes.yaml
+[7]: http://www.apache.org/licenses/LICENSE-2.0
+[8]: https://github.com/tobie/ua-parser/commits/master/py
+[9]: https://raw.github.com/tobie/ua-parser/master/py/LICENSE
+[10]: https://github.com/tobie/ua-parser/commits/master/js
+[11]: https://raw.github.com/tobie/ua-parser/master/js/LICENSE
+[12]: https://github.com/tobie/ua-parser/commits/master/php
+[13]: https://raw.github.com/tobie/ua-parser/master/php/LICENSE
+[14]: https://github.com/tobie/ua-parser/commits/master/java
+[15]: https://github.com/tobie/ua-parser/commits/master/d
+[16]: https://raw.github.com/tobie/ua-parser/master/d/LICENSE
+[17]: https://github.com/tobie/ua-parser/commits/master/csharp
+[18]: https://raw.github.com/tobie/ua-parser/master/csharp/LICENSE
+[19]: https://github.com/tobie/ua-parser/commits/master/perl
+[20]: http://dev.perl.org/licenses
+[21]: https://github.com/tobie/ua-parser/commits/master/pig
+[22]: https://raw.github.com/tobie/ua-parser/master/pig/LICENSE.txt
+[23]: https://github.com/tobie/ua-parser/commits/master/go
+[24]: https://raw.github.com/tobie/ua-parser/master/go/uaparser/LICENSE.md
