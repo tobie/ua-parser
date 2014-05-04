@@ -342,5 +342,5 @@ test_cases:
   - user_agent_string: 'ICC-Crawler/2.0 (Mozilla-compatible; ; http://kc.nict.go.jp/project1/crawl.html; zurukko1552995316;)'
     family: 'Spider'
     
-  - "Innovazion Crawler/Nutch-1.7"
+  - user_agent_string: 'Innovazion Crawler/Nutch-1.7'
     family: 'Spider'
