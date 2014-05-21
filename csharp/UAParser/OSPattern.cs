@@ -35,7 +35,14 @@ namespace UAParser
 
             if (m_osReplacement != null)
             {
-                family = m_osReplacement;
+                if (m_osReplacement.Contains("$1") && groupCount >= 1 && match.Groups[1] != null)
+                {
+                    family = m_osReplacement.ReplaceFirstOccurence("$1", match.Groups[1].Value);
+                }
+                else
+                {
+                    family = m_osReplacement;
+                }
             }
             else if (groupCount >= 1)
             {
@@ -58,13 +65,14 @@ namespace UAParser
             else if (groupCount >= 3)
             {
                 v2 = match.Groups[3].Value;
-                if (groupCount >= 4)
+            }
+
+            if (groupCount >= 4)
+            {
+                v3 = match.Groups[4].Value;
+                if (groupCount >= 5)
                 {
-                    v3 = match.Groups[4].Value;
-                    if (groupCount >= 5)
-                    {
-                        v4 = match.Groups[5].Value;
-                    }
+                    v4 = match.Groups[5].Value;
                 }
             }
 
