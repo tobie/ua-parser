@@ -57,10 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\UAParser\InternalExtensions.cs">
-      <Link>InternalExtensions.cs</Link>
-    </Compile>
     <Compile Include="DeviceYamlTestCase.cs" />
+    <Compile Include="InternalExtensions.cs" />
     <Compile Include="YamlTestCase.cs" />
     <Compile Include="TestResourceTests.cs" />
     <Compile Include="ParserTests.cs" />
