@@ -251,89 +251,81 @@ namespace UAParser
             // ReSharper disable once InconsistentNaming
             public static Func<string, OS> OS(Regex regex, string osReplacement, string v1Replacement, string v2Replacement)
             {
-                return Regexer.Create(regex, p => p
-                              .Replace(osReplacement, "$1", (_, f) => f)
-                              .Replace(v1Replacement, (f, v1) => new { family = f, v1 })
-                              .Replace(v2Replacement, (e, v2) => new { e.family, e.v1, v2 })
-                              .Select((e, v3) => new { e.family, e.v1, e.v2, v3 })
-                              .Select((e, v4) => new OS(e.family, e.v1, e.v2, e.v3, v4)));
+                return Create(regex, from family in Replace(osReplacement, "$1")
+                                     from v1 in Replace(v1Replacement)
+                                     from v2 in Replace(v2Replacement)
+                                     from v3 in Select(v => v)
+                                     from v4 in Select(v => v)
+                                     select new OS(family, v1, v2, v3, v4));
             }
 
             public static Func<string, string> Device(Regex regex, string familyReplacement)
             {
-                return Regexer.Create(regex, p => p.Replace(familyReplacement, "$1", (_, f) => f));
+                return Create(regex, Replace(familyReplacement, "$1"));
             }
 
             public static Func<string, UserAgent> UserAgent(Regex regex, string familyReplacement, string majorReplacement, string minorReplacement)
             {
-                return Regexer.Create(regex, p => p
-                              .Replace(familyReplacement, "$1", (_, f) => f)
-                              .Replace(majorReplacement, (f, v1) => new { family = f, v1 })
-                              .Replace(minorReplacement, (e, v2) => new { e.family, e.v1, v2 })
-                              .Select((e, v3) => new UserAgent(e.family, e.v1, e.v2, v3)));
+                return Create(regex, from family in Replace(familyReplacement, "$1")
+                                     from v1 in Replace(majorReplacement)
+                                     from v2 in Replace(minorReplacement)
+                                     from v3 in Select()
+                                     select new UserAgent(family, v1, v2, v3));
+            }
+
+            static Func<Match, IEnumerator<int>, string> Replace(string replacement)
+            {
+                return replacement != null ? Select(_ => replacement) : Select();
+            }
+
+            static Func<Match, IEnumerator<int>, string> Replace(
+                string replacement, string token)
+            {
+                return replacement != null && replacement.Contains(token)
+                     ? Select(s => s != null ? replacement.ReplaceFirstOccurence(token, s) : replacement)
+                     : Replace(replacement);
+            }
+
+            static Func<Match, IEnumerator<int>, string> Select() { return Select(v => v); }
+
+            static Func<Match, IEnumerator<int>, T> Select<T>(Func<string, T> selector)
+            {
+                return (m, num) =>
+                {
+                    if (!num.MoveNext()) throw new InvalidOperationException();
+                    var groups = m.Groups; Group group;
+                    return selector(num.Current <= groups.Count && (group = groups[num.Current]).Success
+                                    ? group.Value : null);
+                };
+            }
+
+            static Func<string, T> Create<T>(Regex regex, Func<Match, IEnumerator<int>, T> binder)
+            {
+                return input =>
+                {
+                    var m = regex.Match(input);
+                    var num = Generate(1, n => n + 1);
+                    return m.Success ? binder(m, num) : default(T);
+                };
+            }
+
+            static IEnumerator<T> Generate<T>(T initial, Func<T, T> next)
+            {
+                for (var state = initial; ; state = next(state))
+                    yield return state;
+                // ReSharper disable once FunctionNeverReturns
             }
         }
     }
 
-    static class Regexer
+    static class RegexBinderBuilder
     {
-        public static Func<string, T> Create<T>(Regex regex, 
-            Func<Func<Match, IEnumerator<int>, Match>, Func<Match, IEnumerator<int>, T>> builder)
+        public static Func<Match, IEnumerator<int>, TResult> SelectMany<T1, T2, TResult>(
+            this Func<Match, IEnumerator<int>, T1> binder,
+            Func<T1, Func<Match, IEnumerator<int>, T2>> continuation,
+            Func<T1, T2, TResult> projection)
         {
-            var parser = builder((m, _) => m);
-            return input =>
-            {
-                var m = regex.Match(input);
-                var num = Generate(1, n => n + 1);
-                return m.Success ? parser(m, num) : default(T);
-            };
-        }
-
-        static IEnumerator<T> Generate<T>(T initial, Func<T, T> next)
-        {
-            for (var state = initial; ; state = next(state))
-                yield return state;
-            // ReSharper disable once FunctionNeverReturns
-        }
-
-        public static Func<Match, IEnumerator<int>, TResult> Replace<T, TResult>(
-            this Func<Match, IEnumerator<int>, T> parser,
-            string replacement,
-            Func<T, string, TResult> resultSelector)
-        {
-            return replacement != null
-                 ? parser.Select((a, _) => resultSelector(a, replacement))
-                 : parser.Select(resultSelector);
-        }
-
-        public static Func<Match, IEnumerator<int>, TResult> Replace<T, TResult>(
-            this Func<Match, IEnumerator<int>, T> parser,
-            string replacement, string token,
-            Func<T, string, TResult> resultSelector)
-        {
-            return replacement != null && replacement.Contains(token)
-                 ? parser.Select((a, v) => resultSelector(a, v != null ? replacement.ReplaceFirstOccurence(token, v) : replacement))
-                 : parser.Replace(replacement, resultSelector);
-        }
-
-        public static Func<Match, IEnumerator<int>, TResult> Select<T, TResult>(this Func<Match, IEnumerator<int>, T> parser, Func<T, string, TResult> resultSelector)
-        {
-            return parser.Then((m, num) =>
-            {
-                if (!num.MoveNext()) throw new InvalidOperationException();
-                var groups = m.Groups;
-                Group group;
-                return num.Current <= groups.Count && (@group = groups[num.Current]).Success 
-                     ? group.Value : null;
-            }, resultSelector);
-        }
-
-        public static Func<Match, IEnumerator<int>, TResult> Then<TFirst, TSecond, TResult>(
-            this Func<Match, IEnumerator<int>, TFirst> firstSelector,
-            Func<Match, IEnumerator<int>, TSecond> secondSelector,
-            Func<TFirst, TSecond, TResult> resultSelector)
-        {
-            return (m, num) => resultSelector(firstSelector(m, num), secondSelector(m, num));
+            return (m, num) => { T1 f; return projection(f = binder(m, num), continuation(f)(m, num)); };
         }
     }
 
