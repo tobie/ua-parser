@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using YamlDotNet.RepresentationModel;
 
@@ -7,15 +6,6 @@ namespace UAParser
 {
     internal static class InternalExtensions
     {
-        internal static string ReplaceFirstOccurence(this string inputstring, string searchText, string replacementText)
-        {
-            int index = inputstring.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
-            if (index == -1)
-                return inputstring;
-
-            return inputstring.Substring(0, index) + replacementText + inputstring.Substring(index + searchText.Length);
-        }
-
         internal static List<Dictionary<string, string>> ConvertToDictionaryList(this YamlSequenceNode yamlNode)
         {
             List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
@@ -33,12 +23,6 @@ namespace UAParser
             dic[key.ToString()] = yamlNode.Children[key].ToString();
           }
           return dic;
-        }
-
-        internal static void ThrowIfNull(this object obj, string exceptionMessage)
-        {
-            if (obj == null)
-                throw new ArgumentNullException(exceptionMessage);
         }
     }
 }

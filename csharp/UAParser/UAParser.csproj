@@ -50,20 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientInfo.cs" />
-    <Compile Include="Device.cs" />
-    <Compile Include="DeviceParser.cs" />
-    <Compile Include="DevicePattern.cs" />
-    <Compile Include="OSParser.cs" />
-    <Compile Include="OSPattern.cs" />
-    <Compile Include="OS.cs" />
-    <Compile Include="YamlParsing.cs" />
-    <Compile Include="UserAgentParser.cs" />
-    <Compile Include="UserAgentPattern.cs" />
-    <Compile Include="UserAgent.cs" />
-    <Compile Include="InternalExtensions.cs" />
-    <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UAParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\regexes.yaml">
