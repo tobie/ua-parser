@@ -7,8 +7,10 @@ module Web.UAParser
     -- * Readying parser
       UAConfig
     , loadUAParser
+    , compiledConfig
     -- * Parsing browser (user agent)
     , parseUA
+    , parseUACompiled
     , UAResult (..)
     , uarVersion
     -- * Parsing OS
