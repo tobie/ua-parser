@@ -2,11 +2,14 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE OverloadedStrings         #-}
 {-# LANGUAGE RecordWildCards           #-}
+{-# LANGUAGE TemplateHaskell           #-}
 
 module Web.UAParser.Core
     ( UAConfig (..)
     , loadConfig
     , parseUA
+    , parseUACompiled
+    , compiledConfig
     , UAResult (..)
     , uarVersion
     , parseOS
@@ -32,6 +35,7 @@ import qualified Data.Text             as T
 import qualified Data.Text.Encoding    as T
 import           Data.Yaml
 import           Text.Regex.PCRE.Light
+import           Data.FileEmbed (embedFile)
 -------------------------------------------------------------------------------
 
 
@@ -162,6 +166,18 @@ osrVersion OSResult{..} =
 loadConfig :: FilePath -> IO UAConfig
 loadConfig fp = either error id  `fmap` decodeFile' fp
 
+regexesYAML :: B.ByteString
+regexesYAML = $(embedFile "regexes.yaml")
+
+-- | compile-time embeds regexes.yaml
+-- This function needs to be tested when regexes.yaml changes
+-- a failure will throw an exception lazily
+compiledConfig :: UAConfig
+compiledConfig = either error id $ decodeEither regexesYAML
+
+
+parseUACompiled :: ByteString -> Maybe UAResult
+parseUACompiled = parseUA compiledConfig
 
 -------------------------------------------------------------------------------
 decodeFile' :: FromJSON a => FilePath -> IO (Either String a)
