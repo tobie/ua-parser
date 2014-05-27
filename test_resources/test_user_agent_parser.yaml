@@ -84,12 +84,6 @@ test_cases:
     minor: '0'
     patch: '4'
 
-  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.122 Mobile Safari/537.36'
-    family: 'Android'
-    major: '4'
-    minor: '4'
-    patch: '2'
-
   - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; zh_CN) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0 baidubrowser/1.x Safari/534.7'
     family: 'Baidu Browser'
     major: '1'
@@ -211,6 +205,12 @@ test_cases:
     major: '18'
     minor: '0'
     patch: '1025'
+
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.122 Mobile Safari/537.36'
+    family: 'Chrome Mobile'
+    major: '35'
+    minor: '0'
+    patch: '1916'
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Ubuntu/10.10 Chromium/10.0.648.133 Chrome/10.0.648.133 Safari/534.16'
     family: 'Chromium'
