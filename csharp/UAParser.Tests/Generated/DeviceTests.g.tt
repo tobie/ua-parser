@@ -1,0 +1,39 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ include file="Stamp.ttinclude" #>
+<# const string sourceFileName = "test_device.yaml"; #>
+namespace UAParser.Tests.Generated
+{
+    using UAParser;
+    using Xunit;
+    
+    // ReSharper disable InconsistentNaming
+
+    // Following tests were generated automatically from <#= sourceFileName #>
+
+    public class DeviceTests
+    {
+        static readonly Parser Parser = Parser.GetDefault();
+
+        // ReSharper disable InconsistentNaming
+<#
+    var tcs = ParseTestCases(Host, sourceFileName, (mark, map) => new
+    {
+        Mark      = mark,
+        UserAgent = map("user_agent_string"),
+        Family    = map("family")
+    }); 
+
+    foreach (var tc in tcs)
+    { #>
+
+        [Fact]
+        public void <#= Identify(tc.Family) #>_Line_<#= tc.Mark.Line #>() 
+        { 
+            var device = Parser.ParseDevice(<#= Stringify(tc.UserAgent) #>);
+            Assert.Equal(<#= Stringify(tc.Family) #>, device.Family);
+        }
+<#  } #>
+    }
+}
+<#@ include file="Tests.ttinclude" #>
