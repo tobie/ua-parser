@@ -344,3 +344,6 @@ test_cases:
 
   - user_agent_string: 'Innovazion Crawler/Nutch-1.7'
     family: 'Spider'
+
+  - user_agent_string: 'crawler4j (http://code.google.com/p/crawler4j/)'
+    family: 'Spider'
