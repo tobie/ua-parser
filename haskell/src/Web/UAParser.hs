@@ -62,7 +62,7 @@ parseUA
     :: ByteString
     -- ^ User-Agent string to be parsed
     -> Maybe UAResult
-parseUA bs = foldr mplus Nothing $ map go uaParsers
+parseUA bs = msum $ map go uaParsers
     where
       UAConfig{..} = uaConfig
 
@@ -115,7 +115,7 @@ parseOS
     :: ByteString
     -- ^ User-Agent string to be parsed
     -> Maybe OSResult
-parseOS bs = foldr mplus Nothing $ map go osParsers
+parseOS bs = msum $ map go osParsers
     where
       UAConfig{..} = uaConfig
 
