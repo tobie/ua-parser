@@ -66,7 +66,8 @@ parseUA bs = foldr mplus Nothing $ map go uaParsers
     where
       UAConfig{..} = uaConfig
 
-      go UAParser{..} = mkRes . map T.decodeUtf8 =<< match uaRegex bs []
+      go UAParser{..} = either (const Nothing) mkRes
+                      . mapM T.decodeUtf8' =<< match uaRegex bs []
         where
           mkRes [] = Nothing
           mkRes [_,f,v1,v2,v3] = Just $ UAResult (repF f) (repV1 v1) (Just v2) (Just v3)
@@ -118,7 +119,8 @@ parseOS bs = foldr mplus Nothing $ map go osParsers
     where
       UAConfig{..} = uaConfig
 
-      go OSParser{..} = mkRes . map T.decodeUtf8 =<< match osRegex bs []
+      go OSParser{..} = either (const Nothing) mkRes
+                      . mapM T.decodeUtf8' =<< match osRegex bs []
           where
           mkRes [] = Nothing
           mkRes [_,f,v1,v2,v3, v4] = Just $
