@@ -21,10 +21,6 @@ Library
   hs-source-dirs: src
   Exposed-modules:
     Web.UAParser
-    Web.UAParser.Core
-  other-modules:
-    Paths_ua_parser
-
 
   Build-depends:       
       base < 5
@@ -33,9 +29,9 @@ Library
     , pcre-light
     , yaml >= 0.7 && < 0.9
     , aeson >= 0.7 && < 0.8
-    , filepath
     , data-default
     , syb
+    , file-embed < 0.1
 
   ghc-options: -O2 -Wall  
 
