@@ -58,10 +58,7 @@ uaConfig = either error id $ decodeEither $(embedFile "regexes.yaml")
 
 -------------------------------------------------------------------------------
 -- | Parse a given User-Agent string
-parseUA
-    :: ByteString
-    -- ^ User-Agent string to be parsed
-    -> Maybe UAResult
+parseUA :: ByteString -> Maybe UAResult
 parseUA bs = msum $ map go uaParsers
     where
       UAConfig{..} = uaConfig
@@ -69,13 +66,11 @@ parseUA bs = msum $ map go uaParsers
       go UAParser{..} = either (const Nothing) mkRes
                       . mapM T.decodeUtf8' =<< match uaRegex bs []
         where
-          mkRes [] = Nothing
           mkRes [_,f,v1,v2,v3] = Just $ UAResult (repF f) (repV1 v1) (Just v2) (Just v3)
-          mkRes [_,f,v1,v2] = Just $ UAResult (repF f) (repV1 v1) (Just v2) Nothing
-          mkRes [_,f,v1] = Just $ UAResult (repF f) (repV1 v1) Nothing Nothing
-          mkRes [_, f] = Just $ UAResult (repF f) Nothing Nothing Nothing
-          mkRes _ = Nothing
-          -- error $  "Unsupported match in parseUA" ++ show x
+          mkRes [_,f,v1,v2]    = Just $ UAResult (repF f) (repV1 v1) (Just v2) Nothing
+          mkRes [_,f,v1]       = Just $ UAResult (repF f) (repV1 v1) Nothing   Nothing
+          mkRes [_,f]          = Just $ UAResult (repF f) Nothing    Nothing   Nothing
+          mkRes _              = Nothing
 
           repV1 x = uaV1Rep `mplus` Just x
           repF x = maybe x id uaFamRep
@@ -111,10 +106,7 @@ instance Default UAResult where
 
 -------------------------------------------------------------------------------
 -- | Parse OS from given User-Agent string
-parseOS
-    :: ByteString
-    -- ^ User-Agent string to be parsed
-    -> Maybe OSResult
+parseOS :: ByteString -> Maybe OSResult
 parseOS bs = msum $ map go osParsers
     where
       UAConfig{..} = uaConfig
@@ -122,15 +114,12 @@ parseOS bs = msum $ map go osParsers
       go OSParser{..} = either (const Nothing) mkRes
                       . mapM T.decodeUtf8' =<< match osRegex bs []
           where
-          mkRes [] = Nothing
-          mkRes [_,f,v1,v2,v3, v4] = Just $
-            OSResult (repF f) (Just v1) (Just v2) (Just v3) (Just v4)
-          mkRes [_,f,v1,v2,v3] = Just $ OSResult (repF f) (Just v1) (Just v2) (Just v3) Nothing
-          mkRes [_,f,v1,v2] = Just $ OSResult (repF f) (Just v1) (Just v2) Nothing Nothing
-          mkRes [_,f,v1] = Just $ OSResult (repF f) (Just v1) Nothing Nothing Nothing
-          mkRes [_, f] = Just $ OSResult (repF f) Nothing Nothing Nothing Nothing
-          mkRes _ = Nothing
-          -- error $  "Unsupported match in parseOS" ++ show x
+          mkRes [_,f,v1,v2,v3,v4] = Just $ OSResult (repF f) (Just v1) (Just v2) (Just v3) (Just v4)
+          mkRes [_,f,v1,v2,v3]    = Just $ OSResult (repF f) (Just v1) (Just v2) (Just v3) Nothing
+          mkRes [_,f,v1,v2]       = Just $ OSResult (repF f) (Just v1) (Just v2) Nothing   Nothing
+          mkRes [_,f,v1]          = Just $ OSResult (repF f) (Just v1) Nothing   Nothing   Nothing
+          mkRes [_,f]             = Just $ OSResult (repF f) Nothing   Nothing   Nothing   Nothing
+          mkRes _                 = Nothing
 
           repF x = maybe x id osFamRep
 
