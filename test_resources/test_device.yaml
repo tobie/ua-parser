@@ -1,4 +1,6 @@
 test_cases:
+  - user_agent_string: 'SoundCloud/3.0.0 build 2547; iPhone/iPhone OS/7.1.1'
+    family: 'iPhone'
 
   - user_agent_string: 'ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A'
     family: 'Alcatel OT510A'

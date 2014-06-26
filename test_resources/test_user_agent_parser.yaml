@@ -1,4 +1,9 @@
 test_cases:
+  - user_agent_string: 'SoundCloud/3.0.0 build 2547; iPhone/iPhone OS/7.1.1'
+    family: 'SoundCloud'
+    major: '3'
+    minor: '0'
+    patch: '0'
 
   - user_agent_string: 'Mozilla/5.0 (Windows; U; en-US) AppleWebKit/531.9 (KHTML, like Gecko) AdobeAIR/2.5.1'
     family: 'AdobeAIR'

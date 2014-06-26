@@ -1,6 +1,9 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
+  - regex: '(SoundCloud)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'SoundCloud'
+
   # HbbTV standard defines what features the browser should understand.
   # but it's like targeting "HTML5 browsers", effective browser support depends on the model
   # See os_parsers if you want to target a specific TV
@@ -675,6 +678,11 @@ os_parsers:
   # iOS
   # http://en.wikipedia.org/wiki/IOS_version_history
   ##########
+
+  # SoundCloud App
+  - regex: '(iPhone OS)/(\d+)\.(\d+)\.(\d+)'
+    os_replacement: 'iOS'
+
   - regex: '(CPU OS|iPhone OS|CPU iPhone) +(\d+)[_\.](\d+)(?:[_\.](\d+))?'
     os_replacement: 'iOS'
 
@@ -1002,6 +1010,9 @@ device_parsers:
   - regex: '(iPod);'
   - regex: '(iPhone) Simulator;'
   - regex: '(iPhone);'
+
+  # SoundCloud App 
+  - regex: '(iPhone)/'
 
   ##########
   # Acer

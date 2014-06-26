@@ -1,4 +1,10 @@
 test_cases:
+  - user_agent_string: 'SoundCloud/3.0.0 build 2547; iPhone/iPhone OS/7.1.1'
+    family: 'iOS'
+    major: '7'
+    minor: '1'
+    patch: '1'
+    patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true'
     family: 'Android'
@@ -1572,20 +1578,6 @@ test_cases:
     family: 'Windows Phone'
     major: '6'
     minor: '5'
-    patch:
-    patch_minor:
-
-  - user_agent_string: 'Mozilla/5.0 (Windows U; Win NT 5.0; en-US; rv:1.8.0.2) Gecko/20060308 Firefox/1.5.0.2'
-    family: 'Windows NT'
-    major:
-    minor:
-    patch:
-    patch_minor:
-
-  - user_agent_string: 'Mozilla/5.0 (Windows; N; WinNT; en-US; m14) Netscape6/6.0b1,gzip(gfe),gzip(gfe),gzip(gfe)'
-    family: 'Windows NT'
-    major:
-    minor:
     patch:
     patch_minor:
 
