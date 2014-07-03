@@ -16,15 +16,14 @@ module Web.UAParser
     , osrVersion
     ) where
 
-
 -------------------------------------------------------------------------------
 import           Control.Applicative
 import           Control.Monad
 import           Data.Aeson
 import           Data.ByteString.Char8 (ByteString)
 import           Data.Default
-import           Data.Generics
 import           Data.FileEmbed
+import           Data.Generics
 import           Data.Maybe
 import           Data.Text             (Text)
 import qualified Data.Text             as T

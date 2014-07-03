@@ -59,5 +59,6 @@ test-suite test
     , data-default
     , syb
     , filepath
+    , file-embed
 
 
