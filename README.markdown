@@ -349,11 +349,13 @@ test_string = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit
 
 -- Main entry point for Haskell
 main = do
-    ua <- loadUAParser
-    let uaResult = parseUA ua test_string
+--    ua <- loadUAParser {-- deprecated since 0.5 --}
+--    let uaResult = parseUA ua test_string
+    let uaResult = parseUA test_string
     print uaResult
 
-    let osResult = parseOS ua test_string
+--    let osResult = parseOS ua test_string
+    let osResult = parseOS test_string
     print osResult
 
 -- Result from user agent parse
