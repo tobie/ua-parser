@@ -1,6 +1,7 @@
 exports.Device = Device
-function Device(family) {
+function Device(family, deviceType) {
   this.family = family || 'Other';
+  this.type = deviceType || 'Other';
 }
 
 Device.prototype.toString = function() {
@@ -11,14 +12,16 @@ Device.prototype.toString = function() {
 exports.makeParser = function(regexes) {
   var parsers = regexes.map(function (obj) {
     var regexp = new RegExp(obj.regex),
-        deviceRep = obj.device_replacement;
+        deviceRep = obj.device_replacement,
+        deviceType = obj.device_type;
 
     function parser(str) {
       var m = str.match(regexp);
       if (!m) { return null; }
 
       var family = deviceRep ? deviceRep.replace('$1', m[1]) : m[1];
-      return new Device(family);
+      var type = deviceType || 'Other';
+      return new Device(family, deviceType);
     }
 
     return parser;
