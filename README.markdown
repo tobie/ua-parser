@@ -327,35 +327,31 @@ More information is available in the README in the perl directory
 
 Usage :: Haskell
 ---------------
+
+Install the package:
+
+    cabal update
+    cabal install ua-parser
+
+Sample Usage:
+
 ```haskell
-{-
-
-Install via Hackage and cabal like so:
-
-cabal update
-cabal install ua-parser
-Now you're good to go.
-
--}
-
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main where
 
 import Web.UAParser
 
--- A test string
 test_string = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B179 Safari/7534.48.3"
 
--- Main entry point for Haskell
 main = do
-    ua <- loadUAParser
-    let uaResult = parseUA ua test_string
-    print uaResult
+    print $ parseUA test_string
+    print $ parseOS test_string
+```
 
-    let osResult = parseOS ua test_string
-    print osResult
+Result of running this program:
 
+```haskell
 -- Result from user agent parse
 Just (UAResult {uarFamily = "Mobile Safari", uarV1 = Just "5", uarV2 = Just "1", uarV3 = Nothing})
 
