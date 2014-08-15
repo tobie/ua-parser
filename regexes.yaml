@@ -6,8 +6,8 @@ user_agent_parsers:
   # See os_parsers if you want to target a specific TV
   - regex: '(HbbTV)/(\d+)\.(\d+)\.(\d+) \('
 
-  # must go before Firefox to catch SeaMonkey/Camino
-  - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
+  # must go before Firefox to catch Chimera/SeaMonkey/Camino
+  - regex: '(Chimera|SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)?'
 
   # Firefox
   - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)\.?(\d+)?'
@@ -49,7 +49,7 @@ user_agent_parsers:
   - regex: '(Navigator)/(\d+)\.(\d+)([ab]\d+)'
     family_replacement: 'Netscape'
 
-  - regex: '(Netscape6)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Netscape6)/(\d+)\.(\d+)\.?([ab]?\d+)?'
     family_replacement: 'Netscape'
 
   - regex: '(MyIBrow)/(\d+)\.(\d+)'
@@ -62,7 +62,7 @@ user_agent_parsers:
     family_replacement: 'Opera Mobile'
   - regex: '(Opera)/(\d+)\.(\d+).+Opera Mobi'
     family_replacement: 'Opera Mobile'
-  - regex: 'Opera Mobi.+(Opera)/(\d+)\.(\d+)'
+  - regex: 'Opera Mobi.+(Opera)(?:\/|\s+)(\d+)\.(\d+)'
     family_replacement: 'Opera Mobile'
   - regex: 'Opera Mobi'
     family_replacement: 'Opera Mobile'
@@ -321,7 +321,7 @@ user_agent_parsers:
   - regex: '(Embider)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
 
-  - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(BonEcho)/(\d+)\.(\d+)\.?([ab]?\d+)?'
     family_replacement: 'Bon Echo'
 
   # @note: iOS / OSX Applications
