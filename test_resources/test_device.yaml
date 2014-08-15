@@ -114,6 +114,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)'
     family: 'Lumia 920'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.122 Mobile Safari/537.36'
+    family: 'Nexus 5'
+
   - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
     family: 'Nintendo DS'
 
