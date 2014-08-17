@@ -62,7 +62,7 @@ user_agent_parsers:
     family_replacement: 'Opera Mobile'
   - regex: '(Opera)/(\d+)\.(\d+).+Opera Mobi'
     family_replacement: 'Opera Mobile'
-  - regex: 'Opera Mobi.+(Opera)(?:\/|\s+)(\d+)\.(\d+)'
+  - regex: 'Opera Mobi.+(Opera)(?:/|\s+)(\d+)\.(\d+)'
     family_replacement: 'Opera Mobile'
   - regex: 'Opera Mobi'
     family_replacement: 'Opera Mobile'
