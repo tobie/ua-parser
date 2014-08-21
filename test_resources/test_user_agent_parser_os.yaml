@@ -1582,6 +1582,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; ANZ821)'
+    family: 'Windows Phone'
+    major: '8'
+    minor: '1'
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Windows U; Win NT 5.0; en-US; rv:1.8.0.2) Gecko/20060308 Firefox/1.5.0.2'
     family: 'Windows NT'
     major:

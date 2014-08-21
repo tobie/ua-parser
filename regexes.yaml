@@ -247,6 +247,18 @@ user_agent_parsers:
   # Chrome/Chromium/major_version.minor_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)'
 
+  ##########
+  # IE Mobile needs to happen before Android to catch cases such as:
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; ANZ821)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Orange)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Vodafone)...
+  ##########
+  
+  # IE Mobile
+  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
+    family_replacement: 'IE Mobile'
+  
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
@@ -275,9 +287,6 @@ user_agent_parsers:
   - regex: '(Android) Honeycomb'
     v1_replacement: '3'
 
-  # IE Mobile
-  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
-    family_replacement: 'IE Mobile'
   # desktop mode
   # http://www.anandtech.com/show/3982/windows-phone-7-review
   - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
@@ -444,6 +453,9 @@ user_agent_parsers:
   - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  # Espial
+  - regex: '(Espial)/(\d+)(?:\.(\d+))?(?:\.(\d+))?'  
+
  # Apple Mail
 
   # apple mail - not directly detectable, have it after Safari stuff
@@ -522,6 +534,16 @@ os_parsers:
   - regex: 'HbbTV/\d+\.\d+\.\d+ \(.*; ?([a-zA-Z]+) ?;.*(201[1-9]).*\)'
 
   ##########
+  # @note: Windows Phone needs to come before Windows NT 6.1 *and* before Android to catch cases such as:
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; ANZ821)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Orange)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Vodafone)...
+  ##########
+
+  - regex: '(Windows Phone) (?:OS[ /])?(\d+)\.(\d+)'
+
+  ##########
   # Android
   # can actually detect rooted android os. do we care?
   ##########
@@ -577,8 +599,7 @@ os_parsers:
   - regex: '(XBLWP7)'
     os_replacement: 'Windows Phone'
 
-  # @note: These need to come before Windows NT 6.1
-  - regex: '(Windows Phone) (?:OS[ /])?(\d+)\.(\d+)'
+  # @note: This needs to come before Windows NT 6.1
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
@@ -988,6 +1009,12 @@ device_parsers:
     device_replacement: 'Spider'
 
   - regex: 'Googlebot/\d+.\d+'
+    device_replacement: 'Spider'
+
+  - regex: 'NING/(\d+).(\d+)'
+    device_replacement: 'Spider'
+    
+  - regex: 'MsnBot-Media /(\d+).(\d+)'
     device_replacement: 'Spider'
 
   ##########
