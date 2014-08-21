@@ -308,6 +308,12 @@ test_cases:
     minor: '1'
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (DTV) AppleWebKit/531.2+ (KHTML, like Gecko) Espial/6.1.6 AQUOSBrowser/2.0 (US01DTV;V;0001;0001)'
+    family: 'Espial'
+    major: '6'
+    minor: '1'
+    patch: '6'
+
   - user_agent_string: 'iBrowser/Mini2.8 (Nokia5130c-2/07.97)'
     family: 'iBrowser Mini'
     major: '2'
@@ -982,6 +988,13 @@ test_cases:
     family: 'IE Mobile'
     major: '8'
     minor: '12'
+    patch:
+    patch_minor:
+
+  - user_agent_string: 'Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)'
+    family: 'IE Mobile'
+    major: '11'
+    minor: '0'
     patch:
     patch_minor:
 

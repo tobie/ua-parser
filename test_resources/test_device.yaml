@@ -347,3 +347,9 @@ test_cases:
 
   - user_agent_string: 'Innovazion Crawler/Nutch-1.7'
     family: 'Spider'
+
+  - user_agent_string: 'NING/1.0'
+    family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) MsnBot-Media /1.0b'
+    family: 'Spider'
