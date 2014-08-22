@@ -240,6 +240,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
     family: 'PlayStation Vita'
 
+  - user_agent_string: 'Mozilla/5.0 (PlayStation 4 1.75) AppleWebKit/536.26 (KHTML, like Gecko)'
+    family: 'PlayStation 4'
+
   - user_agent_string: 'SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0'
     family: 'Samsung C3053'
 

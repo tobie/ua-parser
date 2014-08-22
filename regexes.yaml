@@ -710,6 +710,36 @@ os_parsers:
   - regex: '(AppleTV)/(\d+)\.(\d+)'
     os_replacement: 'ATV OS X'
 
+  # CFNetwork/Darwin - The specific CFNetwork or Darwin version determines
+  # whether the os maps to Mac OS, or iOS, or just Darwin.
+  # See: http://user-agents.me/cfnetwork-version-list
+  - regex: '(CFNetwork)/(5)48\.0\.3.* Darwin/11\.0\.0'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(5)48\.(0)\.4.* Darwin/(1)1\.0\.0'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(5)48\.(1)\.4'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(4)85\.1(3)\.9'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(6)09\.(1)\.4'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(6)(0)9'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/6(7)2\.(1)\.13'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/6(7)2\.(1)\.(1)4'
+    os_replacement: 'iOS'
+  - regex: '(CF)(Network)/6(7)(2)\.1\.15'
+    os_replacement: 'iOS'
+    os_v1_replacement: '7'
+    os_v2_replacement: '1'
+  - regex: '(CFNetwork)/6(7)2\.(0)\.(?:2|8)'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/709\.1'
+    os_replacement: 'iOS'
+    os_v1_replacement: '8'
+    os_v2_replacement: '0.b5'
+  
   ##########
   # CFNetwork iOS Apps
   # @ref: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
@@ -726,9 +756,13 @@ os_parsers:
   - regex: 'CFNetwork/.* Darwin/(13)\.\d+'
     os_replacement: 'iOS'
     os_v1_replacement: '6'
-  - regex: 'CFNetwork/.* Darwin/(14)\.\d+'
+  - regex: 'CFNetwork/6.* Darwin/(14)\.\d+'
     os_replacement: 'iOS'
     os_v1_replacement: '7'
+  - regex: 'CFNetwork/7.* Darwin/(14)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '8'
+    os_v2_replacement: '0'
   # iOS Apps
   - regex: '\b(iOS[ /]|iPhone(?:/| v|[ _]OS[/,]|; | OS : |\d,\d/|\d,\d; )|iPad/)(\d{1,2})[_\.](\d{1,2})(?:[_\.](\d+))?'
     os_replacement: 'iOS'
@@ -895,8 +929,8 @@ device_parsers:
   ##########
   - regex: 'PLAYSTATION 3'
     device_replacement: 'PlayStation 3'
-  - regex: '(PlayStation Portable)'
-  - regex: '(PlayStation Vita)'
+  - regex: '(PlayStation (:?Portable|Vita))'
+  - regex: '(PlayStation (:?\d+))'  
 
   ##########
   # incomplete!
