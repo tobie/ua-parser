@@ -353,3 +353,15 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) MsnBot-Media /1.0b'
     family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0'
+    family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; EtaoSpider/1.0; http://open.etao.com/dev/EtaoSpider)'
+    family: 'Spider'
+
+  - user_agent_string: 'A6-Indexer/1.0 (http://www.a6corp.com/a6-web-scraping-policy/)'
+    family: 'Spider'
+
+  - user_agent_string: 'YisouSpider'
+    family: 'Spider'
