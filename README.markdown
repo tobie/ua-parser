@@ -39,6 +39,12 @@ There are a few other libraries which make use of ua-parser's patterns. These in
 
 * Ruby - [user_agent_parser](https://github.com/toolmantim/user_agent_parser)
 
+See ua-parser in action
+-----------------------
+
+[whatsmyua.info](http://www.whatsmyua.info) shows what ua-parser reports for
+your current user agent/OS/device, or for any arbitrary user agent string.
+
 Usage :: [node.js][1]
 ---------------------
 ```js
