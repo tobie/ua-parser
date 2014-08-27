@@ -19,6 +19,10 @@ public class Os extends EvalFunc<Tuple> {
         parser = PigParser.getParser();
     }
 
+    public Os(String regexYamlPath) throws IOException {
+        parser = PigParser.getParser(regexYamlPath);
+    }
+
     public Tuple exec(Tuple input) throws IOException {
         if (input == null || input.size() == 0) {
             return null;
