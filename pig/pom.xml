@@ -18,8 +18,8 @@
 
     <!-- These are specific for CDH 4.2.0 and this must be part of a profile/classifier setup. -->
     <hadoop.releases.repo>https://repository.cloudera.com/artifactory/cloudera-repos/</hadoop.releases.repo>
-    <hadoop.version>2.0.0-cdh4.2.0</hadoop.version>
-    <pig.version>0.10.0-cdh4.2.0</pig.version>
+    <hadoop.version>2.0.0-cdh4.7.0</hadoop.version>
+    <pig.version>0.11.0-cdh4.7.0</pig.version>
   </properties>
 
   <repositories>
@@ -71,6 +71,12 @@
       <scope>provided</scope>
     </dependency>
 
+     <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.6.1</version>
+        <scope>provided</scope>
+     </dependency>
   </dependencies>
 
   <build>
