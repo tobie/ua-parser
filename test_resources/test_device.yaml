@@ -368,3 +368,6 @@ test_cases:
 
   - user_agent_string: 'YisouSpider'
     family: 'Spider'
+
+  - user_agent_string: 'Riddler (http://riddler.io/about.html)'
+    family: 'Spider'
