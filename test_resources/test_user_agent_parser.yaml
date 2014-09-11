@@ -5,6 +5,12 @@ test_cases:
     minor: '0'
     patch: '0'
 
+  - user_agent_string: 'SoundCloud-Android/14.08.21-17 (Android 4.4.2; samsung SAMSUNG-SGH-I337)'
+    family: 'SoundCloud'
+    major: '14'
+    minor: '08'
+    patch: '21'
+
   - user_agent_string: 'Mozilla/5.0 (Windows; U; en-US) AppleWebKit/531.9 (KHTML, like Gecko) AdobeAIR/2.5.1'
     family: 'AdobeAIR'
     major: '2'
