@@ -25,7 +25,7 @@ import           Test.Framework.Providers.HUnit as T
 import           Test.HUnit                     hiding (Test, path)
 import           Text.Regex.PCRE.Light
 -------------------------------------------------------------------------------
-import           Web.UAParser.Core
+import           Web.UAParser
 -------------------------------------------------------------------------------
 
 
@@ -45,11 +45,10 @@ main = do
 
 -------------------------------------------------------------------------------
 benchMain = do
-  conf <- loadConfig "../regexes.yaml"
   cases <- loadTests "test_user_agent_parser.yaml"
   cases2 <- loadTests "firefox_user_agent_strings.yaml"
   let allC = cases ++ cases2
-      ua = bench "UA Parsing" $ nf (map (parseUA conf . uatcString)) allC
+      ua = bench "UA Parsing" $ nf (map (parseUA . uatcString)) allC
   print $ show (length allC) ++ " strings being parsed."
   C.defaultMain [ua]
 
@@ -74,17 +73,16 @@ testMain = T.defaultMain tests
 
 -------------------------------------------------------------------------------
 uaTests = buildTest $ do
-  conf <- loadConfig "../regexes.yaml"
   cases <- loadTests "test_user_agent_parser.yaml"
   cases2 <- loadTests "firefox_user_agent_strings.yaml"
   let allC = cases ++ cases2
-  return $ testGroup "UA Parsing Tests" $ map (testUAParser conf) allC
+  return $ testGroup "UA Parsing Tests" $ map testUAParser allC
 
 
 
 -------------------------------------------------------------------------------
-testUAParser :: UAConfig -> UserAgentTestCase -> Test
-testUAParser config UATC{..} = testCase tn $ do
+testUAParser :: UserAgentTestCase -> Test
+testUAParser UATC{..} = testCase tn $ do
   case parsed of
     Nothing -> assertFailure "Can't produce UAResult"
     Just UAResult{..} -> do
@@ -93,7 +91,7 @@ testUAParser config UATC{..} = testCase tn $ do
      -- assertEqual "v2 is the same" uatcV2 uarV2
      -- assertEqual "v3 is the same" uatcV3 uarV3
   where
-    parsed = parseUA config uatcString
+    parsed = parseUA uatcString
     tn = T.unpack $ T.intercalate "/" ["UA Test: ", uatcFamily, m uatcV1, m uatcV2, m uatcV3]
     m x = maybe "-" id x
 
@@ -106,15 +104,14 @@ testUAParser config UATC{..} = testCase tn $ do
 
 -------------------------------------------------------------------------------
 osTests = buildTest $ do
-  conf <- loadConfig "../regexes.yaml"
   cases <- loadTests "test_user_agent_parser_os.yaml"
-  return $ testGroup "OS Parsing Tests" $ map (testOSParser conf) cases
+  return $ testGroup "OS Parsing Tests" $ map testOSParser cases
 
 
 
 -------------------------------------------------------------------------------
-testOSParser :: UAConfig -> OSTestCase -> Test
-testOSParser config OSTC{..} = testCase tn $ do
+testOSParser :: OSTestCase -> Test
+testOSParser OSTC{..} = testCase tn $ do
   case parsed of
     Nothing -> assertFailure "Can't produce OSResult"
     Just OSResult{..} -> do
@@ -124,7 +121,7 @@ testOSParser config OSTC{..} = testCase tn $ do
      assertEqual "patch is the same" ostcV3  osrV3
      assertEqual "patch_minor is the same" ostcV4  osrV4
   where
-    parsed = parseOS config ostcString
+    parsed = parseOS ostcString
     tn = T.unpack $ T.intercalate "/"
          ["OS Test: ", ostcFamily, m ostcV1, m ostcV2, m ostcV3, m ostcV4]
     m x = maybe "-" id x
@@ -140,7 +137,7 @@ testOSParser config OSTC{..} = testCase tn $ do
 
 -------------------------------------------------------------------------------
 loadTests :: FromJSON a => FilePath -> IO a
-loadTests fp = parseMonad p =<< either error id `fmap` decodeFile' fp'
+loadTests fp = parseMonad p =<< either (error . show) id `fmap` decodeFileEither fp'
   where
     fp' = "../test_resources" </> fp
     p (Object x) = x .: "test_cases"

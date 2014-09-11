@@ -5295,9 +5295,9 @@ test_cases:
       minor: '48'
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20020909 Chimera/0.5"
-      family: "Other"
-      major:
-      minor:
+      family: "Chimera"
+      major: "0"
+      minor: "5"
       patch:
     - user_agent_string: "Mozilla/5.0 Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20030917 Camino/0.7"
       family: "Camino"
@@ -9200,14 +9200,14 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20021023 Chimera/0.5"
-      family: "Other"
-      major:
-      minor:
+      family: "Chimera"
+      major: "0"
+      minor: "5"
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.0.1) Gecko/20021219 Chimera/0.6+"
-      family: "Other"
-      major:
-      minor:
+      family: "Chimera"
+      major: "0"
+      minor: "6"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.0.1)"
       family: "Other"
@@ -14060,9 +14060,9 @@ test_cases:
       minor: '8'
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.0.1) Gecko/20021220 Chimera/0.6+"
-      family: "Other"
-      major:
-      minor:
+      family: "Chimera"
+      major: "0"
+      minor: "6"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.4) Gecko/20030630 Epiphany/1.0"
       family: "Epiphany"
@@ -54685,14 +54685,14 @@ test_cases:
       minor: '001'
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; m18) Gecko/20001108 Netscape6/6.0"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "0"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win 9x 4.90; en-US; m18) Gecko/20001108 Netscape6/6.0"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "0"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en; rv:1.0) Netscape/6.0"
       family: "Netscape"
@@ -54700,84 +54700,84 @@ test_cases:
       minor: '0'
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; m18) Gecko/20010131 Netscape6/6.01"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "01"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux 2.4.2-2 i586; en-US; m18) Gecko/20010131 Netscape6/6.01"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "01"
       patch:
     - user_agent_string: "Mozilla/5.0 (Linux 2.6.5) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; de-DE; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1\""
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:7.01) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.2) Gecko/20040804 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.6) Gecko/20040206 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; WinNT4.0; en-US) Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; HP-UX 9000/785; en-US; rv:1.6) Gecko/20020604 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; SunOS sun4u; en-US; rv:0.9.2) Gecko/20011002 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Mozilla/5.5 (Windows; U; Windows NT 5.1; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "1"
       patch:
     - user_agent_string: "Netscape 6.1 (X11; I; Linux 2.4.18 i686)"
       family: "Other"
@@ -54800,9 +54800,9 @@ test_cases:
       minor: '2'
       patch: '2'
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:0.9.4) Gecko/20011022 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:0.9.4) Gecko/20011130 Netscape6/6.2.1"
       family: "Netscape"
@@ -54835,9 +54835,9 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-GB; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3"
       family: "Netscape"
@@ -54845,9 +54845,9 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.4) Gecko/20011128 Netscape6/6.2.1"
       family: "Netscape"
@@ -54855,9 +54855,9 @@ test_cases:
       minor: '2'
       patch: '1'
     - user_agent_string: "Mozilla/5.0 (Windows; U; Win 9x 4.90; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-CA; rv:0.9.4) Gecko/20011128 Netscape6/6.2.1"
       family: "Netscape"
@@ -54875,19 +54875,19 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011022 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; mag1001; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3"
       family: "Netscape"
@@ -54900,9 +54900,9 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4) Gecko/20011128 Netscape6/6.2.1"
       family: "Netscape"
@@ -54950,9 +54950,9 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:0.9.4) Gecko/20011022 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:0.9.4) Gecko/20011126 Netscape6/6.2.1"
       family: "Netscape"
@@ -54970,9 +54970,9 @@ test_cases:
       minor: '2'
       patch: '3'
     - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.5) Gecko/20011022 Netscape6/6.2"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "2"
       patch:
     - user_agent_string: "Netscape 6.2 (Macintosh; N; PPC; ja)"
       family: "Other"
@@ -54980,10 +54980,15 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.2) Gecko/20040803 Netscape6/6.5"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "5"
       patch:
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.1) Gecko/20010607 Netscape6/6.1b1"
+      family: "Netscape"
+      major: "6"
+      minor: "1"
+      patch: "b1"
     - user_agent_string: "Mozilla/5.0 (compatible; MSIE 5.5; Windows; NT 5.0) Netscape/7"
       family: "IE"
       major: '5'
@@ -60344,6 +60349,52 @@ test_cases:
       major: '8'
       minor: '4'
       patch:
+    - user_agent_string: "Mozilla/5.0 (S60; SymbOS; Opera Mobi/SYB-1103211396; U; es-LA; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 11.00"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '00'
+      patch:
+    - user_agent_string: "Mozilla/5.0 (S60; SymbOS; Opera Mobi/1209; U; it; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.1"
+      family: "Opera Mobile"
+      major: '10'
+      minor: '1'
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Linux armv7l; Maemo; Opera Mobi/4; U; fr; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 10.1"
+      family: "Opera Mobile"
+      major: '10'
+      minor: '1'
+      patch:
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Linux armv6l; Maemo; Opera Mobi/8; U; en-GB; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 11.00"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '00'
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Android 2.2.2; Linux; Opera Mobi/ADR-1103311355; U; en; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 11.00"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '00'
+      patch:
+    - user_agent_string: "Mozilla/4.0 (compatible; MSIE 8.0; S60; SymbOS; Opera Mobi/SYB-1107071606; en) Opera 11.10"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '10'
+      patch:
+    - user_agent_string: "Mozilla/4.0 (compatible; MSIE 8.0; Linux armv7l; Maemo; Opera Mobi/4; fr) Opera 10.1"
+      family: "Opera Mobile"
+      major: '10'
+      minor: '1'
+      patch:
+    - user_agent_string: "Mozilla/4.0 (compatible; MSIE 8.0; Linux armv6l; Maemo; Opera Mobi/8; en-GB) Opera 11.00"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '00'
+      patch:
+    - user_agent_string: "Mozilla/4.0 (compatible; MSIE 8.0; Android 2.2.2; Linux; Opera Mobi/ADR-1103311355; en) Opera 11.00"
+      family: "Opera Mobile"
+      major: '11'
+      minor: '00'
+      patch:
     - user_agent_string: "Operah"
       family: "Other"
       major:
@@ -62065,9 +62116,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Veczilla/0.35beta (X11; U; UNICOS/mk 21164a(EV5.6) Cray T3E; en-US; m18) Gecko/20020202 Netscape6/6.5"
-      family: "Other"
-      major:
-      minor:
+      family: "Netscape"
+      major: "6"
+      minor: "5"
       patch:
     - user_agent_string: "Veczilla/0.35beta (X11; U; UNICOS/mk 21164a(EV5.6) Cray T3E; en-US; m18) Gecko/20040329"
       family: "Other"
@@ -62354,3 +62405,103 @@ test_cases:
       major:
       minor:
       patch:
+    - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; nl; rv:1.8.1b2) Gecko/20060821 BonEcho/2.0b2 (Debian-1.99+2.0b2+dfsg-1)"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "b2"
+    - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1b2) Gecko/20060821 BonEcho/2.0b2"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "b2"
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1b2) Gecko/20060826 BonEcho/2.0b2"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "b2"
+    - user_agent_string: "Mozilla/5.0 (X11; U; Linux x86_64; en-GB; rv:1.8.1b1) Gecko/20060601 BonEcho/2.0b1 (Ubuntu-edgy)"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "b1"
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1a3) Gecko/20060526 BonEcho/2.0a3"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "a3"
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US; rv:1.8.1a2) Gecko/20060512 BonEcho/2.0a2"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "a2"
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8.1a2) Gecko/20060512 BonEcho/2.0a2"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "a2"
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; Intel Mac OS X Mach-O; en-US; rv:1.8.1a2) Gecko/20060512 BonEcho/2.0a2"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "a2"
+    - user_agent_string: "Mozilla/5.0 (X11; U; OpenBSD ppc; en-US; rv:1.8.1.9) Gecko/20070223 BonEcho/2.0.0.9"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "0"
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.8pre) Gecko/20071012 BonEcho/2.0.0.8pre"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch: "0"
+    - user_agent_string: "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1) Gecko/20061129 BonEcho/2.0"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch:
+    - user_agent_string: "Mozilla/5.0 (X11; U; Win95; en-US; rv:1.8.1) Gecko/20061125 BonEcho/2.0"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1) Gecko/20061209 BonEcho/2.0"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8.1) Gecko/20061026 BonEcho/2.0"
+      family: "Bon Echo"
+      major: "2"
+      minor: "0"
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9a1) Gecko/20061128 BonEcho/0.7b1"
+      family: "Bon Echo"
+      major: "0"
+      minor: "7"
+      patch: "b1"
+    - user_agent_string: "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN) AppleWebKit/533+ (KHTML, like Gecko)"
+      family: "Other"
+      major:
+      minor:
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124 (KHTML, like Gecko)"
+      family: "Other"
+      major:
+      minor:
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-us) AppleWebKit/528.16 (KHTML, like Gecko)"
+      family: "Other"
+      major:
+      minor:
+      patch:
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/412.6.2 (KHTML, like Gecko)"
+      family: "AppleMail"
+      major: "412"
+      minor: "6"
+      patch: "2"
+    - user_agent_string: "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; es-es) AppleWebKit/531.22.7 (KHTML, like Gecko)"
+      family: "AppleMail"
+      major: "531"
+      minor: "22"
+      patch: "7"

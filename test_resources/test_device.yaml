@@ -116,6 +116,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)'
     family: 'Lumia 920'
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.122 Mobile Safari/537.36'
+    family: 'Nexus 5'
+
   - user_agent_string: 'Bunjalloo/0.7.6(Nintendo DS;U;en)'
     family: 'Nintendo DS'
 
@@ -239,6 +242,9 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
     family: 'PlayStation Vita'
 
+  - user_agent_string: 'Mozilla/5.0 (PlayStation 4 1.75) AppleWebKit/536.26 (KHTML, like Gecko)'
+    family: 'PlayStation 4'
+
   - user_agent_string: 'SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0'
     family: 'Samsung C3053'
 
@@ -345,4 +351,25 @@ test_cases:
     family: 'Spider'
 
   - user_agent_string: 'Innovazion Crawler/Nutch-1.7'
+    family: 'Spider'
+
+  - user_agent_string: 'NING/1.0'
+    family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) MsnBot-Media /1.0b'
+    family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0'
+    family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; EtaoSpider/1.0; http://open.etao.com/dev/EtaoSpider)'
+    family: 'Spider'
+
+  - user_agent_string: 'A6-Indexer/1.0 (http://www.a6corp.com/a6-web-scraping-policy/)'
+    family: 'Spider'
+
+  - user_agent_string: 'YisouSpider'
+    family: 'Spider'
+
+  - user_agent_string: 'Riddler (http://riddler.io/about.html)'
     family: 'Spider'

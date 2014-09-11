@@ -91,7 +91,13 @@ public class OSParser {
       int groupCount = matcher.groupCount();
 
       if (osReplacement != null) {
-        family = osReplacement;
+          if (groupCount >= 1) {
+              family = Pattern.compile("(" + Pattern.quote("$1") + ")")
+                              .matcher(osReplacement)
+                              .replaceAll(matcher.group(1));
+          } else { 
+              family = osReplacement; 
+          }
       } else if (groupCount >= 1) {
         family = matcher.group(1);
       }

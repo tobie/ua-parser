@@ -9,8 +9,8 @@ user_agent_parsers:
   # See os_parsers if you want to target a specific TV
   - regex: '(HbbTV)/(\d+)\.(\d+)\.(\d+) \('
 
-  # must go before Firefox to catch SeaMonkey/Camino
-  - regex: '(SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
+  # must go before Firefox to catch Chimera/SeaMonkey/Camino
+  - regex: '(Chimera|SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)?'
 
   # Firefox
   - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)\.?(\d+)?'
@@ -52,7 +52,7 @@ user_agent_parsers:
   - regex: '(Navigator)/(\d+)\.(\d+)([ab]\d+)'
     family_replacement: 'Netscape'
 
-  - regex: '(Netscape6)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(Netscape6)/(\d+)\.(\d+)\.?([ab]?\d+)?'
     family_replacement: 'Netscape'
 
   - regex: '(MyIBrow)/(\d+)\.(\d+)'
@@ -65,7 +65,7 @@ user_agent_parsers:
     family_replacement: 'Opera Mobile'
   - regex: '(Opera)/(\d+)\.(\d+).+Opera Mobi'
     family_replacement: 'Opera Mobile'
-  - regex: 'Opera Mobi.+(Opera)/(\d+)\.(\d+)'
+  - regex: 'Opera Mobi.+(Opera)(?:/|\s+)(\d+)\.(\d+)'
     family_replacement: 'Opera Mobile'
   - regex: 'Opera Mobi'
     family_replacement: 'Opera Mobile'
@@ -250,6 +250,18 @@ user_agent_parsers:
   # Chrome/Chromium/major_version.minor_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)'
 
+  ##########
+  # IE Mobile needs to happen before Android to catch cases such as:
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; ANZ821)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Orange)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Vodafone)...
+  ##########
+  
+  # IE Mobile
+  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
+    family_replacement: 'IE Mobile'
+  
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
@@ -278,9 +290,6 @@ user_agent_parsers:
   - regex: '(Android) Honeycomb'
     v1_replacement: '3'
 
-  # IE Mobile
-  - regex: '(IEMobile)[ /](\d+)\.(\d+)'
-    family_replacement: 'IE Mobile'
   # desktop mode
   # http://www.anandtech.com/show/3982/windows-phone-7-review
   - regex: '(MSIE) (\d+)\.(\d+).*XBLWP7'
@@ -324,7 +333,7 @@ user_agent_parsers:
   - regex: '(Embider)/(\d+)\.(\d+)'
     family_replacement: 'Polaris'
 
-  - regex: '(BonEcho)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(BonEcho)/(\d+)\.(\d+)\.?([ab]?\d+)?'
     family_replacement: 'Bon Echo'
 
   # @note: iOS / OSX Applications
@@ -447,6 +456,9 @@ user_agent_parsers:
   - regex: 'Trident(.*)rv.(\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  # Espial
+  - regex: '(Espial)/(\d+)(?:\.(\d+))?(?:\.(\d+))?'  
+
  # Apple Mail
 
   # apple mail - not directly detectable, have it after Safari stuff
@@ -525,6 +537,16 @@ os_parsers:
   - regex: 'HbbTV/\d+\.\d+\.\d+ \(.*; ?([a-zA-Z]+) ?;.*(201[1-9]).*\)'
 
   ##########
+  # @note: Windows Phone needs to come before Windows NT 6.1 *and* before Android to catch cases such as:
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; ANZ821)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Orange)...
+  # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Vodafone)...
+  ##########
+
+  - regex: '(Windows Phone) (?:OS[ /])?(\d+)\.(\d+)'
+
+  ##########
   # Android
   # can actually detect rooted android os. do we care?
   ##########
@@ -580,8 +602,7 @@ os_parsers:
   - regex: '(XBLWP7)'
     os_replacement: 'Windows Phone'
 
-  # @note: These need to come before Windows NT 6.1
-  - regex: '(Windows Phone) (?:OS[ /])?(\d+)\.(\d+)'
+  # @note: This needs to come before Windows NT 6.1
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
@@ -697,6 +718,36 @@ os_parsers:
   - regex: '(AppleTV)/(\d+)\.(\d+)'
     os_replacement: 'ATV OS X'
 
+  # CFNetwork/Darwin - The specific CFNetwork or Darwin version determines
+  # whether the os maps to Mac OS, or iOS, or just Darwin.
+  # See: http://user-agents.me/cfnetwork-version-list
+  - regex: '(CFNetwork)/(5)48\.0\.3.* Darwin/11\.0\.0'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(5)48\.(0)\.4.* Darwin/(1)1\.0\.0'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(5)48\.(1)\.4'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(4)85\.1(3)\.9'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(6)09\.(1)\.4'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/(6)(0)9'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/6(7)2\.(1)\.13'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/6(7)2\.(1)\.(1)4'
+    os_replacement: 'iOS'
+  - regex: '(CF)(Network)/6(7)(2)\.1\.15'
+    os_replacement: 'iOS'
+    os_v1_replacement: '7'
+    os_v2_replacement: '1'
+  - regex: '(CFNetwork)/6(7)2\.(0)\.(?:2|8)'
+    os_replacement: 'iOS'
+  - regex: '(CFNetwork)/709\.1'
+    os_replacement: 'iOS'
+    os_v1_replacement: '8'
+    os_v2_replacement: '0.b5'
+  
   ##########
   # CFNetwork iOS Apps
   # @ref: https://en.wikipedia.org/wiki/Darwin_(operating_system)#Release_history
@@ -713,9 +764,13 @@ os_parsers:
   - regex: 'CFNetwork/.* Darwin/(13)\.\d+'
     os_replacement: 'iOS'
     os_v1_replacement: '6'
-  - regex: 'CFNetwork/.* Darwin/(14)\.\d+'
+  - regex: 'CFNetwork/6.* Darwin/(14)\.\d+'
     os_replacement: 'iOS'
     os_v1_replacement: '7'
+  - regex: 'CFNetwork/7.* Darwin/(14)\.\d+'
+    os_replacement: 'iOS'
+    os_v1_replacement: '8'
+    os_v2_replacement: '0'
   # iOS Apps
   - regex: '\b(iOS[ /]|iPhone(?:/| v|[ _]OS[/,]|; | OS : |\d,\d/|\d,\d; )|iPad/)(\d{1,2})[_\.](\d{1,2})(?:[_\.](\d+))?'
     os_replacement: 'iOS'
@@ -882,8 +937,8 @@ device_parsers:
   ##########
   - regex: 'PLAYSTATION 3'
     device_replacement: 'PlayStation 3'
-  - regex: '(PlayStation Portable)'
-  - regex: '(PlayStation Vita)'
+  - regex: '(PlayStation (:?Portable|Vita))'
+  - regex: '(PlayStation (:?\d+))'  
 
   ##########
   # incomplete!
@@ -996,6 +1051,12 @@ device_parsers:
     device_replacement: 'Spider'
 
   - regex: 'Googlebot/\d+.\d+'
+    device_replacement: 'Spider'
+
+  - regex: 'NING/(\d+).(\d+)'
+    device_replacement: 'Spider'
+    
+  - regex: 'MsnBot-Media /(\d+).(\d+)'
     device_replacement: 'Spider'
 
   ##########
@@ -1219,6 +1280,6 @@ device_parsers:
   ##########
   # Spiders (this is hack...)
   ##########
-  - regex: '(bingbot|bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler|Netvibes|Sogou Pic Spider|ICC\-Crawler|Innovazion Crawler)'
+  - regex: '(bingbot|bot|borg|google(^tv)|yahoo|slurp|msnbot|msrbot|openbot|archiver|netresearch|lycos|scooter|altavista|teoma|gigabot|baiduspider|blitzbot|oegp|charlotte|furlbot|http%20client|polybot|htdig|ichiro|mogimogi|larbin|pompos|scrubby|searchsight|seekbot|semanticdiscovery|silk|snappy|speedy|spider|voila|vortex|voyager|zao|zeal|fast\-webcrawler|converacrawler|dataparksearch|findlinks|crawler|Netvibes|Sogou Pic Spider|ICC\-Crawler|Innovazion Crawler|Daumoa|EtaoSpider|A6\-Indexer|YisouSpider|Riddler)'
     device_replacement: 'Spider'
 
