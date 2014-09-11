@@ -52,6 +52,20 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>soundcloud-releases</id>
+      <url>http://maven.int.s-cloud.net/content/repositories/releases</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>soundcloud-snapshots</id>
+      <url>http://maven.int.s-cloud.net/content/repositories/snapshots</url>
+      <layout>default</layout>
+    </snapshotRepository>
+  </distributionManagement>
   <dependencies>
     <dependency>
       <groupId>org.yaml</groupId>
