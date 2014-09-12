@@ -371,3 +371,6 @@ test_cases:
 
   - user_agent_string: 'Riddler (http://riddler.io/about.html)'
     family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.1 (compatible; DBot/7.5.6; +http://a14download.com)'
+    family: 'Spider'
