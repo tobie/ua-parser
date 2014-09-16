@@ -371,9 +371,35 @@ test_cases:
 
   - user_agent_string: 'Riddler (http://riddler.io/about.html)'
     family: 'Spider'
+  
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.0.4; SAMSUNG-SGH-I717 Build/IMM76D) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.131 Mobile Safari/537.36'
+    family: 'Samsung SGHI717'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.1.2; en-gb; SAMSUNG GT-I9100/I9100XWLSY Build/JZO54K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
+    family: 'Samsung GT-I9100/I9100XWLSY'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; Android 4.1.1; SCH-I605 Build/JRO03C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.135 Mobile Safari/537.36'
+    family: 'Samsung SCH-I605'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 3.2; en-us; SGH-T869 Build/HTJ85B) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13'
+    family: 'Samsung SGH-T869'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.1.2; en-us; PantechP8010 Build/JZO54K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30 ACHEETAHI/2100050072'
+    family: 'Pantech P8010'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.2.2; lk-a,; F-10D Build/V12R44A) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
+    family: 'F-10D'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.4; zh-cn; sprd-SPHS-on-Hsdroid/1.0 Android/4.4 Release/06.03.2013 Browser/AppleWebKit533.1 Build/MocorDroid2.3.5) AppleWebKit533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+    family: 'sprd-SPHS-on-Hsdroid/1.0'
+    
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.1.2; in-id; SonyLT30p Build/9.1.A.0.489) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30Mozilla/5.0 (Linux; U; Android 2.3.6; in-id; GT-I8160 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+    family: 'Sony LT30p'
 
   - user_agent_string: 'Mozilla/5.1 (compatible; DBot/7.5.6; +http://a14download.com)'
     family: 'Spider'
 
   - user_agent_string: 'wsr-agent/1.0'
     family: 'Spider'
+    
+ 

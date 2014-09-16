@@ -548,7 +548,7 @@ os_parsers:
   # can actually detect rooted android os. do we care?
   ##########
   - regex: '(Android)[ \-/](\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
-
+ 
   - regex: '(Android) Donut'
     os_v1_replacement: '1'
     os_v2_replacement: '2'
@@ -916,7 +916,20 @@ device_parsers:
   # Samsung
   - regex: '(SamsungSGHi560)'
     device_replacement: 'Samsung SGHi560'
+   
+  - regex: '(SCH-[^ ]+ )'
+    device_replacement: 'Samsung $1'
+    
+  - regex: '(SGH-[^ ]+ )'
+    device_replacement: 'Samsung $1'  
+    
+  - regex: 'SAMSUNG-([^ ]+ )'
+    device_replacement: 'Samsung $1'  
 
+  - regex: 'SAMSUNG ([^ ]+ )'
+    device_replacement: 'Samsung $1'  
+    
+    
   #########
   # Ericsson - must come before nokia since they also use symbian
   #########
@@ -960,16 +973,7 @@ device_parsers:
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     device_replacement: 'Kindle Fire'
       
-  #########
-  # Android General Device Matching (far from perfect)
-  #########
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; WOWMobile (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[A-Za-z]{2}\-[A-Za-z]{0,2};(.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; [A-Za-z]{2}\-[A-Za-z]{0,2}; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
-  - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
+ 
 
   ##########
   # NOKIA
@@ -1244,10 +1248,29 @@ device_parsers:
     device_replacement: 'Softbank $1'
 
   ##########
+  # SONY   #
+  ##########
+  - regex: 'Sony([^ ]+ )'
+    device_replacement: 'Sony $1'
+    
+  ##########
   # WebTV
   ##########
   - regex: '(WebTV)/(\d+).(\d+)'
 
+  #########
+  # Android General Device Matching (far from perfect)
+  #########
+  - regex: 'Android[\- ][\d]+\.[\d]+; [^;]+; WOWMobile (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\-update1; [^;]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [^;]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+;[^;]+;(.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; [^;]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+; (.+) Build'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [^;]+; (.+) Android'
+  - regex: 'Android[\- ][\d]+\.[\d]+\.[\d]+; [^;]+; ([^ ]+) '
+  
   ##########
   # Generic Smart Phone
   ##########
