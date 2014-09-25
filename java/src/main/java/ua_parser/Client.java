@@ -16,8 +16,6 @@
 
 package ua_parser;
 
-import java.util.Map;
-
 /**
  * Collection of parsed data for a given user agent string consisting of UserAgent, OS, Device
  *
@@ -55,7 +53,7 @@ public class Client {
 
   @Override
   public String toString() {
-    return String.format("{user_agent: %s, os: %s, device: %s}",
+    return String.format("{\"user_agent\": %s, \"os\": %s, \"device\": %s}",
                          userAgent, os, device);
   }
 }
