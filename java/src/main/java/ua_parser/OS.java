@@ -63,11 +63,11 @@ public class OS {
 
   @Override
   public String toString() {
-    return String.format("{family: %s, major: %s, minor: %s, patch: %s, patch_minor: %s}",
-                         family == null ? null : '"' + family + '"',
-                         major == null ? null : '"' + major + '"',
-                         minor == null ? null : '"' + minor + '"',
-                         patch == null ? null : '"' + patch + '"',
-                         patchMinor == null ? null : '"' + patchMinor + '"');
+    return String.format("{\"family\": %s, \"major\": %s, \"minor\": %s, \"patch\": %s, \"patch_minor\": %s}",
+                         family == null ? Constants.EMPTY_STRING : '"' + family + '"',
+                         major == null ? Constants.EMPTY_STRING : '"' + major + '"',
+                         minor == null ? Constants.EMPTY_STRING : '"' + minor + '"',
+                         patch == null ? Constants.EMPTY_STRING : '"' + patch + '"',
+                         patchMinor == null ? Constants.EMPTY_STRING : '"' + patchMinor + '"');
   }
 }
