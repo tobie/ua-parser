@@ -441,8 +441,8 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (compatible; SeznamBot/3.2; +http://fulltext.sblog.cz/)'
     family: 'Spider'
 
-
-
+  - user_agent_string: 'Mozilla/5.0 (compatible; PaperLiBot/2.1; http://support.paper.li/entries/20023257-what-is-paper-li)'
+    family: 'Spider'
 
 
 
