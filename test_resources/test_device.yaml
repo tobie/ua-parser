@@ -446,4 +446,6 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (compatible; SputnikBot/2.3; +http://corp.sputnik.ru/webmaster)'
     family: 'Spider'
-
+    
+  - user_agent_string: 'CCBot/2.0 (http://commoncrawl.org/faq/)'
+    family: 'Spider'
