@@ -435,9 +435,11 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; DROID2 Build/4.5.1_57_DR4-52) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1' 
     family: 'Motorola DROID2'
 
-  - user_agent_string: "Xenu Link Sleuth/1.3.8" 
+  - user_agent_string: 'Xenu Link Sleuth/1.3.8'
     family: 'Spider'
 
+  - user_agent_string: 'Mozilla/5.0 (compatible; SeznamBot/3.2; +http://fulltext.sblog.cz/)'
+    family: 'Spider'
 
 
 
