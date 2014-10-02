@@ -1,0 +1,176 @@
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)..\packages\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.CodeDom.Compiler" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Linq.Expressions" #>
+<#@ import namespace="System.Runtime.InteropServices" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Threading" #>
+<#@ import namespace="YamlDotNet.Core" #>
+<#@ import namespace="YamlDotNet.RepresentationModel" #>
+<#+
+    static string Stringify(string input, string empty = null)
+    {
+        return input == null 
+             ? "null"
+             : input.Length == 0
+             ? empty ?? "string.Empty"
+             : "@\"" + input.Replace("\"", "\"\"") + "\"";
+    }
+
+    static string Identify(params string[] inputs)
+    {
+        var joined = from input in inputs 
+                     where !string.IsNullOrEmpty(input) 
+                     select input;
+        return Regex.Replace(Regex.Replace(string.Join("_", joined), @"[^a-zA-Z_0-9]", "_"), @"_{2,}", "_");
+    }
+
+    static string UnderscoredToPascalName(string name)
+    {
+        var tokens = 
+            from s in name.Split('_')
+            select s == "os" ? "OS"
+                 : char.ToUpperInvariant(s[0]) + s.Substring(1);
+        return string.Join(null, tokens);
+    }
+
+    static string TestResourcesPath(string path)
+    {
+        return Path.Combine(@"..\..\..\test_resources", path);
+    }
+
+    static string ResolvePath(string path, ITextTemplatingEngineHost host = null)
+    {
+        return !Path.IsPathRooted(path) && host != null
+             ? host.ResolvePath(path)
+             : path;
+    }
+
+    static IEnumerable<T> ParseTestCases<T>(ITextTemplatingEngineHost host, 
+        string path, Func<Mark, Func<string, string>, T> selector)
+    {
+        return
+            from doc in ParseYamlFile(ResolvePath(TestResourcesPath(path), host)).Documents
+            select doc.RootNode as YamlMappingNode into rn
+            where rn != null
+            from e in rn.Children
+            select new { Key = (string) (e.Key as YamlScalarNode), 
+                            Nodes = e.Value as YamlSequenceNode } into e
+            where e.Key == "test_cases" && e.Nodes != null
+            select e into s
+            from node in s.Nodes
+            select node as YamlMappingNode into node
+            from entries in new[]
+            {
+                from e in node.Children
+                select new { Key   = e.Key as YamlScalarNode, 
+                             Value = (string) (e.Value as YamlScalarNode) } into e
+                where e.Key != null && e.Value != null
+                select new
+                {
+                    Mark = e.Key.Start,
+                    Key = (string) e.Key,
+                    e.Value,
+                }
+            }
+            select entries.ToArray() into entries
+            select selector(entries.First().Mark, 
+                            CreateMapper(entries.ToDictionary(e => e.Key, e => e.Value, 
+                                         StringComparer.OrdinalIgnoreCase)));
+    }
+
+    static Func<TKey, TValue> CreateMapper<TKey, TValue>(IDictionary<TKey, TValue> dict)
+    {
+        return key =>
+        {
+            TValue value;
+            return dict.TryGetValue(key, out value) ? value : default(TValue);
+        };
+    }
+
+    static YamlStream ParseYamlFile(string path)
+    {
+        var ys = new YamlStream();
+        using (var reader = File.OpenText(path))
+            ys.Load(reader);
+        return ys;
+    }
+
+    static Func<T, IEnumerable<string>> Generator<T>(T formal, params Expression<Func<T, string>>[] accessors)
+    {
+        var gs = accessors.Select(a => Generator(formal, a)).ToArray();
+        return actual => from g in gs select g(actual);
+    }
+
+    static Func<T, string> Generator<T>(T formal, Expression<Func<T, string>> accessor)
+    {
+        var name = ((MemberExpression) accessor.Body).Member.Name;
+        var compiled = accessor.Compile();
+        return actual =>
+        {
+            var expected = compiled(actual);
+            return !string.IsNullOrEmpty(expected) 
+                 ? string.Format(@"Assert.Equal({0}, {1}.{2});", Stringify(expected), accessor.Parameters[0].Name, name) 
+                 : null;
+        };
+    }
+
+    void Generate<T>(T tc, params Expression<Func<T, string>>[] accessors)
+    {
+        var lines = 
+            from line in Generator(tc, accessors)(tc)
+            where line != null
+            select line;
+        foreach (var line in lines)
+            WriteLine(line);
+    }
+
+    void Generate<T>(T tc, Expression<Func<T, string>> accessor)
+    {
+        var line = Generator(tc, accessor)(tc);
+        if (line != null) WriteLine(line);
+    }
+
+    static string[] _indents;
+
+    public static string GetIndent(int level)
+    {
+        string[] indents;
+        while (true)
+        {
+            indents = _indents;
+            if (indents != null && level < indents.Length)
+                break;
+            var newIndents = Enumerable.Range(0, level + 1).Select(n => new string((char) 32, n * 4)).ToArray();
+            if (indents != Interlocked.CompareExchange(ref _indents, newIndents, indents)) continue;
+            indents = newIndents;
+            break;
+        }
+        return indents[level];
+    }
+
+    IDisposable PushIndent(int level)
+    {
+        PushIndent(GetIndent(level));
+        return new Disposable(() => PopIndent());
+    }
+
+    sealed class Disposable : IDisposable
+    {
+        Action _action;
+
+        public Disposable(Action action) { _action = action; }
+        
+        public void Dispose()
+        {
+            var action = _action;
+            if (action == null) return;
+            _action = null;
+            action();
+        }
+    }
+#>

@@ -1,0 +1,6 @@
+﻿<#@ import namespace="System.IO" #>
+// The file was automatically generated using a T4 Text Template.
+//
+// Source   : <#= Path.GetFileName(Host.TemplateFile) #>
+// Generated: <#= DateTime.UtcNow.ToString("r") #>
+// Generator: <#= Host.GetType().Assembly.FullName #>

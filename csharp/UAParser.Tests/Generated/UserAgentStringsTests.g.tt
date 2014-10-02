@@ -1,0 +1,71 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ include file="Stamp.ttinclude" #>
+namespace UAParser.Tests.Generated
+{
+    using UAParser;
+    using Xunit;
+    
+    // ReSharper disable InconsistentNaming
+
+<#
+    var tcs = 
+        from fn in new[]
+        {
+            "test_user_agent_parser.yaml", 
+            "firefox_user_agent_strings.yaml",
+            "pgts_browser_list.yaml",
+        }
+        select new
+        {
+            FileName   = fn,
+            PascalName = UnderscoredToPascalName(Path.GetFileNameWithoutExtension(fn)),
+        }
+        into src
+        from tc in ParseTestCases(Host, src.FileName, (mark, map) => new
+        {
+            src.FileName,
+            Source    = src.PascalName,
+            Mark      = mark,
+            JsUa      = map("js_ua"),
+            UserAgent = map("user_agent_string"),
+            Family    = map("family"),
+            Major     = map("major"),
+            Minor     = map("minor"),
+            Patch     = map("patch"),
+        })
+        where tc.JsUa == null
+        group tc by new { tc.FileName, tc.Source, tc.Family } into g
+        group g by new { g.Key.FileName, g.Key.Source };
+
+    foreach (var s in tcs)
+    { #>
+
+    namespace <#= Identify(s.Key.Source) #>
+    {
+        // Following tests were generated automatically from <#= s.Key.FileName #>
+
+<#      foreach (var f in s)
+        { #>
+        public class <#= Identify(f.Key.Family) #>_Tests
+        {
+            static readonly Parser Parser = Parser.GetDefault();
+<#          foreach (var tc in f)
+            { #>
+
+            [Fact]
+            public void <#= Identify(tc.Family, tc.Major, tc.Minor, tc.Patch) #>_Line_<#= tc.Mark.Line #>() 
+            { 
+                var ua = Parser.ParseUserAgent(<#= Stringify(tc.UserAgent) #>);
+<# 
+                using (PushIndent(4))
+                    Generate(tc, ua => ua.Family, ua => ua.Major, ua => ua.Minor, ua => ua.Patch);
+#>
+            }
+<#          } #>
+        }
+<#      } #>
+    }
+<#  } #>
+}
+<#@ include file="Tests.ttinclude" #>

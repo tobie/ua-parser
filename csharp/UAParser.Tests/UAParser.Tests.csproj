@@ -38,11 +38,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
       <Private>True</Private>
@@ -51,43 +46,45 @@
       <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="YamlDotNet">
-      <HintPath>..\packages\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceYamlTestCase.cs" />
-    <Compile Include="InternalExtensions.cs" />
-    <Compile Include="YamlTestCase.cs" />
-    <Compile Include="TestResourceTests.cs" />
+    <Compile Include="Generated\OSTests.g.cs">
+      <DependentUpon>OSTests.g.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generated\DeviceTests.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeviceTests.g.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Generated\UserAgentStringsTests.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAgentStringsTests.g.tt</DependentUpon>
+    </Compile>
     <Compile Include="ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\test_resources\additional_os_tests.yaml">
-      <Link>TestResources\additional_os_tests.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\firefox_user_agent_strings.yaml">
-      <Link>TestResources\firefox_user_agent_strings.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\pgts_browser_list-orig.yaml">
-      <Link>TestResources\pgts_browser_list-orig.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\pgts_browser_list.yaml">
-      <Link>TestResources\pgts_browser_list.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\test_device.yaml">
-      <Link>TestResources\test_device.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser.yaml">
-      <Link>TestResources\test_user_agent_parser.yaml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser_os.yaml">
-      <Link>TestResources\test_user_agent_parser_os.yaml</Link>
-    </EmbeddedResource>
+    <None Include="Generated\OSTests.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OSTests.g.cs</LastGenOutput>
+    </None>
+    <None Include="Generated\Stamp.ttinclude">
+      <LastGenOutput>Stamp1.cs</LastGenOutput>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Generated\DeviceTests.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeviceTests.g.cs</LastGenOutput>
+    </None>
+    <None Include="Generated\Tests.ttinclude" />
+    <None Include="Generated\UserAgentStringsTests.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UserAgentStringsTests.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +92,9 @@
       <Project>{83c63bea-1859-4dd5-ae08-9a0fec269b17}</Project>
       <Name>UAParser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
