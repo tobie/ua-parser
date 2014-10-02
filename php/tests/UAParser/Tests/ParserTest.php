@@ -64,6 +64,14 @@ class ParserTest extends AbstractParserTest
         return static::createTestData($resources);
     }
 
+    public function testNoMatch()
+    {
+        $result = $this->parser->parse('unknown user agent');
+        $this->assertSame('Other', $result->device->family);
+        $this->assertSame('Other', $result->ua->family);
+        $this->assertSame('Other', $result->os->family);
+    }
+
     /** @dataProvider getDeviceTestData */
     public function testDeviceParsing($userAgent, array $jsUserAgent, $family)
     {
