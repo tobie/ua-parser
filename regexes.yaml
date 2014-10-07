@@ -126,6 +126,10 @@ user_agent_parsers:
 
   - regex: '(Minimo)'
 
+  # Amazon Silk, should go before Safari and Chrome Mobile
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    family_replacement: 'Amazon Silk'
+
   # Chrome Mobile
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Mobile'
@@ -204,10 +208,6 @@ user_agent_parsers:
 
   # AOL Browser (IE-based)
   - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+)'
-
-  # Amazon Silk, should go before Safari and Chrome
-  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
-    family_replacement: 'Amazon Silk'
 
   #### END SPECIAL CASES TOP ####
 
