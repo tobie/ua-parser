@@ -205,6 +205,10 @@ user_agent_parsers:
   # AOL Browser (IE-based)
   - regex: '(AOL) (\d+)\.(\d+); AOLBuild (\d+)'
 
+  # Amazon Silk, should go before Safari and Chrome
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    family_replacement: 'Amazon Silk'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
@@ -419,10 +423,6 @@ user_agent_parsers:
 
   #- regex: '\(iPad;.+(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
   #  family_replacement: 'iPad'
-
-  # Amazon Silk, should go before Safari
-  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
-    family_replacement: 'Amazon Silk'
 
   # Phantomjs, should go before Safari
   - regex: '(PhantomJS)/(\d+)\.(\d+)\.(\d+)'
