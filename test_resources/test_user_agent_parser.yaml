@@ -30,6 +30,12 @@ test_cases:
     minor: '2'
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.0.3; en-gb; KFTT Build/IML74K) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.25 like Chrome/34.0.1847.137 Mobile Safari/537.36'
+    family: 'Amazon Silk'
+    major: '3'
+    minor: '25'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 2.2.2; en-gb; HTC Desire Build/FRG83G) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
     family: 'Android'
     major: '2'
@@ -440,6 +446,12 @@ test_cases:
     family: 'Mobile Safari'
     major: '5'
     minor: '0'
+    patch: '2'
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Mobile/11D257'
+    family: 'Mobile Safari'
+    major: '7'
+    minor: '1'
     patch: '2'
 
   - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.3a1) Gecko/20100208 MozillaDeveloperPreview/3.7a1 (.NET CLR 3.5.30729)'
