@@ -353,7 +353,7 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
   - regex: '(iPad).*Version/(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
-  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)(?:_\d+)?_(\d+).*Mobile'
+  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)_(\d+)(?:_\d+)?.*Mobile'
     family_replacement: 'Mobile Safari'
   - regex: '(iPod|iPhone|iPad)'
     family_replacement: 'Mobile Safari'
