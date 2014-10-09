@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DeviceYamlTestCase.cs" />
     <Compile Include="InternalExtensions.cs" />
+    <Compile Include="YamlParsing.cs" />
     <Compile Include="YamlTestCase.cs" />
     <Compile Include="TestResourceTests.cs" />
     <Compile Include="ParserTests.cs" />
@@ -85,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\test_resources\test_user_agent_parser_os.yaml">
       <Link>TestResources\test_user_agent_parser_os.yaml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\regexes.yaml">
+      <Link>Regexes\regexes.yaml</Link>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

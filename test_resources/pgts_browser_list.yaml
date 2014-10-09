@@ -60364,7 +60364,6 @@ test_cases:
       major: '10'
       minor: '1'
       patch:
-      patch:
     - user_agent_string: "Mozilla/5.0 (Linux armv6l; Maemo; Opera Mobi/8; U; en-GB; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 Opera 11.00"
       family: "Opera Mobile"
       major: '11'

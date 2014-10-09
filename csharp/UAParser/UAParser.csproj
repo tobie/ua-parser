@@ -49,9 +49,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet">
-      <HintPath>..\packages\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,7 +58,6 @@
     <EmbeddedResource Include="..\..\regexes.yaml">
       <Link>regexes.yaml</Link>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="UAParser.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

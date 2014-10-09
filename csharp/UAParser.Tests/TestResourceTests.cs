@@ -14,66 +14,55 @@ namespace UAParser.Tests
     [Fact]
     public void can_run_device_tests()
     {
-      RunTests<DeviceYamlTestCase>(
-        "UAParser.Tests.TestResources.test_device.yaml",
-        configMap => DeviceYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.test_device.yaml", DeviceYamlTestCase.ReadFromMap);
     }
 
     [Fact]
     public void can_run_additional_os_tests()
     {
-      RunTests<OSYamlTestCase>(
-        "UAParser.Tests.TestResources.additional_os_tests.yaml",
-        configMap => OSYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.additional_os_tests.yaml", OSYamlTestCase.ReadFromMap);
     }
 
     [Fact]
     public void can_run_firefox_user_agent_string_tests()
     {
-      RunTests<UserAgentYamlTestCase>(
-        "UAParser.Tests.TestResources.firefox_user_agent_strings.yaml",
-        configMap => UserAgentYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.firefox_user_agent_strings.yaml", UserAgentYamlTestCase.ReadFromMap);
     }
 
     [Fact]
     public void can_run_pgts_browser_list_tests()
     {
-      RunTests<UserAgentYamlTestCase>(
-        "UAParser.Tests.TestResources.pgts_browser_list.yaml",
-        configMap => UserAgentYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.pgts_browser_list.yaml", UserAgentYamlTestCase.ReadFromMap);
     }
 
     [Fact]
     public void can_run_user_agent_parser_tests()
     {
-      RunTests<UserAgentYamlTestCase>(
-        "UAParser.Tests.TestResources.test_user_agent_parser.yaml",
-        configMap => UserAgentYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.test_user_agent_parser.yaml", UserAgentYamlTestCase.ReadFromMap);
     }
 
     [Fact]
     public void can_run_user_agent_parser_os_tests()
     {
-      RunTests<OSYamlTestCase>(
-        "UAParser.Tests.TestResources.test_user_agent_parser_os.yaml",
-        configMap => OSYamlTestCase.ReadFromMap(configMap));
+      RunTests("UAParser.Tests.TestResources.test_user_agent_parser_os.yaml", OSYamlTestCase.ReadFromMap);
     }
 
-    public static void RunTests<TTestCase>(
+    public void RunTests<TTestCase>(
       string resourceName,
       Func<Dictionary<string, string>, TTestCase> testCaseFunction) where TTestCase : YamlTestCase
     {
-      List<TTestCase> testCases = GetTestCases<TTestCase>(
+      List<TTestCase> testCases = GetTestCases(
         resourceName,
         "test_cases",
         testCaseFunction);
 
-      RunTestCases<TTestCase>(testCases);
+      RunTestCases(testCases);
     }
 
     private static void RunTestCases<TTestCase>(List<TTestCase> testCases) where TTestCase : YamlTestCase
     {
       Parser parser = Parser.GetDefault();
+        Assert.NotEqual(0, testCases.Count);
 
       StringBuilder sb = new StringBuilder();
       for (int i = 0; i < testCases.Count; i++)
@@ -92,17 +81,15 @@ namespace UAParser.Tests
           sb.AppendLine("testcase "+(i+1)+": " +ex.Message);
         }
       }
-
-      Console.WriteLine("Ran {0} tests", testCases.Count);
-      Assert.True(0 == sb.Length, "Failed tests: " + Environment.NewLine + sb.ToString());
+      Assert.True(0 == sb.Length, "Failed tests: " + Environment.NewLine + sb);
     }
 
-    public static List<TTestCase> GetTestCases<TTestCase>(
+    public List<TTestCase> GetTestCases<TTestCase>(
   string resourceName,
   string yamlNodeName,
   Func<Dictionary<string, string>, TTestCase> testCaseFunction)
     {
-      string yamlContent = GetTestResources(resourceName);
+      string yamlContent = this.GetTestResources(resourceName);
       YamlStream yaml = new YamlStream();
       yaml.Load(new StringReader(yamlContent));
 
@@ -124,19 +111,6 @@ namespace UAParser.Tests
         })
         .ToList();
       return testCases;
-    }
-
-    public static string GetTestResources(string name)
-    {
-      using (Stream s = typeof(TestResourceTests).Assembly.GetManifestResourceStream(name))
-      {
-        if (s == null)
-          throw new InvalidOperationException("Could not locate an embedded test resource with name: " + name);
-        using (StreamReader sr = new StreamReader(s, Encoding.ASCII))
-        {
-          return sr.ReadToEnd();
-        }
-      }
     }
   }
 }

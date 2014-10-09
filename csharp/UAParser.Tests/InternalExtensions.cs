@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using YamlDotNet.RepresentationModel;
 
-namespace UAParser
+namespace UAParser.Tests
 {
     internal static class InternalExtensions
     {
@@ -23,6 +26,18 @@ namespace UAParser
             dic[key.ToString()] = yamlNode.Children[key].ToString();
           }
           return dic;
+        }
+        internal static string GetTestResources(this object self, string name)
+        {
+            using (Stream s = typeof(TestResourceTests).Assembly.GetManifestResourceStream(name))
+            {
+                if (s == null)
+                    throw new InvalidOperationException("Could not locate an embedded test resource with name: " + name);
+                using (StreamReader sr = new StreamReader(s, Encoding.ASCII))
+                {
+                    return sr.ReadToEnd();
+                }
+            }
         }
     }
 }
