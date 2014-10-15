@@ -117,20 +117,20 @@ class OSParser(object):
                     os = re.sub(r'\$1', match.group(1), self.os_replacement)
                 else:
                     os = self.os_replacement
-            else:
+            elif match.lastindex:
                 os = match.group(1)
 
             if self.os_v1_replacement:
                 os_v1 = self.os_v1_replacement
-            elif match.lastindex >= 2:
+            elif match.lastindex and match.lastindex >= 2:
                 os_v1 = match.group(2)
 
             if self.os_v2_replacement:
                 os_v2 = self.os_v2_replacement
-            elif match.lastindex >= 3:
+            elif match.lastindex and match.lastindex >= 3:
                 os_v2 = match.group(3)
 
-            if match.lastindex >= 4:
+            if match.lastindex and match.lastindex >= 4:
                 os_v3 = match.group(4)
                 if match.lastindex >= 5:
                     os_v4 = match.group(5)
