@@ -126,6 +126,24 @@ user_agent_parsers:
 
   - regex: '(Minimo)'
 
+  - regex: 'PLAYSTATION 3.+WebKit'
+    family_replacement: 'NetFront NX'
+  - regex: 'PLAYSTATION 3'
+    family_replacement: 'NetFront'
+  - regex: '(PlayStation Portable)'
+    family_replacement: 'NetFront'
+  - regex: '(PlayStation Vita)'
+    family_replacement: 'NetFront NX'
+  
+  - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'NetFront NX'
+  - regex: '(Nintendo 3DS)'
+    family_replacement: 'NetFront NX'
+
+  # Amazon Silk, should go before Safari and Chrome Mobile
+  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
+    family_replacement: 'Amazon Silk'
+
   # Chrome Mobile
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Mobile'
@@ -305,20 +323,6 @@ user_agent_parsers:
   - regex: '(Maxthon|MyIE2|Uzbl|Shiira)'
     v1_replacement: '0'
 
-  - regex: 'PLAYSTATION 3.+WebKit'
-    family_replacement: 'NetFront NX'
-  - regex: 'PLAYSTATION 3'
-    family_replacement: 'NetFront'
-  - regex: '(PlayStation Portable)'
-    family_replacement: 'NetFront'
-  - regex: '(PlayStation Vita)'
-    family_replacement: 'NetFront NX'
-  
-  - regex: 'AppleWebKit.+ (NX)/(\d+)\.(\d+)\.(\d+)'
-    family_replacement: 'NetFront NX'
-  - regex: '(Nintendo 3DS)'
-    family_replacement: 'NetFront NX'
-
   - regex: '(BrowseX) \((\d+)\.(\d+)\.(\d+)'
 
   - regex: '(NCSA_Mosaic)/(\d+)\.(\d+)'
@@ -349,7 +353,7 @@ user_agent_parsers:
     family_replacement: 'Mobile Safari'
   - regex: '(iPad).*Version/(\d+)\.(\d+)'
     family_replacement: 'Mobile Safari'
-  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)(?:_\d+)?_(\d+).*Mobile'
+  - regex: '(iPod|iPhone|iPad);.*CPU.*OS (\d+)_(\d+)(?:_(\d+))?.*Mobile'
     family_replacement: 'Mobile Safari'
   - regex: '(iPod|iPhone|iPad)'
     family_replacement: 'Mobile Safari'
@@ -419,10 +423,6 @@ user_agent_parsers:
 
   #- regex: '\(iPad;.+(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
   #  family_replacement: 'iPad'
-
-  # Amazon Silk, should go before Safari
-  - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
-    family_replacement: 'Amazon Silk'
 
   # Phantomjs, should go before Safari
   - regex: '(PhantomJS)/(\d+)\.(\d+)\.(\d+)'
