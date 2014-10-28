@@ -58,7 +58,7 @@ print $result->os->toVersion();       // 10.7.5
 print $result->device->family;        // Other
 
 print $result->toString();            // Safari 6.0.2/Mac OS X 10.7.5
-print $result->uaOriginal;            // Mozilla/5.0 (Macintosh; Intel Ma...
+print $result->originalUserAgent;            // Mozilla/5.0 (Macintosh; Intel Ma...
 ```
 
 ## Using Your Own Custom regexes.php File ##
