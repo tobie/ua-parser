@@ -144,6 +144,10 @@ user_agent_parsers:
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     family_replacement: 'Amazon Silk'
 
+
+  # @ref: http://www.puffinbrowser.com
+  - regex: '(Puffin)/(\d+)\.(\d+)(?:\.(\d+))?'
+
   # Chrome Mobile
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Mobile'
