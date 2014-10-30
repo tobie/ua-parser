@@ -1406,21 +1406,21 @@ test_cases:
     family: 'Puffin'
     major: '1'
     minor: '3'
-    patch:
+    patch: '2913'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 3.2.1; es-es) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.0.6440M Mobile'
     family: 'Puffin'
     major: '2'
     minor: '0'
-    patch:
+    patch: '6440'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 3.2; en-gb) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.0.5932M Mobile'
     family: 'Puffin'
     major: '2'
     minor: '0'
-    patch:
+    patch: '5932'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Linux; U; Android 4.1.1; en-us) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/2.9909AT Mobile'
@@ -1448,7 +1448,7 @@ test_cases:
     family: 'Puffin'
     major: '1'
     minor: '3'
-    patch:
+    patch: '2665'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux x86_64; ar-AE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.10990IT'
@@ -1497,7 +1497,7 @@ test_cases:
     family: 'Puffin'
     major: '1'
     minor: '3'
-    patch:
+    patch: '3102'
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (iPod; U; CPU iPhone OS 5_1_1 like Mac OS X; de-DE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.9174IP Mobile'

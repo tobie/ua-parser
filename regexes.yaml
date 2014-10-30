@@ -146,7 +146,7 @@ user_agent_parsers:
 
 
   # @ref: http://www.puffinbrowser.com
-  - regex: '(Puffin)/(\d+)\.(\d+)'
+  - regex: '(Puffin)/(\d+)\.(\d+)(?:\.(\d+))?'
 
   # Chrome Mobile
   - regex: '(CrMo)/(\d+)\.(\d+)\.(\d+)\.(\d+)'
