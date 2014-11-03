@@ -455,3 +455,12 @@ test_cases:
 
   - user_agent_string: 'Scrapy/0.20.1 (+http://scrapy.org)'
     family: 'Spider'
+
+  - user_agent_string: 'Mozilla/5.0 (compatible; Genieo/1.0 http://www.genieo.com/webfilter.html)'
+    family: 'Spider'
+
+  - user_agent_string: 'Screaming Frog SEO Spider/2,55'
+    family: 'Spider'
+
+  - user_agent_string: 'YahooCacheSystem'
+    family: 'Spider'
