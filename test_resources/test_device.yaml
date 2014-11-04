@@ -470,3 +470,33 @@ test_cases:
 
   - user_agent_string: 'agent6/Nutch-1.1'
     family: 'Spider'
+
+  - user_agent_string: 'Python-urllib/2.6'
+    family: 'Automata'
+
+  - user_agent_string: 'libwww-perl/5.834'
+    family: 'Automata'
+
+  - user_agent_string: 'Java/1.8.0_20'
+    family: 'Automata'
+
+  - user_agent_string: 'Apache-HttpClient/4.3.3 (java 1.5)'
+    family: 'Automata'
+
+  - user_agent_string: 'Jakarta Commons-HttpClient/3.16'
+    family: 'Automata'
+
+  - user_agent_string: 'Twisted PageGetter'
+    family: 'Automata'
+
+  - user_agent_string: 'Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)'
+    family: 'Automata'
+
+  - user_agent_string: 'Scrapy/0.22.2 (+http://scrapy.org)'
+    family: 'Automata'
+
+  - user_agent_string: 'WordPress/3.3.2; http://givemecupcakes.com'
+    family: 'Automata'
+
+  - user_agent_string: 'Wget/1.12 (linux-gnu)'
+    family: 'Automata'
