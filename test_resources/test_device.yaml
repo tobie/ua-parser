@@ -464,3 +464,9 @@ test_cases:
 
   - user_agent_string: 'YahooCacheSystem'
     family: 'Spider'
+
+  - user_agent_string: 'CiBra Data Collector (http://cibra.de/)'
+    family: 'Spider'
+
+  - user_agent_string: 'agent6/Nutch-1.1'
+    family: 'Spider'
