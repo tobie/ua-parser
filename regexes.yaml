@@ -1337,4 +1337,4 @@ device_parsers:
   # Automata (experimental): intended to cover automated libraries or mirroring software that is not, itself, a crawler
   ##########
   - regex: '(urllib|libww|Java/|(Apache|Jakarta Commons)-HttpClient|Twisted PageGetter|HTTrack|Scrapy|WordPress|Wget)'
-    device_replacement: 'Reuser'
+    device_replacement: 'Automata'
