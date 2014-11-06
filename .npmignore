@@ -1,3 +1,4 @@
+/cpp
 /csharp
 /d
 /go
@@ -7,6 +8,7 @@
 /php
 /pig
 /py
+/tests
 /.gitattributes
 /.npmignore
 /.travis.yml

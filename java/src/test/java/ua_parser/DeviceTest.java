@@ -23,12 +23,15 @@ public class DeviceTest extends DataTest<Device> {
   @Override
   protected Device getRandomInstance(long seed, StringGenerator g) {
     random.setSeed(seed);
-    String family = g.getString(256);
-    return new Device(family);
+    String family = g.getString(256),
+           brand = (random.nextBoolean() ? g.getString(8): null),
+           model = (random.nextBoolean() ? g.getString(8): null);
+
+    return new Device(family, brand, model);
   }
 
   @Override
   protected Device getBlankInstance() {
-    return new Device(null);
+    return new Device(null,null,null);
   }
 }

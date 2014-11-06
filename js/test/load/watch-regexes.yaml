@@ -1,0 +1,19 @@
+# this is a test file to check loading of custom regexes files
+
+user_agent_parsers:
+
+  - regex: '(?:Mobile Safari).*(OPR)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'TEST Opera Mobile'
+
+os_parsers:
+
+  - regex: '(Android)[ /\-](\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?'
+    os_replacement: 'TEST Android'
+
+device_parsers:
+
+  - regex: '; *(SAMSUNG-)?(GT\-[BINPS]\d{4}[^\/]*)(\/[^ ]*) Build'
+    device_replacement: 'TEST $1$2$3'
+    brand_replacement: 'TEST Samsung'
+    model_replacement: 'TEST $2'
+

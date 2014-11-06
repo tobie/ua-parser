@@ -59,6 +59,12 @@ class Converter
      */
     protected function doConvert(array $regexes, $backupBeforeOverride = true)
     {
+        foreach (array('user_agent_parsers', 'os_parsers', 'device_parsers') as $parsers) {
+          if (array_key_exists($parsers, $regexes)) {
+            $this->buildRegexPattern($regexes[$parsers]);
+          }
+        }
+        
         $data = "<?php\nreturn " . var_export($regexes, true) . ';';
 
         $regexesFile = $this->destination . '/regexes.php';
@@ -76,5 +82,19 @@ class Converter
         }
 
         $this->fs->dumpFile($regexesFile, $data);
+    }
+    
+    /**
+     * build regex pattern and apply escaping on matcher char
+     * @param array $regexes
+     */
+    protected function buildRegexPattern(array &$regexes) 
+    {
+      foreach ($regexes as &$regex) {
+        $flag = isset($regex['regex_flag']) ? $regex['regex_flag'] : '';
+        $pattern = preg_replace( '/#/', '\#', $regex['regex']);
+        $pattern = '#' . $pattern . '#' . $flag;
+        $regex['regex'] = $pattern;
+      }
     }
 }

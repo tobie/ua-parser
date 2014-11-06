@@ -1,7 +1,8 @@
 // Documenting current behaviour for backwards compat reqs.
 
 var assert = require('assert'),
-    parse = require('../index').parse;
+    uaParser = require('../index')({ backwardsCompatible: true }),
+    parse = uaParser.parse;
 
 var USER_AGENT_STRING = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0b6pre) Gecko/20100903 Firefox/4.0b6pre Firefox/4.0b6pre';
 
