@@ -259,6 +259,13 @@ test_cases:
     patch:
     patch_minor:
 
+  - user_agent_string: 'Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)'
+    family: 'Kindle'
+    major: '1'
+    minor: '0'
+    patch:
+    patch_minor:
+
   - user_agent_string: 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/528.5+ (KHTML, like Gecko, Safari/528.5+) Version/4.0 Kindle/3.0 (screen 600x800; rotate)'
     family: 'Kindle'
     major: '3'
@@ -806,6 +813,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; chromeframe; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)'
+    js_ua: "{'js_user_agent_string': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/530.1 (KHTML, like Gecko) Chrome/2.0.169.1 Safari/530.1'}"
     family: 'Windows Vista'
     major:
     minor:
@@ -834,6 +842,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; chromeframe; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; Sleipnir 2.8.5)3.0.30729)'
+    js_ua: "{'js_user_agent_string': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/530.1 (KHTML, like Gecko) Chrome/2.0.169.1 Safari/530.1'}"
     family: 'Windows XP'
     major:
     minor:
@@ -841,6 +850,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6; chromeframe; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)'
+    js_ua: "{'js_user_agent_string': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; chromeframe; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)'}"
     family: 'Windows XP'
     major:
     minor:
@@ -848,6 +858,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6; .NET CLR 2.0.50727; .NET CLR 1.1.4322)'
+    js_ua: "{'js_user_agent_string': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 1.1.4322)', 'js_user_agent_family': 'IE Platform Preview', 'js_user_agent_v1': '9', 'js_user_agent_v2': '0', 'js_user_agent_v3': '1'}"
     family: 'Windows XP'
     major:
     minor:
@@ -892,100 +903,103 @@ test_cases:
   - user_agent_string: 'Mozilla/5.0 (Unknown; Linux armv7l) AppleWebKit/537.1+ (KHTML, like Gecko) Safari/537.1+ HbbTV/1.1.1 ( ;LGE ;NetCast 4.0 ;03.20.30 ;1.0M ;)'
     family: 'LG'
     major: '2013'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'Mozilla/5.0 (DirectFB; Linux armv7l) AppleWebKit/534.26+ (KHTML, like Gecko) Version/5.0 Safari/534.26+ HbbTV/1.1.1 ( ;LGE ;NetCast 3.0 ;1.0 ;1.0M ;)'
     family: 'LG'
     major: '2012'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'Opera/9.80 (Linux armv7l; HbbTV/1.1.1 (; Sony; KDL32W650A; PKG3.211EUA; 2013;); ) Presto/2.12.362 Version/12.11'
     family: 'Sony'
     major: '2013'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'Opera/9.80 (Linux mips; U;  HbbTV/1.1.1 (; Sony; KDL40HX751; PKG1.902EUA; 2012;);; en) Presto/2.10.250 Version/11.60'
     family: 'Sony'
     major: '2012'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'Opera/9.80 (Linux mips; U;  HbbTV/1.1.1 (; Sony; KDL22EX320; PKG4.017EUA; 2011;);; en) Presto/2.7.61 Version/11.00'
     family: 'Sony'
     major: '2011'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
+# up market model
   - user_agent_string: 'HbbTV/1.1.1 (;Samsung;SmartTV2013;T-FXPDEUC-1102.2;;) WebKit'
     family: 'Samsung'
     major: '2013'
     minor: 'UE40F7000'
     patch:
-    patch_minor:
+    patch_minor: 
 
+# mid-range model
   - user_agent_string: 'HbbTV/1.1.1 (;Samsung;SmartTV2013;T-MST12DEUC-1102.1;;) WebKit'
     family: 'Samsung'
     major: '2013'
     minor: 'UE32F4500'
     patch:
-    patch_minor:
+    patch_minor: 
 
+# no way to differentiate models
   - user_agent_string: 'HbbTV/1.1.1 (;Samsung;SmartTV2012;;;) WebKit'
     family: 'Samsung'
     major: '2012'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'HbbTV/1.1.1 (;;;;;) Maple_2011'
     family: 'Samsung'
     major: '2011'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
   - user_agent_string: 'Opera/9.80 (Linux mips ; U; HbbTV/1.1.1 (; Philips; ; ; ; ) CE-HTML/1.0 NETTV/3.2.1; en) Presto/2.6.33 Version/10.70'
     family: 'Philips'
     major: '2012'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
   - user_agent_string: 'Opera/9.80 (Linux mips; U; HbbTV/1.1.1 (; Philips; ; ; ; ) CE-HTML/1.0 NETTV/4.1.3 PHILIPSTV/1.1.1; en) Presto/2.10.250 Version/11.60'
     family: 'Philips'
     major: '2013'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
   - user_agent_string: 'HbbTV/1.1.1 (;Panasonic;VIERA 2011;f.532;0071-0802 2000-0000;)'
     family: 'Panasonic'
     major: '2011'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
   - user_agent_string: 'HbbTV/1.1.1 (;Panasonic;VIERA 2012;1.261;0071-3103 2000-0000;)'
     family: 'Panasonic'
     major: '2012'
-    minor:
+    minor: 
     patch:
     patch_minor:
 
   - user_agent_string: 'HbbTV/1.2.1 (;Panasonic;VIERA 2013;3.672;4101-0003 0002-0000;)'
     family: 'Panasonic'
     major: '2013'
-    minor:
+    minor: 
     patch:
-    patch_minor:
+    patch_minor: 
 
   - user_agent_string: 'HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20'
     family: 'FireHbbTV'
@@ -1881,6 +1895,13 @@ test_cases:
     major: '5'
     minor:
     patch:
+    patch_minor:
+
+  - user_agent_string: 'Parking Mania Free/1.9.5.0 CFNetwork/548.0.4 Darwin/11.0.0'
+    family: 'iOS'
+    major: '5'
+    minor: '0'
+    patch: '1'
     patch_minor:
 
   - user_agent_string: 'JyukenSapuriApp/1.9.0 CFNetwork/609 Darwin/13.0.0'

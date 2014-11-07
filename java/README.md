@@ -31,8 +31,6 @@ import ua_parser.Client;
   System.out.println(c.os.minor);         // => "1"
 
   System.out.println(c.device.family);    // => "iPhone"
-  System.out.println(c.device.brand);     // => "Apple"
-  System.out.println(c.device.model);     // => "iPhone"
 ```
 
 Author:

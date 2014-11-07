@@ -10,11 +10,7 @@ is($device->toString(), 'Other');
 
 my $parse = $Device->makeParser([{regex => '(foo)'}]);
 is($parse->('foo')->family,'foo');
-is($parse->('foo')->brand, undef);
-is($parse->('foo')->model,'foo');
 is($parse->('bar')->family,'Other');
-is($parse->('bar')->brand, undef);
-is($parse->('bar')->model, undef);
 
 my $parse2 = $Device->makeParser([{
     regex => '(foo)',

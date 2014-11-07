@@ -21,6 +21,7 @@ import java.util.Random;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.yaml.snakeyaml.Yaml;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;

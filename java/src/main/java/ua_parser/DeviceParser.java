@@ -39,17 +39,15 @@ public class DeviceParser {
       return null;
     }
 
-    Device device = null;
+    String device = null;
     for (DevicePattern p : patterns) {
       if ((device = p.match(agentString)) != null) {
         break;
       }
     }
-    if (device != null) {
-      return device;
-    }
+    if (device == null) device = "Other";
 
-    return new Device("Other", null, null);
+    return new Device(device);
   }
 
   public static DeviceParser fromList(List<Map<String,String>> configList) {
@@ -62,89 +60,41 @@ public class DeviceParser {
 
   protected static DevicePattern patternFromMap(Map<String, String> configMap) {
     String regex = configMap.get("regex");
-    String regex_flag = configMap.get("regex_flag");
-    Pattern pattern;
     if (regex == null) {
       throw new IllegalArgumentException("Device is missing regex");
     }
-    if (null != regex_flag && regex_flag.equals("i")) {
-      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-    }
-    else {
-      pattern = Pattern.compile(regex);
-    }
-    
-    return new DevicePattern(pattern,
-                             configMap.get("device_replacement"),
-                             configMap.get("brand_replacement"),
-                             configMap.get("model_replacement"));
+    return new DevicePattern(Pattern.compile(regex),
+                             configMap.get("device_replacement"));
   }
 
   protected static class DevicePattern {
     private final Pattern pattern;
     private final String familyReplacement;
-    private final String brandReplacement;
-    private final String modelReplacement;
-    private final Pattern patternCut = Pattern.compile("(?=\\$([0-9]))");
-    private final Pattern patternNum = Pattern.compile(".*\\$([0-9]).*");
 
-    public DevicePattern(Pattern pattern,
-                         String familyReplacement,
-                         String brandReplacement,
-                         String modelReplacement) {
+    public DevicePattern(Pattern pattern, String familyReplacement) {
       this.pattern = pattern;
       this.familyReplacement = familyReplacement;
-      this.brandReplacement  = brandReplacement;
-      this.modelReplacement  = modelReplacement;
     }
 
-    public Device match(String agentString) {
-      String family = null, brand = null, model = null;
+    public String match(String agentString) {
       Matcher matcher = pattern.matcher(agentString);
 
       if (!matcher.find()) {
         return null;
       }
-      
-      family = multiReplace(familyReplacement, matcher);
-      family = "".equals(family) ? null : family;
-      if (familyReplacement == null && matcher.groupCount() > 0 && matcher.group(1) != null){
+
+      String family = null;
+      if (familyReplacement != null) {
+        if (familyReplacement.contains("$1") && matcher.groupCount() >= 1 && matcher.group(1) != null) {
+          family = familyReplacement.replaceFirst("\\$1", Matcher.quoteReplacement(matcher.group(1)));
+        } else {
+          family = familyReplacement;
+        }
+      } else if (matcher.groupCount() >= 1) {
         family = matcher.group(1);
       }
-
-      brand = multiReplace(brandReplacement, matcher);
-      brand = "".equals(brand) ? null : brand;
-
-      model = multiReplace(modelReplacement, matcher);
-      model = "".equals(model) ? null : model;
-      if (modelReplacement == null && matcher.groupCount() > 0 && matcher.group(1) != null){
-        model = matcher.group(1);
-      }
-
-      //System.out.println("MATCHED:\"" + agentString + "\" WITH " + pattern + " RESULTING IN" + new Device(family, brand, model));
-      return new Device(family, brand, model);
-    }
-
-    private String multiReplace(String input, Matcher matcher){
-      String output = "";
-      
-      if (null != input) {
-        String[] cut = patternCut.split(input);
-        for (int i=0; i<cut.length; i++) {
-          Matcher m = patternNum.matcher(cut[i]);
-          if (m.find()) {
-            int markerPos = Integer.parseInt(m.group(1));
-            if (matcher.find(0) && matcher.groupCount() >= markerPos && matcher.group(markerPos) != null) {
-              cut[i] = cut[i].replaceFirst("\\$"+markerPos, Matcher.quoteReplacement(matcher.group(markerPos)));
-            }
-            else {
-              cut[i] = cut[i].replaceFirst("\\$"+markerPos, "");
-            }
-          }
-          output += cut[i];
-        }
-      }
-      return output.trim();
+      return family;
     }
   }
+
 }

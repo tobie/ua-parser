@@ -2,12 +2,12 @@ var assert = require('assert'),
     path = require('path'), 
     fs = require('fs'),
     yaml = require('yamlparser'),
-    uaParser = require('../index')();
+    uaParser = require('../index');
 
 function readYAML(fileName) {
   var file = path.join(__dirname, '..', '..', 'test_resources', fileName);
   var fixtures = fs.readFileSync(file, 'utf8');
-  fixtures = yaml.eval(fixtures); // jshint ignore:line
+  fixtures = yaml.eval(fixtures);
   return fixtures;
 }
 
@@ -21,7 +21,7 @@ function msg(name, actual, expected) {
     fixtures.forEach(function(f) {
       if (f.js_ua) return;
       test(f.user_agent_string, function() {
-        var ua = uaParser.parse(f.user_agent_string).ua;
+        var ua = uaParser.parse(f.user_agent_string).userAgent;
         fixFixture(f, ['major', 'minor', 'patch']);
         assert.strictEqual(ua.family, f.family, msg('ua.family', ua.family, f.family));
         assert.strictEqual(ua.major, f.major, msg('ua.major', ua.major, f.major));
@@ -55,17 +55,11 @@ function msg(name, actual, expected) {
     fixtures.forEach(function(f) {
       test(f.user_agent_string, function() {
         var device = uaParser.parse(f.user_agent_string).device;
-        fixFixture(f, ['family', 'brand', 'model']);
-        
         assert.strictEqual(device.family, f.family, msg('device.family', device.family, f.family));
-        assert.strictEqual(device.brand, f.brand, msg('device.brand', device.brand, f.brand));
-        assert.strictEqual(device.model, f.model, msg('device.model', device.model, f.model));
-        
       });
     });
   });
 });
-
 
 function fixFixture(f, props) {
   // A bug in the YAML parser makes empty fixture props
@@ -74,6 +68,6 @@ function fixFixture(f, props) {
     if (typeof f[p] === 'object') {
       f[p] = null;
     }
-  });
+  })
   return f;
 }

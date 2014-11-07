@@ -1,7 +1,6 @@
 var assert = require('assert'),
-    uaParser = require('../index')(),
-    parse = uaParser.parse;
-    
+    parse = require('../index').parse;
+
 var USER_AGENT_STRING = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0b6pre) Gecko/20100903 Firefox/4.0b6pre Firefox/4.0b6pre';
 
 suite('parse function', function() {
