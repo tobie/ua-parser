@@ -81,10 +81,10 @@ public class ParserTest {
 
     Client expected1 = new Client(new UserAgent("Firefox", "3", "5", "5"),
                                   new OS("Mac OS X", "10", "4", null, null),
-                                  new Device("Other"));
+                                  new Device("Other",null,null));
     Client expected2 = new Client(new UserAgent("Mobile Safari", "5", "1", null),
                                   new OS("iOS", "5", "1", "1", null),
-                                  new Device("iPhone"));
+                                  new Device("iPhone","Apple","iPhone"));
 
     assertThat(parser.parse(agentString1), is(expected1));
     assertThat(parser.parse(agentString2), is(expected2));
@@ -114,6 +114,7 @@ public class ParserTest {
     parserFromStringConfig("user_agent_parsers:\n  - family_replacement: 'a'");
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   void testUserAgentFromYaml(String filename) {
     InputStream yamlStream = this.getClass().getResourceAsStream(TEST_RESOURCE_PATH + filename);
 
@@ -127,6 +128,7 @@ public class ParserTest {
     }
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   void testOSFromYaml(String filename) {
     InputStream yamlStream = this.getClass().getResourceAsStream(TEST_RESOURCE_PATH + filename);
 
@@ -140,6 +142,7 @@ public class ParserTest {
     }
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   void testDeviceFromYaml(String filename) {
     InputStream yamlStream = this.getClass().getResourceAsStream(TEST_RESOURCE_PATH + filename);
 

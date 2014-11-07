@@ -1,4 +1,4 @@
-var uap = require('ua-parser');
+var uap = require('ua-parser')();
 var uas = require('./uas').uas;
 var i, u, n=100000;
 

@@ -139,7 +139,7 @@ class OSParser(object):
 
 
 class DeviceParser(object):
-    def __init__(self, pattern, device_replacement=None):
+    def __init__(self, pattern, regex_flag=None, device_replacement=None, brand_replacement=None, model_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
@@ -147,8 +147,13 @@ class DeviceParser(object):
           device_replacement: a string to override the matched device (optional)
         """
         self.pattern = pattern
-        self.user_agent_re = re.compile(self.pattern)
+        if regex_flag == 'i':
+          self.user_agent_re = re.compile(self.pattern, re.IGNORECASE)
+        else:
+          self.user_agent_re = re.compile(self.pattern)
         self.device_replacement = device_replacement
+        self.brand_replacement = brand_replacement
+        self.model_replacement = model_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -158,19 +163,38 @@ class DeviceParser(object):
                            for group_index in range(1, match.lastindex + 1)]
         return match_spans
 
+    def MultiReplace(self, string, match):
+        def _repl(m):
+          index = int(m.group(1)) - 1
+          group = match.groups()
+          if index < len(group):
+            return group[index]
+          return ''
+          
+        _string = re.sub(r'\$(\d)', _repl, string)
+        _string = re.sub(r'^\s+|\s+$', '', _string)
+        if _string == '':
+            return None
+        return _string
+
     def Parse(self, user_agent_string):
-        device = None
+        device, brand, model = None, None, None
         match = self.user_agent_re.search(user_agent_string)
-        if match:
+        if match:            
             if self.device_replacement:
-                if re.search(r'\$1', self.device_replacement):
-                    device = re.sub(r'\$1', match.group(1), self.device_replacement)
-                else:
-                    device = self.device_replacement
+                device = self.MultiReplace(self.device_replacement, match)
             else:
                 device = match.group(1)
 
-        return device
+            if self.brand_replacement:
+                brand = self.MultiReplace(self.brand_replacement, match)
+
+            if self.model_replacement:
+                model = self.MultiReplace(self.model_replacement, match)
+            elif len(match.groups()) > 0:
+                model = match.group(1)
+
+        return device, brand, model
 
 
 def Parse(user_agent_string, **jsParseBits):
@@ -264,7 +288,7 @@ def ParseDevice(user_agent_string):
         A dictionary containing parsed bits.
     """
     for deviceParser in DEVICE_PARSERS:
-        device = deviceParser.Parse(user_agent_string)
+        device, brand, model = deviceParser.Parse(user_agent_string)
         if device:
             break
 
@@ -272,7 +296,9 @@ def ParseDevice(user_agent_string):
         device = 'Other'
 
     return {
-        'family': device
+        'family': device,
+        'brand': brand,
+        'model': model
     }
 
 
@@ -483,9 +509,25 @@ DEVICE_PARSERS = []
 for _device_parser in regexes['device_parsers']:
     _regex = _device_parser['regex']
 
+    _regex_flag = None
+    if 'regex_flag' in _device_parser:
+        _regex_flag = _device_parser['regex_flag']
+
     _device_replacement = None
     if 'device_replacement' in _device_parser:
         _device_replacement = _device_parser['device_replacement']
 
-    DEVICE_PARSERS.append(DeviceParser(_regex, _device_replacement))
+    _brand_replacement = None
+    if 'brand_replacement' in _device_parser:
+        _brand_replacement = _device_parser['brand_replacement']
+
+    _model_replacement = None
+    if 'model_replacement' in _device_parser:
+        _model_replacement = _device_parser['model_replacement']
+
+    DEVICE_PARSERS.append(DeviceParser(_regex,
+                                       _regex_flag,
+                                       _device_replacement,
+                                       _brand_replacement,
+                                       _model_replacement))
 

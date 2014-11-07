@@ -11,8 +11,10 @@ eval {
     my $r = HTTP::UA::Parser->new();
     foreach my $st (@{$yaml}){
         $r->parse($st->{user_agent_string});
-        my $os = $r->device;
-        is ($os->family, $st->{family});
+        my $device = $r->device;
+        is ($device->family, $st->{family});
+        is ($device->brand, $st->{brand});
+        is ($device->model, $st->{model});
     }
 };
 

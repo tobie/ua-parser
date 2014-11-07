@@ -2,7 +2,7 @@
   "name": "ua-parser",
   "description": "A port of Browserscope's user agent parser.",
   "main": "./js/index",
-  "version": "0.3.3",
+  "version": "0.4.9",
   "maintainers": [
     {
       "name": "Tobie Langel",
@@ -53,6 +53,6 @@
     "mocha": "*"
   },
   "scripts": {
-    "test": "mocha -u tdd -R dot ./js/test/*.js"
+    "test": "cd js && mocha && mocha test/load/*.mocha.js"
   }
 }
