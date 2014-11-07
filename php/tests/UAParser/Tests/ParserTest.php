@@ -35,8 +35,10 @@ class ParserTest extends AbstractParserTest
     {
         $resources = Finder::create()
             ->files()
-            ->name('additional_os_tests.yaml')
-            ->name('test_user_agent_parser_os.yaml');
+            ->name('test_device.yaml')
+            ->name('*os*.yaml')
+            ->notName('test_device.yaml')
+            ->notName('pgts_browser_list-orig.yaml');
 
         return static::createTestData($resources);
     }
@@ -45,9 +47,10 @@ class ParserTest extends AbstractParserTest
     {
         $resources = Finder::create()
             ->files()
-            ->name('firefox_user_agent_strings.yaml')
-            ->name('pgts_browser_list.yaml')
-            ->name('test_user_agent_parser.yaml');
+            ->name('*.yaml')
+            ->notName('*os*')
+            ->notName('test_device.yaml')
+            ->notName('pgts_browser_list-orig.yaml');
 
         return static::createTestData($resources);
     }
@@ -70,12 +73,11 @@ class ParserTest extends AbstractParserTest
     }
 
     /** @dataProvider getDeviceTestData */
-    public function testDeviceParsing($userAgent, array $jsUserAgent, $family, $major, $minor, $patch, $patchMinor, $brand, $model)
+    public function testDeviceParsing($userAgent, array $jsUserAgent, $family)
     {
         $result = $this->parser->parse($userAgent, $jsUserAgent);
+
         $this->assertSame($family, $result->device->family);
-        $this->assertSame($brand,  $result->device->brand);
-        $this->assertSame($model,  $result->device->model);
     }
 
     /** @dataProvider getOsTestData */
@@ -196,8 +198,6 @@ class ParserTest extends AbstractParserTest
             isset($testCase['minor']) ? $testCase['minor'] : null,
             isset($testCase['patch']) ? $testCase['patch'] : null,
             isset($testCase['patch_minor']) ? $testCase['patch_minor'] : null,
-            isset($testCase['brand']) ? $testCase['brand'] : null,
-            isset($testCase['model']) ? $testCase['model'] : null,
             $resource->getFilename()
         );
     }

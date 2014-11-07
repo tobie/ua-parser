@@ -71,9 +71,7 @@ class ParseTest(unittest.TestCase):
         user_agent_string = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)'
         expected = {
           'device': {
-            'family': 'Other',
-            'brand': None,
-            'model': None
+            'family': 'Other'
           },
           'os': {
             'family': 'Mac OS X',
@@ -200,21 +198,15 @@ class ParseTest(unittest.TestCase):
 
             # The expected results
             expected = {
-              'family': test_case['family'],
-              'brand': test_case['brand'],
-              'model': test_case['model']
+              'family': test_case['family']
             }
 
             result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
             self.assertEqual(result, expected,
-                u"UA: {0}\n expected<{1} {2} {3}> != actual<{4} {5} {6}>".format(
+                u"UA: {0}\n expected<{1}> != actual<{2}>".format(
                     user_agent_string,
                     expected['family'],
-                    expected['brand'],
-                    expected['model'],
-                    result['family'],
-                    result['brand'],
-                    result['model']))
+                    result['family']))
 
 
 class GetFiltersTest(unittest.TestCase):

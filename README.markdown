@@ -48,9 +48,6 @@ your current user agent/OS/device, or for any arbitrary user agent string.
 
 Usage :: [node.js][1]
 ---------------------
-
-[API Documentation](js/doc/uaparser.md)
-
 ```js
 var http = require('http');
 

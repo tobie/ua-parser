@@ -2,9 +2,6 @@ THIS CHANGELOG IS AN ATTEMPT TO DOCUMENT CHANGES TO THIS PROJECT.
 SUPER MINOR REVISION NUMBERS WON'T SHOW UP IN GITHUB BUT IT'LL HELP
 ME ORGANIZE WHEN I MADE A SET OF FIXES
 
-UAP-3.3.1
- - ADD: device Parsing with brand model and case insensitive testing
-
 UAP-3.3.0
  - Use composer for dependency management
  - Introduce namespaces
