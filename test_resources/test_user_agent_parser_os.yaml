@@ -721,8 +721,8 @@ test_cases:
     patch:
     patch_minor:
 
- - user_agent_string: 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
-    family: 'Windows 8.1'
+ - user_agent_string: 'Mozilla/5.0 (Windows NT 6.4; WOW64; Trident/7.0; rv:11.0) like Gecko'
+    family: 'Windows 10'
     major:
     minor:
     patch:
