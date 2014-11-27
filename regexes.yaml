@@ -9,6 +9,9 @@ user_agent_parsers:
   # must go before Firefox to catch Chimera/SeaMonkey/Camino
   - regex: '(Chimera|SeaMonkey|Camino)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)?'
 
+  # SlimerJS
+  - regex: '(SlimerJS)/(\d+)\.(\d+)\.(\d+)'
+
   # Firefox
   - regex: '(Pale[Mm]oon)/(\d+)\.(\d+)\.?(\d+)?'
     family_replacement: 'Pale Moon (Firefox Variant)'

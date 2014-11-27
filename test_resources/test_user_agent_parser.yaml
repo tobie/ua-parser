@@ -940,6 +940,12 @@ test_cases:
     minor: '6'
     patch: '0'
 
+  - user_agent_string: "Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 SlimerJS/0.9.2"
+    family: "SlimerJS"
+    major: '0'
+    minor: '9'
+    patch: '2'
+
   - user_agent_string: 'Mozilla/5.0 (IE 11.0; Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko'
     family: 'IE'
     major: '11'
