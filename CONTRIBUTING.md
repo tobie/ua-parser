@@ -1,3 +1,11 @@
+# ua-parser has moved
+
+This project has moved to a new project space [ua-parser](https://github.com/ua-parser), separating the regexes from the parsers for the different languages into their own repos.
+
+**Please contribute to the respective repositories there! Thanks.**
+
+----
+
 Contributing Changes to regexes.yaml
 ------------------------------------
 
