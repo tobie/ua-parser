@@ -45,18 +45,18 @@ func ToStruct(interfaceArr []map[string]string, typeInterface interface{}, retur
 	*returnVal = structArr
 }
 
-func New(regexFile string) *Parser {
+func New(regexFile string) (*Parser, error) {
 	parser := new(Parser)
 
 	data, err := ioutil.ReadFile(regexFile)
 	if nil != err {
-		panic(err)
+		return nil, err
 	}
 
 	m := make(map[string][]map[string]string)
 	err = goyaml.Unmarshal(data, &m)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	var wg sync.WaitGroup
@@ -112,7 +112,7 @@ func New(regexFile string) *Parser {
 	parser.OsPatterns = osPatterns
 	parser.DevicePatterns = dvcPatterns
 
-	return parser
+	return parser, nil
 
 }
 
