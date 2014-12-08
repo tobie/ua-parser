@@ -20,7 +20,7 @@ var uaParser *Parser = nil
 
 func uaInitParser(regexFile string) {
 	if uaParser == nil {
-		uaParser = New(regexFile)
+		uaParser, _ = New(regexFile)
 	}
 }
 

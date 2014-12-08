@@ -20,7 +20,7 @@ var dvcParser *Parser = nil
 
 func dvcInitParser(regexFile string) {
 	if dvcParser == nil {
-		dvcParser = New(regexFile)
+		dvcParser, _ = New(regexFile)
 	}
 }
 
