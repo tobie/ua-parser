@@ -277,6 +277,11 @@ user_agent_parsers:
   # Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920; Vodafone)...
   ##########
   
+  # Microsoft .NET Framework pretents to be MSIE6
+  # See https://msdn.microsoft.com/en-us/library/system.web.services.protocols.httpwebclientprotocol.useragent(v=vs.110).aspx
+  - regex: '(MS Web Services Client Protocol) (\d+)\.(\d+)\.(\d+)'
+    family_replacement: '.NET Framework CLR'
+
   # IE Mobile
   - regex: '(IEMobile)[ /](\d+)\.(\d+)'
     family_replacement: 'IE Mobile'
