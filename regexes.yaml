@@ -282,6 +282,12 @@ user_agent_parsers:
   - regex: '(MS Web Services Client Protocol) (\d+)\.(\d+)\.(\d+)'
     family_replacement: '.NET Framework CLR'
 
+  - regex: '(WinHttp\.WinHttpRequest\.)(\d+)'
+    family_replacement: 'Microsoft Windows HTTP Services COM object'
+
+  - regex: '(SkypeUriPreview Preview/)(\d+)\.(\d+)'
+    family_replacement: 'Skype URI Preview'
+
   # IE Mobile
   - regex: '(IEMobile)[ /](\d+)\.(\d+)'
     family_replacement: 'IE Mobile'
