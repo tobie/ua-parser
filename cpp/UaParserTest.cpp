@@ -38,19 +38,15 @@ namespace {
 
 std::string string_field(const YAML::Node& root, const std::string& fname) {
   const auto& yaml_field = root[fname];
-  return YAML::IsNull(yaml_field) ? "" : yaml_field.to<std::string>();
+  return yaml_field.IsNull() ? "" : yaml_field.as<std::string>();
 }
 
 void test_browser_or_os(const char* file_path, const bool browser) {
-  std::ifstream in_stream(file_path);
-  CHECK(in_stream.good());
-  YAML::Parser yaml_parser(in_stream);
-  YAML::Node root;
-  CHECK(yaml_parser.GetNextDocument(root));
+  auto root = YAML::LoadFile(file_path);
   const auto& test_cases = root["test_cases"];
   for (const auto& test : test_cases) {
     // TODO(alex): add support for JS user agent
-    if (test.FindValue("js_ua")) {
+    if (test["js_ua"]) {
       continue;
     }
     const auto major = string_field(test, "major");
@@ -68,11 +64,7 @@ void test_browser_or_os(const char* file_path, const bool browser) {
 }
 
 void test_device(const char* file_path) {
-  std::ifstream in_stream(file_path);
-  CHECK(in_stream.good());
-  YAML::Parser yaml_parser(in_stream);
-  YAML::Node root;
-  CHECK(yaml_parser.GetNextDocument(root));
+  auto root = YAML::LoadFile(file_path);
   const auto& test_cases = root["test_cases"];
   for (const auto& test : test_cases) {
     const auto unparsed = string_field(test, "user_agent_string");

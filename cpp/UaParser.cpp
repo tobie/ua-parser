@@ -27,12 +27,12 @@ typedef AgentStore BrowserStore;
 #define FILL_AGENT_STORE(node, agent_store, repl, maj_repl, min_repl)    \
     CHECK(node.Type() == YAML::NodeType::Map);                           \
     for (auto it = node.begin(); it != node.end(); ++it) {               \
-      const std::string key = it.first().to<std::string>();              \
-      const std::string value = it.second().to<std::string>();           \
+      const auto key = it->first.as<std::string>();                      \
+      const auto value = it->second.as<std::string>();                   \
       if (key == "regex") {                                              \
         agent_store.regExpr = value;                                     \
       } else if (key == repl) {                                          \
-        agent_store.replacement = value;                                \
+        agent_store.replacement = value;                                 \
       } else if (key == maj_repl && !value.empty()) {                    \
         agent_store.majorVersionReplacement = value;                     \
       } else if (key == min_repl && !value.empty()) {                    \
@@ -46,12 +46,7 @@ typedef AgentStore BrowserStore;
 
 struct UAStore {
   explicit UAStore(const std::string& regexes_file_path) {
-    std::ifstream in_stream(regexes_file_path);
-    CHECK(in_stream.good());
-    
-    YAML::Parser yaml_parser(in_stream);
-    YAML::Node regexes;
-    CHECK(yaml_parser.GetNextDocument(regexes));
+    auto regexes = YAML::LoadFile(regexes_file_path);
 
     const auto& user_agent_parsers = regexes["user_agent_parsers"];
     for (const auto& user_agent : user_agent_parsers) {
@@ -73,8 +68,8 @@ struct UAStore {
     for (const auto& d : device_parsers) {
       DeviceStore device;
       for (auto it = d.begin(); it != d.end(); ++it) {
-        const std::string key = it.first().to<std::string>();
-        const std::string value = it.second().to<std::string>();
+        const auto key = it->first.as<std::string>();
+        const auto value = it->second.as<std::string>();
         if (key == "regex") {
           device.regExpr = value;
         } else if (key == "device_replacement") {
