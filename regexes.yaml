@@ -1295,6 +1295,6 @@ device_parsers:
   ##########
   # ZOUND (marshall)
   ##########
-  - regex: 'Zound([A-Za-z0-9\-]+)'
+  - regex: 'Zound ([A-Za-z0-9\-]+)'
     device_replacement: 'Zound $1'
 
