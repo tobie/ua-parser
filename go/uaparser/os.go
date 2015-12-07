@@ -2,6 +2,7 @@ package uaparser
 
 import (
 	"regexp"
+	"strings"
 )
 
 type Os struct {
@@ -26,11 +27,14 @@ func (osPattern *OsPattern) Match(line string, os *Os) {
 		groupCount := osPattern.Regexp.NumSubexp()
 
 		if len(osPattern.OsReplacement) > 0 {
-			os.Family = osPattern.OsReplacement
+			if strings.Contains(osPattern.OsReplacement, "$1") {
+				os.Family = strings.Replace(osPattern.OsReplacement, "$1", bytes[1], -1)
+			} else {
+				os.Family = osPattern.OsReplacement
+			}
 		} else if groupCount >= 1 {
 			os.Family = bytes[1]
 		}
-
 		if len(osPattern.OsV1Replacement) > 0 {
 			os.Major = osPattern.OsV1Replacement
 		} else if groupCount >= 2 {
