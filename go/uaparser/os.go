@@ -35,22 +35,25 @@ func (osPattern *OsPattern) Match(line string, os *Os) {
 		} else if groupCount >= 1 {
 			os.Family = bytes[1]
 		}
+
 		if len(osPattern.OsV1Replacement) > 0 {
 			os.Major = osPattern.OsV1Replacement
 		} else if groupCount >= 2 {
 			os.Major = bytes[2]
-			if len(osPattern.OsV2Replacement) > 0 {
-				os.Minor = osPattern.OsV2Replacement
-			} else if groupCount >= 3 {
-				os.Minor = bytes[3]
-				if groupCount >= 4 {
-					os.Patch = bytes[4]
-					if groupCount >= 5 {
-						os.PatchMinor = bytes[5]
-					}
-				}
-			}
 		}
+		if len(osPattern.OsV2Replacement) > 0 {
+			os.Minor = osPattern.OsV2Replacement
+		} else if groupCount >= 3 {
+			os.Minor = bytes[3]
+
+		}
+		if groupCount >= 4 {
+			os.Patch = bytes[4]
+		}
+		if groupCount >= 5 {
+			os.PatchMinor = bytes[5]
+		}
+
 	}
 }
 
