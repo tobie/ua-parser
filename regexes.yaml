@@ -1,6 +1,9 @@
 user_agent_parsers:
   #### SPECIAL CASES TOP ####
 
+  - regex: '(RAC)/(\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'RAC'
+
   - regex: '(SoundCloud)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'SoundCloud'
 
