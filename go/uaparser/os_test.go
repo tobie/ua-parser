@@ -3,7 +3,7 @@ package uaparser
 import (
 	"fmt"
 	"io/ioutil"
-	"launchpad.net/goyaml"
+	"github.com/go-yaml/yaml"
 	"testing"
 )
 
@@ -11,7 +11,7 @@ func osInitTesting(file string) []map[string]string {
 	fmt.Print(file + ": ")
 	testFile, _ := ioutil.ReadFile(file)
 	testMap := make(map[string][]map[string]string)
-	_ = goyaml.Unmarshal(testFile, &testMap)
+	_ = yaml.Unmarshal(testFile, &testMap)
 	return testMap["test_cases"]
 }
 

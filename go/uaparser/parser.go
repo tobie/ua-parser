@@ -3,7 +3,7 @@ package uaparser
 import (
 	"bytes"
 	"io/ioutil"
-	"launchpad.net/goyaml"
+	"github.com/go-yaml/yaml"
 	"reflect"
 	"regexp"
 	"sync"
@@ -54,7 +54,7 @@ func New(regexFile string) (*Parser, error) {
 	}
 
 	m := make(map[string][]map[string]string)
-	err = goyaml.Unmarshal(data, &m)
+	err = yaml.Unmarshal(data, &m)
 	if err != nil {
 		return nil, err
 	}
