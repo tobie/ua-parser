@@ -243,6 +243,9 @@ user_agent_parsers:
   - regex: '(Thunderbird)/(\d+)\.(\d+)\.(\d+(?:pre)?)'
     family_replacement: 'Thunderbird'
 
+  # Edge/major_version.minor_version
+  - regex: '(Edge)/(\d+)\.(\d+)'
+
   # Chrome/Chromium/major_version.minor_version.beta_version
   - regex: '(Chromium|Chrome)/(\d+)\.(\d+)\.(\d+)'
 
@@ -432,6 +435,10 @@ user_agent_parsers:
   # Amazon Silk, should go before Safari
   - regex: '(Silk)/(\d+)\.(\d+)(?:\.([0-9\-]+))?'
     family_replacement: 'Amazon Silk'
+
+  # Edge Mobile
+  - regex: 'Windows Phone .*(Edge)/(\d+)\.(\d+)'
+    family_replacement: 'Edge Mobile'
 
   # Phantomjs, should go before Safari
   - regex: '(PhantomJS)/(\d+)\.(\d+)\.(\d+)'
@@ -635,6 +642,11 @@ os_parsers:
     os_replacement: 'Windows RT 8.1'
   - regex: '(Windows NT 6\.3)'
     os_replacement: 'Windows 8.1'
+
+  - regex: '(Windows NT 6\.4)'
+    os_replacement: 'Windows 10'
+  - regex: '(Windows NT 10\.0)'
+    os_replacement: 'Windows 10'
 
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
