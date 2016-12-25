@@ -3,6 +3,7 @@
 This project has moved to a new project space [ua-parser](https://github.com/ua-parser), separating the regexes from the parsers for the different languages into their own repos:
 
 * [uap-core](https://github.com/ua-parser/uap-core) : The regex file necessary to build language ports of Browserscope's user agent parser.
+* [uap-clj](https://github.com/ua-parser/uap-clj) : Clojure implementation of ua-parser
 * [uap-cpp](https://github.com/ua-parser/uap-cpp) : C++ implementation of ua-parser
 * [uap-csharp](https://github.com/ua-parser/uap-csharp) : C# implementation of ua-parser
 * [uap-d](https://github.com/ua-parser/uap-d) : D implementation of ua-parser
