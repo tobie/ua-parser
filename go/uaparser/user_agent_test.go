@@ -3,8 +3,9 @@ package uaparser
 import (
 	"fmt"
 	"io/ioutil"
-	"launchpad.net/goyaml"
 	"testing"
+
+	"launchpad.net/goyaml"
 )
 
 func uaInitTesting(file string) []map[string]string {

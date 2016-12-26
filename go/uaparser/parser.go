@@ -3,10 +3,11 @@ package uaparser
 import (
 	"bytes"
 	"io/ioutil"
-	"launchpad.net/goyaml"
 	"reflect"
 	"regexp"
 	"sync"
+
+	"launchpad.net/goyaml"
 )
 
 type Parser struct {
