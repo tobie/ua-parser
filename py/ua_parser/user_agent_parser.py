@@ -418,7 +418,7 @@ else:
     import yaml
 
     yamlFile = open(UA_PARSER_YAML)
-    regexes = yaml.load(yamlFile)
+    regexes = yaml.safe_load(yamlFile)
     yamlFile.close()
 
 # If UA_PARSER_YAML is not specified, load regexes from regexes.json before
@@ -432,7 +432,7 @@ if regexes is None:
         import yaml
 
         yamlFile = open(yamlPath)
-        regexes = yaml.load(yamlFile)
+        regexes = yaml.safe_load(yamlFile)
         yamlFile.close()
 
 
