@@ -664,11 +664,29 @@ test_cases:
     minor: '53'
     patch:
 
-  - user_agent_string: 'User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.20 Safari/537.36 OPR/15.0.1147.18 (Edition Next)'
+  - user_agent_string: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.20 Safari/537.36 OPR/15.0.1147.18 (Edition Next)'
     family: 'Opera'
     major: '15'
     minor: '0'
     patch: '1147'
+
+  - user_agent_string: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.10 Safari/537.36 OPR/27.0.1689.22 (Edition developer)'
+    family: 'Opera'
+    major: '27'
+    minor: '0'
+    patch: '1689'
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_3 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Coast/3.1.0.79792 Mobile/11B511 Safari/7534.48.3'
+    family: 'Opera Coast'
+    major: '3'
+    minor: '1'
+    patch: '0'
+
+  - user_agent_string: 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) OPiOS/8.0.1.80062 Mobile/11D201 Safari/9537.53'
+    family: 'Opera Mini'
+    major: '8'
+    minor: '0'
+    patch: '1'
 
   - user_agent_string: 'Mozilla/5.0 (Linux; Android; 4.1.2; GT-I9100 Build/000000) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1234.12 Mobile Safari/537.22 OPR/14.0.123.123'
     family: 'Opera Mobile'
