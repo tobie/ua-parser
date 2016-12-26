@@ -6,8 +6,9 @@ The implementation uses the shared regex patterns and overrides from regexes.yam
 
 Build:
 ------
-
-    cd ../java ; mvn install
+    
+    cd pig
+    mvn install
     mvn package
 
 Usage:
