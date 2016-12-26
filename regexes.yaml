@@ -206,7 +206,7 @@ user_agent_parsers:
     family_replacement: 'TwitterBot'
 
   # Google Plus
-  - regex: 'Google.*/\+/web/snippet'
+  - regex: 'Google \(\+.*\)'
     family_replacement: 'GooglePlusBot'
 
   # Rackspace Monitoring

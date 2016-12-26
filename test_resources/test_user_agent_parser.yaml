@@ -266,6 +266,12 @@ test_cases:
     minor:
     patch:
 
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google (+)'
+    family: 'GooglePlusBot'
+    major:
+    minor:
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.1pre) Gecko/20090717 Ubuntu/9.04 (jaunty) Shiretoko/3.5.1pre'
     family: 'Firefox (Shiretoko)'
     major: '3'
