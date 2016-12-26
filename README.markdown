@@ -22,7 +22,7 @@ This project has moved to a new project space [ua-parser](https://github.com/ua-
 
 ----
 
-ua-parser [![Build Status](https://secure.travis-ci.org/tobie/ua-parser.png?branch=master)](https://travis-ci.org/tobie/ua-parser)
+ua-parser [![Build Status](https://secure.travis-ci.org/tobie/ua-parser.svg?branch=master)](https://travis-ci.org/tobie/ua-parser)
 =========
 
 `ua-parser` is a multi-language port of [BrowserScope][2]'s [user agent string parser][3].
