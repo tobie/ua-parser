@@ -1590,7 +1590,7 @@ test_cases:
     patch_minor:
 
   - user_agent_string: 'Mozilla/5.0 (Windows U; Win NT 5.0; en-US; rv:1.8.0.2) Gecko/20060308 Firefox/1.5.0.2'
-    family: 'Windows NT'
+    family: 'Windows 2000'
     major:
     minor:
     patch:

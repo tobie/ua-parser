@@ -15,7 +15,7 @@ user_agent_parsers:
   - regex: '(Fennec)/(\d+)\.(\d+)\.?([ab]?\d+[a-z]*)'
     family_replacement: 'Firefox Mobile'
   - regex: '(Fennec)/(\d+)\.(\d+)(pre)'
-    family_replacement: 'Firefox Mobile'
+    family_replacement: 'Firefox MobiWle'
   - regex: '(Fennec)/(\d+)\.(\d+)'
     family_replacement: 'Firefox Mobile'
   - regex: 'Mobile.*(Firefox)/(\d+)\.(\d+)'
@@ -610,6 +610,9 @@ os_parsers:
   - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
     os_replacement: 'Windows XP'
 
+  - regex: '(Win (?:NT 5\.2|NT 5\.1))'
+    os_replacement: 'Windows XP'
+
   - regex: '(Windows NT 6\.1)'
     os_replacement: 'Windows 7'
 
@@ -634,21 +637,30 @@ os_parsers:
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
 
+  - regex: '(Win NT 5\.0)'
+    os_replacement: 'Windows 2000'
+    
   - regex: '(WinNT4.0)'
     os_replacement: 'Windows NT 4.0'
 
   - regex: '(Windows ?CE)'
     os_replacement: 'Windows CE'
 
-  - regex: 'Win ?(95|98|3.1|NT|ME|2000)'
-    os_replacement: 'Windows $1'
-
   - regex: 'Win16'
     os_replacement: 'Windows 3.1'
 
   - regex: 'Win32'
     os_replacement: 'Windows 95'
-
+    
+  - regex: 'WinNT'
+    os_replacement: 'Windows NT'
+ 
+  - regex: '(Win3\.1)'
+    os_replacement: 'Windows 3.1'
+    
+  - regex: '(Win95)'
+    os_replacement: 'Windows 95'
+    
   ##########
   # Tizen OS from Samsung
   # spoofs Android so pushing it above
