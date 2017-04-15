@@ -22,7 +22,7 @@ function BackwardsCompatResults(ua_str, ua, os, device) {
 BackwardsCompatResults.prototype.toVersionString = function() {
   var output = '',
       ua = this.ua;
-  if (ua.major != null) {
+  if (ua && ua.major != null) {
     output += ua.major;
     if (ua.minor != null) {
       output += '.' + ua.minor;
