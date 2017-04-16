@@ -16,6 +16,10 @@ public class Major extends EvalFunc<String> {
         parser = PigParser.getParser();
     }
 
+    public Major(String regexYamlPath) throws IOException {
+        parser = PigParser.getParser(regexYamlPath);
+    }
+
     public String exec(Tuple input) throws IOException {
         if (input == null || input.size() == 0) {
             return null;

@@ -17,6 +17,10 @@ public class UserAgent extends EvalFunc<Tuple> {
         parser = PigParser.getParser();
     }
 
+    public UserAgent(String regexYamlPath) throws IOException {
+        parser = PigParser.getParser(regexYamlPath);
+    }
+
     public Tuple exec(Tuple input) throws IOException {
         if (input == null || input.size() == 0) {
             return null;
