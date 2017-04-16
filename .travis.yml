@@ -1,16 +1,19 @@
-language: node_js
-node_js:
-  - 0.8
+language: python
+python:
+  - "2.7"
+  - "3.3"
 
 before_install:
 - sudo apt-get update
-- sudo apt-get install python-yaml
 - cp regexes.yaml py/ua_parser/regexes.yaml
 - sudo apt-get install php5-cli
 - wget https://getcomposer.org/composer.phar && php composer.phar install
 - php php/bin/uaparser.php ua-parser:convert
 
+install:
+  - pip install -q pyaml
+
 script:
-  - "npm test"
+  - "npm --version && node --version && npm install && npm test"
   - "python py/ua_parser/user_agent_parser_test.py"
   - "cd php && ../vendor/bin/phpunit --exclude-group performance"
